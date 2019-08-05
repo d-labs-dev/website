@@ -64,7 +64,8 @@ workflows:
   version: 2
   release:
     jobs:
-      - build
+      - build:
+          context: website
       - deploy:
           context: website
           requires:
