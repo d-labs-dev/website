@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/d-labs-website
     docker:
-      - image: ruby:2.5.5
+      - image: dlabsdev/website-build:1.0.0
     steps:
       - checkout
       - restore_cache:
@@ -30,7 +30,7 @@ jobs:
   deploy:
     working_directory: ~/d-labs-website
     docker:
-      - image: ruby:2.5.5
+      - image: dlabsdev/website-build:1.0.0
     steps:
       - checkout
       - attach_workspace:
@@ -46,19 +46,14 @@ jobs:
           name: deploy to S3
           command: |
             export TARGET_S3_BUCKET=$(echo "$CIRCLE_BRANCH" | grep -Eq '^(master)$' && echo "d-labs.com" || echo "preview.d-labs.com")
-            apt-get update && apt-get install --assume-yes awscli
             aws s3 sync ./_site/ s3://${TARGET_S3_BUCKET} --delete
 
   invalidate-cache:
     working_directory: ~/d-labs-website
     docker:
-      - image: ruby:2.5.5
+      - image: dlabsdev/website-build:1.0.0
     steps:
-      - run: 
-          name: invalidate cloudfront distribution
-          command: |
-            apt-get update && apt-get install --assume-yes awscli
-            aws cloudfront create-invalidation --distribution-id E9ENVGAMEA762 --paths '/*'
+      - run: aws cloudfront create-invalidation --distribution-id E9ENVGAMEA762 --paths '/*'
 
 workflows:
   version: 2
