@@ -43,11 +43,11 @@ jobs:
           paths:
             - vendor/bundle
       - run:
-        name: deploy to S3
-        command: |
-          export TARGET_S3_BUCKET=$(echo "$CIRCLE_BRANCH" | grep -Eq '^(master)$' && echo "d-labs.com" || echo "preview.d-labs.com")
-          apt-get update && apt-get install --assume-yes awscli
-          aws s3 sync ./_site/ s3://${TARGET_S3_BUCKET} --delete
+          name: deploy to S3
+          command: |
+            export TARGET_S3_BUCKET=$(echo "$CIRCLE_BRANCH" | grep -Eq '^(master)$' && echo "d-labs.com" || echo "preview.d-labs.com")
+            apt-get update && apt-get install --assume-yes awscli
+            aws s3 sync ./_site/ s3://${TARGET_S3_BUCKET} --delete
 
   invalidate-cache:
     working_directory: ~/d-labs-website
