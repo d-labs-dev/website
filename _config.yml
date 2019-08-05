@@ -44,15 +44,15 @@ exclude:
 contentful:
   spaces:
     - de:
-        space: leohosvr9rvy
-        access_token: Vbg-zbYNbbZ3Na7GvBsBNWOy-yh9vPRDO4d5XUtVnO0
+        space: ENV_CONTENTFUL_SPACE_ID
+        access_token: ENV_CONTENTFUL_ACCESS_TOKEN
         cda_query:
           locale: 'de'
         all_entries: true
         destination: contentful
     - en:
-        space: leohosvr9rvy
-        access_token: Vbg-zbYNbbZ3Na7GvBsBNWOy-yh9vPRDO4d5XUtVnO0
+        space: ENV_CONTENTFUL_SPACE_ID
+        access_token: ENV_CONTENTFUL_ACCESS_TOKEN
         cda_query:
           locale: 'en'
         all_entries: true
