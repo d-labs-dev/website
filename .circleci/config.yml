@@ -7,29 +7,23 @@ jobs:
       - image: ruby:2.5.5
     steps:
       - checkout
-
       - restore_cache:
           key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
-
       - run: bundle install
-
       - save_cache:
           key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
           paths:
             - vendor/bundle
-
       - run:
           name: build jekyll
           command: |
             bundle install
             bundle exec jekyll contentful
             bundle exec jekyll build
-
       - persist_to_workspace:
           root: ~/d-labs-website
           paths:
             - _site
-
       - store_artifacts:
           path: _site
 
@@ -39,20 +33,15 @@ jobs:
       - image: ruby:2.5.5
     steps:
       - checkout
-
       - attach_workspace:
           at: ~/d-labs-website
-
       - restore_cache:
           key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
-
       - run: bundle install
-
       - save_cache:
           key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
           paths:
             - vendor/bundle
-
       - run:
         name: deploy to S3
         command: |
@@ -77,18 +66,18 @@ workflows:
     jobs:
       - build
       - deploy:
-          context: 
+          context: website
           requires:
             - build
       - hold-invalidate-cache:
           type: approval
           requires:
-           - deploy
+            - deploy
           filters:
             branches:
               only: master
       - invalidate-cache:
-          context: 
+          context: website
           requires:
             - hold-invalidate-cache
           filters:
