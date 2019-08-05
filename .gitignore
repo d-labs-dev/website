@@ -1,0 +1,6 @@
+_site
+.sass-cache
+.jekyll-metadata
+_data/contentful/*.yaml
+
+.DS_Store

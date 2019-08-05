@@ -1,0 +1,96 @@
+version: 2
+jobs:
+  
+  build:
+    working_directory: ~/d-labs-website
+    docker:
+      - image: ruby:2.5.5
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+
+      - run: bundle install
+
+      - save_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: build jekyll
+          command: |
+            bundle install
+            bundle exec jekyll contentful
+            bundle exec jekyll build
+
+      - persist_to_workspace:
+          root: ~/d-labs-website
+          paths:
+            - _site
+
+      - store_artifacts:
+          path: _site
+
+  deploy:
+    working_directory: ~/d-labs-website
+    docker:
+      - image: ruby:2.5.5
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/d-labs-website
+
+      - restore_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+
+      - run: bundle install
+
+      - save_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+          paths:
+            - vendor/bundle
+
+      - run:
+        name: deploy to S3
+        command: |
+          export TARGET_S3_BUCKET=$(echo "$CIRCLE_BRANCH" | grep -Eq '^(master)$' && echo "d-labs.com" || echo "preview.d-labs.com")
+          apt-get update && apt-get install --assume-yes awscli
+          aws s3 sync ./_site/ s3://${TARGET_S3_BUCKET} --delete
+
+  invalidate-cache:
+    working_directory: ~/d-labs-website
+    docker:
+      - image: ruby:2.5.5
+    steps:
+      - run: 
+          name: invalidate cloudfront distribution
+          command: |
+            apt-get update && apt-get install --assume-yes awscli
+            aws cloudfront create-invalidation --distribution-id E9ENVGAMEA762 --paths '/*'
+
+workflows:
+  version: 2
+  release:
+    jobs:
+      - build
+      - deploy:
+          context: 
+          requires:
+            - build
+      - hold-invalidate-cache:
+          type: approval
+          requires:
+           - deploy
+          filters:
+            branches:
+              only: master
+      - invalidate-cache:
+          context: 
+          requires:
+            - hold-invalidate-cache
+          filters:
+            branches:
+              only: master
