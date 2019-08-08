@@ -21,6 +21,10 @@
 
       <div class="trigger">
         {% locale_link :ref => 'about' %}{{ site.data.includes.header[page.locale].about }}{% endlocale_link %}
+        {% locale_link :ref => 'approach' %}{{ site.data.includes.header[page.locale].approach }}{% endlocale_link %}
+        {% locale_link :ref => 'services' %}{{ site.data.includes.header[page.locale].services }}{% endlocale_link %}
+        {% locale_link :ref => 'blog' %}{{ site.data.includes.header[page.locale].blog }}{% endlocale_link %}
+        {% locale_link :ref => 'jobs' %}{{ site.data.includes.header[page.locale].jobs }}{% endlocale_link %}
         {% language_switcher %}
       </div>
     </nav>
