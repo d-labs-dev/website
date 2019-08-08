@@ -18,6 +18,7 @@ gem "jekyll", "~> 3.8.6"
 group :jekyll_plugins do
   gem "jekyll-contentful-data-import"
   gem "jekyll-seo-tag"
+  gem "jekyll-srcset"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
