@@ -1,8 +1,1 @@
 <h2>{{ site.data.pages.home[page.locale].title }}</h2>
-
-{% assign locale_pages = site.pages | where: "locale", page.locale %}
-<ul>
-{% for page in locale_pages %}
-  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-{% endfor %}
-</ul>

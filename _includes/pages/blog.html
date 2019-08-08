@@ -1,1 +1,10 @@
 <h2>{{ site.data.pages.blog[page.locale].title }}</h2>
+
+{% assign blog_pages = site.pages | where: "is_blog_post", true %}
+{% assign locale_blog_pages = blog_pages | where: "locale", page.locale %}
+
+<ul>
+{% for page in locale_blog_pages %}
+  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+{% endfor %}
+</ul>

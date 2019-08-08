@@ -48,6 +48,7 @@ module Jekyll
         self.data['title'] = data[name]
         self.data['ref'] = eval(ref)
         self.data['locale'] = locale
+        self.data['is_blog_post'] = true
         # add all the information defined in _data for the current record to the
         # current page (so that we can access it with liquid tags)
         self.data.merge!(data)

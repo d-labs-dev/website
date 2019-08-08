@@ -60,12 +60,12 @@ page_gen:
     name: slug
     ref: data['sys']['id']
     locale: de
-    dir: posts
+    dir: blog
   - data: contentful.en.blogPost
     index_files: false
     template: post
     name: slug
     ref: data['sys']['id']
     locale: en
-    dir: en/posts
+    dir: en/blog
     filter: slug
