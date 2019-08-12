@@ -56,6 +56,7 @@ contentful:
 
 page_gen:
   - data: contentful.de.blogPost
+    kind: blogPost
     index_files: false
     template: post
     name: slug
@@ -63,10 +64,28 @@ page_gen:
     locale: de
     dir: blog
   - data: contentful.en.blogPost
+    kind: blogPost
     index_files: false
     template: post
     name: slug
     ref: data['sys']['id']
     locale: en
     dir: en/blog
+    filter: slug
+  - data: contentful.de.method
+    kind: method
+    index_files: false
+    template: method
+    name: slug
+    ref: data['sys']['id']
+    locale: de
+    dir: methods
+  - data: contentful.en.method
+    kind: method
+    index_files: false
+    template: method
+    name: slug
+    ref: data['sys']['id']
+    locale: en
+    dir: en/methods
     filter: slug

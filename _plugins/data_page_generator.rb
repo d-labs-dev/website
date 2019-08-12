@@ -23,10 +23,12 @@ module Jekyll
     # - `dir` is the default output directory
     # - `data` is the data defined in `_data.yml` of the record for which we are generating a page
     # - `name` is the key in `data` which determines the output filename
+    # - `ref` is the cross-locale identifier of the page
     # - `locale` is the locale as defined in _config.yml
+    # - `kind` is the kind of the page (method, blog post, job)
     # - `template` is the name of the template for generating the page
     # - `extension` is the extension for the generated file
-    def initialize(site, base, index_files, dir, data, name, ref, locale, template, extension)
+    def initialize(site, base, index_files, dir, data, name, ref, locale, kind, template, extension)
       @site = site
       @base = base
 
@@ -48,7 +50,7 @@ module Jekyll
         self.data['title'] = data[name]
         self.data['ref'] = eval(ref)
         self.data['locale'] = locale
-        self.data['is_blog_post'] = true
+        self.data['kind'] = kind
         # add all the information defined in _data for the current record to the
         # current page (so that we can access it with liquid tags)
         self.data.merge!(data)
@@ -79,6 +81,7 @@ module Jekyll
           name = data_spec['name']
           ref = data_spec['ref']
           locale = data_spec['locale']
+          kind = data_spec['kind']
           dir = data_spec['dir'] || data_spec['data']
           extension = data_spec['extension'] || "html"
 
@@ -101,7 +104,7 @@ module Jekyll
             records = records.select { |record| eval(data_spec['filter_condition']) } if data_spec['filter_condition']
 
             records.each do |record|
-              site.pages << DataPage.new(site, site.source, index_files_for_this_data, dir, record, name, ref, locale, template, extension)
+              site.pages << DataPage.new(site, site.source, index_files_for_this_data, dir, record, name, ref, locale, kind, template, extension)
             end
           else
             puts "error (datapage_gen). could not find template #{template}" if not site.layouts.key? template

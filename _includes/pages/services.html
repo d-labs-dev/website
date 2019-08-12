@@ -1,1 +1,10 @@
 <h2>{{ site.data.pages.services[page.locale].title }}</h2>
+
+{% assign method_pages = site.pages | where: "kind", "method" %}
+{% assign locale_method_pages = method_pages | where: "locale", page.locale %}
+
+<ul>
+{% for page in locale_method_pages %}
+  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+{% endfor %}
+</ul>
