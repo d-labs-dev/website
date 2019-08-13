@@ -1,0 +1,20 @@
+---
+layout: page
+---
+
+<h1>{{page.tag}}</h1>
+
+{% assign blog_pages = site.pages | where: "kind", page.tag_kind %}
+{% assign locale_blog_pages = blog_pages | where: "locale", page.locale %}
+
+<ul>
+{% for other_page in locale_blog_pages %}
+  {% if other_page.tags contains page.tag %}
+    <li>
+  	  <a href="{{ other_page.url }}">
+  	    {{ other_page.title }}
+  	  </a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>

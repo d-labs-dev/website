@@ -5,3 +5,14 @@ layout: page
 <p>{{page.description}}<p>
 
 {{ page.body | markdownify }}
+
+<h3>Tags</h3>
+<ul>
+{% for tag in page.tags %}
+  <li>
+  	{% link_tag_page {{ tag }} %}
+  	  {{ tag }}
+  	{% endlink_tag_page %}
+  </li>
+{% endfor %}
+</ul>
