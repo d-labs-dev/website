@@ -6,15 +6,14 @@ module Jekyll
 
     def initialize(tag_name, params_string, tokens)
       super
-      bind_params(eval("{#{params_string}}"))
-    end
-
-    def bind_params(params)
-      @ref = params[:ref]
+      @input = params_string
     end
 
     def render(context)
       text = super
+      rendered_input = Liquid::Template.parse(@input).render(context)
+      @ref = rendered_input.split[0]
+
       site = context.registers[:site]
       page = context.registers[:page]
       locale = page['locale']
