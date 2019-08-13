@@ -4,11 +4,11 @@ layout: page
 
 <h1>{{page.tag}}</h1>
 
-{% assign blog_pages = site.pages | where: "kind", page.tag_kind %}
-{% assign locale_blog_pages = blog_pages | where: "locale", page.locale %}
+{% assign pages_of_kind = site.pages | where: "kind", page.tag_kind %}
+{% assign locale_pages_of_kind = pages_of_kind | where: "locale", page.locale %}
 
 <ul>
-{% for other_page in locale_blog_pages %}
+{% for other_page in locale_pages_of_kind %}
   {% if other_page.tags contains page.tag %}
     <li>
   	  <a href="{{ other_page.url }}">

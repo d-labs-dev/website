@@ -10,7 +10,7 @@ layout: page
 <ul>
 {% for tag in page.tags %}
   <li>
-  	{% link_tag_page {{ tag }} %}
+  	{% link_tag_page blogPost {{ tag }} %}
   	  {{ tag }}
   	{% endlink_tag_page %}
   </li>

@@ -68,6 +68,8 @@ module Jekyll
 
     include Sanitizer
 
+    KIND_BASE_PATHES = { 'blogPost' => 'blog', 'method' => 'methods' }
+
     def initialize(tag_name, params_string, tokens)
       super
       @input = params_string
@@ -75,14 +77,16 @@ module Jekyll
 
     def render(context)
       text = super
-      rendered_input = Liquid::Template.parse(@input).render(context)
-      tag = sanitize_filename(rendered_input)
+      rendered_input = Liquid::Template.parse(@input).render(context).split(' ', 2)
+      kind = rendered_input[0]
+      puts kind
+      tag = sanitize_filename(rendered_input[1])
 
       this_page = context.registers[:page]
       current_locale = this_page['locale']
       
-      return "<a href='/#{current_locale}/blog/tags/#{tag}.html'>#{text}</a>" if current_locale != 'de'
-      return "<a href='/blog/tags/#{tag}.html'>#{text}</a>"
+      return "<a href='/#{current_locale}/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html'>#{text}</a>" if current_locale != 'de'
+      return "<a href='/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html'>#{text}</a>"
 
     end
 
