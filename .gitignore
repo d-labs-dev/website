@@ -2,5 +2,6 @@ _site
 .sass-cache
 .jekyll-metadata
 _data/contentful/*.yaml
+.env
 
 .DS_Store
