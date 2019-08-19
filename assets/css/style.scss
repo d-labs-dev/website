@@ -1,8 +1,10 @@
 ---
 ---
 
-@import "base";
+@import "fonts";
 @import "normalize";
+@import "atoms";
+@import "base";
 
 .b1,
 .b2 {
@@ -10,14 +12,6 @@
   height: 120vh;
   padding: 0 10vw;
   scroll-snap-align: center;
-}
-
-.b1 {
-  // background-color: yellow;
-}
-
-.b2 {
-  // background-color: cyan;
 }
 
 .t1 {

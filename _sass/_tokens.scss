@@ -1,0 +1,55 @@
+$spacings: (
+  0: 0.25em,
+  1: 0.5em,
+  2: 0.75em,
+  3: 1em,
+  4: 1.5em,
+  5: 2em,
+  6: 3em,
+  7: 4em,
+  8: 6em,
+);
+
+$blue: #009fe3;
+$white: #fff;
+
+$gray100: #fafafa;
+$gray200: #dee3e6;
+$gray300: #bac0c4;
+
+$black: #152935;
+
+$yellow: #fcbd29;
+$green: #87c745;
+$red: #e72d5f;
+$darkBlue: #1e4c62;
+$purple: #813c96;
+
+$colors: (
+  blue: $blue,
+  white: $white,
+  gray100: $gray100,
+  gray200: $gray200,
+  gray300: $gray300,
+  black: $black,
+  yellow: $yellow,
+  green: $green,
+  red: $red,
+  darkBlue: $darkBlue,
+  purple: $purple,
+);
+
+$shadow-sm: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1), 0 0.1rem 0.5rem rgba(0, 0, 0, 0.05);
+$shadow-md: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
+
+$max-widths: (
+  0: 5rem,
+  1: 10rem,
+  2: 15rem,
+  3: 20rem,
+  4: 30rem,
+  5: 40rem,
+  6: 50rem,
+  7: 60rem,
+  8: 80rem,
+);

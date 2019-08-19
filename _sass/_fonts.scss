@@ -1,0 +1,50 @@
+@font-face {
+  font-family: LetterGothic;
+  font-display: swap;
+  src: url("../fonts/LetterGothicTextWeb.eot"),
+    url("../fonts/LetterGothicTextWeb.woff") format("woff");
+}
+
+@font-face {
+  font-family: LetterGothic;
+  font-weight: bold;
+  font-display: swap;
+  src: url("../fonts/LetterGothicTextWeb-Bold.eot"),
+    url("../fonts/LetterGothicTextWeb-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-display: swap;
+  src: local("Roboto Regular"), local("Roboto-Regular"),
+    url("../fonts/roboto-latin-400.woff2") format("woff2"),
+    url("../fonts/roboto-latin-400.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-display: swap;
+  src: local("Roboto Regular italic"), local("Roboto-Regularitalic"),
+    url("../fonts/roboto-latin-400italic.woff2") format("woff2"),
+    url("../fonts/roboto-latin-400italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-display: swap;
+  font-weight: bold;
+  src: local("Roboto Medium"), local("Roboto-Medium"),
+    url("../fonts/roboto-latin-500.woff2") format("woff2"),
+    url("../fonts/roboto-latin-500.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-display: swap;
+  font-weight: bold;
+  src: local("Roboto Medium italic"), local("Roboto-Mediumitalic"),
+    url("../fonts/roboto-latin-500italic.woff2") format("woff2"),
+    url("../fonts/roboto-latin-500italic.woff") format("woff");
+}
