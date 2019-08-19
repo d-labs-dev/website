@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30.975" height="30.975" viewBox="0 0 30.975 30.975">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="30.975" height="30.975" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="icon_aowwow-right-up" data-name="icon/aowwow-right-up" clip-path="url(#clip-path)">
+    <rect id="Rechteck_1224" data-name="Rechteck 1224" width="24" height="24" transform="translate(3.585 3.487)" fill="rgba(255,255,255,0)"/>
+    <path id="Pfad_23745" data-name="Pfad 23745" d="M9741-2791.9l1.392-1.39,5.419,5.561a23.919,23.919,0,0,1,2.253,2.422l.024-.025a19.414,19.414,0,0,1-.1-2.973V-2806h1.821v17.6a19.418,19.418,0,0,1-.1,2.973l.024.024a23.124,23.124,0,0,1,2.255-2.446l5.37-5.514,1.438,1.463-9.9,9.9Z" transform="translate(8886.072 4934.76) rotate(-135)" fill="#1c1c1b"/>
+  </g>
+</svg>

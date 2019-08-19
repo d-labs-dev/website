@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="32" height="32" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="icon_swipe-right" data-name="icon/swipe-right" clip-path="url(#clip-path)">
+    <rect id="Rechteck_1229" data-name="Rechteck 1229" width="32" height="32" rx="13" fill="rgba(255,255,255,0)"/>
+    <path id="Pfad_23505" data-name="Pfad 23505" d="M19.6-13.608,5.346-27.81,3.24-25.7,15.66-13.446,3.4-1.35l2,2Z" transform="translate(4.76 29.81)" fill="#009fe3"/>
+  </g>
+</svg>
