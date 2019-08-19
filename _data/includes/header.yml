@@ -1,3 +1,10 @@
+pages:
+  - about
+  - approach
+  - services
+  - blog
+  - jobs
+
 de:
   about: Über uns
   approach: Arbeitsweise

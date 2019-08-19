@@ -133,9 +133,19 @@ function setupScrollSpy() {
   });
 }
 
+function toggleButton() {
+  $("[data-toggle]").each(function() {
+    var el = $(this);
+    el.on("click", function() {
+      $(el.data("toggle")).fadeToggle(250);
+    });
+  });
+}
+
 $(function() {
   init();
   setupScrollSpy();
+  toggleButton();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });

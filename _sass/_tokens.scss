@@ -25,6 +25,15 @@ $red: #e72d5f;
 $darkBlue: #1e4c62;
 $purple: #813c96;
 
+$black: #152935;
+
+$black-a05: fade-out($black, 1 - 0.05);
+$black-a10: fade-out($black, 1 - 0.1);
+$black-a25: fade-out($black, 1 - 0.25);
+
+$blue-a10: fade-out($blue, 1 - 0.1);
+$blue-a25: fade-out($blue, 1 - 0.25);
+
 $colors: (
   blue: $blue,
   white: $white,
@@ -52,4 +61,34 @@ $max-widths: (
   6: 50rem,
   7: 60rem,
   8: 80rem,
+);
+
+$font-size-xxs: #{(14 / 20)}rem;
+$font-size-xs: #{(16 / 20)}rem;
+$font-size-sm: #{(18 / 20)}rem;
+$font-size-md: #{(20 / 20)}rem;
+$font-size-lg: #{(24 / 20)}rem;
+$font-size-xl: #{(36 / 20)}rem;
+$font-size-xxl: #{(54 / 20)}rem;
+$font-size-xxxl: #{(80 / 20)}rem;
+
+$font-sizes: (
+  xxs: $font-size-xxs,
+  xs: $font-size-xs,
+  sm: $font-size-sm,
+  md: $font-size-md,
+  lg: $font-size-lg,
+  xl: $font-size-xl,
+  xxl: $font-size-xxl,
+  xxxl: $font-size-xxxl,
+);
+
+$query-sm: "only screen and (max-width : 30em)";
+$query-md: "only screen and (max-width : 40em)";
+$query-lg: "only screen and (max-width : 50em)";
+
+$media-queries: (
+  sm: $query-sm,
+  md: $query-md,
+  lg: $query-lg,
 );

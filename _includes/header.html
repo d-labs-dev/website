@@ -1,22 +1,44 @@
-<header class="site-header">
-
-  <div class="wrapper">
-    {%- assign default_paths = site.pages | map: "path" -%}
-    {%- assign page_paths = site.header_pages | default: default_paths -%}
-    {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
-
+<header class="main-header bg-white col align-center px-4 py-4 sticky">
+  <div class="maxwidth-7 width-full row sp-3 align-center">
     {% locale_link home %}
-      {{ site.title | escape }}
+      <img src="/assets/images/logo_d-labs.svg" alt="{{ site.title | escape }}" class="height-3 header-logo" />
     {% endlocale_link %}
+    <div class="push"></div>
 
-      <div class="trigger">
-        {% locale_link about %}{{ site.data.includes.header[page.locale].about }}{% endlocale_link %}
-        {% locale_link approach %}{{ site.data.includes.header[page.locale].approach }}{% endlocale_link %}
-        {% locale_link services %}{{ site.data.includes.header[page.locale].services }}{% endlocale_link %}
-        {% locale_link blog %}{{ site.data.includes.header[page.locale].blog }}{% endlocale_link %}
-        {% locale_link jobs %}{{ site.data.includes.header[page.locale].jobs }}{% endlocale_link %}
-        {% language_switcher %}
+    <nav class="row sp-6 align-baseline hide-lg">
+      <div class="row sp-5 align-baseline">
+      {% for name in site.data.includes.header.pages %}
+        {% locale_link {{ name }} class:"header-link" %}
+          {{site.data.includes.header[page.locale][name]}}
+        {% endlocale_link %}
+      {% endfor %}
       </div>
+      {% language_switcher %}
     </nav>
+    <div class="show-lg">
+    <button class="button-text header-menu-button" data-toggle="#mobile-nav">
+      <img src="/assets/images/icons/icon-menu.svg" class="h-2"/>
+    </button>
+  </div>
   </div>
 </header>
+<div id="mobile-nav" class="hidden relative" style="z-index: 11;">
+  <div class="fixed col inset-full bg-white px-5 py-4 align-center">
+    <div class="absolute top-4 right-4">
+      <button class="button-text show-lg" data-toggle="#mobile-nav">
+        <img src="/assets/images/icons/icon-close.svg" class="h-2"/>
+      </button>
+    </div>
+    <div class="push"></div>
+    <nav class="col sp-4 align-center">
+    {% for name in site.data.includes.header.pages %}
+      {% locale_link {{ name }} class:"header-link text-center" %}
+        {{site.data.includes.header[page.locale][name]}}
+      {% endlocale_link %}
+    {% endfor %}
+    </nav>
+    <div class="push maxheight-1"></div>
+    {% language_switcher %}
+    <div class="push"></div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+@import "tokens";
+
+%raw-button {
+  transition-property: background-color, color, box-shadow, border-color, opacity;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: center;
+  width: auto;
+  display: block;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  user-select: none;
+  cursor: pointer;
+}
+
+.button-text {
+  @extend %raw-button;
+  padding: 0.2rem;
+  margin: -0.2rem;
+  box-shadow: 0 0 0 0.2rem transparent;
+
+  &:hover {
+    background-color: $black-a05;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem $black-a10;
+  }
+}
+
+.button {
+  @extend %raw-button;
+}

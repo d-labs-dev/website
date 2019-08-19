@@ -75,6 +75,19 @@
     padding-top: $val;
     padding-bottom: $val;
   }
+
+  .top-#{$key} {
+    top: $val;
+  }
+  .left-#{$key} {
+    left: $val;
+  }
+  .right-#{$key} {
+    right: $val;
+  }
+  .bottom-#{$key} {
+    bottom: $val;
+  }
 }
 
 .elevation-sm {
@@ -111,6 +124,11 @@
 .sticky {
   position: -webkit-sticky;
   position: sticky;
+  top: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 .inset-full {
@@ -164,4 +182,48 @@
 }
 .height-screen {
   height: 100vh;
+}
+
+.minheight-screen {
+  min-height: 100vh;
+}
+
+@each $key, $val in $font-sizes {
+  .text-#{$key} {
+    font-size: $val;
+  }
+}
+
+.font-normal {
+  font-weight: 400;
+}
+.font-bold {
+  font-weight: bold;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .hide-#{$key} {
+      display: none;
+    }
+  }
+}
+
+@each $key, $val in $media-queries {
+  .show-#{$key} {
+    display: none;
+    @media #{$val} {
+      display: block;
+    }
+  }
 }

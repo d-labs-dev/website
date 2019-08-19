@@ -7,6 +7,11 @@ module Jekyll
     def initialize(tag_name, params_string, tokens)
       super
       @input = params_string
+      @attributes = {}
+
+      params_string.scan(Liquid::TagAttributes) do |key, value|
+        @attributes[key] = value.gsub(/^'|"/, '').gsub(/'|"$/, '')
+      end
     end
 
     def render(context)
@@ -14,12 +19,13 @@ module Jekyll
       rendered_input = Liquid::Template.parse(@input).render(context)
       @ref = rendered_input.split[0]
 
+
       site = context.registers[:site]
       page = context.registers[:page]
       locale = page['locale']
-
-      site.pages.each do |each|
-        return "<a href=\"#{each.url}\">#{text}</a>" if each["ref"] == @ref and each["locale"] == locale
+      link_classes = (@attributes['class'] || "").to_s
+      site.pages.each do |node|
+        return "<a href=\"#{node.url}\" class=\"#{page["url"] == node.url ? "is-active " : ""}#{link_classes}\">#{text}</a>" if node["ref"] == @ref and node["locale"] == locale
       end
 
       raise ArgumentError, <<~MSG

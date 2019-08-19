@@ -4,7 +4,9 @@
 @import "fonts";
 @import "normalize";
 @import "atoms";
+@import "buttons";
 @import "base";
+@import "header";
 
 .b1,
 .b2 {
@@ -35,7 +37,7 @@
   padding: 0;
 }
 
-.hidden {
+.almost-hidden {
   opacity: 0.1;
 }
 
