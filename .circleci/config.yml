@@ -1,6 +1,5 @@
 version: 2
 jobs:
-  
   build:
     working_directory: ~/d-labs-website
     docker:
@@ -20,6 +19,8 @@ jobs:
             bundle install
             bundle exec jekyll contentful
             bundle exec jekyll build
+          environment:
+            JEKYLL_ENV: production
       - persist_to_workspace:
           root: ~/d-labs-website
           paths:
