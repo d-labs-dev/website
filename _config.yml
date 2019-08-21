@@ -20,6 +20,9 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # Build settings
 markdown: kramdown
 
+kramdown:
+  hard_wrap: true
+
 plugins:
   - jekyll-seo-tag
   - jekyll-srcset
@@ -43,14 +46,14 @@ contentful:
         space: ENV_CONTENTFUL_SPACE_ID
         access_token: ENV_CONTENTFUL_ACCESS_TOKEN
         cda_query:
-          locale: 'de'
+          locale: "de"
         all_entries: true
         destination: contentful
     - en:
         space: ENV_CONTENTFUL_SPACE_ID
         access_token: ENV_CONTENTFUL_ACCESS_TOKEN
         cda_query:
-          locale: 'en'
+          locale: "en"
         all_entries: true
         destination: contentful
 

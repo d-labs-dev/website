@@ -1,14 +1,8 @@
 ---
 layout: default
 ---
-<article class="post">
-
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title | escape }}</h1>
-  </header>
-
-  <div class="post-content">
+<article class="col align-center px-4 py-6">
+  <div class="page-content maxwidth-5 width-full col{% if page.name contains '.md' %} markdown{% endif %}">
     {{ content }}
   </div>
-
 </article>

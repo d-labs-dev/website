@@ -2,6 +2,13 @@
 
 .main-header {
   z-index: 10;
+  transition-property: padding, box-shadow;
+
+  &.is-scrolled {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    box-shadow: $shadow-md;
+  }
 }
 
 .header-logo {

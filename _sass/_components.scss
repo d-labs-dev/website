@@ -43,3 +43,57 @@
     color: $blue;
   }
 }
+
+.markdown {
+  line-height: 1.6;
+  word-break: break-word;
+
+  p,
+  pre {
+    margin-bottom: 1.5rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    font-family: LetterGothic;
+  }
+
+  h1 {
+    font-size: $font-size-xl;
+    margin-bottom: 3rem;
+  }
+  h2 {
+    font-size: $font-size-lg;
+  }
+  h3 {
+    font-size: $font-size-lg;
+    font-weight: normal;
+  }
+  h4 {
+    font-size: $font-size-md;
+  }
+  h5 {
+    font-size: $font-size-md;
+    font-weight: normal;
+  }
+
+  ul,
+  ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+  }
+
+  a {
+    transition-property: color;
+    color: $blue;
+    &:hover {
+      color: $darkBlue;
+    }
+  }
+}

@@ -66,17 +66,17 @@
 }
 
 @each $key, $val in $media-queries {
-  @each $spkey, $val in $spacings {
-    .row.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
-      margin-right: $val;
-    }
-
-    .col.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
-      margin-bottom: $val;
-    }
-  }
-
   @media #{$val} {
+    @each $spkey, $val in $spacings {
+      .row.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
+        margin-right: $val;
+      }
+
+      .col.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
+        margin-bottom: $val;
+      }
+    }
+
     .q-#{$key}-col {
       display: flex;
       flex-direction: column;

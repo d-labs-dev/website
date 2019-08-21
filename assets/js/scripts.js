@@ -142,10 +142,22 @@ function toggleButton() {
   });
 }
 
+function headerScroll() {
+  var el = $(".main-header");
+  $(window).on("scroll", () => {
+    if (window.scrollY < 20) {
+      el.removeClass("is-scrolled");
+    } else if (window.scrollY > 50) {
+      el.addClass("is-scrolled");
+    }
+  });
+}
+
 $(function() {
   init();
   setupScrollSpy();
   toggleButton();
+  headerScroll();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });
