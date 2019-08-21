@@ -33,3 +33,13 @@
 .button {
   @extend %raw-button;
 }
+
+.link {
+  transition-property: color;
+  text-decoration: none;
+  color: $black;
+  font-weight: bold;
+  &:hover {
+    color: $blue;
+  }
+}

@@ -1,14 +1,37 @@
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      {% locale_link imprint %}{{ site.data.includes.footer[page.locale].imprint }}{% endlocale_link %}
-      {% locale_link privacy %}{{ site.data.includes.footer[page.locale].privacy }}{% endlocale_link %}
-      {% locale_link partners %}{{ site.data.includes.footer[page.locale].partners }}{% endlocale_link %}
+<header class="bg-white col align-center px-4 py-5">
+  <div class="maxwidth-7 width-full col sp-5 q-lg-sp-6">
+    <div class="row sp-3 align-center q-lg-col q-lg-sp-5">
+      <div class="row sp-2">
+        <a href="/" class="button-text ">
+          <img src="/assets/images/icons/icon-facebook.svg" alt="Facebook" class="height-4" />
+        </a>
+        <a href="/" class="button-text ">
+          <img src="/assets/images/icons/icon-twitter.svg" alt="Twitter" class="height-4" />
+        </a>
+        <a href="/" class="button-text ">
+          <img src="/assets/images/icons/icon-linkedin.svg" alt="Linkedin" class="height-4" />
+        </a>
+      </div>
+      <div class="push"></div>
+      <div class="row sp-6">
+        {% for name in site.data.includes.footer.pages %}
+          {% locale_link {{ name }} class:"link text-xs" %}
+            {{site.data.includes.footer[page.locale][name]}}
+          {% endlocale_link %}
+        {% endfor %}
+      </div>
+      <div class="push"></div>
+      <div class="col sp-2 align-end q-lg-align-center">
+        <a href="/" class="button-text">
+          <img src="/assets/images/logo_sisa.svg" alt="Silicon Sanssouci" class="height-5" />
+        </a>
+        <div class="text-xxs">
+          Mitglied im Silicon Sanssouci e.V.
+        </div>
+      </div>
     </div>
-
+    <div class="col align-center">
+      <div class="text-xs">© D-LABS GmbH {{ 'now' | date: "%Y" }}</div>
+    </div>
   </div>
-
 </footer>

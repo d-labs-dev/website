@@ -8,7 +8,7 @@
     <nav class="row sp-6 align-baseline hide-lg">
       <div class="row sp-5 align-baseline">
       {% for name in site.data.includes.header.pages %}
-        {% locale_link {{ name }} class:"header-link" %}
+        {% locale_link {{ name }} class:"link header-link" %}
           {{site.data.includes.header[page.locale][name]}}
         {% endlocale_link %}
       {% endfor %}
@@ -32,7 +32,7 @@
     <div class="push"></div>
     <nav class="col sp-4 align-center">
     {% for name in site.data.includes.header.pages %}
-      {% locale_link {{ name }} class:"header-link text-center" %}
+      {% locale_link {{ name }} class:"link header-link text-center within-overlay" %}
         {{site.data.includes.header[page.locale][name]}}
       {% endlocale_link %}
     {% endfor %}

@@ -1,7 +1,12 @@
+pages:
+  - privacy
+  - imprint
+  - partners
+
 de:
   imprint: Impressum
   privacy: Datenschutz
-  partners: Partner
+  partners: Partnerschaften
 
 en:
   imprint: Imprint

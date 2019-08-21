@@ -9,19 +9,16 @@
 }
 
 .header-link {
-  transition-property: color;
-  text-decoration: none;
-  color: $black;
-  font-weight: bold;
   font-size: $font-size-xs;
   padding-top: 2px;
   border-bottom: 2px solid transparent;
-  &:hover {
-    color: $blue;
-  }
 
   &.is-active {
     border-bottom: 2px solid $blue;
+  }
+
+  &.within-overlay {
+    font-size: $font-size-md;
   }
 }
 

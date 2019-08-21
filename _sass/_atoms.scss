@@ -31,6 +31,20 @@
   align-items: baseline;
 }
 
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$key}-align-start {
+      align-items: flex-start;
+    }
+    .q-#{$key}-align-center {
+      align-items: center;
+    }
+    .q-#{$key}-align-end {
+      align-items: flex-end;
+    }
+  }
+}
+
 .justify-start {
   justify-content: flex-start;
 }
@@ -48,6 +62,35 @@
 
   .col.sp-#{$key} > *:not(:last-child):not(.push) {
     margin-bottom: $val;
+  }
+}
+
+@each $key, $val in $media-queries {
+  @each $spkey, $val in $spacings {
+    .row.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
+      margin-right: $val;
+    }
+
+    .col.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
+      margin-bottom: $val;
+    }
+  }
+
+  @media #{$val} {
+    .q-#{$key}-col {
+      display: flex;
+      flex-direction: column;
+
+      @each $spkey, $val in $spacings {
+        &.sp-#{$spkey} > *:not(:last-child):not(.push) {
+          margin-right: 0;
+          margin-bottom: $val;
+        }
+        &.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
+          margin-bottom: $val;
+        }
+      }
+    }
   }
 }
 
