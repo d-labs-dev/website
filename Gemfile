@@ -32,3 +32,4 @@ end
 gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 gem "mini_magick"
 gem "image_optim"
+gem "uglifier"

@@ -1,3 +1,6 @@
+//= require vendor/jquery-3.4.1.min.js
+//= require vendor/wobble.browser.min.js
+
 function init() {
   $("[data-init-class]").each(function() {
     var el = $(this);
