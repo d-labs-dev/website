@@ -80,12 +80,14 @@
     .q-#{$key}-col {
       display: flex;
       flex-direction: column;
-
       @each $spkey, $val in $spacings {
         &.sp-#{$spkey} > *:not(:last-child):not(.push) {
           margin-right: 0;
           margin-bottom: $val;
         }
+      }
+
+      @each $spkey, $val in $spacings {
         &.q-#{$key}-sp-#{$spkey} > *:not(:last-child):not(.push) {
           margin-bottom: $val;
         }
@@ -147,7 +149,7 @@
 }
 
 @each $key, $val in $colors {
-  .#{"" + $key} {
+  .text-#{"" + $key} {
     color: $val;
   }
 }
@@ -208,6 +210,16 @@
   border-radius: 50%;
 }
 
+@each $key, $val in $spacings {
+  .width-#{$key} {
+    width: $val;
+  }
+}
+@each $key, $val in $dimensions {
+  .width-#{$key} {
+    width: $val;
+  }
+}
 .width-full {
   width: 100%;
 }
@@ -219,6 +231,11 @@
 }
 
 @each $key, $val in $spacings {
+  .height-#{$key} {
+    height: $val;
+  }
+}
+@each $key, $val in $dimensions {
   .height-#{$key} {
     height: $val;
   }
@@ -256,6 +273,25 @@
 
 @each $key, $val in $media-queries {
   @media #{$val} {
+    .q-#{$key}-text-left {
+      text-align: left;
+    }
+    .q-#{$key}-text-right {
+      text-align: right;
+    }
+    .q-#{$key}-text-center {
+      text-align: center;
+    }
+  }
+}
+
+.font-heading {
+  font-family: LetterGothic, sans-serif;
+  line-height: 1.5;
+}
+
+@each $key, $val in $media-queries {
+  @media #{$val} {
     .hide-#{$key} {
       display: none;
     }
@@ -269,4 +305,13 @@
       display: block;
     }
   }
+}
+
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.underline {
+  text-decoration: underline;
 }

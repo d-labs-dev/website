@@ -61,6 +61,14 @@
   }
 }
 
+.light-link {
+  transition-property: color;
+  color: $white;
+  &:hover {
+    color: $white-a90;
+  }
+}
+
 .markdown {
   line-height: 1.6;
   word-break: break-word;

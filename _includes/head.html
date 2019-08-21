@@ -2,9 +2,10 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
-  <script src="{{ "/assets/js/vendor/jquery-3.4.1.min.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/vendor/wobble.browser.min.js" | relative_url }}"></script>
-  <script src="{{ "/assets/js/scripts.js" | relative_url }}"></script>
+  {% asset normalize.css %}
+  {% asset style.css %}
+  {% asset vendor/jquery-3.4.1.min.js %}
+  {% asset vendor/wobble.browser.min.js %}
+  {% asset scripts.js %}
   {% seo %}
 </head>

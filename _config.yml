@@ -24,8 +24,18 @@ kramdown:
   hard_wrap: true
 
 plugins:
-  - jekyll-seo-tag
-  - jekyll-srcset
+
+assets:
+  plugins:
+    img:
+      optim:
+        default:
+          allow_lossy: true
+          verbose: true
+          jpegoptim:
+            strip: all
+          jpegrecompress:
+            allow_lossy: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

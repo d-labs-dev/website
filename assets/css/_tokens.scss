@@ -10,6 +10,13 @@ $spacings: (
   8: 6em,
 );
 
+$dimensions: (
+  9: 8em,
+  10: 10em,
+  11: 15em,
+  12: 20em,
+);
+
 $blue: #009fe3;
 $white: #fff;
 
@@ -33,6 +40,8 @@ $black-a25: fade-out($black, 1 - 0.25);
 
 $blue-a10: fade-out($blue, 1 - 0.1);
 $blue-a25: fade-out($blue, 1 - 0.25);
+
+$white-a90: fade-out($white, 1 - 0.9);
 
 $colors: (
   blue: $blue,
@@ -86,9 +95,11 @@ $font-sizes: (
 $query-sm: "only screen and (max-width : 30em)";
 $query-md: "only screen and (max-width : 40em)";
 $query-lg: "only screen and (max-width : 50em)";
+$query-xl: "only screen and (max-width : 70em)";
 
 $media-queries: (
   sm: $query-sm,
   md: $query-md,
   lg: $query-lg,
+  xl: $query-xl,
 );

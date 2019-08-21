@@ -1,0 +1,29 @@
+locations:
+  - name: Potsdam
+    is_main: true
+    img: location-berlin.jpg
+    street: Marlene-Dietrich-Allee 15
+    city: 14482 Potsdam
+    tel: +49 331 97 992 300
+    email: potsdam@d-labs.com
+  - name: Berlin
+    img: location-berlin.jpg
+    street: Matkowskystraße 2
+    city: 10245 Berlin
+    tel: +49 30 29 387 978
+    email: berlin@d-labs.com
+  - name: Stuttgart
+    img: location-berlin.jpg
+    street: Königstraße 21
+    city: 70173 Stuttgart
+    tel: +49 711 99 796 266
+    email: stuttgart@d-labs.com
+
+de:
+  title: Warum von uns erzählen, wenn es um Sie geht.<br/>Wir sind an drei Standorten im Einsatz und freuen uns auf Ihren Anruf!
+  main: Hauptsitz
+
+en:
+  imprint: Imprint
+  privacy: Privacy
+  partners: Partners

@@ -18,7 +18,7 @@ gem "jekyll", "~> 3.8.6"
 group :jekyll_plugins do
   gem "jekyll-contentful-data-import"
   gem "jekyll-seo-tag"
-  gem "jekyll-srcset"
+  gem "jekyll-assets"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -30,3 +30,5 @@ end
 
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
+gem "mini_magick"
+gem "image_optim"
