@@ -1,5 +1,22 @@
 de:
-  title: Willkommen
+  hero_claim: Bedarfe verstehen. Potenziale erkennen. Den richtigen Fokus setzen.<br/><b>magnifying potentials</b>
+
+  screens:
+    - title: Wir geben Unternehmen Sicherheit, die Potenziale der Digitalisierung schnell, zielsicher und nachhaltig für sich zu nutzen.
+      cta: Wer wir sind
+      cta_target: /
+    - title: Wie kann die Kundenschnittstelle eines Verteilnetzbetreibers einheitlich gestaltet werden?
+      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle.
+      cta: Mehr zum Projekt
+      cta_target: /
+    - title: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
+      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+      cta: Mehr zum Projekt
+      cta_target: /
+    - title: Wie können die Besucher einer Ausstellung digital unterstützt werden?
+      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+      cta: Mehr zum Projekt
+      cta_target: /
 
 en:
   title: Welcome

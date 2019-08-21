@@ -5,46 +5,4 @@
 @import "components";
 @import "base";
 @import "header";
-
-.b1,
-.b2 {
-  position: relative;
-  height: 120vh;
-  padding: 0 10vw;
-  scroll-snap-align: center;
-}
-
-.t1 {
-  transition-property: opacity;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: -webkit-sticky;
-  position: sticky;
-}
-
-.overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  z-index: 2;
-  padding: 0;
-}
-
-.almost-hidden {
-  opacity: 0.1;
-}
-
-.home-logo-container {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+@import "home";

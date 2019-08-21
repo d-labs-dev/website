@@ -11,7 +11,9 @@
   }
 }
 
-.header-logo {
+.header-logo,
+.header-menu-button {
+  filter: grayscale(0) brightness(1);
   transition-property: filter;
 }
 
@@ -52,8 +54,10 @@ body.with-blue-header {
       }
     }
   }
-  .header-logo,
+  .header-logo {
+    filter: grayscale(1) brightness(2);
+  }
   .header-menu-button {
-    filter: grayscale(1) brightness(100);
+    filter: grayscale(1) brightness(10);
   }
 }

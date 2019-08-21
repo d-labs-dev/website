@@ -1,5 +1,5 @@
 $spacings: (
-  0: 0.25em,
+  0: 0,
   1: 0.5em,
   2: 0.75em,
   3: 1em,
@@ -79,7 +79,7 @@ $font-size-md: #{(20 / 20)}rem;
 $font-size-lg: #{(24 / 20)}rem;
 $font-size-xl: #{(36 / 20)}rem;
 $font-size-xxl: #{(54 / 20)}rem;
-$font-size-xxxl: #{(80 / 20)}rem;
+$font-size-xxxl: #{(72 / 20)}rem;
 
 $font-sizes: (
   xxs: $font-size-xxs,

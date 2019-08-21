@@ -1,0 +1,28 @@
+.home-circle-container {
+  width: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+
+  @media #{$query-md} {
+    width: 100%;
+  }
+}
+
+.home-scroll-screen {
+  transition-property: opacity;
+  margin-left: 40%;
+  height: 120vh;
+
+  @media #{$query-md} {
+    margin-left: 0;
+  }
+}
+
+.t1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.opacity-0 {
+  opacity: 0;
+}

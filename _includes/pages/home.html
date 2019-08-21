@@ -1,251 +1,42 @@
-<h2>{{ site.data.pages.home[page.locale].title }}</h2>
+{%- assign _ = site.data.pages.home[page.locale] -%}
 <div class="relative">
-  <div class="overlay">
-    <div class="home-logo-container">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="maxwidth-6 width-full">
-          <circle
-            id="_06-ellipse-red"
-            cx="300"
-            cy="300"
-            r="50"
-            fill="none"
-            stroke="#e72d5f"
-            stroke-miterlimit="10"
-            stroke-width="10"
-            opacity="0"
-            data-attr-on-enter="
-              screen0:cx=300,cy=300,r=50,opacity=0
-              screen1:cx=300,cy=254,r=50,opacity=1
-              screen2:cx=306.5,cy=305,r=47.5,opacity=1
-              screen3:cx=300,cy=254,r=50,opacity=0
-              screen4:cx=381.5,cy=330,r=138.5,opacity=1
-            "
-          />
-          <circle
-            id="_05-ellipse-green"
-            cx="300"
-            cy="300"
-            r="50"
-            fill="none"
-            stroke="#87c745"
-            stroke-miterlimit="10"
-            stroke-width="10"
-            opacity="0"
-            data-attr-on-enter="
-              screen0:cx=300,cy=300,r=50,opacity=0
-              screen1:cx=251.5,cy=289,r=50,opacity=1
-              screen2:cx=336.5,cy=196,r=111.5,opacity=1
-              screen3:cx=206.5,cy=221,r=55.5,opacity=1
-              screen4:cx=263.5,cy=256,r=36.5,opacity=1
-            "
-          />
-          <circle
-            id="_04-ellipse-yellow"
-            cx="300"
-            cy="300"
-            r="50"
-            fill="none"
-            stroke="#fcbd29"
-            stroke-miterlimit="10"
-            stroke-width="10"
-            opacity="0"
-            data-attr-on-enter="
-              screen0:cx=300,cy=300,r=50,opacity=0
-              screen1:cx=269.5,cy=345,r=50,opacity=1
-              screen2:cx=184.6,cy=384.9,r=140.5,opacity=1
-              screen3:cx=193.9,cy=284.36,r=39.5,opacity=1
-              screen4:cx=240.5,cy=292,r=39.5,opacity=1
-            "
-          />
-          <circle
-            id="_03-ellipse-darkblue"
-            cx="300"
-            cy="300"
-            r="50"
-            fill="none"
-            stroke="#1e4c62"
-            stroke-miterlimit="10"
-            stroke-width="10"
-            opacity="0"
-            data-attr-on-enter="
-              screen0:cx=300,cy=300,r=50,opacity=0
-              screen1:cx=348.5,cy=289,r=50,opacity=1
-              screen2:cx=348.5,cy=289,r=50,opacity=0
-              screen3:cx=354.5,cy=284,r=161.5,opacity=1
-              screen4:cx=348.5,cy=289,r=50,opacity=0
-            "
-          />
-          <circle
-            id="_02-ellipse-purple"
-            cx="300"
-            cy="300"
-            r="50"
-            fill="none"
-            stroke="#813c96"
-            stroke-miterlimit="10"
-            stroke-width="10"
-            opacity="0"
-            data-attr-on-enter="
-              screen0:cx=300,cy=300,r=50,opacity=0
-              screen1:cx=329.5,cy=346,r=50,opacity=1
-              screen2:cx=324.2,cy=378.65,r=79.5,opacity=1
-              screen3:cx=329.5,cy=346,r=50,opacity=0
-              screen4:cx=262.5,cy=382,r=87.5,opacity=1
-            "
-          />
-          <circle
-            id="_01-ellipse-blue"
-            cx="300"
-            cy="300"
-            r="50"
-            fill="none"
-            stroke="#0099e2"
-            stroke-miterlimit="10"
-            stroke-width="10"
-            opacity="1"
-            data-attr-on-enter="
-              screen0:opacity=1
-              screen1:opacity=0
-              screen2:opacity=0
-              screen3:opacity=0
-              screen4:opacity=0
-            "
-          />
-          <text
-            transform="translate(152.5 402)"
-            opacity="0"
-            font-size="14"
-            fill="#eec000"
-            font-family="LetterGothic"
-            letter-spacing="0.15em"
-            style="isolation: isolate"
-            data-attr-on-enter="
-              screen0:opacity=0,translateX=152.5,translateY=402
-              screen1:opacity=1,translateX=152.5,translateY=402
-              screen2:opacity=1,translateX=77.5,translateY=455
-              screen3:opacity=1,translateX=84.5,translateY=334
-              screen4:opacity=1,translateX=115.5,translateY=288
-            "
-          >
-            RESEARCH
-          </text>
-          <text
-            transform="translate(107.5 263)"
-            opacity="0"
-            font-size="14"
-            fill="#5aa700"
-            font-family="LetterGothic"
-            letter-spacing="0.15em"
-            style="isolation: isolate"
-            data-attr-on-enter="
-              screen0:opacity=0,translateX=107.5,translateY=263
-              screen1:opacity=1,translateX=107.5,translateY=263
-              screen2:opacity=1,translateX=144.5,translateY=119
-              screen3:opacity=1,translateX=154.5,translateY=147
-              screen4:opacity=1,translateX=172.5,translateY=207
-            "
-          >
-            CONSULTING
-          </text>
-          <text
-            transform="translate(377.5 402)"
-            opacity="0"
-            font-size="14"
-            fill="#813c96"
-            font-family="LetterGothic"
-            letter-spacing="0.14em"
-            style="isolation: isolate"
-            data-attr-on-enter="
-              screen0:opacity=0,translateX=377.5,translateY=402
-              screen1:opacity=1,translateX=377.5,translateY=402
-              screen2:opacity=1,translateX=403.5,translateY=452
-              screen3:opacity=0,translateX=377.5,translateY=402
-              screen4:opacity=1,translateX=136.5,translateY=464
-            "
-          >
-            DESIGN
-          </text>
-          <text
-            transform="translate(251.24 186)"
-            opacity="0"
-            font-size="14"
-            fill="#ea1e5c"
-            font-family="LetterGothic"
-            letter-spacing="0.14em"
-            style="isolation: isolate"
-            data-attr-on-enter="
-              screen0:opacity=0,translateX=251.24,translateY=186
-              screen1:opacity=1,translateX=251.24,translateY=186
-              screen2:opacity=1,translateX=272.24,translateY=240
-              screen3:opacity=0,translateX=251.24,translateY=186
-              screen4:opacity=1,translateX=401.24,translateY=370
-            "
-          >
-            ENGINEERING
-          </text>
-          <text
-            transform="translate(407.5 263)"
-            opacity="0"
-            font-size="14"
-            fill="#1e4c62"
-            font-family="LetterGothic"
-            letter-spacing="0.14em"
-            style="isolation: isolate"
-            data-attr-on-enter="
-              screen0:opacity=0,translateX=407.5,translateY=263
-              screen1:opacity=1,translateX=407.5,translateY=263
-              screen2:opacity=0,translateX=407.5,translateY=263
-              screen3:opacity=1,translateX=323.5,translateY=416
-              screen4:opacity=0,translateX=407.5,translateY=263
-            "
-          >
-            TRAINING
-          </text>
-        </svg>
+  <div class="height-screen sroll-snap-start text-white relative zindex-2 col justify-center align-center px-4 py-5" data-visible-key="screen0">
+    <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.hero_claim}}</div>
+    <svg viewbox="0 0 100 100" class="absolute inset-full text-blue fill-current" preserveAspectRatio="none">
+      <polygon points="0 0,100 0,100 70,0 100" class="hide-md"/>
+      <polygon points="0 0,100 0,100 80,0 100" class="show-md"/>
+    </svg>
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-4">
+      <a href="#n1" class="fill-current button-text">{% asset icons/icon-arrow-down.svg class="height-4" %}</a>
+    </div>
+  </div>
+  <div class="absolute inset-full col align-center">
+    <div class="maxwidth-7 width-full sticky height-screen row align-center q-md-align-start py-5 q-md-justify-center zindex-1">
+      <div class="home-circle-container">
+        {%- include home-circles.html -%}
       </div>
     </div>
   </div>
-  <div class="b2" data-visible-key="screen0"></div>
-  <div class="b1" data-visible-key="screen1">
-    <div
-      class="t1"
-      data-init-class="almost-hidden"
-      data-class-on-enter="screen1:-almost-hidden"
-      data-class-on-leave="screen1:+almost-hidden"
-    >
-      Hi
+  {%- for screen in _.screens -%}
+    <div class="sroll-snap-center col align-center px-4" data-visible-key="screen{{forloop.index}}" id="n{{forloop.index}}">
+      <div class="maxwidth-7 width-full">
+        <div class="home-scroll-screen relative">
+          <div
+            class="sticky height-screen col justify-center sp-4 maxwidth-4 q-md-justify-end py-5"
+            data-init-class="opacity-0"
+            data-class-on-enter="screen{{{forloop.index}}:-opacity-0"
+            data-class-on-leave="screen{{{forloop.index}}:+opacity-0"
+          >
+            <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
+            {%- if screen.text - %}
+            <div class="q-md-text-xs">{{screen.text}}</div>
+            {%- endif- %}
+            <div class="col align-start">
+              <a class="button" href="{{screen.cta_target}}">{{screen.cta}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="b2" data-visible-key="screen2">
-    <div
-      class="t1"
-      data-init-class="almost-hidden"
-      data-class-on-enter="screen2:-almost-hidden"
-      data-class-on-leave="screen2:+almost-hidden"
-    >
-      There
-    </div>
-  </div>
-  <div class="b1" data-visible-key="screen3">
-    <div
-      class="t1"
-      data-init-class="almost-hidden"
-      data-class-on-enter="screen3:-almost-hidden"
-      data-class-on-leave="screen3:+almost-hidden"
-    >
-      This is test
-    </div>
-  </div>
-  <div class="b2" data-visible-key="screen4">
-    <div
-      class="t1"
-      data-init-class="almost-hidden"
-      data-class-on-enter="screen4:-almost-hidden"
-      data-class-on-leave="screen4:+almost-hidden"
-    >
-      Test again
-    </div>
-  </div>
-</div>
+  {%- endfor -%}
 <div class="b1"></div>

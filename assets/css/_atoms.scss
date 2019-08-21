@@ -55,6 +55,20 @@
   justify-content: flex-end;
 }
 
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$key}-justify-start {
+      justify-content: flex-start;
+    }
+    .q-#{$key}-justify-center {
+      justify-content: center;
+    }
+    .q-#{$key}-justify-end {
+      justify-content: flex-end;
+    }
+  }
+}
+
 @each $key, $val in $spacings {
   .row.sp-#{$key} > *:not(:last-child):not(.push) {
     margin-right: $val;
@@ -178,9 +192,9 @@
 
 .inset-full {
   top: 0;
-  bottom: 0;
   right: 0;
-  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .inset-x {
@@ -253,6 +267,15 @@
     font-size: $val;
   }
 }
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    @each $tkey, $val in $font-sizes {
+      .q-#{$key}-text-#{$tkey} {
+        font-size: $val;
+      }
+    }
+  }
+}
 
 .font-normal {
   font-weight: 400;
@@ -314,4 +337,22 @@
 
 .underline {
   text-decoration: underline;
+}
+
+@each $index in (0, 1, 2, 3, 4, 5) {
+  .zindex-#{$index} {
+    z-index: $index;
+  }
+}
+
+.sroll-snap-start {
+  scroll-snap-align: start;
+}
+
+.sroll-snap-center {
+  scroll-snap-align: center;
+}
+
+.fill-current {
+  fill: currentColor;
 }

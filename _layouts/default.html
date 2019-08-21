@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
   {%- include head.html -%}
-  <body class="col {{layout.body_class}}">
+  <body
+    class="col {{layout.body_class}}"
+    data-class-on-enter="screen1:-{{layout.body_class}} screen0:+{{layout.body_class}}"
+  >
     {%- include header.html -%}
     <main class="fill-parent" aria-label="Content">
       {{ content }}
