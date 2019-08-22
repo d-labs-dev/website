@@ -43,7 +43,6 @@ For larger screen sizes this results in 1rem being greater than 16px.
 body {
   background-color: #fff;
   min-height: 100%;
-  scroll-snap-type: y mandatory;
   margin: 0;
   font-family: "Roboto", sans-serif;
   line-height: 1.5;
@@ -53,6 +52,7 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 h1,

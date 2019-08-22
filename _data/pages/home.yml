@@ -1,3 +1,79 @@
+first_clients:
+  - name: Addidas
+    logo: clients/logo-addidas.svg
+  - name: Airbus
+    logo: clients/logo-airbus.svg
+  - name: Amg
+    logo: clients/logo-amg.svg
+  - name: Arvato
+    logo: clients/logo-arvato.svg
+  - name: Aspo
+    logo: clients/logo-aspo.svg
+  - name: Audi
+    logo: clients/logo-audi.svg
+  - name: Basf
+    logo: clients/logo-basf.svg
+  - name: Bayer Businesscience
+    logo: clients/logo-bayer-businesscience.svg
+  - name: Bayer Cropscience
+    logo: clients/logo-bayer-cropscience.svg
+  - name: Bwb
+    logo: clients/logo-bwb.svg
+  - name: Daimler
+    logo: clients/logo-daimler.svg
+  - name: Db
+    logo: clients/logo-db.svg
+
+rest_clients:
+  - name: Dp
+    logo: clients/logo-dp.svg
+  - name: E-on
+    logo: clients/logo-e-on.svg
+  - name: Evonik
+    logo: clients/logo-evonik.svg
+  - name: Gasag
+    logo: clients/logo-gasag.svg
+  - name: Ilb
+    logo: clients/logo-ilb.svg
+  - name: Innogy
+    logo: clients/logo-innogy.svg
+  - name: Lbs
+    logo: clients/logo-lbs.svg
+  - name: Lidl
+    logo: clients/logo-lidl.svg
+  - name: Mobile-de
+    logo: clients/logo-mobile-de.svg
+  - name: Mvs
+    logo: clients/logo-mvs.svg
+  - name: Randstad
+    logo: clients/logo-randstad.svg
+  - name: Roche
+    logo: clients/logo-roche.svg
+  - name: Sap
+    logo: clients/logo-sap.svg
+  - name: Siemens
+    logo: clients/logo-siemens.svg
+  - name: Telekom
+    logo: clients/logo-telekom.svg
+  - name: Thieme
+    logo: clients/logo-thieme.svg
+  - name: Tuev
+    logo: clients/logo-tuev.svg
+  - name: Vattenfall
+    logo: clients/logo-vattenfall.svg
+  - name: Vodafon
+    logo: clients/logo-vodafon.svg
+  - name: Vorwerk
+    logo: clients/logo-vorwerk.svg
+  - name: Vw
+    logo: clients/logo-vw.svg
+  - name: Westnetz
+    logo: clients/logo-westnetz.svg
+  - name: Wfbb
+    logo: clients/logo-wfbb.svg
+  - name: Xing
+    logo: clients/logo-xing.svg
+
 de:
   hero_claim: Bedarfe verstehen. Potenziale erkennen. Den richtigen Fokus setzen.<br/><b>magnifying potentials</b>
 
@@ -18,5 +94,46 @@ de:
       cta: Mehr zum Projekt
       cta_target: /
 
+  clients_heading: Unsere Kunden
+  clients_show_more: Mehr Anzeigen
+
+  blog_cta_text: Erfahren Sie Mehr
+
+  jobs_image: jobs-portrait.jpg
+  jobs_lead: Jobs
+  jobs_title: Werde Teil unseres Teams
+  jobs_desc: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+  jobs_cta_text: Erfahre Mehr
+  jobs_cta_url: /blog.html
+
 en:
-  title: Welcome
+  hero_claim: Bedarfe verstehen. Potenziale erkennen. Den richtigen Fokus setzen.<br/><b>magnifying potentials</b>
+
+  screens:
+    - title: Wir geben Unternehmen Sicherheit, die Potenziale der Digitalisierung schnell, zielsicher und nachhaltig für sich zu nutzen.
+      cta: Wer wir sind
+      cta_target: /
+    - title: Wie kann die Kundenschnittstelle eines Verteilnetzbetreibers einheitlich gestaltet werden?
+      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle.
+      cta: Mehr zum Projekt
+      cta_target: /
+    - title: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
+      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+      cta: Mehr zum Projekt
+      cta_target: /
+    - title: Wie können die Besucher einer Ausstellung digital unterstützt werden?
+      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+      cta: Mehr zum Projekt
+      cta_target: /
+
+  clients_heading: Unsere Kunden
+  clients_show_more: Mehr Anzeigen
+
+  blog_cta_text: Erfahren Sie Mehr
+
+  jobs_image: jobs-portrait.jpg
+  jobs_lead: Jobs
+  jobs_title: Werde Teil unseres Teams
+  jobs_desc: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+  jobs_cta_text: Erfahre Mehr
+  jobs_cta_url: /blog.html

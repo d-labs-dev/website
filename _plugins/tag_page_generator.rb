@@ -79,12 +79,11 @@ module Jekyll
       text = super
       rendered_input = Liquid::Template.parse(@input).render(context).split(' ', 2)
       kind = rendered_input[0]
-      puts kind
       tag = sanitize_filename(rendered_input[1])
 
       this_page = context.registers[:page]
       current_locale = this_page['locale']
-      
+
       return "<a href='/#{current_locale}/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html'>#{text}</a>" if current_locale != 'de'
       return "<a href='/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html'>#{text}</a>"
 

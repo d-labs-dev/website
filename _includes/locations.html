@@ -1,5 +1,11 @@
 {%- assign _ = site.data.includes.locations[page.locale] -%}
-<div class="bg-blue col px-4 pt-6 pb-7 text-white sp-4 align-center">
+{%if include.is_white %}
+{%- assign link_class = "link-blue" -%}
+{%else%}
+{%- assign link_class = "link-light" -%}
+{%endif%}
+<div
+  class="{%if include.is_white %}bg-gray100 text-black{%else%}bg-blue text-white{%endif%} col px-4 pt-6 pb-7 sp-4 align-center">
   <div class="maxwidth-7 width-full col sp-3 q-xl-sp-6">
     <h2 class="font-heading text-xl maxwidth-5 q-md-text-center">{{_.title}}</h2>
     <div class="row sp-8 q-xl-col q-md-align-center q-lg-sp-6-parent">
@@ -7,34 +13,36 @@
         <div class="height-10 hide-xl"></div>
         <div class="col q-lg-align-center">
           <div>D-LABS GmbH</div>
-          <a href="mailto:info@d-labs.com" class="light-link">info@d-labs.com</a>
+          <a class="{{link_class}}" href="mailto:info@d-labs.com">info@d-labs.com</a>
         </div>
       </div>
       <div class="row sp-3 q-lg-col q-lg-align-center fill-parent">
         {%- for location in site.data.includes.locations.locations -%}
-          <div class="col sp-5 fill-parent q-lg-align-center q-lg-sp-2">
-            <div>
-              {% asset {{location.img}}
+        <div class="col sp-5 fill-parent q-lg-align-center q-lg-sp-2">
+          <div>
+            {% asset {{location.img}}
                 srcset:width="400"
                 srcset:width="200"
                 srcset:width="100"
                 sizes="10em"
                 class="rounded-full width-10"
               %}
+          </div>
+          <div class="col sp-4 q-lg-align-center q-lg-text-center">
+            <div class="font-heading uppercase text-sm">
+              {%-if location.is_main -%}
+              {{_.main}}{% else %}&nbsp;
+              {% endif %}
             </div>
-            <div class="col sp-4 q-lg-align-center q-lg-text-center">
-              <div class="font-heading uppercase text-sm">
-                {%-if location.is_main -%}{{_.main}}{% else %}&nbsp;{% endif %}
-              </div>
-              <div class="text-lg underline pb-1">{{location.name}}</div>
-              <div>
-                {{location.street}}<br/>{{location.city}}
-              </div>
-              <div>
-                {{location.tel}}<br/><a class="light-link" href="mailto:{{location.email}}">{{location.email}}</a>
-              </div>
+            <div class="text-lg underline pb-1">{{location.name}}</div>
+            <div>
+              {{location.street}}<br />{{location.city}}
+            </div>
+            <div>
+              {{location.tel}}<br /><a class="{{link_class}}" href="mailto:{{location.email}}">{{location.email}}</a>
             </div>
           </div>
+        </div>
         {%- endfor -%}
       </div>
     </div>

@@ -3,6 +3,10 @@
 .row {
   display: flex;
   flex-direction: row;
+
+  &.wrappable {
+    flex-wrap: wrap;
+  }
 }
 
 .col {
@@ -149,6 +153,36 @@
   }
 }
 
+@each $qkey, $val in $media-queries {
+  @media #{$val} {
+    @each $key, $val in $spacings {
+      .q-#{$qkey}-pt-#{$key} {
+        padding-top: $val;
+      }
+      .q-#{$qkey}-pb-#{$key} {
+        padding-bottom: $val;
+      }
+      .q-#{$qkey}-pl-#{$key} {
+        padding-left: $val;
+      }
+      .q-#{$qkey}-pr-#{$key} {
+        padding-right: $val;
+      }
+      .q-#{$qkey}-pa-#{$key} {
+        padding: $val;
+      }
+      .q-#{$qkey}-px-#{$key} {
+        padding-left: $val;
+        padding-right: $val;
+      }
+      .q-#{$qkey}-py-#{$key} {
+        padding-top: $val;
+        padding-bottom: $val;
+      }
+    }
+  }
+}
+
 .elevation-sm {
   box-shadow: $shadow-sm;
 }
@@ -238,6 +272,33 @@
   width: 100%;
 }
 
+@each $key, $val in ("1_2": 50%, "1_3": 33.333%, "1_4": 25%) {
+  .width-#{$key} {
+    width: $val;
+  }
+}
+
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    @each $wkey, $val in ("1_2": 50%, "1_3": 33.333%, "1_4": 25%) {
+      .q-#{$key}-width-#{$wkey} {
+        width: $val;
+      }
+    }
+    .q-#{$key}-width-full {
+      width: 100%;
+    }
+  }
+}
+
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$key}-is-first {
+      order: -1;
+    }
+  }
+}
+
 @each $key, $val in $max-widths {
   .maxwidth-#{$key} {
     max-width: $val;
@@ -254,12 +315,20 @@
     height: $val;
   }
 }
+
 .height-screen {
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.minheight-screen {
-  min-height: 100vh;
+@each $key, $val in $spacings {
+  .minheight-#{$key} {
+    min-height: $val;
+  }
+}
+@each $key, $val in $dimensions {
+  .minheight-#{$key} {
+    min-height: $val;
+  }
 }
 
 @each $key, $val in $font-sizes {
@@ -310,7 +379,7 @@
 
 .font-heading {
   font-family: LetterGothic, sans-serif;
-  line-height: 1.5;
+  line-height: 1.2;
 }
 
 @each $key, $val in $media-queries {
@@ -355,4 +424,12 @@
 
 .fill-current {
   fill: currentColor;
+}
+
+.non-interactive {
+  pointer-events: none;
+}
+
+.no-shrink {
+  flex-shrink: 0;
 }

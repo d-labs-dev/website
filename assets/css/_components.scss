@@ -25,6 +25,7 @@
   padding: 0.2rem;
   margin: -0.2rem;
   box-shadow: 0 0 0 0.2rem transparent;
+  color: $black;
 
   &:hover {
     background-color: $black-a05;
@@ -33,6 +34,16 @@
   &:focus {
     outline: none;
     box-shadow: 0 0 0 0.2rem $black-a10;
+  }
+
+  &.is-blue {
+    color: $blue;
+    &:hover {
+      background-color: $blue-a10;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $blue-a10;
+    }
   }
 }
 
@@ -51,6 +62,32 @@
   }
 }
 
+.button-ghost {
+  @extend %raw-button;
+  padding: 1rem 1rem 0.85rem;
+  border: 2px solid;
+
+  color: $black;
+  background-color: transparent;
+  &:hover {
+    background-color: $black-a05;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem $black-a25;
+  }
+
+  &.is-white {
+    color: $white;
+    &:hover {
+      background-color: $white-a10;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $white-a25;
+    }
+  }
+}
+
 .link {
   transition-property: color;
   text-decoration: none;
@@ -61,7 +98,7 @@
   }
 }
 
-.light-link {
+.link-light {
   transition-property: color;
   color: $white;
   &:hover {
@@ -69,12 +106,21 @@
   }
 }
 
+.link-blue {
+  transition-property: color;
+  color: $blue;
+  text-decoration: none;
+  &:hover {
+    color: $darkBlue;
+  }
+}
+
 .markdown {
   line-height: 1.6;
   word-break: break-word;
 
-  p,
-  pre {
+  p:not(:last-child),
+  pre:not(:last-child) {
     margin-bottom: 1.5rem;
   }
 
@@ -84,7 +130,9 @@
   h4,
   h5,
   h6 {
-    margin-bottom: 1rem;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
     line-height: 1.2;
     font-family: LetterGothic;
   }
@@ -110,7 +158,9 @@
 
   ul,
   ol {
-    margin-bottom: 1rem;
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
     padding-left: 2rem;
   }
 
@@ -120,5 +170,42 @@
     &:hover {
       color: $darkBlue;
     }
+  }
+}
+
+.scroll-indicator {
+  @extend %raw-button;
+  border-radius: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: $gray200;
+  transition-property: background-color;
+
+  &:hover {
+    background-color: $gray300;
+  }
+
+  &.is-active {
+    background-color: $blue;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.1rem $blue-a25;
+  }
+}
+
+.lead-line {
+  margin-left: 6em;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    margin-right: 1em;
+    left: -6em;
+    border-bottom: 1px solid;
+    top: 40%;
   }
 }

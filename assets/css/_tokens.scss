@@ -1,20 +1,20 @@
 $spacings: (
   0: 0,
-  1: 0.5em,
-  2: 0.75em,
-  3: 1em,
-  4: 1.5em,
-  5: 2em,
-  6: 3em,
-  7: 4em,
-  8: 6em,
+  1: 0.5rem,
+  2: 0.75rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 2rem,
+  6: 3rem,
+  7: 4rem,
+  8: 6rem,
 );
 
 $dimensions: (
-  9: 8em,
-  10: 10em,
-  11: 15em,
-  12: 20em,
+  9: 8rem,
+  10: 10rem,
+  11: 15rem,
+  12: 20rem,
 );
 
 $blue: #009fe3;
@@ -41,6 +41,9 @@ $black-a25: fade-out($black, 1 - 0.25);
 $blue-a10: fade-out($blue, 1 - 0.1);
 $blue-a25: fade-out($blue, 1 - 0.25);
 
+$white-a05: fade-out($white, 1 - 0.05);
+$white-a10: fade-out($white, 1 - 0.1);
+$white-a25: fade-out($white, 1 - 0.25);
 $white-a90: fade-out($white, 1 - 0.9);
 
 $colors: (

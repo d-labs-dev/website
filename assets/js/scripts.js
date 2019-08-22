@@ -119,8 +119,8 @@ function setupScrollSpy() {
   measureSpies();
   $(window).on("resize", measureSpies);
   $(window).on("scroll", e => {
-    var scrollEnterPos = window.scrollY + window.innerHeight * 0.75;
-    var scrollLeavePos = window.scrollY + window.innerHeight * 0.25;
+    var scrollEnterPos = window.scrollY + window.innerHeight;
+    var scrollLeavePos = window.scrollY + window.innerHeight;
     spyDimensions.forEach(dim => {
       var nextActive = scrollLeavePos >= dim.top && scrollEnterPos <= dim.bottom;
       if (nextActive !== dim.isActive) {
@@ -139,8 +139,9 @@ function setupScrollSpy() {
 function toggleButton() {
   $("[data-toggle]").each(function() {
     var el = $(this);
+    var style = el.data("toggle-style") || "fade";
     el.on("click", function() {
-      $(el.data("toggle")).fadeToggle(250);
+      $(el.data("toggle"))[style + "Toggle"](250);
     });
   });
 }
@@ -156,11 +157,55 @@ function headerScroll() {
   });
 }
 
+function setupActiveSnapping() {
+  var spyDimensions = [];
+  var isActive = false;
+
+  function measure() {
+    spyDimensions = [];
+    $("[data-active-snapping]").each(function() {
+      var el = $(this);
+      var top = el.offset().top;
+      var bottom = top + el.outerHeight();
+      var spyInfo = {
+        top: top,
+        bottom: bottom,
+      };
+      spyDimensions.push(spyInfo);
+    });
+  }
+
+  function findIfActive() {
+    var scrollEnterPos = window.scrollY + window.innerHeight * 0.75;
+    var scrollLeavePos = window.scrollY + window.innerHeight * 0.66;
+    var someActive = spyDimensions.some(
+      spy => scrollLeavePos >= spy.top && scrollEnterPos <= spy.bottom
+    );
+    if (someActive) {
+      if (!isActive) {
+        $("body").css({scrollSnapType: "y mandatory"});
+        isActive = true;
+      }
+    } else {
+      if (isActive) {
+        $("body").css({scrollSnapType: "none"});
+        isActive = false;
+      }
+    }
+  }
+
+  $(window).on("resize", measure);
+  $(window).on("scroll", findIfActive);
+  measure();
+  findIfActive();
+}
+
 $(function() {
   init();
   setupScrollSpy();
   toggleButton();
   headerScroll();
+  setupActiveSnapping();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });

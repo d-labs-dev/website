@@ -8,12 +8,13 @@
 }
 
 .home-scroll-screen {
-  transition-property: opacity;
   margin-left: 40%;
   height: 120vh;
+  margin-right: 3rem;
 
   @media #{$query-md} {
     margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -23,6 +24,9 @@
   justify-content: center;
 }
 
+.home-scroll-screen-content {
+  transition-property: opacity;
+}
 .opacity-0 {
   opacity: 0;
 }

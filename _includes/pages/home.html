@@ -1,42 +1,130 @@
 {%- assign _ = site.data.pages.home[page.locale] -%}
-<div class="relative">
-  <div class="height-screen sroll-snap-start text-white relative zindex-2 col justify-center align-center px-4 py-5" data-visible-key="screen0">
+<div class="relative" data-active-snapping>
+  <div class="height-screen sroll-snap-start text-white relative zindex-2 col justify-center align-center px-4 py-5"
+    data-visible-key="screen0">
     <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.hero_claim}}</div>
     <svg viewbox="0 0 100 100" class="absolute inset-full text-blue fill-current" preserveAspectRatio="none">
-      <polygon points="0 0,100 0,100 70,0 100" class="hide-md"/>
-      <polygon points="0 0,100 0,100 80,0 100" class="show-md"/>
+      <polygon points="0 0,100 0,100 70,0 100" class="hide-md" />
+      <polygon points="0 0,100 0,100 80,0 100" class="show-md" />
     </svg>
     <div class="absolute inset-x bottom-0 col align-center text-black pb-4">
-      <a href="#n1" class="fill-current button-text">{% asset icons/icon-arrow-down.svg class="height-4" %}</a>
+      <a href="#n1" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
   </div>
-  <div class="absolute inset-full col align-center">
-    <div class="maxwidth-7 width-full sticky height-screen row align-center q-md-align-start py-5 q-md-justify-center zindex-1">
+  <div class="absolute inset-full col align-center non-interactive">
+    <div
+      class="maxwidth-7 width-full sticky height-screen row align-center q-md-align-start py-5 q-md-justify-center zindex-1">
       <div class="home-circle-container">
         {%- include home-circles.html -%}
       </div>
     </div>
   </div>
-  {%- for screen in _.screens -%}
-    <div class="sroll-snap-center col align-center px-4" data-visible-key="screen{{forloop.index}}" id="n{{forloop.index}}">
+  <div class="relative">
+    {%- for screen in _.screens -%}
+    <div class="sroll-snap-center col align-center px-4" data-visible-key="screen{{forloop.index}}"
+      id="n{{forloop.index}}">
       <div class="maxwidth-7 width-full">
-        <div class="home-scroll-screen relative">
+        <div class="home-scroll-screen relative col align-end">
           <div
-            class="sticky height-screen col justify-center sp-4 maxwidth-4 q-md-justify-end py-5"
-            data-init-class="opacity-0"
-            data-class-on-enter="screen{{{forloop.index}}:-opacity-0"
-            data-class-on-leave="screen{{{forloop.index}}:+opacity-0"
-          >
+            class="home-scroll-screen-content sticky height-screen col justify-center sp-4 maxwidth-4 q-md-justify-end py-5"
+            data-init-class="opacity-0" data-class-on-enter="screen{{{forloop.index}}:-opacity-0"
+            data-class-on-leave="screen{{{forloop.index}}:+opacity-0">
             <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
             {%- if screen.text - %}
             <div class="q-md-text-xs">{{screen.text}}</div>
             {%- endif- %}
             <div class="col align-start">
-              <a class="button" href="{{screen.cta_target}}">{{screen.cta}}</a>
+              <a class="button-ghost" href="{{screen.cta_target}}">{{screen.cta}}</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  {%- endfor -%}
-<div class="b1"></div>
+    {%- endfor -%}
+    <div class="absolute inset-y right-0 hide-md">
+      <div class="sticky height-screen col justify-center sp-3 pr-3">
+        {%- for screen in _.screens -%}
+        <a href="#n{{forloop.index}}" class="scroll-indicator" data-class-on-enter="screen{{{forloop.index}}:+is-active"
+          data-class-on-leave="screen{{{forloop.index}}:-is-active">
+        </a>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white col align-center px-4 py-5 sroll-snap-start">
+  <div class="maxwidth-7 width-full col sp-5">
+    <h2 class="font-heading font-bold text-xl">{{_.clients_heading}}</h2>
+    <div class="col">
+      <div class="row wrappable">
+        {%- for client in site.data.pages.home.first_clients -%}
+        <div class="row justify-center align-center width-1_4 px-4 py-3 q-lg-width-1_2">
+          {% asset {{client.logo}} alt={{client.name}} title={{client.name}} class="full-width maxheight-6" %}
+        </div>
+        {%- endfor -%}
+      </div>
+      <div class="hidden" id="more-clients">
+        <div class="row wrappable">
+          {%- for client in site.data.pages.home.rest_clients -%}
+          <div class="row justify-center align-center width-1_4 px-4 py-3 q-lg-width-1_2">
+            {% asset {{client.logo}} alt={{client.name}} title={{client.name}} class="full-width maxheight-6" %}
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+    <div class="col align-center">
+      <button class="button-text is-blue" data-toggle="#more-clients" data-toggle-style="slide">
+        <div class="row align-center sp-3">
+          {% asset icons/icon-arrow-down.svg @inline %}
+          <div>{{_.clients_show_more}}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+{%- assign latest_post = site.pages | where: "kind", "blogPost" | where: "locale", page.locale | first -%}
+<div class="bg-blue col align-center text-white pl-4 q-md-px-0">
+  <div class="maxwidth-7 width-full col sp-5">
+    <div class="row sp-8 q-md-col q-md-sp-0">
+      <div class="row pt-6 pb-7 sp-6 align-start q-xl-col q-xl-sp-0 q-md-px-4">
+        <div class="uppercase font-heading font-bold text-sm lead-line">Blog</div>
+        <div class="col sp-3 pt-5">
+          <h3 class="font-heading text-xl">{{latest_post.title}}</h3>
+          <div class="markdown">
+            {{ latest_post.description | markdownify }}
+          </div>
+          <div class="col align-start">
+            <a class="button-ghost is-white" href="{{page.url}}">{{_.blog_cta_text}}</a>
+          </div>
+        </div>
+      </div>
+      {% if latest_post.hero_image %}
+      <div class="width-11 relative no-shrink minheight-10 q-md-width-full q-md-is-first">
+        <img src="{{latest_post.hero_image.url}}?w={{400 | times: 3 | divided_by: 4}}&h=400&fit=fill&f=faces"
+          alt="{{latest_post.hero_image.description}}" class="absolute inset-full" />
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="bg-white row q-md-col">
+  <div class="width-1_2 relative minheight-9 q-md-width-full">
+    {% asset {{_.jobs_image}} class="absolute inset-full"%}
+  </div>
+  <div class="width-1_2 q-md-width-full">
+    <div class="py-7 pl-5 pr-4 maxwidth-10 col sp-3">
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.jobs_lead}}</div>
+      <h2 class="font-heading font-bold text-xl">{{_.jobs_title}}</h2>
+      <div>{{_.jobs_desc}}</div>
+      <div class="col align-start">
+        <a class="button-ghost is-blue" href="{{_.jobs_cta_url}}">{{_.jobs_cta_text}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- include locations.html is_white=true -%}
