@@ -1,1 +1,25 @@
-<h2>{{ site.data.pages.approach[page.locale].title }}</h2>
+{%- assign _ = site.data.pages.approach[page.locale] -%}
+
+<div class="relative" data-active-snapping>
+  <div
+    class="relative height-screen sroll-snap-start col align-center justify-center py-7 px-4 sroll-snap-start overflow-hidden"
+    data-after-approach-animate="+text-white">
+    <div class="maxwidth-7 width-full col sp-2 pb-6 relative zindex-1">
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line"
+        data-after-approach-animate="-text-blue +text-white">{{_.intro_lead}}</div>
+      <div class="markdown text-xl font-heading">{{_.intro_text | markdownify}}</div>
+    </div>
+    <div class="absolute non-interactive inset-full col">
+      <div class="approach-circle is-small" id="approach-circle" />
+    </div>
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
+      <a class="button-text" data-after-approach-animate="+is-white" href="#n1">
+        <div class="col sp-3">
+          <div>{{_.intro_cta_text}}</div>
+          {% asset icons/icon-arrow-down.svg @inline %}
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>

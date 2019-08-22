@@ -44,7 +44,7 @@
 }
 
 body.with-blue-header {
-  .main-header {
+  .main-header:not(.is-scrolled) {
     background-color: $blue;
     .header-link,
     .lang-switcher-link {
@@ -53,11 +53,11 @@ body.with-blue-header {
         color: $white;
       }
     }
-  }
-  .header-logo {
-    filter: grayscale(1) brightness(2);
-  }
-  .header-menu-button {
-    filter: grayscale(1) brightness(10);
+    .header-logo {
+      filter: grayscale(1) brightness(2);
+    }
+    .header-menu-button {
+      filter: grayscale(1) brightness(10);
+    }
   }
 }

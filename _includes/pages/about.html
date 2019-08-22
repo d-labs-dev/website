@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <div id="next" class="col sp-4 sroll-snap-start pt-5 pb-8">
+  <div class="col sp-4 sroll-snap-start pt-5 pb-8" id="next">
     <div class="height-10 relative">
       {% asset {{_.about_image}} class="absolute inset-full"%}
     </div>
@@ -28,5 +28,6 @@
   </div>
 </div>
 
-
-{%- include locations.html -%}
+<div class="sroll-snap-start">
+  {%- include locations.html -%}
+</div>

@@ -1,0 +1,16 @@
+@import "tokens";
+
+.approach-circle {
+  margin: auto;
+  width: 50vmax;
+  height: 50vmax;
+  background-color: $blue;
+  border-radius: 50%;
+
+  transform: translate3d(0, 15%, 0) scale(0.04);
+  transition: transform 0.5s ease-out;
+
+  &.is-big {
+    transform: translate3d(0, 15%, 0) scale(4);
+  }
+}

@@ -239,12 +239,32 @@ function initMap() {
   });
 }
 
+function approachAnimation() {
+  var hasFired = false;
+  function fire() {
+    if (hasFired) return;
+    hasFired = true;
+    $("#approach-circle").addClass("is-big");
+    $("body").addClass("with-blue-header");
+    $("[data-after-approach-animate]").each(function() {
+      var el = $(this);
+      el.data("after-approach-animate")
+        .split(/\s+/g)
+        .forEach(part => {
+          console.log("do", part);
+        });
+    });
+  }
+  setTimeout(fire, 1000);
+}
+
 $(function() {
   init();
   setupScrollSpy();
   toggleButton();
   headerScroll();
   setupActiveSnapping();
+  approachAnimation();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });
