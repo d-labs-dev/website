@@ -1,2 +1,32 @@
-<h2>{{ site.data.pages.about[page.locale].title }}</h2>
+{%- assign _ = site.data.pages.about[page.locale] -%}
+<div class="relative" data-active-snapping>
+  <div class="relative height-screen sroll-snap-start row q-lg-col">
+    <div class="width-2_3 pt-8 pb-6 col justify-center align-end q-lg-align-start q-lg-width-full pl-4">
+      <div class="col sp-4 maxwidth-5 pr-6">
+        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
+        <h1 class="font-heading text-xxl font-normal">{{_.intro_title}}</h1>
+        <div class="markdown text-sm">{{_.intro_text | markdownify}}</div>
+      </div>
+    </div>
+    <div class="width-1_3 relative q-lg-width-full fill-parent">
+      {% asset {{_.intro_image}} class="absolute inset-full"%}
+    </div>
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-4">
+      <a class="button-text" href="#next">{% asset icons/icon-arrow-down.svg @inline %}</a>
+    </div>
+  </div>
+
+  <div id="next" class="col sp-4 sroll-snap-start pt-5 pb-8">
+    <div class="height-10 relative">
+      {% asset {{_.about_image}} class="absolute inset-full"%}
+    </div>
+    <div class="col align-center">
+      <div class="maxwidth-4 markdown">
+        {{_.about_text | markdownify}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {%- include locations.html -%}
