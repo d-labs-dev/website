@@ -74,7 +74,7 @@
   <div class="maxwidth-7 width-full col sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{_.projects_title}}</h2>
     {%- for project in _.projects -%}
-      <div class="col sp-4">
+      <div class="col sp-4" id="project{{forloop.index}}">
         <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{project.lead}}</div>
         <div class="row sp-3 height-14 q-md-height-10">
           <div class="width-11 no-shrink relative q-md-width-1_3">

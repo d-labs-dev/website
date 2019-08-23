@@ -91,12 +91,14 @@
       <div class="row pt-6 pb-7 sp-6 align-start q-xl-col q-xl-sp-0 q-md-px-4">
         <div class="uppercase font-heading font-bold text-sm lead-line">Blog</div>
         <div class="col sp-3 pt-5">
-          <h3 class="font-heading text-xl">{{latest_post.title}}</h3>
+          <a href="{{latest_post.url}}" class="reset-link">
+            <h3 class="font-heading text-xl">{{latest_post.title}}</h3>
+          </a>
           <div class="markdown">
             {{ latest_post.description | markdownify }}
           </div>
           <div class="col align-start">
-            <a class="button-ghost is-white" href="{{page.url}}">{{_.blog_cta_text}}</a>
+            <a class="button-ghost is-white" href="{{latest_post.url}}">{{_.blog_cta_text}}</a>
           </div>
         </div>
       </div>
@@ -120,7 +122,9 @@
       <h2 class="font-heading font-bold text-xl">{{_.jobs_title}}</h2>
       <div>{{_.jobs_desc}}</div>
       <div class="col align-start">
-        <a class="button-ghost is-blue" href="{{_.jobs_cta_url}}">{{_.jobs_cta_text}}</a>
+        {% locale_link jobs class:"button-ghost is-blue" %}
+          {{_.jobs_cta_text}}
+        {% endlocale_link %}
       </div>
     </div>
   </div>
