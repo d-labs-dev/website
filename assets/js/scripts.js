@@ -282,6 +282,51 @@ function setupCarousel() {
   });
 }
 
+function setupMethodFilter() {
+  var activeFilters = [];
+  var buttons = {}
+  var tiles = []
+  $('[data-services-filter]').each(function() {
+    var button = $(this);
+    var filter = button.data("services-filter")
+    buttons[filter] = button;
+    button.on("click", () => {
+      if (filter === 'all') {
+        activeFilters = []
+      } else if (activeFilters.indexOf(filter) >= 0) {
+        activeFilters = activeFilters.filter(f => f !== filter)
+      } else {
+        activeFilters.push(filter)
+      }
+      sync()
+    })
+  })
+
+  $('[data-method-tile]').each(function() {
+    var tile = $(this);
+    var domainKeys = tile.data("method-tile").split(",").filter(Boolean)
+    var domains = {}
+    domainKeys.forEach(key => domains[key] = true)
+    tiles.push({el: tile, domains: domains})
+  })
+
+  function sync() {
+    $('[data-services-filter]').removeClass("is-active")
+    if (activeFilters.length === 0) {
+      buttons.all.addClass("is-active")
+      tiles.forEach(tile => tile.el.removeClass("hidden"))
+    } else {
+      tiles.forEach(tile => tile.el.addClass("hidden"))
+      activeFilters.forEach(f => {
+        buttons[f].addClass("is-active")
+        tiles.forEach(tile => {
+          if (tile.domains[f]) tile.el.removeClass("hidden")
+        })
+      })
+    }
+  }
+}
+
 $(function() {
   setupScrollSpy();
   toggleButton();
@@ -289,6 +334,7 @@ $(function() {
   setupActiveSnapping();
   approachAnimation();
   setupCarousel();
+  setupMethodFilter();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });

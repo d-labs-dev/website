@@ -62,8 +62,8 @@
   <div class="maxwidth-7 width-full col sp-6">
     <h2 class="font-heading text-xl">{{_.services_title}}</h2>
     <div class="row justify-center sp-3 hide-lg align-start">
-      <button class="button-transparent" style="flex-basis: 6em" data-services-filter="all">
-        <div class="service-carousel-indicator row align-start sp-1 is-active">
+      <button class="button-transparent service-carousel-indicator is-active" style="flex-basis: 6em" data-services-filter="all">
+        <div class="row align-start sp-1">
           <div class="width-3 height-3 no-shrink">
             <div class="service-circle text-blue"></div>
           </div>
@@ -71,8 +71,8 @@
         </div>
       </button>
       {%- for slide in _.slides -%}
-      <button class="button-transparent" style="flex-basis: 10em" data-services-filter="{{slide.name}}">
-        <div class="service-carousel-indicator row align-start sp-1">
+      <button class="button-transparent service-carousel-indicator" style="flex-basis: 10em" data-services-filter="{{slide.name}}">
+        <div class="row align-start sp-1">
           <div class="width-3 height-3 no-shrink">
             <div class="service-circle text-{{slide.color}}"></div>
           </div>
@@ -85,7 +85,7 @@
     {% assign method_pages = site.pages | where: "kind", "method" | where: "locale", page.locale %}
     <div class="grid sp-6 q-lg-4">
       {%- for method in method_pages -%}
-      <a href="{{method.url}}" class="reset-link col sp-3 width-1_3 q-lg-width-1_2 q-sm-width-full" data-method-tile>
+      <a href="{{method.url}}" class="reset-link col sp-3 width-1_3 q-lg-width-1_2 q-sm-width-full" data-method-tile="{%- for domain in method.domains -%}{{domain.title}},{%- endfor -%}">
         <img src="{{method.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
           alt="{{method.hero_image.description}}" class="width-full" />
         <h3 class="font-heading text-md">{{method.title}}</h3>
