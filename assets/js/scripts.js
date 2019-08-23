@@ -236,13 +236,15 @@ function initMap() {
 }
 
 function approachAnimation() {
+  var circle = $("#approach-circle");
+  if (!circle.length) return;
   var hasFired = false;
   function fire() {
     if (hasFired) return;
     $(document).off("mousemove", fire);
     $(window).off("scroll", fire);
     hasFired = true;
-    $("#approach-circle").addClass("is-big");
+    circle.addClass("is-big");
     $("body").addClass("with-blue-header");
     $("[data-after-approach-animate]").each(function() {
       var el = $(this);
