@@ -69,7 +69,7 @@
 .button {
   @extend %raw-button;
   @extend %button-with-text;
-  padding: 0.75rem 1rem 0.55rem;
+  padding: 1rem 1rem 0.85rem;
 
   color: $white;
   background-color: $blue;
@@ -79,6 +79,17 @@
   &:focus {
     outline: none;
     box-shadow: 0 0 0 0.2rem $blue-a25;
+  }
+
+  &.is-white {
+    color: $blue;
+    background-color: $white;
+    &:hover {
+      background-color: $white-a90;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $white-a25;
+    }
   }
 }
 
