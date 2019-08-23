@@ -64,7 +64,7 @@ module Jekyll
 
   end
 
-  class TagPageLinkTag < Liquid::Block
+  class TagPageUrl < Liquid::Tag
 
     include Sanitizer
 
@@ -84,8 +84,8 @@ module Jekyll
       this_page = context.registers[:page]
       current_locale = this_page['locale']
 
-      return "<a href='/#{current_locale}/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html'>#{text}</a>" if current_locale != 'de'
-      return "<a href='/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html'>#{text}</a>"
+      return "/#{current_locale}/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html" if current_locale != 'de'
+      return "/#{KIND_BASE_PATHES[kind]}/tags/#{tag}.html"
 
     end
 
@@ -93,4 +93,4 @@ module Jekyll
 
 end
 
-Liquid::Template.register_tag('link_tag_page', Jekyll::TagPageLinkTag)
+Liquid::Template.register_tag('link_tag_url', Jekyll::TagPageUrl)

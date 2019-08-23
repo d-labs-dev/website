@@ -1,0 +1,16 @@
+{%- assign post = includes.post -%}
+<div class="col sp-3 width-1_3 q-lg-width-1_2 q-sm-width-full">
+  <a href="{{post.url}}">
+    <img src="{{post.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
+    alt="{{post.hero_image.description}}" class="width-full" />
+  </a>
+  <a href="{{post.url}}" class="reset-link">
+    <h3 class="font-heading text-md">{{post.title}}</h3>
+  </a>
+  <div class="markdown text-sm">{{post.description | markdownify}}</div>
+  <div class="row wrappable sp-2">
+  {%- for tag in post.tags -%}
+    <a href="{% link_tag_url {{post.kind}} {{tag}} %}" class="text-xxs pill">{{tag}}</a>
+  {%- endfor -%}
+  </div>
+</div>

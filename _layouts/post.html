@@ -1,18 +1,32 @@
 ---
-layout: page
+layout: default
 ---
 
-<p>{{page.description}}<p>
+{%- assign _ = site.data.pages.blog[page.locale] -%}
 
-{{ page.body | markdownify }}
+<div class="col align-center px-4 py-7 pt-8">
+	<div class="maxwidth-5 width-full col sp-6">
+		<div class="col sp-4">
+			<div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{page.sys.created_at | date: "%d. %M. %Y"}}</div>
+			<h1 class="font-heading text-xl">{{page.title}}</h1>
+			<img src="{{page.hero_image.url}}?w=800" alt="{{page.hero_image.description}}" class="full-width" />
+			<div class="col align-center">
+				<div class="col sp-5 maxwidth-4 full-width">
+					<div class="markdown">{{ page.body | markdownify }}</div>
+					<div class="row wrappable sp-2">
+					{%- for tag in page.tags -%}
+						<a href="{% link_tag_url blogPost {{tag}} %}" class="text-xxs pill">{{tag}}</a>
+					{%- endfor -%}
+					</div>
+				</div>
+			</div>
+			<div class="col align-start pt-6">
+				{% locale_link blog class:"button-text" %}
+				← {{_.back_button_text}}
+				{% endlocale_link %}
+			</div>
+		</div>
+	</div>
+</div>
 
-<h3>Tags</h3>
-<ul>
-{% for tag in page.tags %}
-  <li>
-  	{% link_tag_page blogPost {{ tag }} %}
-  	  {{ tag }}
-  	{% endlink_tag_page %}
-  </li>
-{% endfor %}
-</ul>
+{%- include locations.html -%}

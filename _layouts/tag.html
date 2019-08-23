@@ -1,20 +1,20 @@
 ---
-layout: page
+layout: default
 ---
 
-<h1>{{page.tag}}</h1>
+{% assign posts = site.pages | where: "kind", page.tag_kind | where: "locale", page.locale %}
 
-{% assign pages_of_kind = site.pages | where: "kind", page.tag_kind %}
-{% assign locale_pages_of_kind = pages_of_kind | where: "locale", page.locale %}
+<div class="col align-center px-4 py-7 pt-8">
+  <div class="maxwidth-7 width-full col sp-6">
+    <h2 class="font-heading text-xl">{{page.tag}}</h2>
 
-<ul>
-{% for other_page in locale_pages_of_kind %}
-  {% if other_page.tags contains page.tag %}
-    <li>
-  	  <a href="{{ other_page.url }}">
-  	    {{ other_page.title }}
-  	  </a>
-    </li>
-  {% endif %}
-{% endfor %}
-</ul>
+    <div class="grid sp-6 q-lg-4">
+      {%- for post in posts -%}
+        {% if post.tags contains page.tag %}
+        {%- include post-tile.html post=post -%}
+        {% endif %}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+

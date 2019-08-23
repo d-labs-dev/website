@@ -4,8 +4,8 @@
 {% assign latest_post = blog_pages | first %}
 
 <div class="col align-center px-4 py-7 pt-8">
-  <div class="maxwidth-7 width-full col sp-6">
-    <div class="row sp-4 q-md-col">
+  <div class="maxwidth-7 width-full col sp-7">
+    <div class="row sp-6 q-md-col pt-5">
       <div class="width-1_3 no-shrink relative q-md-width-full minheight-9">
         <img src="{{latest_post.hero_image.url}}?w=800&h=800&fit=fill&f=faces"
           alt="{{latest_post.hero_image.description}}" class="absolute inset-full" />
@@ -26,7 +26,7 @@
         </div>
         <div class="row wrappable sp-2">
         {%- for tag in post.tags -%}
-          <div class="text-xxs pill">{{tag}}</div>
+          <a href="{% link_tag_url blogPost {{tag}} %}" class="text-xxs pill">{{tag}}</a>
         {%- endfor -%}
         </div>
       </div>
@@ -35,17 +35,7 @@
     <div class="grid sp-6 q-lg-4">
       {%- for post in blog_pages -%}
       {%- if forloop.index==1 -%}{%- continue -%}{%- endif -%}
-      <a href="{{blog.url}}" class="reset-link col sp-3 width-1_3 q-lg-width-1_2 q-sm-width-full">
-        <img src="{{post.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
-          alt="{{post.hero_image.description}}" class="width-full" />
-        <h3 class="font-heading text-md">{{post.title}}</h3>
-        <div class="markdown text-sm">{{post.description | markdownify}}</div>
-        <div class="row wrappable sp-2">
-        {%- for tag in post.tags -%}
-          <div class="text-xxs pill">{{tag}}</div>
-        {%- endfor -%}
-        </div>
-      </a>
+      {%- include post-tile.html post=post -%}
       {%- endfor -%}
     </div>
   </div>
