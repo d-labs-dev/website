@@ -1,16 +1,13 @@
 {%- assign _ = site.data.pages.approach[page.locale] -%}
 
 <div class="relative" data-active-snapping>
-  <div
-    class="relative height-screen sroll-snap-start col align-center justify-center py-7 px-4 sroll-snap-start overflow-hidden"
-    data-after-approach-animate="+text-white">
+  <div class="relative height-screen sroll-snap-start col align-center justify-center py-7 px-4 sroll-snap-start overflow-hidden" data-after-approach-animate="+text-white">
     <div class="maxwidth-7 width-full col sp-2 pb-6 relative zindex-1">
-      <div class="uppercase font-heading font-bold text-blue text-sm lead-line"
-        data-after-approach-animate="-text-blue +text-white">{{_.intro_lead}}</div>
-      <div class="markdown text-xl font-heading">{{_.intro_text | markdownify}}</div>
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line" data-after-approach-animate="-text-blue +text-white">{{_.intro_lead}}</div>
+      <div class="markdown text-xl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
     </div>
     <div class="absolute non-interactive inset-full col">
-      <div class="approach-circle is-small" id="approach-circle" />
+      <div class="approach-circle is-small" id="approach-circle"></div>
     </div>
     <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
       <a class="button-text" data-after-approach-animate="+is-white" href="#n1">
@@ -21,5 +18,48 @@
       </a>
     </div>
   </div>
+
+  <div class="relative">
+    <div class="absolute inset-full col align-center non-interactive zindex-1">
+      <div class="maxwidth-7 width-full sticky height-screen row align-center overflow-hidden">
+          <div class="white-cover"></div>
+        <div class="approach-image-container">
+          {%- include approach-image.html -%}
+        </div>
+        <div class="absolute inset-x bottom-0 pb-4 col align-center">
+          <a class="button-text is-blue" href="#projects">
+            <div class="row sp-3 align-center">
+              {% asset icons/icon-arrow-right.svg @inline %}
+              <div>{{_.projects_link_text}}</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    {%- for screen in _.screens -%}
+    <div class="sroll-snap-center col align-center px-4" data-visible-key="screen{{forloop.index}}"
+      id="n{{forloop.index}}">
+      <div class="maxwidth-7 width-full">
+        <div class="approach-scroll-screen relative col">
+          <div class="sticky height-screen col sp-4 pt-7 pb-7">
+            {%- if screen.lead - %}
+            <div class="uppercase font-heading font-bold text-blue text-xs lead-line">{{screen.lead}}</div>
+            {%- endif- %}
+            <div class="push show-md"></div>
+            <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
+            {%- if screen.text - %}
+            <div class="q-md-text-xs maxwidth-2 approach-scroll-screen-text">{{screen.text}}</div>
+            {%- endif- %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {%- endfor -%}
+  </div>
+
 </div>
+<div id="projects">
+
 </div>

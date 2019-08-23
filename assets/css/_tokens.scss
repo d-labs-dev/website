@@ -96,9 +96,13 @@ $font-sizes: (
 );
 
 $query-sm: "only screen and (max-width : 30em)";
+$query-gt-sm: "only screen and (min-width : 30.0001em)";
 $query-md: "only screen and (max-width : 40em)";
+$query-gt-md: "only screen and (min-width : 40.0001em)";
 $query-lg: "only screen and (max-width : 50em)";
+$query-gt-lg: "only screen and (min-width : 50.0001em)";
 $query-xl: "only screen and (max-width : 70em)";
+$query-gt-xl: "only screen and (min-width : 70.0001em)";
 
 $media-queries: (
   sm: $query-sm,

@@ -45,6 +45,16 @@
       box-shadow: 0 0 0 0.2rem $blue-a10;
     }
   }
+
+  &.is-white {
+    color: $white;
+    &:hover {
+      background-color: $white-a10;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $white-a25;
+    }
+  }
 }
 
 .button {
@@ -208,4 +218,11 @@
     border-bottom: 1px solid;
     top: 40%;
   }
+}
+
+.white-cover {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 88%, rgba(255, 255, 255, 1) 95%);
 }

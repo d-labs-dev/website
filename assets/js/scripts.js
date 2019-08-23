@@ -8,29 +8,24 @@ function init() {
   });
 }
 
+function constructTransform(attrSprings) {
+  const parts = []
+  if (attrSprings.translateX || attrSprings.translateY) {
+    const vals = [
+      attrSprings.translateX ? attrSprings.translateX.currentValue : 0,
+      attrSprings.translateY ? attrSprings.translateY.currentValue : 0
+    ]
+    parts.push("translate(" + vals.join(" ") + ")")
+  }
+  if (attrSprings.scale) {
+    parts.push("scale(" + attrSprings.scale.currentValue + ")")
+  }
+  return parts.join(" ")
+}
+
 function setupScrollSpy() {
   var spyDimensions = [];
   var enterListeners = {};
-  var leaveListeners = {};
-
-  $("[data-class-on-enter]").each(function() {
-    var el = $(this);
-    el.data("class-on-enter")
-      .split(" ")
-      .forEach(part => {
-        var m = part.match(/(\w+):([+\-*])([\w-]+)/);
-        if (m) {
-          var list = (enterListeners[m[1]] = enterListeners[m[1]] || []);
-          list.push(() => {
-            if (m[2] === "+") {
-              el.addClass(m[3]);
-            } else if (m[2] === "-") {
-              el.removeClass(m[3]);
-            }
-          });
-        }
-      });
-  });
 
   $("[data-attr-on-enter]").each(function() {
     var el = $(this);
@@ -47,24 +42,21 @@ function setupScrollSpy() {
             var attr = splitted[0];
             var val = parseFloat(splitted[1]);
             var spring = attrSprings[attr];
-            var isTranslate = attr.indexOf("translate") === 0;
+            var isTransform = attr.indexOf("translate") === 0 || attr === "scale";
 
             if (!spring) {
-              var currVal = isTranslate ? val : parseFloat(el.attr(attr), 10) || 0;
+              var currVal = isTransform ? val : parseFloat(el.attr(attr), 10) || 0;
               spring = new Wobble.Spring({
                 damping: 15,
                 fromValue: currVal,
                 toValue: currVal,
               });
-              if (isTranslate) {
+              if (isTransform) {
+
                 spring.onUpdate(() =>
                   el.attr(
                     "transform",
-                    "translate(" +
-                      attrSprings.translateX.currentValue +
-                      " " +
-                      attrSprings.translateY.currentValue +
-                      ")"
+                    constructTransform(attrSprings)
                   )
                 );
               } else {
@@ -82,45 +74,24 @@ function setupScrollSpy() {
       });
   });
 
-  $("[data-class-on-leave]").each(function() {
-    var el = $(this);
-    el.data("class-on-leave")
-      .split(",")
-      .forEach(part => {
-        var m = part.match(/(\w+):([+-])([\w-]+)/);
-        if (m) {
-          var list = (leaveListeners[m[1]] = leaveListeners[m[1]] || []);
-          list.push(() => el[m[2] === "-" ? "removeClass" : "addClass"](m[3]));
-        }
-      });
-  });
-
   function measureSpies() {
     spyDimensions = [];
-    var scrollEnterPos = window.scrollY + window.innerHeight * 0.75;
-    var scrollLeavePos = window.scrollY + window.innerHeight * 0.25;
     $("[data-visible-key]").each(function() {
       var el = $(this);
       var top = el.offset().top;
-      var bottom = top + el.outerHeight();
       var spyInfo = {
-        isActive: scrollLeavePos >= top && scrollEnterPos <= bottom,
+        isActive: false,
         key: el.data("visible-key"),
         top: top,
-        bottom: bottom,
+        bottom: top + el.outerHeight(),
       };
       spyDimensions.push(spyInfo);
-      if (spyInfo.isActive && enterListeners[spyInfo.key]) {
-        enterListeners[spyInfo.key].forEach(fn => fn());
-      }
     });
   }
 
-  measureSpies();
-  $(window).on("resize", measureSpies);
-  $(window).on("scroll", e => {
-    var scrollEnterPos = window.scrollY + window.innerHeight;
-    var scrollLeavePos = window.scrollY + window.innerHeight;
+  function checkIfActive() {
+    var scrollEnterPos = window.scrollY + window.innerHeight * 0.75;
+    var scrollLeavePos = window.scrollY + window.innerHeight * 0.25;
     spyDimensions.forEach(dim => {
       var nextActive = scrollLeavePos >= dim.top && scrollEnterPos <= dim.bottom;
       if (nextActive !== dim.isActive) {
@@ -128,12 +99,14 @@ function setupScrollSpy() {
         if (nextActive && enterListeners[dim.key]) {
           enterListeners[dim.key].forEach(fn => fn());
         }
-        if (!nextActive && leaveListeners[dim.key]) {
-          leaveListeners[dim.key].forEach(fn => fn());
-        }
       }
     });
-  });
+  }
+
+  $(window).on("resize", measureSpies);
+  $(window).on("scroll", checkIfActive);
+  measureSpies();
+  checkIfActive();
 }
 
 function toggleButton() {
@@ -243,6 +216,8 @@ function approachAnimation() {
   var hasFired = false;
   function fire() {
     if (hasFired) return;
+    $(document).off("mousemove", fire);
+    $(window).off("scroll", fire);
     hasFired = true;
     $("#approach-circle").addClass("is-big");
     $("body").addClass("with-blue-header");
@@ -251,11 +226,20 @@ function approachAnimation() {
       el.data("after-approach-animate")
         .split(/\s+/g)
         .forEach(part => {
-          console.log("do", part);
+          var match = part.match(/([+\-])([\w-]+)/);
+          if (match) {
+            if (match[1] === "-") {
+              el.removeClass(match[2]);
+            } else {
+              el.addClass(match[2]);
+            }
+          }
         });
     });
   }
-  setTimeout(fire, 1000);
+  setTimeout(fire, 5000);
+  $(document).on("mousemove", fire);
+  $(window).on("scroll", fire);
 }
 
 $(function() {

@@ -5,5 +5,28 @@ de:
   "
   intro_cta_text: Unser Vorgehen in Projekten
 
+  screens:
+    - lead: Unser Vorgehen
+      title: Überblick
+      text: Je nach Anforderung können Lesiungen aus unseren verhsciedne Kompetenzfeldern im Projekt zur Anwendung
+    - lead: Unser Vorgehen
+      title: 360°-Sicht
+      text: Ganzheitliche Analyse des Projekt­umfeldes und umfassende Untersuchung der Nutzerbedürfnisse.
+    - lead: Unser Vorgehen
+      title: Synthese
+      text: Zusammenfassung, Strukturierung und Bewertung der ­gewonnenen Erkennt­nisse und Definition der Anforderungen.
+    - lead: Unser Vorgehen
+      title: Konzept + Design
+      text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team.
+    - lead: Unser Vorgehen
+      title: Umsetzung
+      text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird.
+    - lead: Unser Vorgehen
+      title: Training
+      text: Trainings zu agilen Themen, Durchführung von digitalen Projekten und inter­disziplinärer Zusammenarbeit.
+
+  projects_link_text: Projektbeispiele
+
+
 en:
   title: Approach

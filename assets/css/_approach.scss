@@ -14,3 +14,21 @@
     transform: translate3d(0, 15%, 0) scale(4);
   }
 }
+
+.approach-image-container {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+
+  svg {
+    @media #{$query-gt-md} {
+      transform: none !important;
+    }
+  }
+}
+
+.approach-scroll-screen-text {
+  @media #{$query-md} {
+    max-width: 25rem;
+  }
+}
+
