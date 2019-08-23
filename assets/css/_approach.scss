@@ -17,7 +17,10 @@
 
 .approach-image-container {
   width: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.75) 95%, rgba(255, 255, 255, 0) 100%);
+  @media #{$query-md} {
+    background: linear-gradient(0, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 0) 100%);
+  }
 
   svg {
     @media #{$query-gt-md} {

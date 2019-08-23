@@ -1,31 +1,25 @@
 //= require vendor/jquery-3.4.1.min.js
 //= require vendor/wobble.browser.min.js
 
-function init() {
-  $("[data-init-class]").each(function() {
-    var el = $(this);
-    el.addClass(el.data("init-class"));
-  });
-}
-
 function constructTransform(attrSprings) {
-  const parts = []
+  const parts = [];
   if (attrSprings.translateX || attrSprings.translateY) {
     const vals = [
       attrSprings.translateX ? attrSprings.translateX.currentValue : 0,
-      attrSprings.translateY ? attrSprings.translateY.currentValue : 0
-    ]
-    parts.push("translate(" + vals.join(" ") + ")")
+      attrSprings.translateY ? attrSprings.translateY.currentValue : 0,
+    ];
+    parts.push("translate(" + vals.join(" ") + ")");
   }
   if (attrSprings.scale) {
-    parts.push("scale(" + attrSprings.scale.currentValue + ")")
+    parts.push("scale(" + attrSprings.scale.currentValue + ")");
   }
-  return parts.join(" ")
+  return parts.join(" ");
 }
 
 function setupScrollSpy() {
   var spyDimensions = [];
   var enterListeners = {};
+  var leaveListeners = {};
 
   $("[data-attr-on-enter]").each(function() {
     var el = $(this);
@@ -52,13 +46,7 @@ function setupScrollSpy() {
                 toValue: currVal,
               });
               if (isTransform) {
-
-                spring.onUpdate(() =>
-                  el.attr(
-                    "transform",
-                    constructTransform(attrSprings)
-                  )
-                );
+                spring.onUpdate(() => el.attr("transform", constructTransform(attrSprings)));
               } else {
                 spring.onUpdate(s => el.attr(attr, s.currentValue));
               }
@@ -70,6 +58,38 @@ function setupScrollSpy() {
               spring.start();
             });
           });
+        }
+      });
+  });
+
+  $("[data-class-on-enter]").each(function() {
+    var el = $(this);
+    el.data("class-on-enter")
+      .split(" ")
+      .forEach(part => {
+        var m = part.match(/(\w+):([+\-*])([\w-]+)/);
+        if (m) {
+          var list = (enterListeners[m[1]] = enterListeners[m[1]] || []);
+          list.push(() => {
+            if (m[2] === "+") {
+              el.addClass(m[3]);
+            } else if (m[2] === "-") {
+              el.removeClass(m[3]);
+            }
+          });
+        }
+      });
+  });
+
+  $("[data-class-on-leave]").each(function() {
+    var el = $(this);
+    el.data("class-on-leave")
+      .split(",")
+      .forEach(part => {
+        var m = part.match(/(\w+):([+-])([\w-]+)/);
+        if (m) {
+          var list = (leaveListeners[m[1]] = leaveListeners[m[1]] || []);
+          list.push(() => el[m[2] === "-" ? "removeClass" : "addClass"](m[3]));
         }
       });
   });
@@ -98,6 +118,9 @@ function setupScrollSpy() {
         dim.isActive = nextActive;
         if (nextActive && enterListeners[dim.key]) {
           enterListeners[dim.key].forEach(fn => fn());
+        }
+        if (!nextActive && leaveListeners[dim.key]) {
+          leaveListeners[dim.key].forEach(fn => fn());
         }
       }
     });
@@ -243,7 +266,6 @@ function approachAnimation() {
 }
 
 $(function() {
-  init();
   setupScrollSpy();
   toggleButton();
   headerScroll();

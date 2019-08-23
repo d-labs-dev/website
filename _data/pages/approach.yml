@@ -1,3 +1,10 @@
+task_types:
+  user_research: yellow
+  design: purple
+  engineering: red
+  consulting: green
+  training: darkBlue
+
 de:
   intro_lead: Wie wir arbeiten
   intro_text: "
@@ -26,6 +33,88 @@ de:
       text: Trainings zu agilen Themen, Durchführung von digitalen Projekten und inter­disziplinärer Zusammenarbeit.
 
   projects_link_text: Projektbeispiele
+  projects_title: Herausforderungen, bei denen wir unsere Kunden unterstützt haben
+  projects_goal_title: Ziele
+  projects_approach_title: Vorgehen
+  projects_result_title: Ergebnis
+
+  user_research: User Research
+  design: Digitial Experience Design
+  engineering: Software Engineering
+  consulting: Consulting
+  training: Training
+
+  projects:
+    - lead: Projekt 01
+      img1: about.jpg
+      img2: about.jpg
+      circle_img: projects/circle-small_project01.svg
+      percentages:
+        user_research: 50
+        design: 15
+        engineering: 5
+        consulting: 30
+        training: 0
+      task: Wie kann die Kundenschnittstelle eines Verteilnetz­betreibers einheitlich gestaltet werden?
+      goals:
+        - Erhöhung der Kunden- und Service­orientierung
+        - Eine einheitliche Customer Experience über alle Kanäle hinweg
+        - Prozessautomatisierung und Digitalisierung
+        - Erhöhung der Transparenz für alle Beteiligten
+      approaches:
+        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
+        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
+        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+      results:
+        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+
+    - lead: Projekt 02
+      img1: about.jpg
+      img2: about.jpg
+      circle_img: projects/circle-small_project02.svg
+      percentages:
+        user_research: 5
+        design: 0
+        engineering: 0
+        consulting: 10
+        training: 85
+      task: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
+      goals:
+        - Erhöhung der Kunden- und Service­orientierung
+        - Eine einheitliche Customer Experience über alle Kanäle hinweg
+        - Prozessautomatisierung und Digitalisierung
+        - Erhöhung der Transparenz für alle Beteiligten
+      approaches:
+        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
+        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
+        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+      results:
+        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+
+    - lead: Projekt 03
+      img1: about.jpg
+      img2: about.jpg
+      circle_img: projects/circle-small_project03.svg
+      percentages:
+        user_research: 5
+        design: 25
+        engineering: 65
+        consulting: 5
+        training: 0
+      task: Wie können die Besucher einer Ausstellung digital unterstützt werden?
+      goals:
+        - Erhöhung der Kunden- und Service­orientierung
+        - Eine einheitliche Customer Experience über alle Kanäle hinweg
+        - Prozessautomatisierung und Digitalisierung
+        - Erhöhung der Transparenz für alle Beteiligten
+      approaches:
+        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
+        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
+        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+      results:
+        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+
+
 
 
 en:

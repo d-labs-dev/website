@@ -14,6 +14,7 @@
   <div class="absolute inset-full col align-center non-interactive">
     <div
       class="maxwidth-7 width-full sticky height-screen row align-center q-md-align-start py-5 q-md-justify-center zindex-1">
+      <div class="white-cover"></div>
       <div class="home-circle-container">
         {%- include home-circles.html -%}
       </div>
@@ -26,8 +27,7 @@
       <div class="maxwidth-7 width-full">
         <div class="home-scroll-screen relative col align-end">
           <div
-            class="home-scroll-screen-content sticky height-screen col justify-center sp-4 maxwidth-4 q-md-justify-end py-5"
-            data-init-class="opacity-0">
+            class="home-scroll-screen-content sticky height-screen col justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
             <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
             {%- if screen.text - %}
             <div class="q-md-text-xs">{{screen.text}}</div>

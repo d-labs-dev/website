@@ -220,6 +220,14 @@
   top: 0;
 }
 
+@each $qkey, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$qkey}-relative {
+      position: relative;
+    }
+  }
+}
+
 .hidden {
   display: none;
 }
@@ -313,6 +321,21 @@
 @each $key, $val in $dimensions {
   .height-#{$key} {
     height: $val;
+  }
+}
+
+@each $qkey, $val in $media-queries {
+  @media #{$val} {
+    @each $key, $val in $spacings {
+      .q-#{$qkey}-height-#{$key} {
+        height: $val;
+      }
+    }
+    @each $key, $val in $dimensions {
+      .q-#{$qkey}-height-#{$key} {
+        height: $val;
+      }
+    }
   }
 }
 

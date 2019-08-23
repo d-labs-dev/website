@@ -27,7 +27,7 @@
           {%- include approach-image.html -%}
         </div>
         <div class="absolute inset-x bottom-0 pb-4 col align-center">
-          <a class="button-text is-blue" href="#projects">
+          <a class="button-text is-blue" href="#projects" style="pointer-events: auto">
             <div class="row sp-3 align-center">
               {% asset icons/icon-arrow-right.svg @inline %}
               <div>{{_.projects_link_text}}</div>
@@ -57,9 +57,79 @@
       </div>
     </div>
     {%- endfor -%}
+
+    <div class="absolute inset-y right-0 hide-md zindex-1">
+      <div class="sticky height-screen col justify-center sp-3 pr-3">
+        {%- for screen in _.screens -%}
+        <a href="#n{{forloop.index}}" class="scroll-indicator" data-class-on-enter="screen{{{forloop.index}}:+is-active"
+          data-class-on-leave="screen{{{forloop.index}}:-is-active">
+        </a>
+        {%- endfor -%}
+      </div>
+    </div>
   </div>
-
 </div>
-<div id="projects">
 
+<div id="projects" class="sroll-snap-start col align-center px-4 py-7">
+  <div class="maxwidth-7 width-full col sp-6">
+    <h2 class="font-heading text-xl maxwidth-4">{{_.projects_title}}</h2>
+    {%- for project in _.projects -%}
+      <div class="col sp-4">
+        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{project.lead}}</div>
+        <div class="row sp-3 height-14 q-md-height-10">
+          <div class="width-11 no-shrink relative q-md-width-1_3">
+            {% asset {{project.img1}} class="absolute inset-full"%}
+          </div>
+          <div class="fill-parent relative">
+            {% asset {{project.img2}} class="absolute inset-full"%}
+          </div>
+        </div>
+        <div class="row sp-3 relative align-start q-md-col q-md-align-center">
+          <div class="width-11 no-shrink sticky col sp-5 align-center pt-6 pb-5 q-md-relative q-md-py-2">
+            {% asset {{project.circle_img}} class="width-full"%}
+            <div class="col sp-2">
+              {%- for type in site.data.pages.approach.task_types -%}
+              {%- assign key = type[0] -%}
+              {% if project.percentages[key] == 0 %}{% continue %}{% endif %}
+                <div class="row sp-1 font-heading text-xs text-{{type[1]}}">
+                  <div class="width-4 text-right">{{project.percentages[key]}}%</div>
+                  <div>{{_[key]}}</div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="fill-parent relative col sp-5 pt-7 q-md-py-4">
+            <h2 class="font-heading text-xl maxwidth-4">{{project.task}}</h2>
+
+            <div class="col sp-4">
+              <h4 class="font-heading text-xs uppercase">{{_.projects_goal_title}}</h4>
+              <ul class="col sp-2 d-labs-list">
+                {%- for el in project.goals -%}
+                <li class="markdown">{{el | markdownify}}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+
+            <div class="col sp-4">
+              <h4 class="font-heading text-xs uppercase">{{_.projects_approach_title}}</h4>
+              <ul class="col sp-2 d-labs-list">
+                {%- for el in project.approaches -%}
+                <li class="markdown">{{el | markdownify}}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+
+            <div class="col sp-4">
+              <h4 class="font-heading text-xs uppercase">{{_.projects_result_title}}</h4>
+              <ul class="col sp-2 d-labs-list">
+                {%- for el in project.results -%}
+                <li class="markdown">{{el | markdownify}}</li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
 </div>
