@@ -1,10 +1,52 @@
-<h2>{{ site.data.pages.blog[page.locale].title }}</h2>
+{%- assign _ = site.data.pages.blog[page.locale] -%}
 
-{% assign blog_pages = site.pages | where: "kind", "blogPost" %}
-{% assign locale_blog_pages = blog_pages | where: "locale", page.locale %}
+{% assign blog_pages = site.pages | where: "kind", "blogPost" | where: "locale", page.locale %}
+{% assign latest_post = blog_pages | first %}
 
-<ul>
-{% for page in locale_blog_pages %}
-  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-{% endfor %}
-</ul>
+<div class="col align-center px-4 py-7 pt-8">
+  <div class="maxwidth-7 width-full col sp-6">
+    <div class="row sp-4 q-md-col">
+      <div class="width-1_3 no-shrink relative q-md-width-full minheight-9">
+        <img src="{{latest_post.hero_image.url}}?w=800&h=800&fit=fill&f=faces"
+          alt="{{latest_post.hero_image.description}}" class="absolute inset-full" />
+      </div>
+      <div class="col sp-3">
+        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{latest_post.sys.created_at | date: "%d. %M. %Y"}}</div>
+        <a class="reset-link" href="{{latest_post.url}}"">
+          <h2 class="font-heading text-xl">{{latest_post.title}}</h2>
+        </a>
+        <div class="markdown">{{latest_post.description}}</div>
+        <div class="col align-start">
+          <a class="button-ghost" href="{{latest_post.url}}">
+            <div class="row align-center sp-3">
+              <div>{{_.cta_learn_more}}</div>
+              {% asset icons/icon-arrow-right.svg @inline %}
+            </div>
+          </a>
+        </div>
+        <div class="row wrappable sp-2">
+        {%- for tag in post.tags -%}
+          <div class="text-xxs pill">{{tag}}</div>
+        {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid sp-6 q-lg-4">
+      {%- for post in blog_pages -%}
+      {%- if forloop.index==1 -%}{%- continue -%}{%- endif -%}
+      <a href="{{blog.url}}" class="reset-link col sp-3 width-1_3 q-lg-width-1_2 q-sm-width-full">
+        <img src="{{post.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
+          alt="{{post.hero_image.description}}" class="width-full" />
+        <h3 class="font-heading text-md">{{post.title}}</h3>
+        <div class="markdown text-sm">{{post.description | markdownify}}</div>
+        <div class="row wrappable sp-2">
+        {%- for tag in post.tags -%}
+          <div class="text-xxs pill">{{tag}}</div>
+        {%- endfor -%}
+        </div>
+      </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
