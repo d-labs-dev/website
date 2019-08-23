@@ -1,9 +1,12 @@
-//= require normalize.css
+//= require vendor/normalize.css
+//= require vendor/slick.css
 
 @import "fonts";
 @import "atoms";
 @import "components";
+@import "carousel";
 @import "base";
 @import "header";
 @import "home";
 @import "approach";
+@import "services";

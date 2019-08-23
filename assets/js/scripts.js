@@ -1,5 +1,6 @@
 //= require vendor/jquery-3.4.1.min.js
 //= require vendor/wobble.browser.min.js
+//= require vendor/slick.min.js
 
 function constructTransform(attrSprings) {
   const parts = [];
@@ -267,12 +268,27 @@ function approachAnimation() {
   $(window).on("scroll", fire);
 }
 
+function setupCarousel() {
+  var indicators = $("[data-carousel-indicators]")
+
+  $(".carousel").slick({
+    dots: true,
+    arrows: true,
+    prevArrow: '<div class="absolute inset-y right-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
+    nextArrow: '<div class="absolute inset-y left-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
+  }).on("afterChange", (slick, slide) => {
+    indicators.children().removeClass("is-active")
+    indicators.children(":eq("+slide.currentSlide+")").addClass("is-active")
+  });
+}
+
 $(function() {
   setupScrollSpy();
   toggleButton();
   headerScroll();
   setupActiveSnapping();
   approachAnimation();
+  setupCarousel();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });

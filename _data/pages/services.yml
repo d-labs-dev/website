@@ -1,5 +1,34 @@
 de:
-  title: Leistungen
+  intro_lead: Was wir machen
+  intro_text: Wir identifizieren die Bedürfnisse unserer Kunden, gestalten relevante Prozesse, konzipieren und optimieren digitale Produkte und Services, implementieren Software und befähigen unsere Kunden nachhaltig in diesen Aktivitäten.
+  intro_services_title: "Wir bieten Leistungen in den folgenden Kompetenzfeldern an:"
+
+  slides_title: Kompetenzfelder
+
+  slides:
+    - name: User Research
+      img: about.jpg
+      text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
+      color: yellow
+    - name: Digital Experience Design
+      img: about.jpg
+      text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
+      color: purple
+    - name: Software Engineering
+      img: about.jpg
+      text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
+      color: red
+    - name: Consulting
+      img: about.jpg
+      text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
+      color: green
+    - name: Training
+      img: about.jpg
+      text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
+      color: darkBlue
+
+  services_title: Leistungen und Methoden
+  services_all_button: Alle
 
 en:
   title: Services

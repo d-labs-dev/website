@@ -1,0 +1,49 @@
+@import "tokens";
+
+.carousel {
+  .slick-dots li button {
+    font-size: 0;
+    line-height: 0;
+
+    display: block;
+
+    cursor: pointer;
+
+    color: transparent;
+    border: none;
+    outline: none;
+    z-index: 1;
+    padding: 0;
+  }
+
+  .slick-dots {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: -2rem;
+    display: flex;
+    justify-content: start;
+    list-style: none;
+
+    li {
+      &:not(:last-child) {
+        margin-right: 18px;
+      }
+      button {
+        border: none;
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: $gray200;
+        border-radius: 50%;
+        transition-property: background-color;
+
+        &:hover {
+          background-color: $gray300;
+        }
+      }
+      &.slick-active button {
+        background-color: $blue
+      }
+    }
+  }
+}

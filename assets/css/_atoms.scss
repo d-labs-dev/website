@@ -152,6 +152,53 @@
     bottom: $val;
   }
 }
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  @each $key, $val in $spacings {
+    &.sp-#{$key} {
+      margin-left: -$val / 2;
+      margin-right: -$val / 2;
+      margin-bottom: -$val;
+      > * {
+        padding-left: $val / 2;
+        padding-right: $val / 2;
+        padding-bottom: $val;
+      }
+    }
+  }
+
+  @each $qkey, $val in $media-queries {
+    @media #{$val} {
+      @each $key, $val in $spacings {
+        &.q-#{$qkey}-sp-#{$key} {
+          margin-left: -$val / 2;
+          margin-right: -$val / 2;
+          margin-bottom: -$val;
+          > * {
+            padding-left: $val / 2;
+            padding-right: $val / 2;
+            padding-bottom: $val;
+          }
+        }
+      }
+    }
+  }
+}
+
+.top-100 {
+  top: 100%;
+}
+.left-100 {
+  left: 100%;
+}
+.right-100 {
+  right: 100%;
+}
+.bottom-100 {
+  bottom: 100%;
+}
 
 @each $qkey, $val in $media-queries {
   @media #{$val} {
@@ -276,9 +323,6 @@
     width: $val;
   }
 }
-.width-full {
-  width: 100%;
-}
 
 @each $key, $val in ("1_2": 50%, "1_3": 33.333%, "2_3": 66.666%, "1_4": 25%) {
   .width-#{$key} {
@@ -293,6 +337,14 @@
         width: $val;
       }
     }
+  }
+}
+
+.width-full {
+  width: 100%;
+}
+@each $key, $val in $media-queries {
+  @media #{$val} {
     .q-#{$key}-width-full {
       width: 100%;
     }

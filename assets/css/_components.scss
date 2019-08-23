@@ -12,6 +12,25 @@
   background-color: transparent;
   user-select: none;
   cursor: pointer;
+}
+
+.button-transparent {
+  @extend %raw-button;
+  padding: 0.2rem;
+  margin: -0.2rem;
+  box-shadow: 0 0 0 0.2rem transparent;
+  text-align: inherit;
+  &:hover {
+    background-color: $black-a05;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem $black-a10;
+  }
+}
+
+%button-with-text {
   font-weight: bold;
   font-family: LetterGothic;
   text-transform: uppercase;
@@ -21,20 +40,10 @@
 }
 
 .button-text {
-  @extend %raw-button;
-  padding: 0.2rem;
-  margin: -0.2rem;
-  box-shadow: 0 0 0 0.2rem transparent;
+  @extend .button-transparent;
+  @extend %button-with-text;
+
   color: $black;
-
-  &:hover {
-    background-color: $black-a05;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem $black-a10;
-  }
 
   &.is-blue {
     color: $blue;
@@ -59,6 +68,7 @@
 
 .button {
   @extend %raw-button;
+  @extend %button-with-text;
   padding: 0.75rem 1rem 0.55rem;
 
   color: $white;
@@ -74,6 +84,7 @@
 
 .button-ghost {
   @extend %raw-button;
+  @extend %button-with-text;
   padding: 1rem 1rem 0.85rem;
   border: 2px solid;
 
@@ -262,4 +273,23 @@
       background-repeat: no-repeat;
     }
   }
+}
+
+.service-circle {
+  flex: none;
+  width: 1.25em;
+  height: 1.25em;
+  border-radius: 50%;
+  border: 0.2em solid;
+}
+
+.reset-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pill {
+  border: 1px solid $gray300;
+  border-radius: 0.2em;
+  padding: 0.3em 0.75em 0.15em;
 }
