@@ -21,12 +21,6 @@
   @media #{$query-md} {
     background: linear-gradient(0, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 0) 100%);
   }
-
-  svg {
-    @media #{$query-gt-md} {
-      transform: none !important;
-    }
-  }
 }
 
 .approach-scroll-screen-text {

@@ -393,7 +393,9 @@
 
 .height-screen {
   min-height: 100vh;
-  min-height: -webkit-fill-available;
+  &:not(.sticky) {
+    min-height: -webkit-fill-available;
+  }
 }
 
 @each $key, $val in $spacings {

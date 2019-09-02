@@ -1,40 +1,5 @@
 @import "tokens";
 
-.approach-circle {
-  margin: auto;
-  width: 50vmax;
-  height: 50vmax;
-  background-color: $blue;
-  border-radius: 50%;
-
-  transform: translate3d(0, 15%, 0) scale(0.04);
-  transition: transform 0.5s ease-out;
-
-  &.is-big {
-    transform: translate3d(0, 15%, 0) scale(4);
-  }
-}
-
-.approach-image-container {
-  width: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.75) 95%, rgba(255, 255, 255, 0) 100%);
-  @media #{$query-md} {
-    background: linear-gradient(0, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 0) 100%);
-  }
-
-  svg {
-    @media #{$query-gt-md} {
-      transform: none !important;
-    }
-  }
-}
-
-.approach-scroll-screen-text {
-  @media #{$query-md} {
-    max-width: 25rem;
-  }
-}
-
 .service-carousel-indicator {
   .service-carousel-hidable-text {
     transition-property: opacity;

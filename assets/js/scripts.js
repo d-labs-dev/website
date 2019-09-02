@@ -21,10 +21,22 @@ function setupScrollSpy() {
   var spyDimensions = [];
   var enterListeners = {};
   var leaveListeners = {};
+  var mediaQueriesChecker = []
 
   $("[data-attr-on-enter]").each(function() {
     var el = $(this);
     var attrSprings = {};
+    var enable = true;
+
+    var mediaQuery = el.data('only-animate-if-matches')
+    if (mediaQuery && window.matchMedia) {
+      var checkerFn = () => {
+        var mql = window.matchMedia(mediaQuery)
+        enable = mql.matches;
+      }
+      mediaQueriesChecker.push(checkerFn)
+    }
+
     el.data("attr-on-enter")
       .trim()
       .split(/\s+/g)
@@ -47,9 +59,18 @@ function setupScrollSpy() {
                 toValue: currVal,
               });
               if (isTransform) {
-                spring.onUpdate(() => el.attr("transform", constructTransform(attrSprings)));
+                spring.onUpdate(() => {
+                  if (enable) {
+                    el.attr("transform", constructTransform(attrSprings))
+                  } else {
+                    el.attr("transform", null);
+                  }});
               } else {
-                spring.onUpdate(s => el.attr(attr, s.currentValue));
+                spring.onUpdate(s => {if (enable) {
+                  el.attr(attr, s.currentValue)
+                } else {
+                  el.attr(attr, 'initial')
+                }});
               }
               attrSprings[attr] = spring;
             }
@@ -95,7 +116,7 @@ function setupScrollSpy() {
       });
   });
 
-  function measureSpies() {
+  function handleResize() {
     spyDimensions = [];
     $("[data-visible-key]").each(function() {
       var el = $(this);
@@ -108,6 +129,7 @@ function setupScrollSpy() {
       };
       spyDimensions.push(spyInfo);
     });
+    mediaQueriesChecker.forEach(checkerFn => checkerFn())
   }
 
   function checkIfActive() {
@@ -127,9 +149,9 @@ function setupScrollSpy() {
     });
   }
 
-  $(window).on("resize", measureSpies);
+  $(window).on("resize", handleResize);
   $(window).on("scroll", checkIfActive);
-  measureSpies();
+  handleResize();
   checkIfActive();
 }
 
@@ -207,7 +229,6 @@ function setupActiveSnapping() {
 
 // This function is being called by the google-maps script
 function initMap() {
-  var position = {lat: 52.3902316, lng: 13.1149683};
   var styles = [
     {elementType: "geometry", stylers: [{color: "#f5f5f5"}]},
     {elementType: "labels.icon", stylers: [{visibility: "off"}]},
@@ -234,14 +255,38 @@ function initMap() {
     {featureType: "water", elementType: "labels.text.fill", stylers: [{color: "#9e9e9e"}]},
   ];
   var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 12,
-    center: position,
+    zoom: 6,
+    center: {lat: 48.77 + (52.50 - 48.77) / 2, lng: 9.17 + (13.12 - 9.17) / 2},
     styles,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false
   });
+
+  // TODO: use d-labs icon, once available
+  var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+
+  // Potsdam
   new google.maps.Marker({
-    position: position,
+    position: {lat: 52.3902283, lng: 13.1149736},
     map: map,
+    icon: image
   });
+
+  // Stuttgart
+  new google.maps.Marker({
+    position: {lat: 48.7765607, lng: 9.1745821},
+    map: map,
+    icon: image
+  });
+
+  // Berlin
+  new google.maps.Marker({
+    position: {lat: 52.5051579, lng: 13.4620999},
+    map: map,
+    icon: image
+  });
+
 }
 
 function approachAnimation() {
