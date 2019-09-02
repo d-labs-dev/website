@@ -3,12 +3,12 @@
 <div class="relative" data-active-snapping>
   <div class="relative height-screen sroll-snap-start col align-center py-7 px-4 sroll-snap-start overflow-hidden">
     <div class="maxwidth-7 width-full col sp-2 pb-6 relative zindex-1 fill-parent">
-      <div class="push"></div>
+      <div class="push minheight-4" style="flex-grow: 0.75"></div>
       <div class="col sp-2">
         <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
-        <div class="markdown text-xl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
+        <div class="markdown text-xxl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
       </div>
-      <div class="push" style="flex-grow: 0.5"></div>
+      <div class="push minheight-5" style="flex-grow: 0.5"></div>
       <div class="col sp-4">
         <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_services_title}}</div>
         <div class="row justify-center sp-3">
@@ -58,28 +58,30 @@
   </div>
 </div>
 
-<div class="col align-center px-4 py-7">
-  <div class="maxwidth-7 width-full col sp-6">
-    <h2 class="font-heading text-xl">{{_.services_title}}</h2>
-    <div class="row justify-center sp-3 hide-lg align-start">
-      <button class="button-transparent service-carousel-indicator is-active" style="flex-basis: 6em" data-services-filter="all">
-        <div class="row align-start sp-1">
-          <div class="width-3 height-3 no-shrink">
-            <div class="service-circle text-blue"></div>
+<div class="col align-center px-4 pb-7">
+  <div class="maxwidth-7 width-full col sp-6 q-md-sp-2">
+    <div class="sticky pt-7 pb-2 col sp-6 bg-white q-md-relative">
+      <h2 class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.services_title}}</h2>
+      <div class="row justify-center sp-3 hide-lg align-start">
+        <button class="button-transparent service-carousel-indicator is-active" style="flex-basis: 6em" data-services-filter="all">
+          <div class="row align-start sp-1">
+            <div class="width-3 height-3 no-shrink">
+              <div class="service-circle text-blue"></div>
+            </div>
+            <div class="text-xs" style="padding-top:0.2rem;">{{_.services_all_button}}</div>
           </div>
-          <div class="text-xs" style="padding-top:0.2rem;">{{_.services_all_button}}</div>
-        </div>
-      </button>
-      {%- for slide in _.slides -%}
-      <button class="button-transparent service-carousel-indicator" style="flex-basis: 10em" data-services-filter="{{slide.name}}">
-        <div class="row align-start sp-1">
-          <div class="width-3 height-3 no-shrink">
-            <div class="service-circle text-{{slide.color}}"></div>
+        </button>
+        {%- for slide in _.slides -%}
+        <button class="button-transparent service-carousel-indicator" style="flex-basis: 10em" data-services-filter="{{slide.name}}">
+          <div class="row align-start sp-1">
+            <div class="width-3 height-3 no-shrink">
+              <div class="service-circle text-{{slide.color}}"></div>
+            </div>
+            <div class="text-xs"  style="padding-top:0.2rem;">{{slide.name}}</div>
           </div>
-          <div class="text-xs"  style="padding-top:0.2rem;">{{slide.name}}</div>
-        </div>
-      </button>
-      {%- endfor -%}
+        </button>
+        {%- endfor -%}
+      </div>
     </div>
 
     {% assign method_pages = site.pages | where: "kind", "method" | where: "locale", page.locale %}
@@ -94,11 +96,6 @@
           <h3 class="font-heading text-md">{{method.title}}</h3>
         </a>
         <div class="markdown text-sm">{{method.description | markdownify}}</div>
-        <div class="row wrappable sp-2">
-        {%- for tag in method.tags -%}
-          <a href="{% link_tag_url method {{tag}} %}" class="text-xxs pill">{{tag}}</a>
-        {%- endfor -%}
-        </div>
       </div>
       {%- endfor -%}
     </div>
