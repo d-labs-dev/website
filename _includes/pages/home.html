@@ -1,4 +1,9 @@
 {%- assign _ = site.data.pages.home[page.locale] -%}
+
+<div class="absolute inset-full zindex-1 non-interactive">
+  <div class="home-curtain sticky height-screen"></div>
+</div>
+
 <div class="relative" data-active-snapping>
   <div class="height-screen sroll-snap-start text-white relative zindex-2 col justify-center align-center px-4 py-5"
     data-visible-key="screen0">
@@ -11,10 +16,8 @@
       <a href="#n1" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
   </div>
-  <div class="absolute inset-full col align-center non-interactive">
-    <div
-      class="maxwidth-7 width-full sticky height-screen row align-center q-md-align-start py-5 q-md-justify-center zindex-1">
-      <div class="white-cover"></div>
+  <div class="absolute inset-full col align-center non-interactive md-py-7">
+    <div class="maxwidth-7 width-full sticky zindex-1 align-start home-circle-outer">
       <div class="home-circle-container">
         {%- include home-circles.html -%}
       </div>
@@ -25,23 +28,21 @@
     <div class="sroll-snap-center col align-center px-4" data-visible-key="screen{{forloop.index}}"
       id="n{{forloop.index}}">
       <div class="maxwidth-7 width-full">
-        <div class="home-scroll-screen relative col align-end">
-          <div
-            class="home-scroll-screen-content sticky height-screen col justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
-            <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
-            {%- if screen.text - %}
-            <div class="q-md-text-xs">{{screen.text}}</div>
-            {%- endif- %}
-            <div class="col align-start">
-              <a class="button-ghost" href="{{screen.cta_target}}">{{screen.cta}}</a>
-            </div>
+        <div
+          class="home-scroll-screen-content col align-end justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
+          <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
+          {%- if screen.text - %}
+          <div class="q-md-text-xs">{{screen.text}}</div>
+          {%- endif- %}
+          <div class="col align-start">
+            <a class="button-ghost" href="{{screen.cta_target}}">{{screen.cta}}</a>
           </div>
         </div>
       </div>
     </div>
     {%- endfor -%}
     <div class="absolute inset-y right-0 hide-md">
-      <div class="sticky height-screen col justify-center sp-3 pr-3">
+      <div class="sticky col justify-center sp-3 pr-3" style="height: 60vh;top:20vh">
         {%- for screen in _.screens -%}
         <a href="#n{{forloop.index}}" class="scroll-indicator" data-class-on-enter="screen{{{forloop.index}}:+is-active"
           data-class-on-leave="screen{{{forloop.index}}:-is-active">
@@ -52,7 +53,7 @@
   </div>
 </div>
 
-<div class="bg-white col align-center px-4 py-5 sroll-snap-start">
+<div class="bg-white col align-center px-4 py-5 sroll-snap-start relative zindex-1">
   <div class="maxwidth-7 width-full col sp-5">
     <h2 class="font-heading font-bold text-xl">{{_.clients_heading}}</h2>
     <div class="col">
@@ -89,7 +90,7 @@
 </div>
 
 {%- assign latest_post = site.pages | where: "kind", "blogPost" | where: "locale", page.locale | first -%}
-<div class="bg-blue col align-center text-white pl-4 q-md-px-0">
+<div class="bg-blue col align-center text-white pl-4 q-md-px-0 relative zindex-1">
   <div class="maxwidth-7 width-full col sp-5">
     <div class="row sp-8 q-md-col q-md-sp-0">
       <div class="row pt-6 pb-7 sp-6 align-start q-xl-col q-xl-sp-0 q-md-px-4">
@@ -116,12 +117,12 @@
   </div>
 </div>
 
-<div class="bg-white row q-md-col">
+<div class="bg-white row q-md-col relative zindex-1">
   <div class="width-1_2 relative minheight-9 q-md-width-full">
     {% asset {{_.jobs_image}} class="absolute inset-full"%}
   </div>
   <div class="width-1_2 q-md-width-full">
-    <div class="py-7 pl-5 pr-4 maxwidth-10 col sp-3">
+    <div class="py-8 pl-6 pr-4 maxwidth-10 col sp-3">
       <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.jobs_lead}}</div>
       <h2 class="font-heading font-bold text-xl">{{_.jobs_title}}</h2>
       <div>{{_.jobs_desc}}</div>

@@ -208,8 +208,8 @@
 .scroll-indicator {
   @extend %raw-button;
   border-radius: 50%;
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.33rem;
+  height: 0.33rem;
   background-color: $gray200;
   transition-property: background-color;
 
