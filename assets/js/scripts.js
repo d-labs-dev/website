@@ -136,9 +136,11 @@ function setupScrollSpy() {
 function toggleButton() {
   $("[data-toggle]").each(function() {
     var el = $(this);
+    var hasHidden = el.children(".hidden").length > 0
     var style = el.data("toggle-style") || "fade";
     el.on("click", function() {
       $(el.data("toggle"))[style + "Toggle"](250);
+      if (hasHidden) el.children().toggleClass("hidden");
     });
   });
 }
