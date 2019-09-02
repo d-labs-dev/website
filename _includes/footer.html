@@ -1,29 +1,29 @@
 <footer class="bg-gray100 col align-center px-4 pt-7 pb-5">
   <div class="maxwidth-7 width-full col sp-5 q-lg-sp-6">
     <div class="row sp-3 align-center q-lg-col q-lg-sp-5">
-      <div class="row sp-2">
-        <a href="/" class="button-text ">
-          <img src="/assets/images/icons/icon-facebook.svg" alt="Facebook" class="height-4" />
+      <div class="row sp-2 flex-footer-space">
+        <a class="button-text " href="/">
+          <img alt="Facebook" class="height-3" src="/assets/images/icons/icon-instagram.svg"/>
         </a>
-        <a href="/" class="button-text ">
-          <img src="/assets/images/icons/icon-twitter.svg" alt="Twitter" class="height-4" />
+        <a class="button-text " href="/">
+          <img alt="Twitter" class="height-3" src="/assets/images/icons/icon-twitter.svg"/>
         </a>
-        <a href="/" class="button-text ">
-          <img src="/assets/images/icons/icon-linkedin.svg" alt="Linkedin" class="height-4" />
+        <a class="button-text " href="/">
+          <img alt="Linkedin" class="height-3" src="/assets/images/icons/icon-linkedin.svg"/>
         </a>
       </div>
       <div class="push"></div>
       <div class="row sp-6 q-md-sp-3">
         {% for name in site.data.includes.footer.pages %}
           {% locale_link {{ name }} class:"link text-xs" %}
-            {{site.data.includes.footer[page.locale][name]}}
+          {{site.data.includes.footer[page.locale][name]}}
           {% endlocale_link %}
         {% endfor %}
       </div>
       <div class="push"></div>
-      <div class="col sp-2 align-end q-lg-align-center">
-        <a href="/" class="button-text">
-          <img src="/assets/images/logo_sisa.svg" alt="Silicon Sanssouci" class="height-5" />
+      <div class="col sp-2 align-end q-lg-align-center flex-footer-space">
+        <a class="button-text" href="/">
+          <img alt="Silicon Sanssouci" class="height-5" src="/assets/images/logo_sisa.svg"/>
         </a>
         <div class="text-xxs">
           Mitglied im Silicon Sanssouci e.V.
@@ -31,7 +31,8 @@
       </div>
     </div>
     <div class="col align-center">
-      <div class="text-xxs">© D-LABS GmbH {{ 'now' | date: "%Y" }}</div>
+      <div class="text-xxs">© D-LABS GmbH
+        {{ 'now' | date: "%Y" }}</div>
     </div>
   </div>
 </footer>

@@ -144,12 +144,18 @@ function toggleButton() {
 }
 
 function headerScroll() {
-  var el = $(".main-header");
+  var el = $(".main-header,#mobile-nav");
+  var windowHeight = $(window).innerHeight() * 0.8;
   $(window).on("scroll", () => {
     if (window.scrollY < 20) {
       el.removeClass("is-scrolled");
     } else if (window.scrollY > 50) {
       el.addClass("is-scrolled");
+    }
+    if (window.scrollY < windowHeight - 30) {
+      el.removeClass("is-scrolled-a-page");
+    } else if (window.scrollY > windowHeight) {
+      el.addClass("is-scrolled-a-page");
     }
   });
 }

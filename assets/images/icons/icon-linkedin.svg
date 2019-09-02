@@ -1,11 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56">
-  <defs>
-    <clipPath id="a">
-      <path fill="none" d="M0 0h56v56H0z"/>
-    </clipPath>
-  </defs>
-  <g data-name="icon/instagram" clip-path="url(#a)">
-    <path data-name="Pfad 23755" d="M0 0h56v56H0z" fill="rgba(255,255,255,0)"/>
-    <path data-name="Pfad 23756" d="M17.77 40A1.75 1.75 0 0 1 16 38.28V17.72A1.75 1.75 0 0 1 17.77 16h20.45A1.75 1.75 0 0 1 40 17.72v20.56A1.75 1.75 0 0 1 38.22 40zm14.95-9.7v5.8h3.62v-6.22c0-3.33-1.78-4.88-4.17-4.88a3.6 3.6 0 0 0-3.26 1.78v-1.53h-3.63c.04 1.02 0 10.84 0 10.84h3.63v-6.05a2.42 2.42 0 0 1 .11-.88 1.99 1.99 0 0 1 1.86-1.32c1.31 0 1.84 1 1.84 2.45zm-13.07 5.8h3.62V25.24h-3.62zm-.21-14.2a1.87 1.87 0 0 0 2 1.87h.02a1.89 1.89 0 0 0 2.05-1.87 1.87 1.87 0 0 0-2.03-1.87 1.89 1.89 0 0 0-2.04 1.87z"/>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon_Linkedin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
+<path id="Pfad_23755" class="st0" d="M0,0h32v32H0V0z"/>
+<path id="Pfad_23756" d="M5.8,28c-1,0-1.8-0.8-1.8-1.7V5.7C4,4.8,4.8,4,5.8,4h0h20.5c1,0,1.8,0.8,1.8,1.7c0,0,0,0,0,0v20.6
+	c0,1-0.8,1.7-1.8,1.7H5.8z M20.7,18.3v5.8h3.6v-6.2c0-3.3-1.8-4.9-4.2-4.9c-1.3-0.1-2.6,0.6-3.3,1.8v-1.5h-3.6c0,1,0,10.8,0,10.8
+	h3.6V18c0-0.3,0-0.6,0.1-0.9c0.3-0.8,1-1.3,1.9-1.3C20.2,15.8,20.7,16.8,20.7,18.3L20.7,18.3z M7.6,24.1h3.6V13.3H7.6V24.1z
+	 M7.4,9.9c0,1,0.8,1.9,1.9,1.9c0,0,0.1,0,0.1,0h0c1,0.1,2-0.7,2-1.7c0-0.1,0-0.1,0-0.2c0-1-0.8-1.9-1.9-1.9C9.6,8,9.5,8,9.5,8
+	c-1-0.1-2,0.7-2,1.7C7.4,9.8,7.4,9.8,7.4,9.9L7.4,9.9z"/>
 </svg>

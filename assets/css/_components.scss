@@ -309,3 +309,9 @@
     background-color: $black-a05;
   }
 }
+
+@media #{$query-gt-lg} {
+  .flex-footer-space {
+    flex-basis: 12em;
+  }
+}
