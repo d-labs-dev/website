@@ -14,13 +14,12 @@
     transform: translate3d(0, 15%, 0) scale(4);
   }
 }
+.approach-curtain {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 5rem, rgba(255, 255, 255, 0) 6rem, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 1) 65%);
+}
 
-.approach-image-container {
-  width: 100%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0.75) 95%, rgba(255, 255, 255, 0) 100%);
-  @media #{$query-md} {
-    background: linear-gradient(0, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 0) 100%);
-  }
+.approach-scroll-screen {
+  min-height: 60vh;
 }
 
 .approach-scroll-screen-text {

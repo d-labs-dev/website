@@ -242,32 +242,6 @@
   }
 }
 
-.white-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 1) 5%,
-    rgba(255, 255, 255, 0) 10%,
-    rgba(255, 255, 255, 0) 88%,
-    rgba(255, 255, 255, 1) 95%
-  );
-
-  @media only screen and (min-height: 700px) {
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 1) 4%,
-      rgba(255, 255, 255, 0) 7%,
-      rgba(255, 255, 255, 0) 92%,
-      rgba(255, 255, 255, 1) 97.5%
-    );
-  }
-}
-
 .d-labs-list {
   list-style: none;
   padding-left: 1.5em;
