@@ -21,20 +21,20 @@ function setupScrollSpy() {
   var spyDimensions = [];
   var enterListeners = {};
   var leaveListeners = {};
-  var mediaQueriesChecker = []
+  var mediaQueriesChecker = [];
 
   $("[data-attr-on-enter]").each(function() {
     var el = $(this);
     var attrSprings = {};
     var enable = true;
 
-    var mediaQuery = el.data('only-animate-if-matches')
+    var mediaQuery = el.data("only-animate-if-matches");
     if (mediaQuery && window.matchMedia) {
       var checkerFn = () => {
-        var mql = window.matchMedia(mediaQuery)
+        var mql = window.matchMedia(mediaQuery);
         enable = mql.matches;
-      }
-      mediaQueriesChecker.push(checkerFn)
+      };
+      mediaQueriesChecker.push(checkerFn);
     }
 
     el.data("attr-on-enter")
@@ -61,16 +61,19 @@ function setupScrollSpy() {
               if (isTransform) {
                 spring.onUpdate(() => {
                   if (enable) {
-                    el.attr("transform", constructTransform(attrSprings))
+                    el.attr("transform", constructTransform(attrSprings));
                   } else {
                     el.attr("transform", null);
-                  }});
+                  }
+                });
               } else {
-                spring.onUpdate(s => {if (enable) {
-                  el.attr(attr, s.currentValue)
-                } else {
-                  el.attr(attr, 'initial')
-                }});
+                spring.onUpdate(s => {
+                  if (enable) {
+                    el.attr(attr, s.currentValue);
+                  } else {
+                    el.attr(attr, "initial");
+                  }
+                });
               }
               attrSprings[attr] = spring;
             }
@@ -129,7 +132,7 @@ function setupScrollSpy() {
       };
       spyDimensions.push(spyInfo);
     });
-    mediaQueriesChecker.forEach(checkerFn => checkerFn())
+    mediaQueriesChecker.forEach(checkerFn => checkerFn());
   }
 
   function checkIfActive() {
@@ -158,7 +161,7 @@ function setupScrollSpy() {
 function toggleButton() {
   $("[data-toggle]").each(function() {
     var el = $(this);
-    var hasHidden = el.children(".hidden").length > 0
+    var hasHidden = el.children(".hidden").length > 0;
     var style = el.data("toggle-style") || "fade";
     el.on("click", function() {
       $(el.data("toggle"))[style + "Toggle"](250);
@@ -251,37 +254,37 @@ function initMap() {
   ];
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 6,
-    center: {lat: 48.77 + (52.50 - 48.77) / 2, lng: 9.17 + (13.12 - 9.17) / 2},
+    center: {lat: 48.77 + (52.5 - 48.77) / 2, lng: 9.17 + (13.12 - 9.17) / 2},
     styles,
     streetViewControl: false,
     mapTypeControl: false,
-    fullscreenControl: false
+    fullscreenControl: false,
   });
 
   // TODO: use d-labs icon, once available
-  var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+  var image =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
   // Potsdam
   new google.maps.Marker({
     position: {lat: 52.3902283, lng: 13.1149736},
     map: map,
-    icon: image
+    icon: image,
   });
 
   // Stuttgart
   new google.maps.Marker({
     position: {lat: 48.7765607, lng: 9.1745821},
     map: map,
-    icon: image
+    icon: image,
   });
 
   // Berlin
   new google.maps.Marker({
     position: {lat: 52.5051579, lng: 13.4620999},
     map: map,
-    icon: image
+    icon: image,
   });
-
 }
 
 function approachAnimation() {
@@ -317,60 +320,67 @@ function approachAnimation() {
 }
 
 function setupCarousel() {
-  var indicators = $("[data-carousel-indicators]")
+  var indicators = $("[data-carousel-indicators]");
 
-  $(".carousel").slick({
-    dots: true,
-    arrows: true,
-    prevArrow: '<div class="absolute inset-y right-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
-    nextArrow: '<div class="absolute inset-y left-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
-  }).on("afterChange", (slick, slide) => {
-    indicators.children().removeClass("is-active")
-    indicators.children(":eq("+slide.currentSlide+")").addClass("is-active")
-  });
+  $(".carousel")
+    .slick({
+      dots: true,
+      arrows: true,
+      prevArrow:
+        '<div class="absolute inset-y right-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
+      nextArrow:
+        '<div class="absolute inset-y left-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
+    })
+    .on("afterChange", (slick, slide) => {
+      indicators.children().removeClass("is-active");
+      indicators.children(":eq(" + slide.currentSlide + ")").addClass("is-active");
+    });
 }
 
 function setupMethodFilter() {
   var activeFilters = [];
-  var buttons = {}
-  var tiles = []
-  $('[data-services-filter]').each(function() {
+  var buttons = {};
+  var tiles = [];
+  $("[data-services-filter]").each(function() {
     var button = $(this);
-    var filter = button.data("services-filter")
+    var filter = button.data("services-filter");
     buttons[filter] = button;
     button.on("click", () => {
-      if (filter === 'all') {
-        activeFilters = []
+      if (filter === "all") {
+        activeFilters = [];
       } else if (activeFilters.indexOf(filter) >= 0) {
-        activeFilters = activeFilters.filter(f => f !== filter)
+        activeFilters = activeFilters.filter(f => f !== filter);
       } else {
-        activeFilters.push(filter)
+        activeFilters.push(filter);
       }
-      sync()
-    })
-  })
+      sync();
+    });
+  });
 
-  $('[data-method-tile]').each(function() {
+  $("[data-method-tile]").each(function() {
     var tile = $(this);
-    var domainKeys = tile.data("method-tile").split(",").filter(Boolean)
-    var domains = {}
-    domainKeys.forEach(key => domains[key] = true)
-    tiles.push({el: tile, domains: domains})
-  })
+    var domainKeys = tile
+      .data("method-tile")
+      .split(",")
+      .filter(Boolean);
+    var domains = {};
+    domainKeys.forEach(key => (domains[key] = true));
+    tiles.push({el: tile, domains: domains});
+  });
 
   function sync() {
-    $('[data-services-filter]').removeClass("is-active")
+    $("[data-services-filter]").removeClass("is-active");
     if (activeFilters.length === 0) {
-      buttons.all.addClass("is-active")
-      tiles.forEach(tile => tile.el.removeClass("hidden"))
+      buttons.all.addClass("is-active");
+      tiles.forEach(tile => tile.el.removeClass("hidden"));
     } else {
-      tiles.forEach(tile => tile.el.addClass("hidden"))
+      tiles.forEach(tile => tile.el.addClass("hidden"));
       activeFilters.forEach(f => {
-        buttons[f].addClass("is-active")
+        buttons[f].addClass("is-active");
         tiles.forEach(tile => {
-          if (tile.domains[f]) tile.el.removeClass("hidden")
-        })
-      })
+          if (tile.domains[f]) tile.el.removeClass("hidden");
+        });
+      });
     }
   }
 }
