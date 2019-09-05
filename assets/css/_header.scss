@@ -29,7 +29,7 @@
     transition-property: all;
   }
 
-  body:not(.with-blue-header) .main-header,
+  body:not(.with-blue-header) .main-header &,
   .main-header.is-scrolled-a-page & {
     &.is-badge {
       &::before {
