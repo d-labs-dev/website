@@ -153,7 +153,7 @@
 }
 
 .markdown {
-  line-height: 1.6;
+  &:not(.font-heading) {line-height: 1.6;}
   word-break: break-word;
 
   p:not(:last-child),
