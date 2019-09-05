@@ -1,6 +1,5 @@
 {%- assign contact = include.contact -%}
-<div
-  class="bg-blue text-white col px-4 pt-6 pb-7 sp-4 align-center">
+<div class="bg-blue text-white col px-4 pt-6 pb-7 sp-4 align-center">
   <div class="maxwidth-7 width-full sp-3 row q-xl-col q-xl-sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{contact.title}}</h2>
     <div class="push hide-lg"></div>
@@ -9,14 +8,16 @@
       <div class="col sp-4">
         <div class="col">
           <div class="font-bold">{{contact.name}}</div>
-          <div class="text-lightBlue text-sm">{{contact.position}}</div>
+          <div class="text-sm">{{contact.position}}</div>
         </div>
         <div class="col text-sm">
-          <div>T {{contact.tel}}</div>
-          <div>M {{contact.mobile}}</div>
-          <a href="mailto:{{contact.email}}" class="reset-link">{{contact.email}}</a>
+          <div>T
+            {{contact.tel}}</div>
+          <div>M
+            {{contact.mobile}}</div>
+          <a class="reset-link" href="mailto:{{contact.email}}">{{contact.email}}</a>
         </div>
-        <a href="mailto:{{contact.email}}" class="button is-white">{{contact.cta_text}}</a>
+        <a class="button is-white" href="mailto:{{contact.email}}">{{contact.cta_text}}</a>
       </div>
     </div>
   </div>
