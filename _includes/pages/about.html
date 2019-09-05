@@ -31,5 +31,51 @@
 </div>
 
 <div class="sroll-snap-start">
-  {%- include locations.html -%}
+
+  {%- assign _loc = site.data.includes.locations[page.locale] -%}
+  <div
+    class="bg-blue text-white col px-4 pt-7 pb-8 sp-4 align-center relative zindex-1">
+    <div class="maxwidth-7 width-full col sp-5 q-xl-sp-6">
+      <h2 class="font-heading text-xl maxwidth-5">{{_.location_title}}</h2>
+      <div class="row sp-8 q-xl-col q-lg-sp-6-parent">
+        <div class="col sp-5">
+          <div class="height-10 hide-xl"></div>
+          <div class="col">
+            <div>D-LABS GmbH</div>
+            <a class="link-light" href="mailto:info@d-labs.com">info@d-labs.com</a>
+          </div>
+        </div>
+        <div class="row sp-3 q-lg-col fill-parent q-lg-sp-7">
+          {%- for location in site.data.includes.locations.locations -%}
+          <div class="col sp-5 fill-parent q-lg-sp-2">
+            <div class="col align-center q-lg-pb-4">
+              {% asset {{location.img}}
+                  srcset:width="400"
+                  srcset:width="200"
+                  srcset:width="100"
+                  sizes="10em"
+                  class="rounded-full width-10"
+                %}
+            </div>
+            <div class="col sp-4">
+              <div class="font-heading uppercase text-sm hide-lg">
+                {%-if location.is_main -%}
+                {{_loc.main}}{% else %}&nbsp;
+                {% endif %}
+              </div>
+              <div class="text-lg underline pb-1">{{location.name}}</div>
+              <div>
+                {{location.street}}<br />{{location.zip}}  {{location.city}}
+              </div>
+              <div>
+                {{location.tel}}<br /><a class="link-light" href="mailto:{{location.email}}">{{location.email}}</a>
+              </div>
+            </div>
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
