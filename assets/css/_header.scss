@@ -3,6 +3,7 @@
 .main-header {
   z-index: 10;
   transition-property: padding, box-shadow;
+  border-top: 0.1rem solid $blue;
 }
 
 .header-logo,
@@ -28,7 +29,7 @@
     transition-property: all;
   }
 
-  body:not(.with-blue-header) &,
+  body:not(.with-blue-header) .main-header,
   .main-header.is-scrolled-a-page & {
     &.is-badge {
       &::before {
@@ -68,6 +69,10 @@
   text-transform: uppercase;
   &:hover {
     color: $darkBlue;
+  }
+
+  #mobile-nav & {
+    font-size: $font-size-sm;
   }
 }
 
