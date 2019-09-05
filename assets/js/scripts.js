@@ -173,13 +173,15 @@ function toggleButton() {
 function headerScroll() {
   var el = $(".main-header,#mobile-nav");
   var windowHeight = $(window).innerHeight() * 0.8;
-  $(window).on("scroll", () => {
+  var handleScroll = () => {
     if (window.scrollY < windowHeight - 30) {
       el.removeClass("is-scrolled-a-page");
     } else if (window.scrollY > windowHeight) {
       el.addClass("is-scrolled-a-page");
     }
-  });
+  }
+  $(window).on("scroll", handleScroll);
+  handleScroll();
 }
 
 function setupActiveSnapping() {
@@ -261,9 +263,10 @@ function initMap() {
     fullscreenControl: false,
   });
 
-  // TODO: use d-labs icon, once available
-  var image =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+  var image = {
+    url: "/assets/images/icon_d-labs.svg",
+    scaledSize: new google.maps.Size(25, 25)
+  };
 
   // Potsdam
   new google.maps.Marker({
