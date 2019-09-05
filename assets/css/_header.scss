@@ -3,11 +3,6 @@
 .main-header {
   z-index: 10;
   transition-property: padding, box-shadow;
-
-  &.is-scrolled {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
 }
 
 .header-logo,
@@ -62,13 +57,6 @@
       }
     }
   }
-
-  body:not(.with-blue-header) .main-header.is-scrolled &,
-  .main-header.is-scrolled-a-page.is-scrolled & {
-    &.is-badge {
-      transform: rotate(0) scale(0.7);
-    }
-  }
 }
 
 .lang-switcher-link {
@@ -99,11 +87,5 @@ body.with-blue-header {
     .header-menu-button {
       filter: grayscale(1) brightness(10);
     }
-  }
-}
-
-.mobile-nav-close-container {
-  .is-scrolled & {
-    top: 0.75rem;
   }
 }
