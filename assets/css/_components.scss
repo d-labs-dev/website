@@ -20,8 +20,9 @@
   margin: -0.2rem;
   box-shadow: 0 0 0 0.2rem transparent;
   text-align: inherit;
+  color: $black;
   &:hover {
-    background-color: $black-a05;
+    color: $blue;
   }
 
   &:focus {
@@ -43,12 +44,10 @@
   @extend .button-transparent;
   @extend %button-with-text;
 
-  color: $black;
-
   &.is-blue {
     color: $blue;
     &:hover {
-      background-color: $blue-a10;
+      color: $black;
     }
     &:focus {
       box-shadow: 0 0 0 0.2rem $blue-a10;
@@ -58,7 +57,7 @@
   &.is-white {
     color: $white;
     &:hover {
-      background-color: $white-a10;
+      color: $black;
     }
     &:focus {
       box-shadow: 0 0 0 0.2rem $white-a25;
@@ -73,8 +72,10 @@
 
   color: $white;
   background-color: $blue;
+  border: 2px solid $blue;
   &:hover {
-    background-color: $darkBlue;
+    background-color: $white;
+    color: $blue;
   }
   &:focus {
     outline: none;
@@ -84,8 +85,9 @@
   &.is-white {
     color: $blue;
     background-color: $white;
+    border-color: $white;
     &:hover {
-      background-color: $white-a90;
+      color: $black;
     }
     &:focus {
       box-shadow: 0 0 0 0.2rem $white-a25;
@@ -97,12 +99,13 @@
   @extend %raw-button;
   @extend %button-with-text;
   padding: 1rem 1rem 0.85rem;
-  border: 2px solid;
+  border: 2px solid $black;
 
   color: $black;
   background-color: transparent;
   &:hover {
-    background-color: $black-a05;
+    background-color: $black;
+    color: $white;
   }
   &:focus {
     outline: none;
@@ -111,8 +114,10 @@
 
   &.is-white {
     color: $white;
+    border-color: $white;
     &:hover {
-      background-color: $white-a10;
+      background-color: $white;
+      color: $blue;
     }
     &:focus {
       box-shadow: 0 0 0 0.2rem $white-a25;
