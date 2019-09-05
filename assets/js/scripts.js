@@ -354,7 +354,7 @@ function setupMethodFilter() {
       } else if (activeFilters.indexOf(filter) >= 0) {
         activeFilters = activeFilters.filter(f => f !== filter);
       } else {
-        activeFilters.push(filter);
+        activeFilters = [filter]
       }
       sync();
     });
