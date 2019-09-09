@@ -1,9 +1,7 @@
 de:
   intro_lead: Was wir machen
   intro_text: Wir identifizieren die Bedürfnisse unserer Kunden, gestalten relevante Prozesse, konzipieren und optimieren digitale Produkte und Services, implementieren Software und befähigen unsere Kunden nachhaltig in diesen Aktivitäten.
-  intro_services_title: "Wir bieten Leistungen in den folgenden Kompetenzfeldern an:"
-
-  slides_title: Kompetenzfelder
+  intro_services_title: Unsere Kompetenzfelder
 
   slides:
     - name: User Research

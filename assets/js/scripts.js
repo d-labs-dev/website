@@ -10,7 +10,7 @@ function constructTransform(attrSprings, opts) {
       attrSprings.translateY ? attrSprings.translateY.currentValue : 0,
     ];
     if (opts.asStyle) {
-      parts.push("translate3d(" + vals.map(v => v + "px").join(", ") + ", 0px)");
+      parts.push("translate3d(" + vals.map(v => v + "%").join(", ") + ", 0)");
     } else {
       parts.push("translate(" + vals.join(" ") + ")");
     }
@@ -355,8 +355,6 @@ function approachAnimation() {
 }
 
 function setupCarousel() {
-  var indicators = $("[data-carousel-indicators]");
-
   $(".carousel")
     .slick({
       dots: true,
@@ -366,10 +364,6 @@ function setupCarousel() {
       nextArrow:
         '<div class="absolute inset-y left-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
     })
-    .on("afterChange", (slick, slide) => {
-      indicators.children().removeClass("is-active");
-      indicators.children(":eq(" + slide.currentSlide + ")").addClass("is-active");
-    });
 }
 
 function setupMethodFilter() {

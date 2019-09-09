@@ -1,62 +1,65 @@
 {%- assign _ = site.data.pages.services[page.locale] -%}
 
-<div class="relative" data-active-snapping>
-  <div class="relative height-screen sroll-snap-start col align-center py-7 px-4 sroll-snap-start overflow-hidden">
-    <div class="maxwidth-7 width-full col sp-2 pb-6 relative zindex-1 fill-parent">
-      <div class="push minheight-4" style="flex-grow: 0.75"></div>
-      <div class="col sp-2">
-        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
-        <div class="markdown text-xxl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
-      </div>
-      <div class="push minheight-5" style="flex-grow: 0.5"></div>
-      <div class="col sp-4">
-        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_services_title}}</div>
-        <div class="row justify-center sp-3">
-        {%- for slide in _.slides -%}
-          <div class="row align-start sp-1" style="flex-basis: 10em">
-            <div class="service-circle text-{{slide.color}}"></div>
-            <div class="text-sm">{{slide.name}}</div>
-          </div>
-        {%- endfor -%}
-        </div>
-      </div>
-    </div>
-
-    <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
-      <a class="button-text" data-after-approach-animate="+is-white" href="#overview">
-        {% asset icons/icon-arrow-down.svg @inline %}
-      </a>
-    </div>
+<div class="relative col justify-center align-center pt-8 px-4" style="min-height: 75vh;">
+  <div class="maxwidth-7 width-full col sp-2">
+    <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
+    <div class="markdown text-xxl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
   </div>
-</div>
 
-<div id="overview" class="sroll-snap-start col align-center px-6 py-7 pb-8">
-  <div class="maxwidth-7 width-full col sp-6">
-    <h2 class="font-heading text-xl">{{_.slides_title}}</h2>
-    <div class="row justify-center sp-3 hide-lg" data-carousel-indicators>
+  <!-- <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
+    <a class="button-text" href="#overview">
+      {% asset icons/icon-arrow-down.svg @inline %}
+    </a>
+  </div> -->
+</div>
+<div class="relative" data-scrollspy>
+  <div class="height-screen sticky col align-center px-4 q-md-px-0">
+    <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-px-4">
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">{{_.intro_services_title}}</div>
+      <div class="row justify-center sp-3 q-md-col q-md-sp-1 q-md-pb-3">
       {%- for slide in _.slides -%}
-      <div class="service-carousel-indicator row align-start sp-2 {%if forloop.index==1%}is-active{% endif %}" style="flex-basis: 10em">
-        <div class="width-3 height-3 no-shrink">
-          <div class="service-circle text-{{slide.color}}"></div>
-        </div>
-        <div class="text-sm service-carousel-hidable-text">{{slide.name}}</div>
-      </div>
-      {%- endfor -%}
-    </div>
-    <div class="carousel">
-    {%- for slide in _.slides -%}
-      <div class="">
-        <div class="row sp-4 q-md-col q-md-align-center">
-          <div class="width-1_3 no-shrink q-md-width-full">
-            {% asset {{slide.img}} class="width-full"%}
+        <div
+          class="row align-start service-carousel-indicator"
+          data-class-on-range="{{forloop.index | minus: 1 | times: 0.166}}-{{forloop.index | times: 0.166 }}:is-active"
+        >
+          <div class="width-4">
+            <div class="service-circle text-{{slide.color}}"></div>
           </div>
-          <div class="markdown">{{slide.text}}</div>
+          <div class="text-sm">{{slide.name}}</div>
         </div>
+      {%- endfor -%}
       </div>
-    {%- endfor -%}
     </div>
+    <div class="push"></div>
+    <div class="overflow-hidden col align-center width-full">
+      <div
+        class="maxwidth-7 width-full row"
+        data-style-keyframes="
+          0:translateX=0
+          0.166:translateX=-100
+          0.333:translateX=-200
+          0.5:translateX=-300
+          0.666:translateX=-400
+        "
+      >
+        {%- for slide in _.slides -%}
+        <div class="width-full no-shrink" >
+          <div class="row sp-4 q-md-col q-md-align-center">
+            <div class="width-1_3 no-shrink q-md-width-full">
+              {% asset {{slide.img}} class="width-full q-md-height-8"%}
+            </div>
+            <div class="markdown px-4 q-md-text-xs">{{slide.text}}</div>
+          </div>
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="push"></div>
   </div>
+
+  <div style="height:200vh;"></div>
 </div>
+
 
 <div class="col align-center px-4 pb-7">
   <div class="maxwidth-7 width-full col sp-6 q-md-sp-2">
