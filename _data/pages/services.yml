@@ -25,16 +25,16 @@ de:
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
       color: darkBlue
 
+  list_link_text: Zu unseren Leistungen und Methoden
   services_title: Leistungen und Methoden
   services_all_button: Alle
   back_button_text: Zurück zur Übersicht
+  search_placeholder: Suche nach...
 
 en:
   intro_lead: Was wir machen
   intro_text: Wir identifizieren die Bedürfnisse unserer Kunden, gestalten relevante Prozesse, konzipieren und optimieren digitale Produkte und Services, implementieren Software und befähigen unsere Kunden nachhaltig in diesen Aktivitäten.
   intro_services_title: "Wir bieten Leistungen in den folgenden Kompetenzfeldern an:"
-
-  slides_title: Kompetenzfelder
 
   slides:
     - name: User Research
@@ -58,6 +58,7 @@ en:
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
       color: darkBlue
 
+  list_link_text: Zu unseren Leistungen und Methoden
   services_title: Leistungen und Methoden
   services_all_button: Alle
   back_button_text: Zurück zur Übersicht

@@ -370,6 +370,8 @@ function setupMethodFilter() {
   var activeFilters = [];
   var buttons = {};
   var tiles = [];
+  var query = null;
+
   $("[data-services-filter]").each(function() {
     var button = $(this);
     var filter = button.data("services-filter");
@@ -386,28 +388,62 @@ function setupMethodFilter() {
     });
   });
 
-  $("[data-method-tile]").each(function() {
-    var tile = $(this);
-    var domainKeys = tile
+  $("[data-search]").each(function() {
+    var container = $(this);
+    var inputArea = container.find("[data-search-input]")
+    var input = inputArea.find("input")
+    var inputAreaButton = inputArea.find("button")
+    var button = container.find("[data-search-button]")
+    button.on("click", function() {
+      button.hide();
+      inputArea.show();
+      input.focus();
+    })
+    inputAreaButton.on("click", function() {
+      inputArea.hide();
+      button.show();
+      query = null;
+      sync()
+    })
+    input.on("input", function(e) {
+      query = e.target.value.toLowerCase()
+      sync()
+    })
+  })
+
+  $("[data-search-tile]").each(function() {
+    var el = $(this);
+    var domainKeys = el
       .data("method-tile")
       .split(",")
       .filter(Boolean);
     var domains = {};
     domainKeys.forEach(key => (domains[key] = true));
-    tiles.push({el: tile, domains: domains});
+
+    var texts = []
+    el.find("[data-search-text]").each(function() {
+      texts.push($(this).text())
+    })
+    tiles.push({el: el, domains: domains, text: texts.join(" ").toLowerCase()});
   });
 
   function sync() {
     $("[data-services-filter]").removeClass("is-active");
     if (activeFilters.length === 0) {
       buttons.all.addClass("is-active");
-      tiles.forEach(tile => tile.el.removeClass("hidden"));
+      tiles.forEach(tile => {
+        if (!query || tile.text.indexOf(query) >= 0) {
+          tile.el.removeClass("hidden")
+        } else {
+          tile.el.addClass("hidden")
+        }
+      });
     } else {
       tiles.forEach(tile => tile.el.addClass("hidden"));
       activeFilters.forEach(f => {
         buttons[f].addClass("is-active");
         tiles.forEach(tile => {
-          if (tile.domains[f]) tile.el.removeClass("hidden");
+          if (tile.domains[f] && (!query || tile.text.indexOf(query) >= 0)) tile.el.removeClass("hidden");
         });
       });
     }

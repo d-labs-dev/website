@@ -43,6 +43,9 @@
     .q-#{$key}-align-center {
       align-items: center;
     }
+    .q-#{$key}-align-stretch {
+      align-items: stretch;
+    }
     .q-#{$key}-align-end {
       align-items: flex-end;
     }

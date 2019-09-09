@@ -123,6 +123,25 @@
       box-shadow: 0 0 0 0.2rem $white-a25;
     }
   }
+
+  &.is-mini {
+    padding: 0.25rem 0.25rem 0.15rem;
+    border-color: $gray200;
+  }
+}
+
+.input {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: $font-size-xs;
+
+  border-bottom: 2px solid $black;
+  padding: 0.6rem 0 0.5rem;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .link {
