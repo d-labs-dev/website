@@ -1,12 +1,7 @@
 {%- assign _ = site.data.pages.home[page.locale] -%}
 
-<div class="absolute inset-full zindex-1 non-interactive">
-  <div class="home-curtain sticky height-screen"></div>
-</div>
-
-<div class="relative" data-active-snapping>
-  <div class="height-screen sroll-snap-start text-white relative zindex-2 col justify-center align-center px-4 py-5"
-    data-visible-key="screen0">
+<div class="relative" data-scrollspy>
+  <div class="height-screen text-white relative zindex-2 col justify-center align-center px-4 py-5">
     <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.hero_claim}}</div>
     <svg viewbox="0 0 100 100" class="absolute inset-full text-blue fill-current" preserveAspectRatio="none">
       <polygon points="0 0,100 0,100 70,0 100" class="hide-md" />
@@ -17,7 +12,7 @@
     </div>
   </div>
   <div class="absolute inset-full col align-center non-interactive md-py-7">
-    <div class="maxwidth-7 width-full sticky zindex-1 align-start home-circle-outer">
+    <div class="height-screen width-full sticky zindex-1 col justify-center home-circle-outer q-md-justify-start q-md-pt-5">
       <div class="home-circle-container">
         {%- include home-circles.html -%}
       </div>
@@ -25,17 +20,30 @@
   </div>
   <div class="relative">
     {%- for screen in _.screens -%}
-    <div class="sroll-snap-center col align-center px-4" data-visible-key="screen{{forloop.index}}"
-      id="n{{forloop.index}}">
-      <div class="maxwidth-7 width-full">
-        <div
-          class="home-scroll-screen-content col align-end justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
-          <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
-          {%- if screen.text - %}
-          <div class="q-md-text-xs">{{screen.text}}</div>
-          {%- endif- %}
-          <div class="col align-start">
-            <a class="button-ghost" href="{{screen.cta_target}}">{{screen.cta}}</a>
+    <div class="height-15" id="n{{forloop.index}}">
+    </div>
+    {%- endfor -%}
+    {%- for screen in _.screens -%}
+    <div
+      class="absolute inset-full"
+      style="opacity: 0"
+      data-style-keyframes="
+        0:opacity=0,translateY=-10
+        {{forloop.index | times: 0.2}}:opacity=1,translateY=0
+        {{forloop.index  | times: 0.2 | plus: 0.2}}:opacity=0,translateY=10
+      "
+    >
+      <div class="sticky height-screen col px-4 align-center justify-center">
+        <div class="maxwidth-7 width-full">
+          <div
+            class="home-scroll-screen-content col align-end justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
+            <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
+            {%- if screen.text - %}
+            <div class="q-md-text-xs">{{screen.text}}</div>
+            {%- endif- %}
+            <div class="col align-start">
+              <a class="button-ghost" href="{{screen.cta_target}}">{{screen.cta}}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -44,8 +52,10 @@
     <div class="absolute inset-y right-0 hide-md">
       <div class="sticky col justify-center sp-3 pr-3" style="height: 60vh;top:20vh">
         {%- for screen in _.screens -%}
-        <a href="#n{{forloop.index}}" class="scroll-indicator" data-class-on-enter="screen{{{forloop.index}}:+is-active"
-          data-class-on-leave="screen{{{forloop.index}}:-is-active">
+        <a
+          href="#n{{forloop.index}}"
+          class="scroll-indicator"
+          data-class-on-range="{{forloop.index | times: 0.2}}-{{forloop.index  | times: 0.2 | plus: 0.2}}:is-active">
         </a>
         {%- endfor -%}
       </div>
@@ -53,7 +63,7 @@
   </div>
 </div>
 
-<div class="bg-white col align-center px-4 py-5 sroll-snap-start relative zindex-1">
+<div class="bg-white col align-center px-4 py-5 relative zindex-1">
   <div class="maxwidth-7 width-full col sp-5">
     <h2 class="font-heading font-bold text-xl">{{_.clients_heading}}</h2>
     <div class="col">

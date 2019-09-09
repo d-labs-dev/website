@@ -2,14 +2,18 @@
 //= require vendor/wobble.browser.min.js
 //= require vendor/slick.min.js
 
-function constructTransform(attrSprings) {
-  const parts = [];
+function constructTransform(attrSprings, opts) {
+  var parts = [];
   if (attrSprings.translateX || attrSprings.translateY) {
-    const vals = [
+    var vals = [
       attrSprings.translateX ? attrSprings.translateX.currentValue : 0,
       attrSprings.translateY ? attrSprings.translateY.currentValue : 0,
     ];
-    parts.push("translate(" + vals.join(" ") + ")");
+    if (opts.asStyle) {
+      parts.push("translate3d(" + vals.map(v => v + "px").join(", ") + ", 0px)");
+    } else {
+      parts.push("translate(" + vals.join(" ") + ")");
+    }
   }
   if (attrSprings.scale) {
     parts.push("scale(" + attrSprings.scale.currentValue + ")");
@@ -17,145 +21,159 @@ function constructTransform(attrSprings) {
   return parts.join(" ");
 }
 
-function setupScrollSpy() {
-  var spyDimensions = [];
-  var enterListeners = {};
-  var leaveListeners = {};
-  var mediaQueriesChecker = [];
-
-  $("[data-attr-on-enter]").each(function() {
-    var el = $(this);
-    var attrSprings = {};
-    var enable = true;
-
-    var mediaQuery = el.data("only-animate-if-matches");
-    if (mediaQuery && window.matchMedia) {
-      var checkerFn = () => {
-        var mql = window.matchMedia(mediaQuery);
-        enable = mql.matches;
-      };
-      mediaQueriesChecker.push(checkerFn);
+function applyCss(el, attr, val) {
+  el.css(attr, val);
+  if (attr === "opacity") {
+    if (val < 0.2) {
+      el.css({pointerEvents: "none"});
+    } else {
+      el.css({pointerEvents: "initial"});
     }
-
-    el.data("attr-on-enter")
-      .trim()
-      .split(/\s+/g)
-      .forEach(part => {
-        var m = part.trim().match(/(\w+):(.*)/);
-        if (m) {
-          var list = (enterListeners[m[1]] = enterListeners[m[1]] || []);
-          m[2].split(",").map(attr => {
-            var splitted = attr.split("=");
-            var attr = splitted[0];
-            var val = parseFloat(splitted[1]);
-            var spring = attrSprings[attr];
-            var isTransform = attr.indexOf("translate") === 0 || attr === "scale";
-
-            if (!spring) {
-              var currVal = isTransform ? val : parseFloat(el.attr(attr), 10) || 0;
-              spring = new Wobble.Spring({
-                damping: 15,
-                fromValue: currVal,
-                toValue: currVal,
-              });
-              if (isTransform) {
-                spring.onUpdate(() => {
-                  if (enable) {
-                    el.attr("transform", constructTransform(attrSprings));
-                  } else {
-                    el.attr("transform", null);
-                  }
-                });
-              } else {
-                spring.onUpdate(s => {
-                  if (enable) {
-                    el.attr(attr, s.currentValue);
-                  } else {
-                    el.attr(attr, "initial");
-                  }
-                });
-              }
-              attrSprings[attr] = spring;
-            }
-
-            list.push(() => {
-              spring.updateConfig({toValue: val});
-              spring.start();
-            });
-          });
-        }
-      });
-  });
-
-  $("[data-class-on-enter]").each(function() {
-    var el = $(this);
-    el.data("class-on-enter")
-      .split(" ")
-      .forEach(part => {
-        var m = part.match(/(\w+):([+\-*])([\w-]+)/);
-        if (m) {
-          var list = (enterListeners[m[1]] = enterListeners[m[1]] || []);
-          list.push(() => {
-            if (m[2] === "+") {
-              el.addClass(m[3]);
-            } else if (m[2] === "-") {
-              el.removeClass(m[3]);
-            }
-          });
-        }
-      });
-  });
-
-  $("[data-class-on-leave]").each(function() {
-    var el = $(this);
-    el.data("class-on-leave")
-      .split(",")
-      .forEach(part => {
-        var m = part.match(/(\w+):([+-])([\w-]+)/);
-        if (m) {
-          var list = (leaveListeners[m[1]] = leaveListeners[m[1]] || []);
-          list.push(() => el[m[2] === "-" ? "removeClass" : "addClass"](m[3]));
-        }
-      });
-  });
-
-  function handleResize() {
-    spyDimensions = [];
-    $("[data-visible-key]").each(function() {
-      var el = $(this);
-      var top = el.offset().top;
-      var spyInfo = {
-        isActive: false,
-        key: el.data("visible-key"),
-        top: top,
-        bottom: top + el.outerHeight(),
-      };
-      spyDimensions.push(spyInfo);
-    });
-    mediaQueriesChecker.forEach(checkerFn => checkerFn());
   }
+}
 
-  function checkIfActive() {
-    var scrollEnterPos = window.scrollY + window.innerHeight * 0.75;
-    var scrollLeavePos = window.scrollY + window.innerHeight * 0.25;
-    spyDimensions.forEach(dim => {
-      var nextActive = scrollLeavePos >= dim.top && scrollEnterPos <= dim.bottom;
-      if (nextActive !== dim.isActive) {
-        dim.isActive = nextActive;
-        if (nextActive && enterListeners[dim.key]) {
-          enterListeners[dim.key].forEach(fn => fn());
-        }
-        if (!nextActive && leaveListeners[dim.key]) {
-          leaveListeners[dim.key].forEach(fn => fn());
-        }
+function createKeyframeListener(el, opts) {
+  var opts = opts || {asStyle: false};
+  var targetVals = []; // {keyframeVal: 0.2, springs: [{spring, targetVal}]}
+  var attrSprings = {}; // one spring for each attribute that is listed
+  var enable = true;
+  var applyAttr = opts.asStyle
+    ? (attr, val) => applyCss(el, attr, val)
+    : (attr, val) => el.attr(attr, val);
+  el.data(opts.asStyle ? "style-keyframes" : "keyframes")
+    .trim()
+    .split(/\s+/g)
+    .forEach(keyframe => {
+      var m = keyframe.trim().match(/([\d.]+):(.*)/);
+      if (m) {
+        var keyframeVal = parseFloat(m[1]);
+        var springs = [];
+        m[2].split(",").map(attr => {
+          var splitted = attr.split("=");
+          var attr = splitted[0];
+          var val = parseFloat(splitted[1]);
+          var spring = attrSprings[attr];
+          var isTransform = attr.indexOf("translate") === 0 || attr === "scale";
+
+          if (!spring) {
+            var currVal = isTransform ? val : parseFloat(el.attr(attr), 10) || 0;
+            spring = new Wobble.Spring({
+              damping: 15,
+              fromValue: currVal,
+              toValue: currVal,
+            });
+            if (isTransform) {
+              spring.onUpdate(() => {
+                if (enable) {
+                  applyAttr("transform", constructTransform(attrSprings, opts));
+                } else {
+                  applyAttr("transform", null);
+                }
+              });
+            } else {
+              spring.onUpdate(s => {
+                if (enable) {
+                  applyAttr(attr, s.currentValue);
+                } else {
+                  applyAttr(attr, "initial");
+                }
+              });
+            }
+            attrSprings[attr] = spring;
+          }
+          springs.push({spring: spring, targetValue: val});
+        });
+        targetVals.push({
+          keyframeVal: keyframeVal,
+          springs: springs,
+        });
+      }
+    });
+
+  targetVals.reverse();
+
+  function handleProgress(progress) {
+    var firstValidTargetVal = targetVals.filter(targetVal => progress >= targetVal.keyframeVal)[0];
+    if (!firstValidTargetVal) return;
+    firstValidTargetVal.springs.forEach(data => {
+      data.spring.updateConfig({toValue: data.targetValue});
+      data.spring.start();
+    });
+  }
+  return handleProgress;
+}
+
+function createClassOnRangeListener(el) {
+  var classList = [];
+  el.data("class-on-range")
+    .trim()
+    .split(/\s+/g)
+    .forEach(keyframe => {
+      var m = keyframe.trim().match(/([\d.]+)-([\d.]+):(.*)/);
+      if (m) {
+        classList.push({
+          start: parseFloat(m[1]),
+          end: parseFloat(m[2]),
+          className: m[3],
+        });
+      }
+    });
+  function handleProgress(progress) {
+    classList.forEach(data => {
+      if (progress >= data.start && progress < data.end) {
+        el.addClass(data.className);
+      } else {
+        el.removeClass(data.className);
       }
     });
   }
+  return handleProgress;
+}
 
-  $(window).on("resize", handleResize);
-  $(window).on("scroll", checkIfActive);
-  handleResize();
-  checkIfActive();
+function setupScrollSpy() {
+  $("[data-scrollspy]").each(function() {
+    var scrollArea = $(this);
+    var mediaQueriesChecker = [];
+    var listeners = [];
+    var spyDimensions = {};
+
+    function handleScroll() {
+      var progress =
+        (window.scrollY - spyDimensions.top) /
+        Math.max(200, spyDimensions.height - window.innerHeight / 2);
+      listeners.forEach(fn => fn(progress));
+    }
+
+    function handleResize() {
+      var top = scrollArea.offset().top;
+      spyDimensions = {
+        top: top,
+        height: scrollArea.outerHeight(),
+      };
+      mediaQueriesChecker.forEach(checkerFn => checkerFn());
+      handleScroll();
+    }
+
+    scrollArea.find("[data-keyframes]").each(function() {
+      var el = $(this);
+      listeners.push(createKeyframeListener(el));
+    });
+
+    scrollArea.find("[data-style-keyframes]").each(function() {
+      var el = $(this);
+      listeners.push(createKeyframeListener(el, {asStyle: true}));
+    });
+
+    scrollArea.find("[data-class-on-range]").each(function() {
+      var el = $(this);
+      listeners.push(createClassOnRangeListener(el));
+    });
+
+    $(window).on("resize", handleResize);
+    $(window).on("scroll", handleScroll);
+    handleResize();
+    handleScroll();
+  });
 }
 
 function toggleButton() {
@@ -179,7 +197,7 @@ function headerScroll() {
     } else if (window.scrollY > windowHeight) {
       el.addClass("is-scrolled-a-page");
     }
-  }
+  };
   $(window).on("scroll", handleScroll);
   handleScroll();
 }
@@ -265,7 +283,7 @@ function initMap() {
 
   var image = {
     url: "/assets/images/icon_d-labs.svg",
-    scaledSize: new google.maps.Size(25, 25)
+    scaledSize: new google.maps.Size(25, 25),
   };
 
   // Potsdam
@@ -354,7 +372,7 @@ function setupMethodFilter() {
       } else if (activeFilters.indexOf(filter) >= 0) {
         activeFilters = activeFilters.filter(f => f !== filter);
       } else {
-        activeFilters = [filter]
+        activeFilters = [filter];
       }
       sync();
     });
