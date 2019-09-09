@@ -18,12 +18,16 @@
 
   .slick-dots {
     position: absolute;
-    left: 0;
+    left: 9rem;
     width: 100%;
     bottom: -2rem;
     display: flex;
     justify-content: start;
     list-style: none;
+
+    @media #{$query-md} {
+      left: 2rem;
+    }
 
     li {
       &:not(:last-child) {

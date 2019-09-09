@@ -93,6 +93,18 @@
       box-shadow: 0 0 0 0.2rem $white-a25;
     }
   }
+
+  &.is-black {
+    background-color: $black;
+    border-color: $black;
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $white-a25;
+    }
+  }
 }
 
 .button-ghost {
@@ -312,4 +324,8 @@
   .flex-footer-space {
     flex-basis: 12em;
   }
+}
+
+.list-entry {
+  border-bottom: solid 1px $blue;
 }

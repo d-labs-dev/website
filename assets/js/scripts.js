@@ -360,9 +360,9 @@ function setupCarousel() {
       dots: true,
       arrows: true,
       prevArrow:
-        '<div class="absolute inset-y right-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
+        '<div class="absolute inset-y right-100 col justify-center"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
       nextArrow:
-        '<div class="absolute inset-y left-100 col justify-center px-1"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
+        '<div class="absolute inset-y left-100 col justify-center"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
     })
 }
 
