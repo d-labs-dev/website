@@ -37,6 +37,16 @@ function createKeyframeListener(el, opts) {
   var targetVals = []; // {keyframeVal: 0.2, springs: [{spring, targetVal}]}
   var attrSprings = {}; // one spring for each attribute that is listed
   var enable = true;
+  var resizeListener = null
+
+  var mediaQuery = el.data("only-animate-if-matches");
+  if (mediaQuery && window.matchMedia) {
+    resizeListener = () => {
+      var mql = window.matchMedia(mediaQuery);
+      enable = mql.matches;
+    };
+  }
+
   var applyAttr = opts.asStyle
     ? (attr, val) => applyCss(el, attr, val)
     : (attr, val) => el.attr(attr, val);
@@ -100,7 +110,7 @@ function createKeyframeListener(el, opts) {
       data.spring.start();
     });
   }
-  return handleProgress;
+  return {handleProgress: handleProgress, handleResize: resizeListener};
 }
 
 function createClassOnRangeListener(el) {
@@ -133,15 +143,15 @@ function createClassOnRangeListener(el) {
 function setupScrollSpy() {
   $("[data-scrollspy]").each(function() {
     var scrollArea = $(this);
-    var mediaQueriesChecker = [];
-    var listeners = [];
+    var resizeListeners = [];
+    var scrollListeners = [];
     var spyDimensions = {};
 
     function handleScroll() {
       var progress =
         (window.scrollY - spyDimensions.top) /
         Math.max(200, spyDimensions.height - window.innerHeight / 2);
-      listeners.forEach(fn => fn(progress));
+      scrollListeners.forEach(fn => fn(progress));
     }
 
     function handleResize() {
@@ -150,23 +160,27 @@ function setupScrollSpy() {
         top: top,
         height: scrollArea.outerHeight(),
       };
-      mediaQueriesChecker.forEach(checkerFn => checkerFn());
+      resizeListeners.forEach(checkerFn => checkerFn());
       handleScroll();
     }
 
     scrollArea.find("[data-keyframes]").each(function() {
       var el = $(this);
-      listeners.push(createKeyframeListener(el));
+      var retVal = createKeyframeListener(el);
+      scrollListeners.push(retVal.handleProgress);
+      if (retVal.handleResize) resizeListeners.push(retVal.handleResize)
     });
 
     scrollArea.find("[data-style-keyframes]").each(function() {
       var el = $(this);
-      listeners.push(createKeyframeListener(el, {asStyle: true}));
+      var retVal = createKeyframeListener(el, {asStyle: true});
+      scrollListeners.push(retVal.handleProgress);
+      if (retVal.handleResize) resizeListeners.push(retVal.handleResize)
     });
 
     scrollArea.find("[data-class-on-range]").each(function() {
       var el = $(this);
-      listeners.push(createClassOnRangeListener(el));
+      scrollListeners.push(createClassOnRangeListener(el));
     });
 
     $(window).on("resize", handleResize);

@@ -1,11 +1,7 @@
 {%- assign _ = site.data.pages.approach[page.locale] -%}
 
-<div class="relative" data-active-snapping>
-  <div class="absolute inset-full zindex-1 non-interactive">
-    <div class="approach-curtain sticky height-screen"></div>
-  </div>
-
-  <div class="relative height-screen sroll-snap-start col align-center justify-center py-7 px-4 sroll-snap-start overflow-hidden relative zindex-1" data-after-approach-animate="+text-white">
+<div class="relative" data-scrollspy>
+  <div class="relative height-screen col align-center justify-center py-7 px-4 overflow-hidden relative zindex-1" data-after-approach-animate="+text-white">
     <div class="maxwidth-7 width-full col sp-2 pb-6 relative zindex-1">
       <div class="uppercase font-heading font-bold text-blue text-sm lead-line" data-after-approach-animate="-text-blue +text-white">{{_.intro_lead}}</div>
       <div class="markdown text-xxl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
@@ -40,22 +36,35 @@
       </div>
     </div>
     <div class="absolute inset-full col align-center relative zindex-1">
-      <div class="maxwidth-7 width-full sticky q-md-px-4 pt-7 height-screen">
+      <div class="maxwidth-7 width-full sticky q-md-px-4 pt-8 height-screen">
         <div class="uppercase font-heading font-bold text-blue text-xs lead-line sticky">{{_.slider_lead}}</div>
       </div>
     </div>
 
+    {%- for screen in _.screens -%}
+    <div class="height-13" id="n{{forloop.index}}">
+    </div>
+    {%- endfor -%}
 
     {%- for screen in _.screens -%}
-    <div class="sroll-snap-start col align-center px-4" data-visible-key="screen{{forloop.index}}"
-      id="n{{forloop.index}}">
-      <div class="maxwidth-7 width-full">
-        <div class="approach-scroll-screen relative col sp-4 pt-7 pb-7">
-          <h2 class="font-heading text-xl q-md-text-md pt-4">{{screen.title}}</h2>
-          {%- if screen.text - %}
-          <div class="q-md-text-xs maxwidth-2 approach-scroll-screen-text">{{screen.text}}</div>
-          {%- endif- %}
-        </div>
+    <div
+      class="absolute inset-full"
+      style="opacity: 0"
+      data-style-keyframes="
+        0:opacity=0,translateY=-10
+        {{forloop.index | times: 0.133}}:opacity=1,translateY=0
+        {{forloop.index  | times: 0.133 | plus: 0.133}}:opacity=0,translateY=10
+      "
+    >
+      <div class="sticky height-screen col px-4 align-center">
+        <div class="maxwidth-7 width-full">
+            <div class="approach-scroll-screen relative col sp-4 pt-8 pb-7">
+              <h2 class="font-heading text-xl q-md-text-md pt-4">{{screen.title}}</h2>
+              {%- if screen.text - %}
+              <div class="q-md-text-xs maxwidth-2 approach-scroll-screen-text">{{screen.text}}</div>
+              {%- endif- %}
+            </div>
+          </div>
       </div>
     </div>
     {%- endfor -%}
@@ -63,8 +72,10 @@
     <div class="absolute inset-y right-0 hide-md zindex-1">
       <div class="sticky height-screen col justify-center sp-3 pr-3">
         {%- for screen in _.screens -%}
-        <a href="#n{{forloop.index}}" class="scroll-indicator" data-class-on-enter="screen{{{forloop.index}}:+is-active"
-          data-class-on-leave="screen{{{forloop.index}}:-is-active">
+        <a
+          href="#n{{forloop.index}}"
+          class="scroll-indicator"
+          data-class-on-range="{{forloop.index | times: 0.133}}-{{forloop.index  | times: 0.133 | plus: 0.133}}:is-active">
         </a>
         {%- endfor -%}
       </div>
@@ -72,7 +83,7 @@
   </div>
 </div>
 
-<div id="projects" class="sroll-snap-start col align-center px-4 py-7">
+<div id="projects" class="col align-center px-4 py-7">
   <div class="maxwidth-7 width-full col sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{_.projects_title}}</h2>
     {%- for project in _.projects -%}

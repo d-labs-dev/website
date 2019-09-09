@@ -22,10 +22,10 @@
     {%- for screen in _.screens -%}
     <div class="height-15" id="n{{forloop.index}}">
     </div>
+    {%- endfor -%}
     <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
       <a href="#clients" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
-    {%- endfor -%}
     {%- for screen in _.screens -%}
     <div
       class="absolute inset-full"
