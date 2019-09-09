@@ -1,1 +1,26 @@
-<h2>{{ site.data.pages.jobs[page.locale].title }}</h2>
+{%- assign _ = site.data.pages.jobs[page.locale] -%}
+
+<div class="height-screen text-white relative col justify-center align-center px-4 py-5">
+  <div class="absolute inset-full bg-blue" data-image-fader>
+    {% asset about.jpg class="absolute inset-full"%}
+    {% asset jobs-portrait.jpg class="absolute inset-full"%}
+  </div>
+
+  <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.title_text | markdownify}}</div>
+  <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh">
+    <polygon points="0 100, 100 100, 100 0" fill="white"/>
+  </svg>
+  <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
+    <a href="#list" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
+  </div>
+</div>
+
+<div class="col justify-center align-center px-4 py-8" id="list">
+  <div class="font-heading text-xl q-md-text-lg maxwidth-5 width-full">
+    {{_.intro_text | markdownify}}
+  </div>
+</div>
+
+
+{%- include contact.html contact=_.contact-%}
+{%- include locations.html is_white=true with_map=true -%}

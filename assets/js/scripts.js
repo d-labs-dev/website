@@ -450,6 +450,25 @@ function setupMethodFilter() {
   }
 }
 
+function setupImageFader() {
+  $("[data-image-fader]").each(function() {
+    var children = $(this).children();
+    var currentIndex = children.length - 1;
+    setInterval(() => {
+      var lastChild = children.eq(currentIndex)
+      var nextIndex = (currentIndex + 1) % children.length;
+      var nextChild = children.eq(nextIndex);
+      nextChild.css("z-index", 1)
+      nextChild.hide();
+      nextChild.fadeIn(2000, () => {
+        lastChild.hide();
+        nextChild.css("z-index", 0)
+      })
+      currentIndex = nextIndex;
+    }, 5000)
+  })
+}
+
 $(function() {
   setupScrollSpy();
   toggleButton();
@@ -458,6 +477,7 @@ $(function() {
   approachAnimation();
   setupCarousel();
   setupMethodFilter();
+  setupImageFader()
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });

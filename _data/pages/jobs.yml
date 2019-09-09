@@ -1,5 +1,29 @@
 de:
-  title: Jobs
+  title_text: '**Zusammen arbeiten,**<br/>gestalten und erleben'
+
+  intro_text: 'Und bei dir so? Bereichere unser Team mit deinen Fähigkeiten und deiner Persönlichkeit und starte eine nachhaltige Karriere.'
+
+  contact:
+    title: Für Fragen stehen wir Dir gern zur Verfügung.
+    avatar_img: about.jpg
+    name: Uta Kanthack
+    position: Business Administration & Controlling
+    tel: +49 331 97 992 303
+    mobile: +49 151 46 756 702
+    email: till.heinrich@d-labs.com
+    cta_text: Anfragen
+
+
 
 en:
-  title: Jobs
+  title_text: '**Zusammen arbeiten,**<br/>gestalten und erleben'
+
+  contact:
+    title: Für Fragen stehen wir Dir gern zur Verfügung.
+    avatar_img: about.jpg
+    name: Till Heinrich
+    position: Sales Manager
+    tel: +49 331 97 992 303
+    mobile: +49 151 46 756 702
+    email: till.heinrich@d-labs.com
+    cta_text: Anfragen
