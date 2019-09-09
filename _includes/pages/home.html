@@ -3,7 +3,7 @@
 <div class="relative" data-scrollspy>
   <div class="height-screen text-white relative zindex-2 col justify-center align-center px-4 py-5">
     <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.hero_claim}}</div>
-    <svg viewbox="0 0 100 100" class="absolute inset-full text-blue fill-current" preserveAspectRatio="none">
+    <svg viewbox="0 0 100 100" class="absolute inset-full text-blue fill-current non-interactive" preserveAspectRatio="none">
       <polygon points="0 0,100 0,100 70,0 100" class="hide-md" />
       <polygon points="0 0,100 0,100 80,0 100" class="show-md" />
     </svg>
@@ -21,6 +21,9 @@
   <div class="relative">
     {%- for screen in _.screens -%}
     <div class="height-15" id="n{{forloop.index}}">
+    </div>
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
+      <a href="#clients" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
     {%- endfor -%}
     {%- for screen in _.screens -%}
@@ -63,7 +66,7 @@
   </div>
 </div>
 
-<div class="bg-white col align-center px-4 py-5 relative zindex-1">
+<div class="bg-white col align-center px-4 py-5 pt-8 relative zindex-1" id="clients">
   <div class="maxwidth-7 width-full col sp-5">
     <h2 class="font-heading font-bold text-xl">{{_.clients_heading}}</h2>
     <div class="col">
