@@ -37,7 +37,7 @@ function createKeyframeListener(el, opts) {
   var targetVals = []; // {keyframeVal: 0.2, springs: [{spring, targetVal}]}
   var attrSprings = {}; // one spring for each attribute that is listed
   var enable = true;
-  var resizeListener = null
+  var resizeListener = null;
 
   var mediaQuery = el.data("only-animate-if-matches");
   if (mediaQuery && window.matchMedia) {
@@ -168,14 +168,14 @@ function setupScrollSpy() {
       var el = $(this);
       var retVal = createKeyframeListener(el);
       scrollListeners.push(retVal.handleProgress);
-      if (retVal.handleResize) resizeListeners.push(retVal.handleResize)
+      if (retVal.handleResize) resizeListeners.push(retVal.handleResize);
     });
 
     scrollArea.find("[data-style-keyframes]").each(function() {
       var el = $(this);
       var retVal = createKeyframeListener(el, {asStyle: true});
       scrollListeners.push(retVal.handleProgress);
-      if (retVal.handleResize) resizeListeners.push(retVal.handleResize)
+      if (retVal.handleResize) resizeListeners.push(retVal.handleResize);
     });
 
     scrollArea.find("[data-class-on-range]").each(function() {
@@ -355,15 +355,14 @@ function approachAnimation() {
 }
 
 function setupCarousel() {
-  $(".carousel")
-    .slick({
-      dots: true,
-      arrows: true,
-      prevArrow:
-        '<div class="absolute inset-y right-100 col justify-center"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
-      nextArrow:
-        '<div class="absolute inset-y left-100 col justify-center"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
-    })
+  $(".carousel").slick({
+    dots: true,
+    arrows: true,
+    prevArrow:
+      '<div class="absolute inset-y right-100 col justify-center"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-left.svg" alt="Previous" class="height-4" style="max-width: initial"/></button></div>',
+    nextArrow:
+      '<div class="absolute inset-y left-100 col justify-center"><button type="button" class="button-text"><img src="/assets/images/icons/icon-swipe-right.svg" alt="Next" class="height-4" style="max-width: initial"/></button></div>',
+  });
 }
 
 function setupMethodFilter() {
@@ -390,26 +389,26 @@ function setupMethodFilter() {
 
   $("[data-search]").each(function() {
     var container = $(this);
-    var inputArea = container.find("[data-search-input]")
-    var input = inputArea.find("input")
-    var inputAreaButton = inputArea.find("button")
-    var button = container.find("[data-search-button]")
+    var inputArea = container.find("[data-search-input]");
+    var input = inputArea.find("input");
+    var inputAreaButton = inputArea.find("button");
+    var button = container.find("[data-search-button]");
     button.on("click", function() {
       button.hide();
       inputArea.show();
       input.focus();
-    })
+    });
     inputAreaButton.on("click", function() {
       inputArea.hide();
       button.show();
       query = null;
-      sync()
-    })
+      sync();
+    });
     input.on("input", function(e) {
-      query = e.target.value.toLowerCase()
-      sync()
-    })
-  })
+      query = e.target.value.toLowerCase();
+      sync();
+    });
+  });
 
   $("[data-search-tile]").each(function() {
     var el = $(this);
@@ -420,10 +419,10 @@ function setupMethodFilter() {
     var domains = {};
     domainKeys.forEach(key => (domains[key] = true));
 
-    var texts = []
+    var texts = [];
     el.find("[data-search-text]").each(function() {
-      texts.push($(this).text())
-    })
+      texts.push($(this).text());
+    });
     tiles.push({el: el, domains: domains, text: texts.join(" ").toLowerCase()});
   });
 
@@ -433,9 +432,9 @@ function setupMethodFilter() {
       buttons.all.addClass("is-active");
       tiles.forEach(tile => {
         if (!query || tile.text.indexOf(query) >= 0) {
-          tile.el.removeClass("hidden")
+          tile.el.removeClass("hidden");
         } else {
-          tile.el.addClass("hidden")
+          tile.el.addClass("hidden");
         }
       });
     } else {
@@ -443,7 +442,8 @@ function setupMethodFilter() {
       activeFilters.forEach(f => {
         buttons[f].addClass("is-active");
         tiles.forEach(tile => {
-          if (tile.domains[f] && (!query || tile.text.indexOf(query) >= 0)) tile.el.removeClass("hidden");
+          if (tile.domains[f] && (!query || tile.text.indexOf(query) >= 0))
+            tile.el.removeClass("hidden");
         });
       });
     }
@@ -455,18 +455,18 @@ function setupImageFader() {
     var children = $(this).children();
     var currentIndex = children.length - 1;
     setInterval(() => {
-      var lastChild = children.eq(currentIndex)
+      var lastChild = children.eq(currentIndex);
       var nextIndex = (currentIndex + 1) % children.length;
       var nextChild = children.eq(nextIndex);
-      nextChild.css("z-index", 1)
+      nextChild.css("z-index", 1);
       nextChild.hide();
       nextChild.fadeIn(2000, () => {
         lastChild.hide();
-        nextChild.css("z-index", 0)
-      })
+        nextChild.css("z-index", 0);
+      });
       currentIndex = nextIndex;
-    }, 5000)
-  })
+    }, 5000);
+  });
 }
 
 $(function() {
@@ -477,7 +477,7 @@ $(function() {
   approachAnimation();
   setupCarousel();
   setupMethodFilter();
-  setupImageFader()
+  setupImageFader();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });
