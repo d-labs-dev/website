@@ -16,7 +16,6 @@ jobs:
       - run:
           name: build jekyll
           command: |
-            bundle install
             bundle exec jekyll contentful
             bundle exec jekyll build
           environment:
@@ -36,13 +35,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/d-labs-website
-      - restore_cache:
-          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
-      - run: bundle install
-      - save_cache:
-          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
-          paths:
-            - vendor/bundle
       - run:
           name: deploy to S3
           command: |
