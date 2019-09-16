@@ -13,11 +13,6 @@ layout: default
 			<div class="col align-center">
 				<div class="col sp-5 maxwidth-4 full-width">
 					<div class="markdown">{{ page.body | markdownify }}</div>
-					<div class="row wrappable sp-2">
-					{%- for tag in page.tags -%}
-						<a href="{% link_tag_url blogPost {{tag}} %}" class="text-xxs pill">{{tag}}</a>
-					{%- endfor -%}
-					</div>
 				</div>
 			</div>
 			<div class="col align-start pt-6">
