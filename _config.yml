@@ -44,6 +44,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+  - prettier.config.js
   - README.md
   - vendor/bundle/
   - vendor/cache/
