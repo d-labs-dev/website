@@ -8,9 +8,4 @@
     <h3 class="font-heading text-md">{{post.title}}</h3>
   </a>
   <div class="markdown text-sm">{{post.description | markdownify}}</div>
-  <div class="row wrappable sp-2">
-  {%- for tag in post.tags -%}
-    <a href="{% link_tag_url {{post.kind}} {{tag}} %}" class="text-xxs pill">{{tag}}</a>
-  {%- endfor -%}
-  </div>
 </div>
