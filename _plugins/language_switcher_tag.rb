@@ -17,7 +17,7 @@ module Jekyll
       current_language = this_page['locale']
       switch_to_language = current_language.eql?('de') ? 'en' : 'de'
 
-      return "<a href='#{LOCALE_BASE_PATHES[switch_to_language]}'>#{LOCALE_NAMES[switch_to_language]}</a>" if this_page['ref'].nil?
+      return "<a href='#{LOCALE_BASE_PATHES[switch_to_language]}' class='lang-switcher-link' title='#{LOCALE_NAMES[switch_to_language]}'>#{switch_to_language}</a>" if this_page['ref'].nil?
 
       translated_page = @site.pages.find do |that_page|
         that_page["ref"] == this_page["ref"] and that_page["locale"] != this_page["locale"]
