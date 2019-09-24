@@ -7,17 +7,29 @@ layout: default
 <div class="col align-center px-4 py-7 pt-8">
 	<div class="maxwidth-5 width-full col sp-6">
 		<div class="col sp-4">
-			<div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{page.sys.created_at | date: "%d. %M. %Y"}}</div>
+			<div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{page.date | date: "%d. %m. %Y"}}</div>
 			<h1 class="font-heading text-xl">{{page.title}}</h1>
 			<img src="{{page.hero_image.url}}?w=800" alt="{{page.hero_image.description}}" class="full-width" />
 			<div class="col align-center">
-				<div class="col sp-5 maxwidth-4 full-width">
+				<div class="col sp-6 maxwidth-4 full-width">
 					<div class="markdown">{{ page.body | markdownify }}</div>
+					<div class="col sp-2 align-start">
+						{% if page.author.image %}
+							<img src="{{page.author.image.url}}?w=100&h=100" alt="{{page.author.image.title}}" class="width-6 height-6 rounded-full"/>
+						{% endif %}
+						<div class="col">
+							<div class="text-sm">{{_.by_author}} {{page.author.name}}</div>
+							<div class="font-bold text-sm">{{page.author.title}}</div>
+					</div>
+					</div>
 				</div>
 			</div>
 			<div class="col align-start pt-6">
 				{% locale_link blog class:"button-text" %}
-				← {{_.back_button_text}}
+				<div class="row sp-2">
+					<div>←</div>
+					<div>{{_.back_button_text}}</div>
+				</div>
 				{% endlocale_link %}
 			</div>
 		</div>

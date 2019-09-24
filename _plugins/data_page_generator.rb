@@ -74,6 +74,8 @@ module Jekyll
       # data contains the specification of the data for which we want to generate
       # the pages (look at the README file for its specification)
       data = site.config['page_gen']
+      puts data
+      puts "***********"
       if data
         data.each do |data_spec|
           index_files_for_this_data = data_spec['index_files'] != nil ? data_spec['index_files'] : index_files

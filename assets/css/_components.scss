@@ -315,3 +315,14 @@
 .list-entry {
   border-bottom: solid 1px $blue;
 }
+
+.category-tile {
+  display: inline-block;
+  text-transform: uppercase;
+  color: $white;
+  background-color: $black;
+  padding: 0.3em 0.75em 0.15em;
+  font-size: #{(12 / 20)}rem;
+  position: relative;
+  top: -0.2em;
+}

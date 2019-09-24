@@ -3,15 +3,18 @@
 {% assign blog_pages = site.pages | where: "kind", "blogPost" | where: "locale", page.locale %}
 {% assign latest_post = blog_pages | first %}
 
-<div class="col align-center px-4 py-7 pt-8">
+<div class="col align-center py-7 pt-8 px-4 q-md-px-0">
   <div class="maxwidth-7 width-full col sp-7">
     <div class="row sp-6 q-md-col pt-5">
-      <div class="width-40p no-shrink relative q-md-width-full minheight-9">
+      <div class="width-40p no-shrink relative q-md-width-full q-md-height-aspect-16-9">
         <img src="{{latest_post.hero_image.url}}?w=800&h=800&fit=fill&f=faces"
           alt="{{latest_post.hero_image.description}}" class="absolute inset-full" />
       </div>
-      <div class="col sp-3">
-        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{latest_post.sys.created_at | date: "%d. %M. %Y"}}</div>
+      <div class="col sp-3 q-md-px-4">
+        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">
+          {{latest_post.category.title}} |
+          {{latest_post.date | date: "%d. %m. %Y"}}
+        </div>
         <a class="reset-link" href="{{latest_post.url}}"">
           <h2 class="font-heading text-xl">{{latest_post.title}}</h2>
         </a>
@@ -27,7 +30,7 @@
       </div>
     </div>
 
-    <div class="grid sp-6 q-lg-4">
+    <div class="grid sp-6 q-lg-4 q-md-px-4">
       {%- for post in blog_pages -%}
       {%- if forloop.index==1 -%}{%- continue -%}{%- endif -%}
       {%- include post-tile.html post=post -%}
