@@ -518,3 +518,19 @@
 .overflow-hidden {
   overflow: hidden;
 }
+
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$key}-first {
+      order: -1
+    }
+  }
+}
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$key}-height-aspect-16-9 {
+      height: 0;
+      padding-bottom: #{9 / 16 * 100%}
+    }
+  }
+}
