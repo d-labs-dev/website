@@ -21,13 +21,12 @@
   box-shadow: 0 0 0 0.2rem transparent;
   text-align: inherit;
   color: $black;
-  &:hover {
+  &:hover,
+  &:focus {
     color: $blue;
   }
-
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem $black-a10;
   }
 }
 
@@ -46,21 +45,17 @@
 
   &.is-blue {
     color: $blue;
-    &:hover {
-      color: $black;
-    }
+    &:hover,
     &:focus {
-      box-shadow: 0 0 0 0.2rem $blue-a10;
+      color: $black;
     }
   }
 
   &.is-white {
     color: $white;
-    &:hover {
-      color: $black;
-    }
+    &:hover,
     &:focus {
-      box-shadow: 0 0 0 0.2rem $white-a25;
+      color: $black;
     }
   }
 }
@@ -73,13 +68,13 @@
   color: $white;
   background-color: $blue;
   border: 2px solid $blue;
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $white;
     color: $blue;
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem $blue-a25;
   }
 
   &.is-white {
@@ -97,12 +92,10 @@
   &.is-black {
     background-color: $black;
     border-color: $black;
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $white;
       color: $black;
-    }
-    &:focus {
-      box-shadow: 0 0 0 0.2rem $white-a25;
     }
   }
 }
@@ -115,13 +108,13 @@
 
   color: $black;
   background-color: transparent;
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $black;
     color: $white;
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.2rem $black-a25;
   }
 
   &.is-white {
@@ -184,7 +177,9 @@
 }
 
 .markdown {
-  &:not(.font-heading) {line-height: 1.6;}
+  &:not(.font-heading) {
+    line-height: 1.6;
+  }
   word-break: break-word;
 
   p:not(:last-child),
@@ -249,17 +244,16 @@
   background-color: $gray200;
   transition-property: background-color;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: $gray300;
+  }
+  &:focus {
+    outline: none;
   }
 
   &.is-active {
     background-color: $blue;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.1rem $blue-a25;
   }
 }
 
