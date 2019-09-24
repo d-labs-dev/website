@@ -1,4 +1,4 @@
-# D-LABS Website
+# D‑LABS Website
 
 ## Setup
 
