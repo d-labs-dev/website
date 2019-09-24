@@ -12,18 +12,18 @@
     </div>
   </div>
   <div class="absolute inset-full col align-center non-interactive md-py-7">
-    <div class="height-screen width-full sticky zindex-1 col justify-center home-circle-outer q-md-justify-start q-md-pt-5">
+    <div class="height-screen maxwidth-7 width-full sticky zindex-1 col justify-center home-circle-outer q-md-justify-start q-md-pt-5">
       <div class="home-circle-container">
         {%- include home-circles.html -%}
       </div>
     </div>
   </div>
-  <div class="relative">
+  <div class="relative pt-7">
     {%- for screen in _.screens -%}
     <div class="height-15" id="n{{forloop.index}}">
     </div>
     {%- endfor -%}
-    <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1">
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1 hide-md">
       <a class="button-text" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
     {%- for screen in _.screens -%}
@@ -31,15 +31,15 @@
       class="absolute inset-full"
       style="opacity: 0"
       data-style-keyframes="
-        0:opacity=0,translateY=-1
-        {{forloop.index | times: 0.2}}:opacity=1,translateY=0
-        {{forloop.index  | times: 0.2 | plus: 0.2}}:opacity=0,translateY=1
+        0:opacity=0
+        {{forloop.index | times: 0.2}}:opacity=1
+        {{forloop.index  | times: 0.2 | plus: 0.2}}:opacity=0
       "
     >
       <div class="sticky height-screen col px-4 align-center justify-center">
         <div class="maxwidth-7 width-full">
           <div
-            class="home-scroll-screen-content col align-end justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
+            class="home-scroll-screen-content col justify-center sp-4 maxwidth-4 q-md-justify-end py-5">
             <h2 class="font-heading text-xl q-md-text-md">{{screen.title}}</h2>
             {%- if screen.text - %}
             <div class="q-md-text-xs">{{screen.text}}</div>
@@ -66,7 +66,7 @@
   </div>
 </div>
 
-<div class="bg-white col align-center px-4 py-5 pt-8 relative zindex-1" id="clients">
+<div class="bg-white col align-center px-4 pt-5 pb-8 pt-8 relative zindex-1" id="clients">
   <div class="maxwidth-7 width-full col sp-5">
     <h2 class="font-heading font-bold text-xl">{{_.clients_heading}}</h2>
     <div class="col">
