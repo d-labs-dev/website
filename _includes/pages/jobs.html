@@ -10,8 +10,8 @@
   <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh">
     <polygon points="0 100, 100 100, 100 0" fill="white"/>
   </svg>
-  <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
-    <a href="#list" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
+  <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1">
+    <a class="button-text" href="#list">{% asset icons/icon-arrow-down.svg @inline %}</a>
   </div>
 </div>
 
@@ -24,13 +24,13 @@
   </div>
 
   <div class="width-full maxwidth-5 col sp-2">
-  {%- for job in _.jobs -%}
-    <div class="row align-baseline sp-3 list-entry pb-2">
-      <div class="">{{job.title}}</div>
-      <div class="push"></div>
-      <div class="uppercase text-gray300 text-xs">{{job.location}}</div>
-    </div>
-  {%- endfor -%}
+    {%- for job in _.jobs -%}
+      <div class="row align-baseline sp-3 list-entry pb-2">
+        <div class="">{{job.title}}</div>
+        <div class="push"></div>
+        <div class="uppercase text-gray300 text-xs">{{job.location}}</div>
+      </div>
+    {%- endfor -%}
   </div>
 
   <div class="width-full maxwidth-5 col sp-4">

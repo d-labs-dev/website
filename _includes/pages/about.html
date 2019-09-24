@@ -13,7 +13,7 @@
     <div class="width-1_3 relative q-lg-width-full fill-parent">
       {% asset {{_.intro_image}} class="absolute inset-full"%}
     </div>
-    <div class="absolute inset-x bottom-0 col align-center text-black pb-4">
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-6">
       <a class="button-text" href="#next">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
   </div>
@@ -33,8 +33,7 @@
 <div class="sroll-snap-start">
 
   {%- assign _loc = site.data.includes.locations[page.locale] -%}
-  <div
-    class="bg-blue text-white col px-4 pt-7 pb-8 sp-4 align-center relative zindex-1">
+  <div class="bg-blue text-white col px-4 pt-7 pb-8 sp-4 align-center relative zindex-1">
     <div class="maxwidth-7 width-full col sp-5 q-xl-sp-6">
       <h2 class="font-heading text-xl maxwidth-5">{{_.location_title}}</h2>
       <div class="row sp-8 q-xl-col q-lg-sp-6-parent">
@@ -47,31 +46,32 @@
         </div>
         <div class="row sp-3 q-lg-col fill-parent q-lg-sp-7">
           {%- for location in site.data.includes.locations.locations -%}
-          <div class="col sp-5 fill-parent q-lg-sp-2">
-            <div class="col align-center q-lg-pb-4">
-              {% asset {{location.img}}
+            <div class="col sp-5 fill-parent q-lg-sp-2">
+              <div class="col align-center q-lg-pb-4">
+                {% asset {{location.img}}
                   srcset:width="400"
                   srcset:width="200"
                   srcset:width="100"
                   sizes="10em"
                   class="rounded-full width-10"
                 %}
+              </div>
+              <div class="col sp-4">
+                <div class="font-heading uppercase text-sm hide-lg">
+                  {%-if location.is_main -%}
+                    {{_loc.main}}{% else %}&nbsp;
+                  {% endif %}
+                </div>
+                <div class="text-lg underline pb-1">{{location.name}}</div>
+                <div>
+                  {{location.street}}<br/>{{location.zip}}
+                  {{location.city}}
+                </div>
+                <div>
+                  {{location.tel}}<br/><a class="link-light" href="mailto:{{location.email}}">{{location.email}}</a>
+                </div>
+              </div>
             </div>
-            <div class="col sp-4">
-              <div class="font-heading uppercase text-sm hide-lg">
-                {%-if location.is_main -%}
-                {{_loc.main}}{% else %}&nbsp;
-                {% endif %}
-              </div>
-              <div class="text-lg underline pb-1">{{location.name}}</div>
-              <div>
-                {{location.street}}<br />{{location.zip}}  {{location.city}}
-              </div>
-              <div>
-                {{location.tel}}<br /><a class="link-light" href="mailto:{{location.email}}">{{location.email}}</a>
-              </div>
-            </div>
-          </div>
           {%- endfor -%}
         </div>
       </div>

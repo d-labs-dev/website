@@ -7,8 +7,8 @@
       <polygon points="0 0,100 0,100 70,0 100" class="hide-md" />
       <polygon points="0 0,100 0,100 80,0 100" class="show-md" />
     </svg>
-    <div class="absolute inset-x bottom-0 col align-center text-black pb-4">
-      <a href="#n1" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-5">
+      <a class="button-text" href="#n1">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
   </div>
   <div class="absolute inset-full col align-center non-interactive md-py-7">
@@ -23,8 +23,8 @@
     <div class="height-15" id="n{{forloop.index}}">
     </div>
     {%- endfor -%}
-    <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
-      <a href="#clients" class="button-text">{% asset icons/icon-arrow-down.svg @inline %}</a>
+    <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1">
+      <a class="button-text" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
     {%- for screen in _.screens -%}
     <div
