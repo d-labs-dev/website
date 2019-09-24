@@ -8,7 +8,13 @@ de:
   privacy: Datenschutz
   partners: Partnerschaften
 
+  cookie_consent_text: Diese Website verwendet Cookies. Durch die fortgesetzte Nutzung dieser Website stimmen Sie dem Einsatz von Cookies zu. [Details ansehen](/privacy-policy).
+  cookie_consent_button_label: Akzeptieren
+
 en:
   imprint: Imprint
   privacy: Privacy
   partners: Partners
+
+  cookie_consent_text: Diese Website verwendet Cookies. Durch die fortgesetzte Nutzung dieser Website stimmen Sie dem Einsatz von Cookies zu. [Details ansehen](/privacy-policy).
+  cookie_consent_button_label: Akzeptieren

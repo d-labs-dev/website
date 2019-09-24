@@ -1,4 +1,5 @@
 //= require vendor/jquery-3.4.1.min.js
+//= require vendor/jquery.cookie-1.4.1.js
 //= require vendor/wobble.browser.min.js
 //= require vendor/slick.min.js
 
@@ -474,6 +475,17 @@ function setupImageFader() {
   });
 }
 
+function cookieConsent() {
+  if ($.cookie("accept_cookies") !== "true") {
+    var container = $("#cookie-consent");
+    container.removeClass("hidden");
+    container.find("button").on("click", function() {
+      $.cookie("accept_cookies", "true", {expires: 365});
+      container.addClass("hidden");
+    });
+  }
+}
+
 $(function() {
   setupScrollSpy();
   toggleButton();
@@ -483,6 +495,7 @@ $(function() {
   setupCarousel();
   setupMethodFilter();
   setupImageFader();
+  cookieConsent();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });
