@@ -1,9 +1,9 @@
 task_types:
   user_research: yellow
-  design: purple
+  design: darkBlue
   engineering: red
-  consulting: green
-  training: darkBlue
+  training: green
+  consulting: purple
 
 de:
   intro_lead: Wie wir arbeiten
@@ -25,8 +25,10 @@ de:
       text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team.
     - title: Umsetzung
       text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird.
-    - title: Training
-      text: Trainings zu agilen Themen, Durchführung von digitalen Projekten und inter­disziplinärer Zusammenarbeit.
+    - title: Enabling & Coaching
+      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+    - title: Business & Innovation
+      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
 
   projects_link_text: Projektbeispiele
   projects_title: Herausforderungen, bei denen wir unsere Kunden unterstützt haben
@@ -37,8 +39,8 @@ de:
   user_research: User Research
   design: Digitial Experience Design
   engineering: Software Engineering
-  consulting: Consulting
-  training: Training
+  consulting: Business & Innovation
+  training: Enabling & Coaching
 
   projects:
     - lead: Projekt 01
@@ -47,10 +49,10 @@ de:
       circle_img: projects/circle-small_project01.svg
       percentages:
         user_research: 50
-        design: 15
+        design: 30
         engineering: 5
-        consulting: 30
         training: 0
+        consulting: 15
       task: Wie kann die Kundenschnittstelle eines Verteilnetz­betreibers einheitlich gestaltet werden?
       goals:
         - Erhöhung der Kunden- und Service­orientierung
@@ -70,9 +72,9 @@ de:
       circle_img: projects/circle-small_project02.svg
       percentages:
         user_research: 5
-        design: 0
+        design: 10
         engineering: 0
-        consulting: 10
+        consulting: 0
         training: 85
       task: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
       goals:
@@ -93,10 +95,10 @@ de:
       circle_img: projects/circle-small_project03.svg
       percentages:
         user_research: 5
-        design: 25
+        design: 0
         engineering: 65
-        consulting: 5
-        training: 0
+        consulting: 25
+        training: 5
       task: Wie können die Besucher einer Ausstellung digital unterstützt werden?
       goals:
         - Erhöhung der Kunden- und Service­orientierung
@@ -141,8 +143,10 @@ en:
       text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team.
     - title: Umsetzung
       text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird.
-    - title: Training
-      text: Trainings zu agilen Themen, Durchführung von digitalen Projekten und inter­disziplinärer Zusammenarbeit.
+    - title: Enabling & Coaching
+      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+    - title: Business & Innovation
+      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
 
   projects_link_text: Projektbeispiele
   projects_title: Herausforderungen, bei denen wir unsere Kunden unterstützt haben

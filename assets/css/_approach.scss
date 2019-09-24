@@ -2,16 +2,18 @@
 
 .approach-circle {
   margin: auto;
-  width: 50vmax;
-  height: 50vmax;
+  width: 20vmax;
+  height: 20vmax;
   background-color: $blue;
   border-radius: 50%;
+  border: 0.2vmax solid $blue;
+  transform: translate3d(0, 33%, 0) scale(0.10);
 
-  transform: translate3d(0, 15%, 0) scale(0.04);
-  transition: transform 0.5s ease-out;
+  transition: transform 0.75s ease-out;
 
   &.is-big {
-    transform: translate3d(0, 15%, 0) scale(4);
+    background-color: transparent;
+    transform: translate3d(0, 33%, 0) scale(10);
   }
 }
 .approach-curtain {

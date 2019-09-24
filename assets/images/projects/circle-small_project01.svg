@@ -1,9 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="310" height="224.75" viewBox="0 0 310 224.75">
-  <g id="Gruppe_6703" data-name="Gruppe 6703" transform="translate(-310 -1032)">
-    <rect id="Rechteck_333" data-name="Rechteck 333" width="310" height="224.75" transform="translate(310 1032)" fill="#fff" opacity="0.6"/>
-    <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="18.729" cy="19.375" rx="18.729" ry="19.375" transform="translate(470.813 1116.604)" fill="none" stroke="#e72d5f" stroke-miterlimit="10" stroke-width="6"/>
-    <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="44.563" cy="44.562" rx="44.563" ry="44.562" transform="translate(456.604 1048.146)" fill="none" stroke="#87c745" stroke-miterlimit="10" stroke-width="6"/>
-    <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="56.188" cy="56.833" rx="56.188" ry="56.833" transform="translate(384.271 1111.438)" fill="none" stroke="#fcbd29" stroke-miterlimit="10" stroke-width="6"/>
-    <ellipse id="Ellipse_4" data-name="Ellipse 4" cx="32.292" cy="31.646" rx="32.292" ry="31.646" transform="translate(464.354 1134.688)" fill="none" stroke="#813c96" stroke-miterlimit="10" stroke-width="6"/>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 310 224.8" style="enable-background:new 0 0 310 224.8;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.6;fill:#FFFFFF;enable-background:new    ;}
+	.st1{fill:none;stroke:#E72D5F;stroke-width:6;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#1E4C62;stroke-width:6;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#FCBD29;stroke-width:6;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#813C96;stroke-width:6;stroke-miterlimit:10;}
+</style>
+<g id="Gruppe_6703" transform="translate(-310 -1032)">
+	<rect id="Rechteck_333" x="310" y="1032" class="st0" width="310" height="224.8"/>
+	<ellipse id="Ellipse_1" class="st1" cx="489.5" cy="1136" rx="18.7" ry="19.4"/>
+	<ellipse id="Ellipse_2" class="st2" cx="501.2" cy="1092.7" rx="44.6" ry="44.6"/>
+	<ellipse id="Ellipse_3" class="st3" cx="440.5" cy="1168.3" rx="56.2" ry="56.8"/>
+	<ellipse id="Ellipse_4" class="st4" cx="496.6" cy="1166.3" rx="32.3" ry="31.6"/>
+</g>
 </svg>

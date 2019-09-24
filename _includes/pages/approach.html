@@ -1,20 +1,20 @@
 {%- assign _ = site.data.pages.approach[page.locale] -%}
 
 <div class="relative" data-scrollspy>
-  <div class="relative height-screen col align-center justify-center py-7 px-4 overflow-hidden relative zindex-1" data-after-approach-animate="+text-white">
+  <div class="relative height-screen col align-center justify-center py-7 px-4 overflow-hidden relative zindex-1">
     <div class="maxwidth-7 width-full col sp-4 pb-6 relative zindex-1">
-      <div class="uppercase font-heading font-bold text-blue text-sm lead-line" data-after-approach-animate="-text-blue +text-white">{{_.intro_lead}}</div>
-      <div class="markdown text-xxl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line" >{{_.intro_lead}}</div>
+      <div class="markdown text-xxl q-md-text-xl font-heading">{{_.intro_text | markdownify}}</div>
     </div>
     <div class="absolute non-interactive inset-full col">
       <div class="approach-circle is-small" id="approach-circle"></div>
     </div>
     <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
       <div class="col sp-3 align-center">
-        <a class="button-text" data-after-approach-animate="+is-white" href="#n1">
+        <a class="button-text" href="#n1">
           {{_.intro_cta_text}}
         </a>
-        <a class="button-text" data-after-approach-animate="+is-white" href="#n1">
+        <a class="button-text" href="#n1">
           {% asset icons/icon-arrow-down.svg @inline %}
         </a>
       </div>
@@ -23,9 +23,9 @@
 
   <div class="relative" style="padding-bottom:40vh">
     <div class="absolute inset-full col align-center non-interactive zindex-1">
-      <div class="maxwidth-7 width-full sticky height-screen row align-center overflow-hidden q-md-align-end pb-7">
+      <div class="maxwidth-8 width-full sticky height-screen row align-center overflow-hidden q-md-align-end q-md-pb-7">
         {%- include approach-image.html -%}
-        <div class="absolute inset-x bottom-0 pb-7 col align-center">
+        <div class="absolute inset-x bottom-0 pb-7 col align-center q-md-pb-2">
           <a class="button-text is-blue" href="#projects" style="pointer-events: auto">
             <div class="row sp-3 align-center">
               {% asset icons/icon-arrow-down.svg @inline %}
@@ -51,15 +51,15 @@
       class="absolute inset-full"
       style="opacity: 0"
       data-style-keyframes="
-        0:opacity=0,translateY=-1
-        {{forloop.index | times: 0.133}}:opacity=1,translateY=0
-        {{forloop.index  | times: 0.133 | plus: 0.133}}:opacity=0,translateY=1
+        0:opacity=0
+        {{forloop.index | times: 0.1 | plus: 0.05 }}:opacity=1
+        {{forloop.index  | times: 0.1 | plus: 0.15}}:opacity=0
       "
     >
       <div class="sticky height-screen col px-4 align-center">
         <div class="maxwidth-7 width-full">
             <div class="approach-scroll-screen relative col sp-4 pt-8 pb-7">
-              <h2 class="font-heading text-xl q-md-text-md pt-4">{{screen.title}}</h2>
+              <h2 class="font-heading text-xl q-md-text-md pt-5">{{screen.title}}</h2>
               {%- if screen.text - %}
               <div class="q-md-text-xs maxwidth-2 approach-scroll-screen-text">{{screen.text}}</div>
               {%- endif- %}
@@ -83,7 +83,7 @@
   </div>
 </div>
 
-<div id="projects" class="col align-center px-4 py-7">
+<div id="projects" class="col align-center px-4 pt-8 pb-7">
   <div class="maxwidth-7 width-full col sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{_.projects_title}}</h2>
     {%- for project in _.projects -%}
@@ -98,7 +98,7 @@
           </div>
         </div>
         <div class="row sp-3 relative align-start q-md-col q-md-align-center">
-          <div class="width-11 no-shrink sticky col sp-5 align-center pt-6 pb-5 q-md-relative q-md-py-2">
+          <div class="width-11 no-shrink sticky col sp-5 align-center pt-7 pb-5 q-md-relative q-md-py-2">
             {% asset {{project.circle_img}} class="width-full"%}
             <div class="col sp-2">
               {%- for type in site.data.pages.approach.task_types -%}

@@ -338,22 +338,6 @@ function approachAnimation() {
     $(window).off("scroll", fire);
     hasFired = true;
     circle.addClass("is-big");
-    $("body").addClass("with-blue-header");
-    $("[data-after-approach-animate]").each(function() {
-      var el = $(this);
-      el.data("after-approach-animate")
-        .split(/\s+/g)
-        .forEach(part => {
-          var match = part.match(/([+\-])([\w-]+)/);
-          if (match) {
-            if (match[1] === "-") {
-              el.removeClass(match[2]);
-            } else {
-              el.addClass(match[2]);
-            }
-          }
-        });
-    });
   }
   setTimeout(fire, 5000);
   $(document).on("mousemove", fire);
