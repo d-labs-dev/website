@@ -308,21 +308,21 @@ function initMap() {
 
   // Potsdam
   new google.maps.Marker({
-    position: {lat: 52.3902283, lng: 13.1149736},
+    position: {lat: 52.3902283, lng: 13.1171623},
     map: map,
     icon: image,
   });
 
   // Stuttgart
   new google.maps.Marker({
-    position: {lat: 48.7765607, lng: 9.1745821},
+    position: {lat: 48.7765607, lng: 9.1767708},
     map: map,
     icon: image,
   });
 
   // Berlin
   new google.maps.Marker({
-    position: {lat: 52.5051579, lng: 13.4620999},
+    position: {lat: 52.5051579, lng: 13.4642886},
     map: map,
     icon: image,
   });
