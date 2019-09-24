@@ -271,6 +271,11 @@ function initMap() {
       elementType: "labels.text.fill",
       stylers: [{color: "#bdbdbd"}],
     },
+    {
+      featureType: "administrative.country",
+      elementType: "geometry.stroke",
+      stylers: [{color: "#9e9e9e"}],
+    },
     {featureType: "poi", elementType: "geometry", stylers: [{color: "#eeeeee"}]},
     {featureType: "poi", elementType: "labels.text.fill", stylers: [{color: "#757575"}]},
     {featureType: "poi.park", elementType: "geometry", stylers: [{color: "#e5e5e5"}]},
