@@ -383,14 +383,15 @@ function setupMethodFilter() {
     var input = inputArea.find("input");
     var inputAreaButton = inputArea.find("button");
     var button = container.find("[data-search-button]");
+    var nonSearchInput = container.find("[data-search-button],[data-toggle]")
     button.on("click", function() {
-      button.hide();
+      nonSearchInput.hide();
       inputArea.show();
       input.focus();
     });
     inputAreaButton.on("click", function() {
       inputArea.hide();
-      button.show();
+      nonSearchInput.show();
       query = null;
       sync();
     });
@@ -470,6 +471,36 @@ function cookieConsent() {
   }
 }
 
+function setupServicesAnimation() {
+  var container =  $("#services-top-area");
+  if (!container.length) return;
+  var blue = container.find(".service-circle.is-blue")
+  var bluePos = blue.offset();
+  container.find(".service-circle:not(.is-blue)").each(function() {
+    var circle = $(this);
+    var circlePos = circle.offset();
+    circle.addClass("is-active")
+    circle.css({
+      position: 'relative',
+      left: bluePos.left - circlePos.left + 10,
+      top: bluePos.top - circlePos.top + 10,
+    })
+    setTimeout(() => {
+      circle.css({left: 0, top: 0, opacity: 1})
+      blue.css({opacity: 0})
+      circle.removeClass("is-active")
+    }, 250)
+  })
+  setTimeout(() => {
+    container.find(".service-label").css({opacity: 1})
+    setTimeout(() => {
+      container.find(".lead-line").css({opacity: 1})
+    }, 500)
+  }, 750)
+  container.find("")
+
+}
+
 $(function() {
   setupScrollSpy();
   toggleButton();
@@ -480,6 +511,7 @@ $(function() {
   setupMethodFilter();
   setupImageFader();
   cookieConsent();
+  setupServicesAnimation();
   var ua = window.navigator.userAgent;
   if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
 });

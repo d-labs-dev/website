@@ -11,25 +11,26 @@ de:
     - name: Digital Experience Design
       img: about.jpg
       text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
-      color: purple
+      color: darkBlue
     - name: Software Engineering
       img: about.jpg
       text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
       color: red
-    - name: Consulting
+    - name: Enabling & Consulting
       img: about.jpg
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
       color: green
-    - name: Training
+    - name: Business & Innovation
       img: about.jpg
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
-      color: darkBlue
+      color: purple
 
   list_link_text: Zu unseren Leistungen und Methoden
   services_title: Leistungen und Methoden
   services_all_button: Alle
   back_button_text: Zurück zur Übersicht
   search_placeholder: Suche nach...
+  filter_button_label: Filter
 
 en:
   intro_lead: Was wir machen
@@ -44,21 +45,22 @@ en:
     - name: Digital Experience Design
       img: about.jpg
       text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
-      color: purple
+      color: darkBlue
     - name: Software Engineering
       img: about.jpg
       text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
       color: red
-    - name: Consulting
+    - name: Enabling & Consulting
       img: about.jpg
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
       color: green
-    - name: Training
+    - name: Business & Innovation
       img: about.jpg
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
-      color: darkBlue
+      color: purple
 
   list_link_text: Zu unseren Leistungen und Methoden
   services_title: Leistungen und Methoden
   services_all_button: Alle
   back_button_text: Zurück zur Übersicht
+  filter_button_label: Filter

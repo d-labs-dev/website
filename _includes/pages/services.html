@@ -1,31 +1,34 @@
 {%- assign _ = site.data.pages.services[page.locale] -%}
 
-<div class="relative col justify-center align-center pt-8 px-4" style="min-height: 75vh;">
+<div class="relative col justify-center align-center pt-8 px-4 q-md-height-screen minheight-75vh">
   <div class="maxwidth-7 width-full col sp-4">
     <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
-    <div class="markdown text-xxl q-md-text-lg font-heading">{{_.intro_text | markdownify}}</div>
+    <div class="markdown text-xxl q-md-text-xl q-sm-text-lg font-heading">{{_.intro_text | markdownify}}</div>
   </div>
 
-  <!-- <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
+  <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1 show-md">
     <a class="button-text" href="#overview">
       {% asset icons/icon-arrow-down.svg @inline %}
     </a>
-  </div> -->
+  </div>
 </div>
-<div class="relative" data-scrollspy>
+<div class="relative" data-scrollspy id="overview">
   <div class="height-screen sticky col align-center px-4 q-md-px-0">
-    <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-px-4">
-      <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">{{_.intro_services_title}}</div>
-      <div class="row justify-center sp-3 q-md-col q-md-sp-1 q-md-pb-3">
+    <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-px-4" id="services-top-area">
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs opacity-0">{{_.intro_services_title}}</div>
+      <div class="row justify-center sp-3 q-md-col q-md-sp-1 q-md-pb-3 relative">
+        <div class="absolute inset-full top-0 col align-center">
+          <div class="service-circle is-blue is-active"></div>
+        </div>
       {%- for slide in _.slides -%}
         <div
-          class="row align-start service-carousel-indicator fill-parent"
+          class="row align-start service-carousel-indicator fill-parent sp-1"
           data-class-on-range="{{forloop.index | minus: 1 | times: 0.166}}-{{forloop.index | times: 0.166 }}:is-active"
         >
           <div class="width-4">
-            <div class="service-circle text-{{slide.color}}"></div>
+            <div class="service-circle is-{{slide.color}} opacity-0"></div>
           </div>
-          <div class="text-sm">{{slide.name}}</div>
+          <div class="text-sm service-label opacity-0">{{slide.name}}</div>
         </div>
       {%- endfor -%}
       </div>
@@ -54,8 +57,8 @@
         {%- endfor -%}
       </div>
     </div>
-    <div class="push"></div>
-    <div class="absolute inset-x bottom-0 pb-7 col align-center hide-md">
+    <div class="push" style="flex-grow: 2"></div>
+    <div class="absolute inset-x bottom-0 pb-5 col align-center hide-md">
       <a class="button-text is-blue" href="#list">
         <div class="row sp-3 align-center">
           {% asset icons/icon-arrow-down.svg @inline %}
@@ -73,7 +76,7 @@
   <div class="maxwidth-7 width-full col sp-6 q-md-sp-2">
     <div class="sticky pt-8 pb-2 col sp-6 bg-white q-md-relative">
       <div class="row sp-2 align-end q-md-col q-md-align-stretch">
-        <h2 class="font-heading text-xl">{{_.services_title}}</h2>
+        <h2 class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">{{_.services_title}}</h2>
         <div class="push"></div>
         <div class="relative hidden" data-search-input>
           <input class="input q-md-width-full" placeholder="{{_.search_placeholder}}"/>
@@ -81,46 +84,58 @@
             {% asset icons/icon-search.svg @inline %}
           </button>
         </div>
-        <div>
+        <div class="row sp-2">
+          <div class="show-lg fill-parent col">
+            <button class="button-ghost is-mini fill-parent" data-toggle="#services-filter" data-toggle-style="slide">
+              <div class="row align-center py-1 px-2">
+                <div>{{_.filter_button_label}}</div>
+                {% asset icons/icon-caret-down.svg @inline %}
+              </div>
+            </button>
+          </div>
           <button class="button-ghost is-mini" data-search-button>
             {% asset icons/icon-search.svg @inline %}
           </button>
         </div>
       </div>
-      <div class="row justify-center sp-3 hide-lg align-start">
-        <button class="button-transparent service-carousel-indicator is-active" style="flex-basis: 6em" data-services-filter="all">
-          <div class="row align-start sp-1">
-            <div class="width-3 height-3 no-shrink">
-              <div class="service-circle text-blue"></div>
+      <div class="hide-lg" id="services-filter">
+        <div class="row justify-center sp-3 q-lg-col align-start q-lg-pb-5">
+          <button class="button-transparent service-carousel-indicator is-active" data-services-filter="all">
+            <div class="row align-start sp-1">
+              <div class="width-3 height-3 no-shrink">
+                <div class="service-circle is-blue"></div>
+              </div>
+              <div class="text-xs" style="padding-top:0.2rem;">{{_.services_all_button}}</div>
             </div>
-            <div class="text-xs" style="padding-top:0.2rem;">{{_.services_all_button}}</div>
-          </div>
-        </button>
-        {%- for slide in _.slides -%}
-        <button class="button-transparent service-carousel-indicator" style="flex-basis: 10em" data-services-filter="{{slide.name}}">
-          <div class="row align-start sp-1">
-            <div class="width-3 height-3 no-shrink">
-              <div class="service-circle text-{{slide.color}}"></div>
+          </button>
+          {%- for slide in _.slides -%}
+          <button class="button-transparent service-carousel-indicator" data-services-filter="{{slide.name}}">
+            <div class="row align-start sp-1">
+              <div class="width-3 height-3 no-shrink">
+                <div class="service-circle is-{{slide.color}}"></div>
+              </div>
+              <div class="text-xs"  style="padding-top:0.2rem;">{{slide.name}}</div>
             </div>
-            <div class="text-xs"  style="padding-top:0.2rem;">{{slide.name}}</div>
-          </div>
-        </button>
-        {%- endfor -%}
+          </button>
+          {%- endfor -%}
+        </div>
       </div>
     </div>
 
     {% assign method_pages = site.pages | where: "kind", "method" | where: "locale", page.locale %}
     <div class="grid sp-6 q-lg-4">
       {%- for method in method_pages -%}
-      <div class="col sp-3 width-1_3 q-lg-width-1_2 q-sm-width-full" data-search-tile data-method-tile="{%- for domain in method.domains -%}{{domain.title}},{%- endfor -%}">
+      <div class="col sp-4 width-1_3 q-lg-width-1_2 q-sm-width-full" data-search-tile data-method-tile="{%- for domain in method.domains -%}{{domain.title}},{%- endfor -%}">
         <a href="{{method.url}}">
           <img src="{{method.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
             alt="{{method.hero_image.description}}" class="width-full" />
         </a>
-        <a href="{{method.url}}" class="reset-link">
-          <h3 class="font-heading text-md" data-search-text>{{method.title}}</h3>
-        </a>
-        <div class="markdown text-sm" data-search-text>{{method.description | markdownify}}</div>
+        <div class="col sp-3">
+          <a href="{{method.url}}" class="reset-link">
+            <h3 class="font-small-heading text-md" data-search-text>{{method.title}}</h3>
+          </a>
+          <div class="markdown text-sm" data-search-text>{{method.description | markdownify}}</div>
+        </div>
       </div>
       {%- endfor -%}
     </div>

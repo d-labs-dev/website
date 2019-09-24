@@ -394,10 +394,22 @@
   }
 }
 
+.minheight-75vh {
+  min-height: 75vh;
+}
+
 .height-screen {
   min-height: 100vh;
   &:not(.sticky) {
     min-height: -webkit-fill-available;
+  }
+}
+
+@each $key, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$key}-height-screen {
+      min-height: -webkit-fill-available;
+    }
   }
 }
 
@@ -463,6 +475,11 @@
   line-height: 1.3;
 }
 
+.font-small-heading {
+  font-weight: bold;
+  line-height: 1.3;
+}
+
 @each $key, $val in $media-queries {
   @media #{$val} {
     .hide-#{$key} {
@@ -476,6 +493,9 @@
     display: none;
     @media #{$val} {
       display: block;
+      &.col, &.row {
+        display: flex
+      }
     }
   }
 }
@@ -533,4 +553,12 @@
       padding-bottom: #{9 / 16 * 100%}
     }
   }
+}
+
+.opacity-0 {
+  transition-property: opacity;
+  opacity: 0
+}
+.opacity-1 {
+  opacity: 1
 }
