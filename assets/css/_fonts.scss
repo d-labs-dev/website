@@ -1,13 +1,13 @@
 @font-face {
   font-family: LetterGothic;
-  font-display: swap;
+  font-display: block;
   src: asset_url("LetterGothicTextWeb.eot"), asset_url("LetterGothicTextWeb.woff") format("woff");
 }
 
 @font-face {
   font-family: LetterGothic;
   font-weight: bold;
-  font-display: swap;
+  font-display: block;
   src: asset_url("LetterGothicTextWeb-Bold.eot"),
     asset_url("LetterGothicTextWeb-Bold.woff") format("woff");
 }
