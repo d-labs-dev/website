@@ -33,5 +33,6 @@ gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 gem "mini_magick"
 gem "image_optim"
 
-# TODO: make sure it runs on CI via installing a JavaScript runtime (https://github.com/rails/execjs)
-# gem "uglifier"
+gem "uglifier"
+# JS runtime required by uglifier
+gem "therubyracer"
