@@ -103,3 +103,20 @@ page_gen:
     locale: en
     dir: en/methods
     filter: slug
+  - data: contentful.de.jobPosting
+    kind: jobPosting
+    index_files: false
+    template: job
+    name: slug
+    ref: data['sys']['id']
+    locale: de
+    dir: jobs
+  - data: contentful.en.jobPosting
+    kind: jobPosting
+    index_files: false
+    template: job
+    name: slug
+    ref: data['sys']['id']
+    locale: en
+    dir: en/jobs
+    filter: slug
