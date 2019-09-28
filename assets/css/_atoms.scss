@@ -22,6 +22,14 @@
   flex: auto;
 }
 
+@each $qkey, $val in $media-queries {
+  @media #{$val} {
+    .q-#{$qkey}-fill-parent {
+      flex: auto;
+    }
+  }
+}
+
 .align-start {
   align-items: flex-start;
 }
@@ -64,6 +72,9 @@
 
 @each $key, $val in $media-queries {
   @media #{$val} {
+    .q-#{$key}-justify-stretch {
+      justify-content: stretch;
+    }
     .q-#{$key}-justify-start {
       justify-content: flex-start;
     }
@@ -368,6 +379,16 @@
   }
 }
 
+@each $qkey, $val in $media-queries {
+  @media #{$val} {
+    @each $key, $val in $max-widths {
+      .q-#{$qkey}-maxwidth-#{$key} {
+        max-width: $val;
+      }
+    }
+  }
+}
+
 @each $key, $val in $spacings {
   .height-#{$key} {
     height: $val;
@@ -549,6 +570,7 @@
 @each $key, $val in $media-queries {
   @media #{$val} {
     .q-#{$key}-height-aspect-16-9 {
+      min-height: 0;
       height: 0;
       padding-bottom: #{9 / 16 * 100%}
     }

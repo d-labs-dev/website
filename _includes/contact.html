@@ -1,5 +1,5 @@
 {%- assign contact = include.contact -%}
-<div class="bg-blue text-white col px-4 pt-6 pb-7 sp-4 align-center">
+<div class="{%if include.is_white %}bg-white text-black{%else%}bg-blue text-white{%endif%} col px-4 pt-7 pb-8 sp-4 align-center">
   <div class="maxwidth-7 width-full sp-3 row q-xl-col q-xl-sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{contact.title}}</h2>
     <div class="push hide-lg"></div>
@@ -17,7 +17,9 @@
             {{contact.mobile}}</div>
           <a class="reset-link" href="mailto:{{contact.email}}">{{contact.email}}</a>
         </div>
+        {% if include.no_button != true %}
         <a class="button is-white" href="mailto:{{contact.email}}">{{contact.cta_text}}</a>
+        {% endif %}
       </div>
     </div>
   </div>

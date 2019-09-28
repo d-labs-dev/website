@@ -227,6 +227,12 @@
     padding-left: 2rem;
   }
 
+  li {
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
   a:not(.button) {
     transition-property: color;
     color: $blue;
@@ -270,9 +276,16 @@
     border-bottom: 1px solid;
     top: 40%;
   }
+
+  @media #{$query-lg} {
+    margin-left: 3em;
+    &::before {
+      left: -3em;
+    }
+  }
 }
 
-.d-labs-list {
+.d-labs-list, .markdown > ul {
   list-style: none;
   padding-left: 1.5em;
   > li {
@@ -325,4 +338,18 @@
   font-size: #{(12 / 20)}rem;
   position: relative;
   top: -0.2em;
+}
+
+.left-wide-img {
+  width: calc(50% - 6rem);
+
+  @media #{$query-lg} {
+    width: 100%;
+  }
+}
+
+.whatsapp-container {
+  background-color: #60D66A;
+  border: 2px solid #fff;
+  padding: 8px;
 }

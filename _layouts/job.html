@@ -4,6 +4,104 @@ layout: default
 
 {%- assign _ = site.data.pages.jobs[page.locale] -%}
 
-<div class="col align-center px-4 py-7 pt-8">
-	
+<div class="relative height-screen col q-lg-col q-lg-pt-7 justify-center q-lg-justify-stretch">
+  <div class="row q-lg-col q-lg-sp-4 q-lg-fill-parent">
+    <div class="relative minheight-13 q-lg-height-aspect-16-9 left-wide-img">
+      <img src="{{page.hero_image.url}}?w=800" alt="{{page.hero_image.description}}" alt="{{page.hero_image.description}}" class="absolute inset-full" />
+    </div>
+    <div class="q-lg-width-full col fill-parent">
+      <div class="width-full sp-4 pl-6 col fill-parent maxwidth-4 q-lg-maxwidth-6 q-lg-px-4">
+        {% locale_link jobs class:"button-text" %}
+          ← {{_.back_button_label}}
+        {% endlocale_link %}
+        <div class="push"></div>
+        <div class="col sp-3">
+          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{page.title}} – {{page.location}}</div>
+          <h1 class="font-heading text-xxl q-md-text-xl">{{page.first_headline | markdownify}}</h1>
+          <div class="markdown text-sm">{{page.first_paragraph | markdownify}}</div>
+        </div>
+        <div class="push"></div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute inset-x bottom-0 col align-center pb-5 hide-lg">
+    <a class="button-text is-blue hide-lg" href="#next">
+      <div class="row align-center sp-3">
+        {% asset icons/icon-arrow-down.svg @inline %}
+        <div>{{_.learn_more}}</div>
+      </div>
+    </a>
+  </div>
 </div>
+
+<div id="next" class="col align-center px-4 py-7 pt-8">
+  <div class="maxwidth-4 width-full col sp-4 pt-6">
+    <h2 class="font-heading text-xxl q-md-text-xl">{{page.second_headline}}</h2>
+    <div class="markdown text-sm">{{page.second_paragraph | markdownify}}</div>
+  </div>
+</div>
+
+<div class="col align-center px-4 py-7">
+  <div class="maxwidth-7 width-full row wrappable">
+    {%- for benefit in _.benefits -%}
+    <div class="col align-center px-2 sp-2 pb-4" style="flex: 5rem 1 1">
+      {% asset {{benefit.img}} alt="" class="height-6" %}
+      <div class="text-blue text-sm font-bold text-center">{{benefit.label}}</div>
+    </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+<div class="col align-center px-4 py-7">
+{%- include jobs-slider.html  -%}
+</div>
+
+<div class="col align-center px-4 py-7 bg-blue sp-5">
+  <h3 class="font-heading text-xl q-md-text-lg text-white">{{_.team_fit_heading}}</h3>
+  <a href="{{_.team_fit_url}}" class="button is-black">{{_.team_fit_button_label}}</a>
+</div>
+
+<div class="col align-center px-4 py-7">
+  <div class="maxwidth-4 width-full col sp-6">
+    <h2 class="font-heading text-xxl q-md-text-xl">{{page.third_headline}}</h2>
+    <div class="markdown text-sm">{{page.third_paragraph | markdownify}}</div>
+    <a class="button-text is-blue" href="{{page.job_posting.url}}">
+      <div class="row sp-2">
+        {% asset icons/icon-download.svg @inline %}
+        <div>{{_.download_button_label}}</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="col align-center px-4 py-7">
+  <div class="maxwidth-5 width-full row q-lg-col sp-7 q-lg-sp-4">
+    <div class="col sp-4 width-1_2 q-lg-width-full">
+      <h4 class="uppercase font-heading text-sm">{{_.profile_heading}}</h4>
+      <div class="markdown text-sm">{{page.profile | markdownify}}</div>
+    </div>
+    <div class="col sp-4 width-1_2 q-lg-width-full">
+      <h4 class="uppercase font-heading text-sm">{{_.tasks_heading}}</h4>
+      <div class="markdown text-sm">{{page.tasks | markdownify}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="col align-center px-4 py-7 bg-blue">
+  <div class="maxwidth-4 width-full align-center col sp-5">
+    <h3 class="font-heading text-xl q-md-text-lg text-white text-center">{{_.apply_now_heading}}</h3>
+    <div class="markdown text-sm text-white text-center">{{_.apply_now_description | markdownify}}</div>
+    <a href="{{_.apply_now_url}}" class="button is-black">{{_.apply_now_button_label}}</a>
+  </div>
+</div>
+
+<div class="fixed bottom-0 right-0 pb-2 pr-2 zindex-3">
+  <a href="{{_.whatsapp_url}}" class="button-text">
+    <div class="whatsapp-container rounded-full">
+      {% asset logo-whatsapp.svg %}
+    </div>
+  </a>
+</div>
+
+{%- include contact.html contact=_.contact is_white=true no_button=true-%}
+{%- include locations.html is_white=true with_map=true -%}

@@ -1,0 +1,27 @@
+{%- assign _ = site.data.pages.jobs[page.locale] -%}
+
+<div class="maxwidth-7 width-full col sp-4 pb-7">
+  <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.slider_title}}</div>
+  <div class="carousel">
+    {%- for slide in _.slides -%}
+      <div>
+        <div class="row sp-8 px-5 q-md-col q-md-sp-2 align-start">
+          <div class="no-shrink py-3">
+            <div class="relative">
+              {% asset {{slide.img}} class="rounded-full width-8 height-8" %}
+              {% asset icons/icon-quotes.svg class="absolute height-5 right-0" style="bottom:-1rem;" %}
+            </div>
+          </div>
+          <div class="col sp-3">
+            <div class="text-xl q-md-text-lg q-sm-text-md font-heading">{{slide.quote | markdownify}}</div>
+            <div class="row sp-1 text-sm">
+              <div>{{slide.name}}</div>
+              <div>—</div>
+              <div class="font-bold">{{slide.position}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

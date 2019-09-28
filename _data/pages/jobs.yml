@@ -20,6 +20,37 @@ de:
       quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
       img: about.jpg
 
+  back_button_label: Alle Jobangebote
+  learn_more: Mehr Erfahren
+  whatsapp_url: https://wa.me/<number>
+
+  benefits:
+    - label: Weiterbilding
+      img: job-benefits/icon-qualification.svg
+    - label: Mobiles Arbeiten
+      img: job-benefits/icon-homeoffice.svg
+    - label: Flexible Arbeitszeiten
+      img: job-benefits/icon-flexible-time.svg
+    - label: Teamevents
+      img: job-benefits/icon-teamevent.svg
+
+  team_fit_heading: Du passt perfekt in unser Team?
+  team_fit_url: http://example.com
+  team_fit_button_label: Jetzt Kontaktdaten schicken!
+
+  download_button_label: Download PDF
+
+  profile_heading: Dein Profil
+  tasks_heading: Deine Aufgaben
+
+  team_fit_heading: Du passt perfekt in unser Team?
+  team_fit_url: http://example.com
+  team_fit_button_label: Jetzt Kontaktdaten schicken!
+
+  apply_now_heading: Bewirb dich jetzt!
+  apply_now_description: Gutes Arbeitsklima, Betreuung von regionalen und überregionalen Kunden sowie viel Gestaltungsspielraum und Freiraum sind für dich vielleicht nur noch einen Klick entfernt!
+  apply_now_url: http://example.com
+  apply_now_button_label: Jetzt Kontaktdaten schicken!
 
   contact:
     title: Für Fragen stehen wir Dir gern zur Verfügung.
@@ -39,12 +70,6 @@ en:
   intro_text: 'Und bei dir so? Bereichere unser Team mit deinen Fähigkeiten und deiner Persönlichkeit und starte eine nachhaltige Karriere.'
   list_title: Wir suchen
 
-  jobs:
-    - title: Senior Consultant Processes & Innovation (m/w/d)
-      location: Stuttgart
-    - title: Software Engineer (m/w/d)
-      location: Potsdam
-
   initiative_text: 'Nichts Passendes dabei? Dann mach einen Vorschlag, wie du unser Team verstärken kannst. Wir freuen uns auf deine Unterlagen!'
   initiative_button_label: Jetzt initiativ bewerben
   initiative_button_target: mailto:info@example.com
@@ -61,6 +86,37 @@ en:
       quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
       img: about.jpg
 
+  back_button_label: Alle Jobangebote
+  learn_more: Mehr Erfahren
+  whatsapp_url: https://wa.me/<number>
+
+  benefits:
+    - label: Weiterbilding
+      img: job-benefits/icon-qualification.svg
+    - label: Mobiles Arbeiten
+      img: job-benefits/icon-homeoffice.svg
+    - label: Flexible Arbeitszeiten
+      img: job-benefits/icon-flexible-time.svg
+    - label: Teamevents
+      img: job-benefits/icon-teamevent.svg
+
+  team_fit_heading: Du passt perfekt in unser Team?
+  team_fit_url: http://example.com
+  team_fit_button_label: Jetzt Kontaktdaten schicken!
+
+  download_button_label: Download PDF
+
+  profile_heading: Dein Profil
+  tasks_heading: Deine Aufgaben
+
+  team_fit_heading: Du passt perfekt in unser Team?
+  team_fit_url: http://example.com
+  team_fit_button_label: Jetzt Kontaktdaten schicken!
+
+  apply_now_heading: Bewirb dich jetzt!
+  apply_now_description: Gutes Arbeitsklima, Betreuung von regionalen und überregionalen Kunden sowie viel Gestaltungsspielraum und Freiraum sind für dich vielleicht nur noch einen Klick entfernt!
+  apply_now_url: http://example.com
+  apply_now_button_label: Jetzt Kontaktdaten schicken!
 
   contact:
     title: Für Fragen stehen wir Dir gern zur Verfügung.
