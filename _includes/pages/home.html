@@ -2,7 +2,7 @@
 
 <div class="relative" data-scrollspy>
   <div class="height-screen text-white relative zindex-2 col justify-center align-center px-4 py-5">
-    <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.hero_claim}}</div>
+    <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3 opacity-0" data-init-fade>{{_.hero_claim}}</div>
     <svg viewbox="0 0 100 100" class="absolute inset-full text-blue fill-current non-interactive" preserveAspectRatio="none">
       <polygon points="0 0,100 0,100 70,0 100" class="hide-md" />
       <polygon points="0 0,100 0,100 80,0 100" class="show-md" />
@@ -12,23 +12,25 @@
     </div>
   </div>
   <div class="absolute inset-full col align-center non-interactive md-py-7">
-    <div class="height-screen maxwidth-7 width-full sticky zindex-1 col justify-center home-circle-outer q-md-justify-start q-md-pt-5">
+    <div class="height-screen maxwidth-7 width-full sticky col justify-center home-circle-outer q-md-justify-start q-md-pt-5">
       <div class="home-circle-container">
         {%- include home-circles.html -%}
       </div>
     </div>
   </div>
   <div class="relative pt-7">
+    <div class="height-screen width-full sticky zindex-1 non-interactive">
+      <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1 hide-md">
+        <a class="button-text interactive" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
+      </div>
+    </div>
     {%- for screen in _.screens -%}
     <div class="height-15" id="n{{forloop.index}}">
     </div>
     {%- endfor -%}
-    <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1 hide-md">
-      <a class="button-text" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
-    </div>
     {%- for screen in _.screens -%}
     <div
-      class="absolute inset-full"
+      class="absolute inset-full non-interactive"
       style="opacity: 0"
       data-style-keyframes="
         0:opacity=0

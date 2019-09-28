@@ -217,49 +217,6 @@ function headerScroll() {
   handleScroll();
 }
 
-function setupActiveSnapping() {
-  var spyDimensions = [];
-  var isActive = false;
-
-  function measure() {
-    spyDimensions = [];
-    $("[data-active-snapping]").each(function() {
-      var el = $(this);
-      var top = el.offset().top;
-      var bottom = top + el.outerHeight();
-      var spyInfo = {
-        top: top,
-        bottom: bottom,
-      };
-      spyDimensions.push(spyInfo);
-    });
-  }
-
-  function findIfActive() {
-    var scrollEnterPos = window.scrollY + window.innerHeight * 0.75;
-    var scrollLeavePos = window.scrollY + window.innerHeight * 0.66;
-    var someActive = spyDimensions.some(
-      spy => scrollLeavePos >= spy.top && scrollEnterPos <= spy.bottom
-    );
-    if (someActive) {
-      if (!isActive) {
-        $("body").css({scrollSnapType: "y mandatory"});
-        isActive = true;
-      }
-    } else {
-      if (isActive) {
-        $("body").css({scrollSnapType: "none"});
-        isActive = false;
-      }
-    }
-  }
-
-  $(window).on("resize", measure);
-  $(window).on("scroll", findIfActive);
-  measure();
-  findIfActive();
-}
-
 // This function is being called by the google-maps script
 function initMap() {
   var styles = [
@@ -339,7 +296,7 @@ function approachAnimation() {
     hasFired = true;
     circle.addClass("is-big");
   }
-  setTimeout(fire, 5000);
+  setTimeout(fire, 1500);
   $(document).on("mousemove", fire);
   $(window).on("scroll", fire);
 }
@@ -488,7 +445,6 @@ function setupServicesAnimation() {
     setTimeout(() => {
       circle.css({left: 0, top: 0, opacity: 1})
       blue.css({opacity: 0})
-      circle.removeClass("is-active")
     }, 250)
   })
   setTimeout(() => {
@@ -497,21 +453,47 @@ function setupServicesAnimation() {
       container.find(".lead-line").css({opacity: 1})
     }, 500)
   }, 750)
-  container.find("")
+  function handleScroll() {
+    container.find(".service-circle:not(.is-blue)").removeClass("is-active")
+    $(window).off("scroll", handleScroll);
+  }
+  $(window).on("scroll", handleScroll);
+}
 
+function setupFadeInit() {
+  $("[data-init-fade]").each(function() {
+    var el = $(this);
+    setTimeout(() => el.removeClass("opacity-0").addClass("opacity-1"), 250)
+  })
+}
+
+function smoothAnchorScroll() {
+  $(document).on("click", "a[href*='#']", function(e) {
+    var $target = $($(this).attr("href"));
+    if ($target.length) {
+      $("html, body").animate({scrollTop: $target.offset().top - 50}, 500);
+      e.preventDefault();
+    }
+  });
 }
 
 $(function() {
   setupScrollSpy();
   toggleButton();
   headerScroll();
-  setupActiveSnapping();
   approachAnimation();
   setupCarousel();
   setupMethodFilter();
   setupImageFader();
   cookieConsent();
   setupServicesAnimation();
+  setupFadeInit();
+  smoothAnchorScroll();
   var ua = window.navigator.userAgent;
-  if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) $("body").addClass("is-ie");
+  if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) {
+    $("body").addClass("is-ie");
+  } else if (/^((?!chrome|android).)*safari/i.test(ua)) {
+    $("body").addClass("is-safari");
+  }
+
 });

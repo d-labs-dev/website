@@ -1,6 +1,6 @@
 {%- assign _ = site.data.pages.about[page.locale] -%}
-<div class="relative" data-active-snapping>
-  <div class="relative height-screen sroll-snap-start row q-lg-col q-lg-pt-7">
+<div class="relative">
+  <div class="relative height-screen row q-lg-col q-lg-pt-7">
     <div class="width-2_3 pt-8 q-lg-pt-4 pb-6 col justify-center align-end q-lg-align-start q-lg-width-full pl-4 fill-parent">
       <div style="max-width: calc(30rem + 25%);" class="width-full">
         <div class="col sp-4 pr-6 maxwidth-5">
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<div class="sroll-snap-start">
+<div>
 
   {%- assign _loc = site.data.includes.locations[page.locale] -%}
   <div class="bg-blue text-white col px-4 pt-7 pb-8 sp-4 align-center relative zindex-1">
@@ -62,7 +62,7 @@
                     {{_loc.main}}{% else %}&nbsp;
                   {% endif %}
                 </div>
-                <div class="text-lg underline pb-1">{{location.name}}</div>
+                <div class="text-lg pb-1">{{location.name}}</div>
                 <div>
                   {{location.street}}<br/>{{location.zip}}
                   {{location.city}}

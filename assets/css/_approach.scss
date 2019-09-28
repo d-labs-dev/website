@@ -4,15 +4,14 @@
   margin: auto;
   width: 20vmax;
   height: 20vmax;
-  background-color: $blue;
   border-radius: 50%;
-  border: 0.2vmax solid $blue;
+  border: 15px solid $blue;
   transform: translate3d(0, 33%, 0) scale(0.10);
 
   transition: transform 0.75s ease-out;
 
   &.is-big {
-    background-color: transparent;
+    border-width: 2px;
     transform: translate3d(0, 33%, 0) scale(10);
   }
 }

@@ -423,6 +423,9 @@
   min-height: 100vh;
   &:not(.sticky) {
     min-height: -webkit-fill-available;
+    body.is-safari & {
+      min-height: 100vh;
+    }
   }
 }
 
@@ -536,20 +539,16 @@
   }
 }
 
-.sroll-snap-start {
-  scroll-snap-align: start;
-}
-
-.sroll-snap-center {
-  scroll-snap-align: center;
-}
-
 .fill-current {
   fill: currentColor;
 }
 
 .non-interactive {
   pointer-events: none;
+}
+
+.interactive {
+  pointer-events: auto;
 }
 
 .no-shrink {
@@ -577,8 +576,12 @@
   }
 }
 
+[data-init-fade] {
+  transition: opacity 0.5s ease-out;
+}
+
 .opacity-0 {
-  transition-property: opacity;
+  transition: opacity 0.5s ease-out;
   opacity: 0
 }
 .opacity-1 {

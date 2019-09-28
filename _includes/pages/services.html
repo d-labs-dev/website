@@ -59,12 +59,14 @@
     </div>
     <div class="push" style="flex-grow: 2"></div>
     <div class="absolute inset-x bottom-0 pb-5 col align-center hide-md">
-      <a class="button-text is-blue" href="#list">
-        <div class="row sp-3 align-center">
+      <div class="col sp-3 align-center">
+        <a class="button-text" href="#list">
+          {{_.list_link_text}}
+        </a>
+        <a class="button-text" href="#list">
           {% asset icons/icon-arrow-down.svg @inline %}
-          <div>{{_.list_link_text}}</div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -74,7 +76,7 @@
 
 <div class="col align-center px-4 pb-7" id="list" data-search>
   <div class="maxwidth-7 width-full col sp-6 q-md-sp-2">
-    <div class="sticky pt-8 pb-2 col sp-6 bg-white q-md-relative">
+    <div class="sticky pt-8 pb-2 col sp-4 bg-white q-md-sp-1 q-md-pt-7-5">
       <div class="row sp-2 align-end q-md-col q-md-align-stretch">
         <h2 class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">{{_.services_title}}</h2>
         <div class="push"></div>
@@ -98,8 +100,8 @@
           </button>
         </div>
       </div>
-      <div class="hide-lg" id="services-filter">
-        <div class="row justify-center sp-3 q-lg-col align-start q-lg-pb-5">
+      <div class="hide-lg q-md-pt-3 pb-2" id="services-filter">
+        <div class="row justify-center sp-3 q-lg-col align-start">
           <button class="button-transparent service-carousel-indicator is-active" data-services-filter="all">
             <div class="row align-start sp-1">
               <div class="width-3 height-3 no-shrink">

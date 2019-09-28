@@ -25,13 +25,15 @@
     <div class="absolute inset-full col align-center non-interactive zindex-1">
       <div class="maxwidth-8 width-full sticky height-screen row align-center overflow-hidden q-md-align-end q-md-pb-7">
         {%- include approach-image.html -%}
-        <div class="absolute inset-x bottom-0 pb-7 col align-center q-md-pb-2">
-          <a class="button-text is-blue" href="#projects" style="pointer-events: auto">
-            <div class="row sp-3 align-center">
+        <div class="absolute inset-x bottom-0 pb-4 col align-center q-md-pb-2">
+          <div class="col sp-3 align-center interactive">
+            <a class="button-text" href="#projects">
+              {{_.projects_link_text}}
+            </a>
+            <a class="button-text" href="#projects">
               {% asset icons/icon-arrow-down.svg @inline %}
-              <div>{{_.projects_link_text}}</div>
-            </div>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -42,7 +44,7 @@
     </div>
 
     {%- for screen in _.screens -%}
-    <div class="height-13" id="n{{forloop.index}}">
+    <div class="height-13 q-md-height-12" id="n{{forloop.index}}">
     </div>
     {%- endfor -%}
 
@@ -86,9 +88,12 @@
 <div id="projects" class="col align-center px-4 pt-8 pb-7">
   <div class="maxwidth-7 width-full col sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{_.projects_title}}</h2>
+    <div class="col sp-8">
     {%- for project in _.projects -%}
-      <div class="col sp-4" id="project{{forloop.index}}">
-        <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{project.lead}}</div>
+      <div class="col" id="project{{forloop.index}}">
+        <div class="pb-4">
+          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{project.lead}}</div>
+        </div>
         <div class="row sp-3 height-14 q-md-height-10">
           <div class="width-11 no-shrink relative q-md-width-1_3">
             {% asset {{project.img1}} class="absolute inset-full"%}
@@ -144,6 +149,7 @@
         </div>
       </div>
     {%- endfor -%}
+    </div>
   </div>
 </div>
 

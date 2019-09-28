@@ -8,7 +8,7 @@
   </div>
 
   <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.title_text | markdownify}}</div>
-  <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh">
+  <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh;bottom:-1px;">
     <polygon points="0 100, 100 100, 100 0" fill="white"/>
   </svg>
   <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1">
@@ -16,28 +16,33 @@
   </div>
 </div>
 
-<div class="col align-center px-4 py-8 sp-6" id="list">
+<div class="col align-center px-4 py-8 sp-8" id="list">
   <div class="font-heading text-xl q-md-text-lg maxwidth-5 width-full">
     {{_.intro_text | markdownify}}
   </div>
-  <div class="maxwidth-7 width-full">
-    <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.list_title}}</div>
-  </div>
+  <div class="col sp-6 align-center width-full">
+    <div class="maxwidth-7 width-full">
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.list_title}}</div>
+    </div>
 
-  <div class="width-full maxwidth-5 col sp-2">
-    {%- for job in job_pages -%}
-      <a class="reset-link row align-baseline sp-3 list-entry pb-2" href="{{job.url}}">
-        <div class="">{{job.title}}</div>
-        <div class="push"></div>
-        <div class="uppercase text-gray300 text-xs font-heading">{{job.location}}</div>
-      </a>
-    {%- endfor -%}
-  </div>
+    <div class="width-full maxwidth-5 col sp-2">
+      {%- for job in job_pages -%}
+        <a class="reset-link row align-baseline sp-3 list-entry pb-2" href="{{job.url}}">
+          <div class="">{{job.title}}</div>
+          <div class="push"></div>
+          <div class="uppercase text-xs font-heading">{{job.location}}</div>
+          <div class="text-blue relative" style="top: 0.15rem;">
+            {% asset icons/icon-arrow-right.svg @inline %}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
 
-  <div class="width-full maxwidth-5 col sp-4">
-    <div class="">{{_.initiative_text | markdownify}}</div>
-    <div class="col align-center">
-      <a class="button is-black" href="{{_.initiative_button_target}}">{{_.initiative_button_label}}</a>
+    <div class="width-full maxwidth-5 col sp-6">
+      <div class="">{{_.initiative_text | markdownify}}</div>
+      <div class="col align-center">
+        <a class="button is-black" href="{{_.initiative_button_target}}">{{_.initiative_button_label}}</a>
+      </div>
     </div>
   </div>
 
