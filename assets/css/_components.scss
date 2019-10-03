@@ -12,6 +12,10 @@
   background-color: transparent;
   user-select: none;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.35;
+  }
 }
 
 .button-transparent {

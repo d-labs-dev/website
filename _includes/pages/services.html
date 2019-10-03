@@ -16,10 +16,10 @@
   <div class="height-1" data-keyframe-marker>
   </div>
   <div class="absolute inset-full non-interactive">
-    <div class="height-screen sticky col align-center px-4 q-md-px-0">
-      <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-pt-7-5 q-md-px-4" id="services-top-area">
+    <div class="height-screen sticky col align-center">
+      <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-pt-7-5 px-4" id="services-top-area">
         <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs opacity-0">{{_.intro_services_title}}</div>
-        <div class="row justify-center sp-3 q-md-col q-md-sp-1 q-md-pb-3 relative">
+        <div class="row justify-center sp-3 q-md-col q-md-sp-1 pb-3 relative">
           <div class="absolute inset-full top-0 col align-center">
             <div class="service-circle is-blue is-active"></div>
           </div>
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="push"></div>
-      <div class="overflow-hidden col align-center width-full">
+      <div class="overflow-hidden col align-center width-full relative">
         <div
           class="maxwidth-7 width-full row interactive"
           data-style-keyframes="
@@ -51,7 +51,7 @@
           "
         >
           {%- for slide in _.slides -%}
-          <div class="width-full no-shrink" >
+          <div class="width-full no-shrink px-4" >
             <div class="row sp-4 q-md-col q-md-align-center">
               <div class="width-1_3 no-shrink q-md-width-full">
                 {% asset {{slide.img}} class="width-full q-md-height-8"%}
@@ -60,6 +60,16 @@
             </div>
           </div>
           {%- endfor -%}
+        </div>
+        <div class="absolute inset-y left-0 row align-center pl-2">
+          <button data-prev-button class="interactive button-text" disabled>
+            {% asset icons/icon-swipe-left.svg @inline %}
+          </button>
+        </div>
+        <div class="absolute inset-y right-0 row align-center pr-2">
+          <button data-next-button class="interactive button-text">
+            {% asset icons/icon-swipe-right.svg @inline %}
+          </button>
         </div>
       </div>
       <div class="push" style="flex-grow: 2"></div>

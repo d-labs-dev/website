@@ -141,13 +141,14 @@ function createClassOnRangeListener(el) {
   return handleProgress;
 }
 
-function setupScrollSpy2() {
+function setupScrollSpy() {
   $("[data-scrollspy]").each(function() {
     var scrollArea = $(this);
     var keyframeEls = [];
     var scrollListeners = [];
     var resizeListeners = [];
     var maxIdx = -1;
+    var currIdx = -1;
 
     function handleResize() {
       keyframeEls = [];
@@ -165,7 +166,8 @@ function setupScrollSpy2() {
     }
 
     function handleScroll() {
-      var currIdx = -1;
+      var prevIdx = currIdx;
+      currIdx = -1;
       var currMin = 9999;
       keyframeEls.forEach(el => {
         if (window.scrollY + window.innerHeight < el.top) {
@@ -185,7 +187,11 @@ function setupScrollSpy2() {
           currIdx = el.idx;
         }
       });
-      scrollListeners.forEach(fn => fn(currIdx));
+      if (prevIdx !== currIdx) {
+        scrollListeners.forEach(fn => fn(currIdx));
+        scrollArea.find("[data-prev-button]").attr("disabled", currIdx <= 1);
+        scrollArea.find("[data-next-button]").attr("disabled", currIdx >= maxIdx);
+      }
     }
 
     scrollArea.find("[data-keyframes]").each(function() {
@@ -205,6 +211,33 @@ function setupScrollSpy2() {
     scrollArea.find("[data-class-on-range]").each(function() {
       var el = $(this);
       scrollListeners.push(createClassOnRangeListener(el));
+    });
+
+    function scrollToTargetIdx(idx, dir) {
+      var target = keyframeEls[idx];
+      const scrollTo =
+        target.top + target.height / 2 - window.innerHeight * (dir === "up" ? 0.3 : 0.7);
+      $("html, body").animate({scrollTop: scrollTo}, 100);
+    }
+
+    scrollArea.find("[data-prev-button]").on("click", function() {
+      if (currIdx > 1) scrollToTargetIdx(currIdx - 1, "up");
+    });
+    scrollArea.find("[data-next-button]").on("click", function() {
+      if (currIdx < maxIdx) scrollToTargetIdx(currIdx + 1, "down");
+    });
+
+    scrollArea.find("[data-prev-button]").each(function() {
+      var btn = $(this);
+      btn.on("click", function() {
+        if (currIdx > 1) {
+          var target = keyframeEls[currIdx - 1];
+          $("html, body").animate(
+            {scrollTop: target.top + target.height / 2 - window.innerHeight * 0.3},
+            500
+          );
+        }
+      });
     });
 
     $(window).on("resize", handleResize);
@@ -501,7 +534,7 @@ function smoothAnchorScroll() {
 }
 
 $(function() {
-  setupScrollSpy2();
+  setupScrollSpy();
   toggleButton();
   headerScroll();
   approachAnimation();
