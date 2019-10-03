@@ -19,13 +19,16 @@
     </div>
   </div>
   <div class="relative pt-7">
-    <div class="height-screen width-full sticky zindex-1 non-interactive">
-      <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1 hide-md">
-        <a class="button-text interactive" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
+    <div class="absolute inset-full non-interactive zindex-1">
+      <div class="height-screen width-full sticky">
+        <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1 hide-md">
+          <a class="button-text interactive" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
+        </div>
       </div>
     </div>
+    <div class="height-5" data-keyframe-marker></div>
     {%- for screen in _.screens -%}
-    <div class="height-15" id="n{{forloop.index}}">
+    <div class="{% if forloop.last %}minheight-100vh{% else %}height-15{% endif %}" id="n{{forloop.index}}" data-keyframe-marker>
     </div>
     {%- endfor -%}
     {%- for screen in _.screens -%}
@@ -34,8 +37,8 @@
       style="opacity: 0"
       data-style-keyframes="
         0:opacity=0
-        {{forloop.index | times: 0.2}}:opacity=1
-        {{forloop.index  | times: 0.2 | plus: 0.2}}:opacity=0
+        {{forloop.index}}:opacity=1
+        {{forloop.index  | plus: 1}}:opacity=0
       "
     >
       <div class="sticky height-screen col px-4 align-center justify-center">
@@ -60,7 +63,8 @@
         <a
           href="#n{{forloop.index}}"
           class="scroll-indicator"
-          data-class-on-range="{{forloop.index | times: 0.2}}-{{forloop.index  | times: 0.2 | plus: 0.2}}:is-active">
+          data-class-on-range="{{forloop.index}}-{{forloop.index | plus: 1}}:is-active"
+        >
         </a>
         {%- endfor -%}
       </div>

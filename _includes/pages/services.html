@@ -13,64 +13,73 @@
   </div>
 </div>
 <div class="relative" data-scrollspy id="overview">
-  <div class="height-screen sticky col align-center px-4 q-md-px-0">
-    <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-px-4" id="services-top-area">
-      <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs opacity-0">{{_.intro_services_title}}</div>
-      <div class="row justify-center sp-3 q-md-col q-md-sp-1 q-md-pb-3 relative">
-        <div class="absolute inset-full top-0 col align-center">
-          <div class="service-circle is-blue is-active"></div>
-        </div>
-      {%- for slide in _.slides -%}
-        <div
-          class="row align-start service-carousel-indicator fill-parent sp-1"
-          data-class-on-range="{{forloop.index | minus: 1 | times: 0.166}}-{{forloop.index | times: 0.166 }}:is-active"
-        >
-          <div class="width-4">
-            <div class="service-circle is-{{slide.color}} opacity-0"></div>
+  <div class="height-1" data-keyframe-marker>
+  </div>
+  <div class="absolute inset-full non-interactive">
+    <div class="height-screen sticky col align-center px-4 q-md-px-0">
+      <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-pt-7-5 q-md-px-4" id="services-top-area">
+        <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs opacity-0">{{_.intro_services_title}}</div>
+        <div class="row justify-center sp-3 q-md-col q-md-sp-1 q-md-pb-3 relative">
+          <div class="absolute inset-full top-0 col align-center">
+            <div class="service-circle is-blue is-active"></div>
           </div>
-          <div class="text-sm service-label opacity-0">{{slide.name}}</div>
-        </div>
-      {%- endfor -%}
-      </div>
-    </div>
-    <div class="push"></div>
-    <div class="overflow-hidden col align-center width-full">
-      <div
-        class="maxwidth-7 width-full row"
-        data-style-keyframes="
-          0:translateX=0
-          0.166:translateX=-100
-          0.333:translateX=-200
-          0.5:translateX=-300
-          0.666:translateX=-400
-        "
-      >
         {%- for slide in _.slides -%}
-        <div class="width-full no-shrink" >
-          <div class="row sp-4 q-md-col q-md-align-center">
-            <div class="width-1_3 no-shrink q-md-width-full">
-              {% asset {{slide.img}} class="width-full q-md-height-8"%}
+          <a
+            href="#n{{forloop.index}}"
+            class="row align-start service-carousel-indicator fill-parent sp-1 interactive reset-link"
+            data-class-on-range="{{forloop.index | plus: 0 }}-{{forloop.index | plus: 1}}:is-active"
+          >
+            <div class="width-4">
+              <div class="service-circle is-{{slide.color}} opacity-0"></div>
             </div>
-            <div class="markdown px-4 q-md-text-xs">{{slide.text}}</div>
-          </div>
-        </div>
+            <div class="text-sm service-label opacity-0">{{slide.name}}</div>
+          </a>
         {%- endfor -%}
+        </div>
       </div>
-    </div>
-    <div class="push" style="flex-grow: 2"></div>
-    <div class="absolute inset-x bottom-0 pb-5 col align-center hide-md">
-      <div class="col sp-3 align-center">
-        <a class="button-text" href="#list">
-          {{_.list_link_text}}
-        </a>
-        <a class="button-text" href="#list">
-          {% asset icons/icon-arrow-down.svg @inline %}
-        </a>
+      <div class="push"></div>
+      <div class="overflow-hidden col align-center width-full">
+        <div
+          class="maxwidth-7 width-full row interactive"
+          data-style-keyframes="
+            0:translateX=0
+            1:translateX=0
+            2:translateX=-100
+            3:translateX=-200
+            4:translateX=-300
+            5:translateX=-400
+          "
+        >
+          {%- for slide in _.slides -%}
+          <div class="width-full no-shrink" >
+            <div class="row sp-4 q-md-col q-md-align-center">
+              <div class="width-1_3 no-shrink q-md-width-full">
+                {% asset {{slide.img}} class="width-full q-md-height-8"%}
+              </div>
+              <div class="markdown px-4 q-md-text-xs">{{slide.text}}</div>
+            </div>
+          </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="push" style="flex-grow: 2"></div>
+      <div class="absolute inset-x bottom-0 pb-5 col align-center hide-md">
+        <div class="col sp-3 align-center interactive">
+          <a class="button-text" href="#list">
+            {{_.list_link_text}}
+          </a>
+          <a class="button-text" href="#list">
+            {% asset icons/icon-arrow-down.svg @inline %}
+          </a>
+        </div>
       </div>
     </div>
   </div>
 
-  <div style="height:200vh;"></div>
+  {%- for slide in _.slides -%}
+  <div class="{% if forloop.last %}minheight-100vh{% else %}height-15{% endif %}" id="n{{forloop.index}}" data-keyframe-marker>
+  </div>
+  {%- endfor -%}
 </div>
 
 

@@ -55,7 +55,7 @@ function createKeyframeListener(el, opts) {
     .trim()
     .split(/\s+/g)
     .forEach(keyframe => {
-      var m = keyframe.trim().match(/([\d.]+):(.*)/);
+      var m = keyframe.trim().match(/(-?[\d.]+):(.*)/);
       if (m) {
         var keyframeVal = parseFloat(m[1]);
         var springs = [];
@@ -120,7 +120,7 @@ function createClassOnRangeListener(el) {
     .trim()
     .split(/\s+/g)
     .forEach(keyframe => {
-      var m = keyframe.trim().match(/([\d.]+)-([\d.]+):(.*)/);
+      var m = keyframe.trim().match(/(-?[\d.]+)-([\d.]+):(.*)/);
       if (m) {
         classList.push({
           start: parseFloat(m[1]),
@@ -141,28 +141,51 @@ function createClassOnRangeListener(el) {
   return handleProgress;
 }
 
-function setupScrollSpy() {
+function setupScrollSpy2() {
   $("[data-scrollspy]").each(function() {
     var scrollArea = $(this);
-    var resizeListeners = [];
+    var keyframeEls = [];
     var scrollListeners = [];
-    var spyDimensions = {};
-
-    function handleScroll() {
-      var progress =
-        (window.scrollY - spyDimensions.top) /
-        Math.max(200, spyDimensions.height - window.innerHeight / 2);
-      scrollListeners.forEach(fn => fn(progress));
-    }
+    var resizeListeners = [];
+    var maxIdx = -1;
 
     function handleResize() {
-      var top = scrollArea.offset().top;
-      spyDimensions = {
-        top: top,
-        height: scrollArea.outerHeight(),
-      };
+      keyframeEls = [];
+      scrollArea.find("[data-keyframe-marker]").each(function(idx) {
+        var el = $(this);
+        maxIdx = idx;
+        keyframeEls.push({
+          idx: idx,
+          top: el.offset().top,
+          height: el.height(),
+        });
+      });
       resizeListeners.forEach(checkerFn => checkerFn());
       handleScroll();
+    }
+
+    function handleScroll() {
+      var currIdx = -1;
+      var currMin = 9999;
+      keyframeEls.forEach(el => {
+        if (window.scrollY + window.innerHeight < el.top) {
+          // below fold
+          return;
+        }
+        if (window.scrollY > el.top + el.height) {
+          if (currIdx === -1) currIdx = maxIdx + 1;
+          // above viewport
+          return;
+        }
+        const distToCenter = Math.abs(
+          window.scrollY + window.innerHeight / 2 - (el.top + el.height / 2)
+        );
+        if (distToCenter < currMin) {
+          currMin = distToCenter;
+          currIdx = el.idx;
+        }
+      });
+      scrollListeners.forEach(fn => fn(currIdx));
     }
 
     scrollArea.find("[data-keyframes]").each(function() {
@@ -340,7 +363,7 @@ function setupMethodFilter() {
     var input = inputArea.find("input");
     var inputAreaButton = inputArea.find("button");
     var button = container.find("[data-search-button]");
-    var nonSearchInput = container.find("[data-search-button],[data-toggle]")
+    var nonSearchInput = container.find("[data-search-button],[data-toggle]");
     button.on("click", function() {
       nonSearchInput.hide();
       inputArea.show();
@@ -429,32 +452,32 @@ function cookieConsent() {
 }
 
 function setupServicesAnimation() {
-  var container =  $("#services-top-area");
+  var container = $("#services-top-area");
   if (!container.length) return;
-  var blue = container.find(".service-circle.is-blue")
+  var blue = container.find(".service-circle.is-blue");
   var bluePos = blue.offset();
   container.find(".service-circle:not(.is-blue)").each(function() {
     var circle = $(this);
     var circlePos = circle.offset();
-    circle.addClass("is-active")
+    circle.addClass("is-active");
     circle.css({
-      position: 'relative',
+      position: "relative",
       left: bluePos.left - circlePos.left + 10,
       top: bluePos.top - circlePos.top + 10,
-    })
+    });
     setTimeout(() => {
-      circle.css({left: 0, top: 0, opacity: 1})
-      blue.css({opacity: 0})
-    }, 250)
-  })
+      circle.css({left: 0, top: 0, opacity: 1});
+      blue.css({opacity: 0});
+    }, 250);
+  });
   setTimeout(() => {
-    container.find(".service-label").css({opacity: 1})
+    container.find(".service-label").css({opacity: 1});
     setTimeout(() => {
-      container.find(".lead-line").css({opacity: 1})
-    }, 500)
-  }, 750)
+      container.find(".lead-line").css({opacity: 1});
+    }, 500);
+  }, 750);
   function handleScroll() {
-    container.find(".service-circle:not(.is-blue)").removeClass("is-active")
+    container.find(".service-circle:not(.is-blue)").removeClass("is-active");
     $(window).off("scroll", handleScroll);
   }
   $(window).on("scroll", handleScroll);
@@ -463,8 +486,8 @@ function setupServicesAnimation() {
 function setupFadeInit() {
   $("[data-init-fade]").each(function() {
     var el = $(this);
-    setTimeout(() => el.removeClass("opacity-0").addClass("opacity-1"), 250)
-  })
+    setTimeout(() => el.removeClass("opacity-0").addClass("opacity-1"), 250);
+  });
 }
 
 function smoothAnchorScroll() {
@@ -478,7 +501,7 @@ function smoothAnchorScroll() {
 }
 
 $(function() {
-  setupScrollSpy();
+  setupScrollSpy2();
   toggleButton();
   headerScroll();
   approachAnimation();
@@ -495,5 +518,4 @@ $(function() {
   } else if (/^((?!chrome|android).)*safari/i.test(ua)) {
     $("body").addClass("is-safari");
   }
-
 });

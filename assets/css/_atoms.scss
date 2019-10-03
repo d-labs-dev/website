@@ -418,6 +418,9 @@
 .minheight-75vh {
   min-height: 75vh;
 }
+.minheight-100vh {
+  min-height: 100vh;
+}
 
 .height-screen {
   min-height: 100vh;
@@ -517,8 +520,9 @@
     display: none;
     @media #{$val} {
       display: block;
-      &.col, &.row {
-        display: flex
+      &.col,
+      &.row {
+        display: flex;
       }
     }
   }
@@ -562,7 +566,7 @@
 @each $key, $val in $media-queries {
   @media #{$val} {
     .q-#{$key}-first {
-      order: -1
+      order: -1;
     }
   }
 }
@@ -571,7 +575,7 @@
     .q-#{$key}-height-aspect-16-9 {
       min-height: 0;
       height: 0;
-      padding-bottom: #{9 / 16 * 100%}
+      padding-bottom: #{9 / 16 * 100%};
     }
   }
 }
@@ -582,8 +586,8 @@
 
 .opacity-0 {
   transition: opacity 0.5s ease-out;
-  opacity: 0
+  opacity: 0;
 }
 .opacity-1 {
-  opacity: 1
+  opacity: 1;
 }

@@ -42,9 +42,9 @@
         <div class="uppercase font-heading font-bold text-blue text-xs lead-line sticky">{{_.slider_lead}}</div>
       </div>
     </div>
-
+    <div class="height-5" data-keyframe-marker></div>
     {%- for screen in _.screens -%}
-    <div class="height-13 q-md-height-12" id="n{{forloop.index}}">
+    <div class="height-13 q-md-height-12" id="n{{forloop.index}}" data-keyframe-marker>
     </div>
     {%- endfor -%}
 
@@ -53,9 +53,9 @@
       class="absolute inset-full"
       style="opacity: 0"
       data-style-keyframes="
-        0:opacity=0
-        {{forloop.index | times: 0.1 | plus: 0.05 }}:opacity=1
-        {{forloop.index  | times: 0.1 | plus: 0.15}}:opacity=0
+        -1:opacity={% if forloop.first %}1{% else %}0{% endif %}
+        {{forloop.index | plus: 0}}:opacity=1
+        {{forloop.index | plus: 1}}:opacity=0
       "
     >
       <div class="sticky height-screen col px-4 align-center">
@@ -77,7 +77,8 @@
         <a
           href="#n{{forloop.index}}"
           class="scroll-indicator"
-          data-class-on-range="{{forloop.index | times: 0.133}}-{{forloop.index  | times: 0.133 | plus: 0.133}}:is-active">
+          data-class-on-range="{{forloop.index}}-{{forloop.index | plus: 1}}:is-active"
+        >
         </a>
         {%- endfor -%}
       </div>
