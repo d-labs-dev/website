@@ -8,7 +8,7 @@
 
   <div class="row wrappable">
     {%- for partner in site.data.pages.partners.partners -%}
-    <a href={{partner.link}} class="row justify-center align-center width-1_3 px-4 py-3 q-lg-width-1_2">
+    <a href={{partner.link}} class="row justify-center align-center width-1_3 px-4 py-3 q-lg-width-1_2" target="_blank">
       {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
     </a>
     {%- endfor -%}

@@ -1,22 +1,22 @@
 partners:
   - name: Automotive BerlinBrandenbug
     logo: partners/logo_automotive-ber.svg
-    link: https://example.com
+    link: https://www.ac-bb.de/
   - name: GERMAN UPA
     logo: partners/logo_german-upa.svg
-    link: https://example.com
+    link: https://germanupa.de/
   - name: hpi
     logo: partners/logo_hpi.svg
-    link: https://example.com
+    link: https://hpi.de/
   - name: hpi dschool
     logo: partners/logo_hpi_dschool.svg
-    link: https://example.com
+    link: https://hpi.de/school-of-design-thinking.html
   - name: Silicon Sanssouci
     logo: partners/logo_sisa.svg
-    link: https://example.com
+    link: https://www.silicon-sanssouci.org/
 
 de:
-  title: Partnerschaften
+  title: Partner
   content: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
 en:
