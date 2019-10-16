@@ -80,19 +80,19 @@ de:
   screens:
     - title: Wir geben Unternehmen Sicherheit, die Potenziale der Digitalisierung schnell, zielsicher und nachhaltig für sich zu nutzen.
       cta: Wer wir sind
-      cta_target: /about
+      cta_target: /about.html
     - title: Wie kann die Kundenschnittstelle eines Verteilnetzbetreibers einheitlich gestaltet werden?
       text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle.
       cta: Mehr zum Projekt
-      cta_target: /approach#project1
+      cta_target: /approach.html#project1
     - title: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
       text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
       cta: Mehr zum Projekt
-      cta_target: /approach#project2
+      cta_target: /approach.html#project2
     - title: Wie können die Besucher einer Ausstellung digital unterstützt werden?
       text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
       cta: Mehr zum Projekt
-      cta_target: /approach#project3
+      cta_target: /approach.html#project3
 
   clients_heading: Unsere Kunden
   clients_show_more: Mehr Anzeigen
@@ -113,19 +113,19 @@ en:
   screens:
     - title: Wir geben Unternehmen Sicherheit, die Potenziale der Digitalisierung schnell, zielsicher und nachhaltig für sich zu nutzen.
       cta: Wer wir sind
-      cta_target: /
+      cta_target: /en/about.html
     - title: Wie kann die Kundenschnittstelle eines Verteilnetzbetreibers einheitlich gestaltet werden?
       text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle.
       cta: Mehr zum Projekt
-      cta_target: /
+      cta_target: /en/approach.html#project1
     - title: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
       text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
       cta: Mehr zum Projekt
-      cta_target: /
+      cta_target: /en/approach.html#project2
     - title: Wie können die Besucher einer Ausstellung digital unterstützt werden?
       text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
       cta: Mehr zum Projekt
-      cta_target: /
+      cta_target: /en/approach.html#project1
 
   clients_heading: Unsere Kunden
   clients_show_more: Mehr Anzeigen
