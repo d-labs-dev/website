@@ -7,7 +7,7 @@ locale: de
 
 # Datenschutzerklärung
 
-Die D‑LABS GmbH, als Verantwortlicher (i. S. d. Art. 4 Nr. 7 EU DSGVO) für die Webseite(n) unter der Domain: <www.d-labs.com>, möchte Sie mit dieser Datenschutzerklärung darüber informieren, ob und in welchem Umfang eine Verarbeitung Ihrer personenbezogenen Daten bei einem Aufruf unserer Webseite(n) und der Kommunikation mittels E-Mail erfolgt (i. S. d. Art. 13 EU DSGVO).
+Die D‑LABS GmbH, als Verantwortlicher (i. S. d. Art. 4 Nr. 7 EU DSGVO) für die Webseite(n) unter der Domain: <https://www.d-labs.com>, möchte Sie mit dieser Datenschutzerklärung darüber informieren, ob und in welchem Umfang eine Verarbeitung Ihrer personenbezogenen Daten bei einem Aufruf unserer Webseite(n) und der Kommunikation mittels E-Mail erfolgt (i. S. d. Art. 13 EU DSGVO).
 Weiterhin führen wir kurz rechtliche Begriffe im Zusammenhang mit der Nutzung unserer Webseite(n) sowie der Kommunikationsmöglichkeit mittels E-Mail für Sie auf, damit Sie erste Informationen erhalten und nennen Ihnen die zuständigen Ansprechpartner zur Wahrung Ihrer Rechte als Betroffener.
 
 #### 1. Rechtliche Begriffe
@@ -75,4 +75,4 @@ Telefon: +49 331 97992-300
 E-Mail: <datenschutz@d-labs.com>
 
 Darüber hinaus besteht ein Beschwerderecht bei einer Aufsichtsbehörde (Art. 77 EU DSGVO).
-Für unseren Firmensitz in Potsdam ist folgende Aufsichtsbehörde zuständig: <www.lda.brandenburg.de>
+Für unseren Firmensitz in Potsdam ist folgende Aufsichtsbehörde zuständig: <https://www.lda.brandenburg.de/>
