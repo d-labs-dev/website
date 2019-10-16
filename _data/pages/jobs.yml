@@ -6,7 +6,7 @@ de:
 
   initiative_text: 'Nichts Passendes dabei? Dann mach einen Vorschlag, wie du unser Team verstärken kannst. Wir freuen uns auf deine Unterlagen!'
   initiative_button_label: Jetzt initiativ bewerben
-  initiative_button_target: mailto:info@example.com
+  initiative_button_target: mailto:jobs@d-labs.com
 
   slider_title: Menschen bei d-labs
 
@@ -35,7 +35,7 @@ de:
       img: job-benefits/icon-teamevent.svg
 
   team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: http://example.com
+  team_fit_url: mailto:jobs@d-labs.com
   team_fit_button_label: Jetzt Kontaktdaten schicken!
 
   download_button_label: Download PDF
@@ -44,12 +44,12 @@ de:
   tasks_heading: Deine Aufgaben
 
   team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: http://example.com
+  team_fit_url: mailto:jobs@d-labs.com
   team_fit_button_label: Jetzt Kontaktdaten schicken!
 
   apply_now_heading: Bewirb dich jetzt!
   apply_now_description: Gutes Arbeitsklima, Betreuung von regionalen und überregionalen Kunden sowie viel Gestaltungsspielraum und Freiraum sind für dich vielleicht nur noch einen Klick entfernt!
-  apply_now_url: http://example.com
+  apply_now_url: mailto:jobs@d-labs.com
   apply_now_button_label: Jetzt Kontaktdaten schicken!
 
   contact:
@@ -57,9 +57,9 @@ de:
     avatar_img: about.jpg
     name: Uta Kanthack
     position: Business Administration & Controlling
-    tel: +49 331 97 992 303
-    mobile: +49 151 46 756 702
-    email: till.heinrich@d-labs.com
+    tel: +49 331 97 992 323
+    mobile: +49 151 461 432 37
+    email: uta.kanthack@d-labs.com
     cta_text: Anfragen
 
 
@@ -72,7 +72,7 @@ en:
 
   initiative_text: 'Nichts Passendes dabei? Dann mach einen Vorschlag, wie du unser Team verstärken kannst. Wir freuen uns auf deine Unterlagen!'
   initiative_button_label: Jetzt initiativ bewerben
-  initiative_button_target: mailto:info@example.com
+  initiative_button_target: mailto:jobs@d-labs.com
 
   slider_title: Menschen bei d-labs
 
@@ -101,7 +101,7 @@ en:
       img: job-benefits/icon-teamevent.svg
 
   team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: http://example.com
+  team_fit_url: mailto:jobs@d-labs.com
   team_fit_button_label: Jetzt Kontaktdaten schicken!
 
   download_button_label: Download PDF
@@ -110,12 +110,12 @@ en:
   tasks_heading: Deine Aufgaben
 
   team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: http://example.com
+  team_fit_url: mailto:jobs@d-labs.com
   team_fit_button_label: Jetzt Kontaktdaten schicken!
 
   apply_now_heading: Bewirb dich jetzt!
   apply_now_description: Gutes Arbeitsklima, Betreuung von regionalen und überregionalen Kunden sowie viel Gestaltungsspielraum und Freiraum sind für dich vielleicht nur noch einen Klick entfernt!
-  apply_now_url: http://example.com
+  apply_now_url: mailto:jobs@d-labs.com
   apply_now_button_label: Jetzt Kontaktdaten schicken!
 
   contact:
@@ -123,7 +123,7 @@ en:
     avatar_img: about.jpg
     name: Uta Kanthack
     position: Business Administration & Controlling
-    tel: +49 331 97 992 303
-    mobile: +49 151 46 756 702
-    email: till.heinrich@d-labs.com
+    tel: +49 331 97 992 323
+    mobile: +49 151 461 432 37
+    email: uta.kanthack@d-labs.com
     cta_text: Anfragen
