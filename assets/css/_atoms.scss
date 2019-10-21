@@ -417,7 +417,14 @@
 
 .minheight-75vh {
   min-height: 75vh;
+  @media only screen and (min-width : 150vh) {
+    min-height: 70vh;
+  }
+  @media only screen and (min-width : 200vh) {
+    min-height: 67vh;
+  }
 }
+
 .minheight-100vh {
   min-height: 100vh;
 }

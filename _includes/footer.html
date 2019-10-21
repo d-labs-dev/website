@@ -17,7 +17,7 @@
       <div class="push"></div>
       <div class="row sp-6 q-md-sp-3">
         {% for name in site.data.includes.footer.pages %}
-        {% locale_link {{ name }} class:"link text-xs" %}
+        {% locale_link {{ name }} class:"link text-xs footer-link" %}
         {{_[name]}}
         {% endlocale_link %}
         {% endfor %}

@@ -374,6 +374,16 @@ function setupMethodFilter() {
   var tiles = [];
   var query = null;
 
+  var filterLabel = $("[data-default-label]");
+
+  var matchesQuery = () => false;
+
+  var mediaQuery = $("[data-filter-toggle-query]").data("filter-toggle-query");
+  if (mediaQuery && window.matchMedia) {
+    var mql = window.matchMedia(mediaQuery);
+    matchesQuery = () => mql.matches;
+  }
+
   $("[data-services-filter]").each(function() {
     var button = $(this);
     var filter = button.data("services-filter");
@@ -433,6 +443,7 @@ function setupMethodFilter() {
   function sync() {
     $("[data-services-filter]").removeClass("is-active");
     if (activeFilters.length === 0) {
+      filterLabel.text(filterLabel.data("default-label"));
       buttons.all.addClass("is-active");
       tiles.forEach(tile => {
         if (!query || tile.text.indexOf(query) >= 0) {
@@ -444,12 +455,22 @@ function setupMethodFilter() {
     } else {
       tiles.forEach(tile => tile.el.addClass("hidden"));
       activeFilters.forEach(f => {
-        buttons[f].addClass("is-active");
+        var button = buttons[f];
+        button.addClass("is-active");
+        filterLabel
+          .html(button.html())
+          .children()
+          .addClass("sp-2")
+          .find(".service-circle")
+          .addClass("is-active");
         tiles.forEach(tile => {
           if (tile.domains[f] && (!query || tile.text.indexOf(query) >= 0))
             tile.el.removeClass("hidden");
         });
       });
+    }
+    if (matchesQuery()) {
+      $("#services-filter").slideUp();
     }
   }
 }

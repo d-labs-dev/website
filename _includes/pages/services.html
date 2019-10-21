@@ -1,6 +1,6 @@
 {%- assign _ = site.data.pages.services[page.locale] -%}
 
-<div class="relative col justify-center align-center pt-8 px-4 q-md-height-screen minheight-75vh">
+<div class="relative col justify-center align-center pt-8 px-4 q-md-height-screen minheight-75vh q-md-pt-4">
   <div class="maxwidth-7 width-full col sp-4">
     <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
     <div class="markdown text-xxl q-md-text-xl q-sm-text-lg font-heading">{{_.intro_text | markdownify}}</div>
@@ -99,7 +99,7 @@
       <div class="row sp-2 align-end q-md-col q-md-align-stretch">
         <h2 class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">{{_.services_title}}</h2>
         <div class="push"></div>
-        <div class="relative hidden" data-search-input>
+        <div class="relative hidden" data-search-input style="margin-bottom: 0.3rem;">
           <input class="input q-md-width-full" placeholder="{{_.search_placeholder}}"/>
           <button class="button-text is-mini absolute inset-y right-0" type="search">
             {% asset icons/icon-search.svg @inline %}
@@ -107,9 +107,9 @@
         </div>
         <div class="row sp-2">
           <div class="show-lg fill-parent col">
-            <button class="button-ghost is-mini fill-parent" data-toggle="#services-filter" data-toggle-style="slide">
+            <button class="button-ghost is-mini fill-parent" data-toggle="#services-filter" data-toggle-style="slide" data-filter-toggle-query="only screen and (max-width : 50em)">
               <div class="row align-center py-1 px-2">
-                <div>{{_.filter_button_label}}</div>
+                <div data-default-label="{{_.filter_button_label}}">{{_.filter_button_label}}</div>
                 {% asset icons/icon-caret-down.svg @inline %}
               </div>
             </button>

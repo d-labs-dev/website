@@ -332,6 +332,10 @@
   .flex-footer-space {
     flex-basis: 12em;
   }
+  .footer-link {
+    min-width: 6em;
+    text-align: center;
+  }
 }
 
 .list-entry {
