@@ -26,7 +26,7 @@ de:
     - title: Umsetzung
       text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird
     - title: Enabling & Coaching
-      text: Befähigung und Begleitung aller Stakeholder in Innovationsprozessen und agilen Arbeitsweisen sowie Trainings zu digitalen Lösungen
+      text: Befähigung und Begleitung aller Stakeholder in Innovations­prozessen und agilen Arbeitsweisen sowie Trainings zu digitalen Lösungen
     - title: Business & Innovation
       text: Strategische Beratung bei der Entwicklung digitaler Lösungen sowie in Innovations- und Changeprozessen 
 
@@ -103,16 +103,16 @@ de:
         training: 5
       task: Wie können die Besucher einer Ausstellung digital unterstützt werden?
       goals:
-        - Erhöhung der Kunden- und Service­orientierung
-        - Eine einheitliche Customer Experience über alle Kanäle hinweg
+        - Aufwertung des Besuchserlebnisses im Museum
+        - Vermittlung von Zusatzinformationen, über die in der Ausstellung präsentierten Exponate
         - Prozessautomatisierung und Digitalisierung
-        - Erhöhung der Transparenz für alle Beteiligten
+        - Unterstützung der Orientierung des Besuchers innerhalb der Ausstellung
       approaches:
-        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
-        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
-        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+        - Definition eines MVP (Minimum Viable Product) gemeinsam mit dem Kunden auf Basis vorhandener Research-Ergebnisse
+        - Durchführung Co-Creativer Workshops mit dem Kunden und iterative Entwicklung von Konzept und Design auf Basis von Prototypen 
+        - Agile Umsetzung des MVP sowie dessen Erweiterung
       results:
-        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+        - Intuitiv benutzbare App für iOS und Android für die multimediale Begleitung und Unterstützung des Besuchers während und nach dem Ausstellungsbesuch
 
   contact:
     title: Wie können wir Sie bei Ihren Herausforderungen unterstützen?
