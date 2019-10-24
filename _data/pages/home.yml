@@ -86,11 +86,11 @@ de:
       cta: Mehr zum Projekt
       cta_target: /approach.html#project1
     - title: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
-      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+      text: Aufbau von Wissen zu agilem Arbeiten im Unternehmen und Anwendung in internen Projekten. 
       cta: Mehr zum Projekt
       cta_target: /approach.html#project2
     - title: Wie können die Besucher einer Ausstellung digital unterstützt werden?
-      text: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+      text: Intuitiv benutzbare App für iOS und Android für die multimediale Begleitung und Unterstützung des Besuchers während und nach dem Ausstellungsbesuch.
       cta: Mehr zum Projekt
       cta_target: /approach.html#project3
 
@@ -102,8 +102,8 @@ de:
 
   jobs_image: jobs-portrait.jpg
   jobs_lead: Jobs
-  jobs_title: Werde Teil unseres Teams
-  jobs_desc: Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen.
+  jobs_title: Deine Chance! Dein neuer Job!
+  jobs_desc: Werde Teil des D-LABS-Teams. Bei uns warten innovative Projekte und abwechslungsreiche Aufgaben auf dich. Informiere dich über unsere Job-Angebote und schicke uns noch heute deine Kontaktdaten!
   jobs_cta_text: Erfahre Mehr
   jobs_cta_url: /blog.html
 
