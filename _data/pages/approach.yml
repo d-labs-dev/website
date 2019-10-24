@@ -18,17 +18,17 @@ de:
     - title: Überblick
       text: In Abhängigkeit von der Aufgabenstellung kommen Leistungen aus unseren verschiedenen Kompetenzfeldern im Projekt zur Anwendung.
     - title: 360°-Sicht
-      text: Ganzheitliche Analyse des Projekt­umfeldes und umfassende Untersuchung der Nutzerbedürfnisse.
+      text: Ganzheitliche Analyse des Projekt­umfeldes und umfassende Untersuchung der Nutzerbedürfnisse
     - title: Synthese
-      text: Zusammenfassung, Strukturierung und Bewertung der ­gewonnenen Erkennt­nisse und Definition der Anforderungen.
-    - title: Konzept + Design
-      text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team.
+      text: Zusammenfassung, Strukturierung und Bewertung der in der 360°-Sicht gewonnenen Erkenntnisse und Definition der Anforderungen an die Lösung
+    - title: Konzept & Design
+      text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team
     - title: Umsetzung
-      text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird.
+      text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird
     - title: Enabling & Coaching
-      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+      text: Befähigung und Begleitung aller Stakeholder in Innovationsprozessen und agilen Arbeitsweisen sowie Trainings zu digitalen Lösungen
     - title: Business & Innovation
-      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+      text: Strategische Beratung bei der Entwicklung digitaler Lösungen sowie in Innovations- und Changeprozessen 
 
   projects_link_text: Projektbeispiele
   projects_title: Herausforderungen, bei denen wir unsere Kunden unterstützt haben
@@ -78,16 +78,18 @@ de:
         training: 85
       task: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
       goals:
-        - Erhöhung der Kunden- und Service­orientierung
-        - Eine einheitliche Customer Experience über alle Kanäle hinweg
-        - Prozessautomatisierung und Digitalisierung
-        - Erhöhung der Transparenz für alle Beteiligten
+        - Ausbildung von 25 Mitarbeitern aus ganz ­Europa zu Design Thinking Facilitators 
+        - Anhand von generischen Challenges und internen Projekten Design Thinking erfahren und Teams selbst darin coachen
+        - Kennenlernen von Implementierungsstrategien 
+        - Aufbau von Wissen zu agilem Arbeiten in Unternehmen sowie der Planung von Projekten und Workshops
       approaches:
-        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
-        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
-        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+        - "Einführung in Design Thinking: Kennenlernen des gesamten Design Thinking Prozesses anhand einer generischen Challenge"
+        - "Vertiefung und Coaching: Bearbeitung einer konzerninternen Challenge, wobei die Teilnehmer selbst als Coaches agierten"
+        - "Implementierungsstrategien: Vorstellung von Business Model Canvas, Value Proposition Canvas und Systems Thinking; Standortbestimmung – Agilität in der Organisation"
+        - "Projekt- und Workshopplanung: Auftragsklärung und Planung interner Projekte"
       results:
-        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+        - Aufbau von Wissen zu agilem Arbeiten im Unternehmen und Praxiserfahrung in internen Projekten
+        - Erfolgreiche Zertifizierung der Teilnehmer als Design Thinking Facilitatoren
 
     - lead: Projekt 03
       img1: about.jpg
