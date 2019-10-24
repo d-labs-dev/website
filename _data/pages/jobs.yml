@@ -1,23 +1,31 @@
 de:
-  title_text: '**Zusammen arbeiten,**<br/>gestalten und erleben'
+  title_text: '**Dein Profil!**Unser Angebot!'
 
-  intro_text: 'Und bei dir so? Bereichere unser Team mit deinen Fähigkeiten und deiner Persönlichkeit und starte eine nachhaltige Karriere.'
+  intro_text: 'Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere Jobangebote für dich an und sende uns deine Kontaktdaten! Der erste Schritt zum neuen Job bei D-LABS in Potsdam oder am Standort Berlin ist schnell gemacht.'
   list_title: Wir suchen
 
-  initiative_text: 'Nichts Passendes dabei? Dann mach einen Vorschlag, wie du unser Team verstärken kannst. Wir freuen uns auf deine Unterlagen!'
+  initiative_text: 'Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige uns, wie du unser Team verstärken könntest!'
   initiative_button_label: Jetzt initiativ bewerben
   initiative_button_target: mailto:jobs@d-labs.com
 
-  slider_title: Menschen bei d-labs
+  slider_title: Warum D-LABS?
 
   slides:
     - name: Peter Weller
-      position: Researcher
+      position: Senior User Researcher
       quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
       img: about.jpg
-    - name: Peter Weller
-      position: Researcher
-      quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
+    - name: Claudia Steinhoff
+      position: Director Digital Experience Design
+      quote: Die enge Zusammenarbeit mit Experten aus verschiedenen Bereichen und mit unterschiedlichen Schwerpunkten ist immer wieder spannend. Auch die Bandbreite der Projekte für namhafte Kunden aus den unterschiedlichsten Branchen sorgt dafür, dass ich immer noch etwas dazu lernen kann. Nicht zuletzt schlägt mein Herz für Potsdam.
+      img: about.jpg
+    - name: Alexander Vielhaber 
+      position: User Researcher
+      quote: Im Sinne der Menschen, für die Lösungen gestaltet werden, ist es mein Ziel ihre Bedürfnisse zu verstehen und in den Entwicklungsprozess mit einfließen zu lassen, um ihre Lebens- und Arbeitsbedingungen nutzbringend zu verbessern.
+      img: about.jpg
+    - name: Doreen Pabst  
+      position: Senior Digital Experience Designer
+      quote: Bei D-LABS kann ich so arbeiten, dass ich noch Zeit für meine Familie habe. Gleichzeitig habe ich die Möglichkeit auf anspruchsvollen Projekten zu arbeiten. Diese Vereinbarkeit ist mir sehr wichtig, weil Familie zu haben hier nicht bedeutet Abstriche in der beruflichen Entwicklung machen zu müssen.
       img: about.jpg
 
   back_button_label: Alle Jobangebote
