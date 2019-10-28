@@ -13,7 +13,7 @@ de:
       text: Wir sind Gestalter der Erfahrbarkeit von digitalen Produkten und Services. Im agilen Design-Prozess erarbeiten wir digitale Produkte und Services, die Menschen wirklich brauchen und optimal benutzen können. Wir arbeiten mit UX Researchern, Beratern und Software-Entwicklern Hand in Hand. Dabei beziehen wir den Kunden eng mit ein und validieren Lösungsansätze mit potenziellen Nutzern.
       color: darkBlue
     - name: Software Engineering
-      img: about.jpg
+      img: dlabs_approach-engineering.jpg
       text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
       color: red
     - name: Enabling & Coaching
@@ -47,7 +47,7 @@ en:
       text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
       color: darkBlue
     - name: Software Engineering
-      img: about.jpg
+      img: dlabs_approach-engineering.jpg
       text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
       color: red
     - name: Enabling & Coaching

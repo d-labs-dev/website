@@ -44,8 +44,8 @@ de:
 
   projects:
     - lead: Projekt 01
-      img1: about.jpg
-      img2: about.jpg
+      img1: dlabs_project01-img01.jpg
+      img2: dlabs_project01-img02.jpg
       circle_img: projects/circle-small_project01.svg
       percentages:
         user_research: 50
@@ -67,8 +67,8 @@ de:
         - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
 
     - lead: Projekt 02
-      img1: about.jpg
-      img2: about.jpg
+      img1: dlabs_project02-img01.jpg
+      img2: dlabs_project02-img02.jpg
       circle_img: projects/circle-small_project02.svg
       percentages:
         user_research: 5
@@ -92,8 +92,8 @@ de:
         - Erfolgreiche Zertifizierung der Teilnehmer als Design Thinking Facilitatoren
 
     - lead: Projekt 03
-      img1: about.jpg
-      img2: about.jpg
+      img1: dlabs_project03-img01.jpg
+      img2: dlabs_project03-img02.jpg
       circle_img: projects/circle-small_project03.svg
       percentages:
         user_research: 5
@@ -116,7 +116,7 @@ de:
 
   contact:
     title: Wie können wir Sie bei Ihren Herausforderungen unterstützen?
-    avatar_img: about.jpg
+    avatar_img: dlabs_contact-till.jpg
     name: Till Heinrich
     position: Sales Manager
     tel: +49 331 97 992 303
@@ -164,8 +164,8 @@ en:
 
   projects:
     - lead: Projekt 01
-      img1: about.jpg
-      img2: about.jpg
+      img1: dlabs_project01-img01.jpg
+      img2: dlabs_project01-img02.jpg
       circle_img: projects/circle-small_project01.svg
       percentages:
         user_research: 50
@@ -187,8 +187,8 @@ en:
         - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
 
     - lead: Projekt 02
-      img1: about.jpg
-      img2: about.jpg
+      img1: dlabs_project02-img01.jpg
+      img2: dlabs_project02-img02.jpg
       circle_img: projects/circle-small_project02.svg
       percentages:
         user_research: 5
@@ -210,8 +210,8 @@ en:
         - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
 
     - lead: Projekt 03
-      img1: about.jpg
-      img2: about.jpg
+      img1: dlabs_project03-img01.jpg
+      img2: dlabs_project03-img02.jpg
       circle_img: projects/circle-small_project03.svg
       percentages:
         user_research: 5
@@ -234,7 +234,7 @@ en:
 
   contact:
     title: Wie können wir Sie bei Ihren Herausforderungen unterstützen?
-    avatar_img: about.jpg
+    avatar_img: dlabs_contact-till.jpg
     name: Till Heinrich
     position: Sales Manager
     tel: +49 331 97 992 303
