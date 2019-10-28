@@ -61,7 +61,7 @@ de:
         - Erhöhung der Transparenz für alle Beteiligten
       approaches:
         - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
-        - Entwicklung von Personas und Abbildung der IST-Situation in [Customer Journey Maps](//methods/customer_journey_maps.html)
+        - Entwicklung von Personas und Abbildung der IST-Situation in [Customer Journey Maps]({% link methods/customer_journey_maps.html %})
         - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
       results:
         - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
