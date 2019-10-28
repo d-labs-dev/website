@@ -3,16 +3,19 @@
 
 <div class="height-screen text-white relative col justify-center align-center px-4 py-5">
   <div class="absolute inset-full bg-blue" data-image-fader>   
-    {% asset dlabs_jobs-slider-2.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-3.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-4.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-5.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-6.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-7.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-8.jpg class="absolute inset-full"%}
-    {% asset dlabs_jobs-slider-9.jpg class="absolute inset-full"%}
+    {% asset dlabs_jobs-slider-2.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-3.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-4.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-5.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-6.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-7.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-8.jpg class="absolute inset-full hidden"%}
+    {% asset dlabs_jobs-slider-9.jpg class="absolute inset-full hidden"%}
     {% asset dlabs_jobs-slider-10.jpg class="absolute inset-full"%}
   </div>
+
+  <!-- last image should not be hidden, because it is shown first -->
+
 
   <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.title_text | markdownify}}</div>
   <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh;bottom:-1px;">
