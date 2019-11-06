@@ -163,7 +163,7 @@ en:
   training: Training
 
   projects:
-    - lead: Projekt 01
+    - lead: Project 01
       img1: dlabs_project01-img01.jpg
       img2: dlabs_project01-img02.jpg
       circle_img: projects/circle-small_project01.svg
@@ -186,7 +186,7 @@ en:
       results:
         - Forward-thinking service concept for the realization of a uniform customer interface, e.g. with the help of an online self-service portal for the various customer groups
 
-    - lead: Projekt 02
+    - lead: Project 02
       img1: dlabs_project02-img01.jpg
       img2: dlabs_project02-img02.jpg
       circle_img: projects/circle-small_project02.svg
@@ -196,20 +196,20 @@ en:
         engineering: 0
         consulting: 10
         training: 85
-      task: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
+      task: How do you train the employees of a DAX Group to be fit for agile working in interdisciplinary teams?
       goals:
-        - Erhöhung der Kunden- und Service­orientierung
-        - Eine einheitliche Customer Experience über alle Kanäle hinweg
-        - Prozessautomatisierung und Digitalisierung
-        - Erhöhung der Transparenz für alle Beteiligten
+        - Training of 25 employees from all over Europe to be Design Thinking Facilitators
+        - Learn design thinking through generic challenges and internal projects and whereby teams coach themselves
+        - Getting to know implementation strategies
+        - Building knowledge about agile work in companies as well as planning projects and workshops
       approaches:
-        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
-        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
+        - Introduction to design thinking: Getting to know the entire design thinking process using a generic challenge
+        - Deepening and coaching: Processing an internal challenge, whereby the participants acted as coaches themselves
         - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
       results:
         - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
 
-    - lead: Projekt 03
+    - lead: Project 03
       img1: dlabs_project03-img01.jpg
       img2: dlabs_project03-img02.jpg
       circle_img: projects/circle-small_project03.svg
