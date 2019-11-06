@@ -126,35 +126,35 @@ de:
 
 
 en:
-  intro_lead: Wie wir arbeiten
+  intro_lead: How we work
   intro_text: "
-    Die Arbeitsweise von D‑LABS orientiert sich an den Ansätzen und Methoden des **Design Thinking** und **Human-centred Design** und stellt immer den Nutzer in den Mittelpunkt.
+    The D-LABS working method is based on the approaches and methods of **design Thinking** and **human-centred design** and always focuses on the user.
   "
-  intro_cta_text: Unser Vorgehen in Projekten
+  intro_cta_text: Our approach in projects
 
-  slider_lead: Unser Vorgehen
+  slider_lead: Our approach
 
   screens:
-    - title: Überblick
-      text: Je nach Anforderung können Lesiungen aus unseren verhsciedne Kompetenzfeldern im Projekt zur Anwendung
-    - title: 360°-Sicht
-      text: Ganzheitliche Analyse des Projekt­umfeldes und umfassende Untersuchung der Nutzerbedürfnisse.
-    - title: Synthese
-      text: Zusammenfassung, Strukturierung und Bewertung der ­gewonnenen Erkennt­nisse und Definition der Anforderungen.
-    - title: Konzept + Design
-      text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team.
-    - title: Umsetzung
-      text: Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder ­gerecht wird.
+    - title: Overview
+      text: Depending on the task at hand, services from our various fields of expertise are used in the project.
+    - title: 360° View
+      text: Holistic analysis of the project environment and comprehensive examination of user needs
+    - title: Synthesis
+      text: Summary, structuring and evaluation of the findings of the 360-degree view and definition of the requirements for the solution
+    - title: Concept & Design
+      text: Development of ideas, prototyping and elaboration of first solutions by an interdisciplinary team
+    - title: Implementation
+      text: Iterative optimization of the concept up to the solution that meets the needs of all stakeholders
     - title: Enabling & Coaching
-      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+      text: Empowerment and support of all stakeholders in innovation processes and agile working methods as well as trainings on digital solutions
     - title: Business & Innovation
-      text: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+      text: Strategic advice in the development of digital solutions as well as in innovation and change processes
 
-  projects_link_text: Projektbeispiele
-  projects_title: Herausforderungen, bei denen wir unsere Kunden unterstützt haben
-  projects_goal_title: Ziele
-  projects_approach_title: Vorgehen
-  projects_result_title: Ergebnis
+  projects_link_text: Case Study
+  projects_title: Challenges where have supported our customers 
+  projects_goal_title: Objectives
+  projects_approach_title: Procedure
+  projects_result_title: Result
 
   user_research: User Research
   design: Digitial Experience Design
@@ -173,18 +173,18 @@ en:
         engineering: 5
         consulting: 30
         training: 0
-      task: Wie kann die Kundenschnittstelle eines Verteilnetz­betreibers einheitlich gestaltet werden?
+      task: How can the customer interface of a distribution system operator be designed in a uniform way?
       goals:
-        - Erhöhung der Kunden- und Service­orientierung
-        - Eine einheitliche Customer Experience über alle Kanäle hinweg
-        - Prozessautomatisierung und Digitalisierung
-        - Erhöhung der Transparenz für alle Beteiligten
+        - Increased customer and service orientation
+        - A unified customer experience across all channels
+        - Process automation and digitalization
+        - Increasing transparency for all stakeholders
       approaches:
-        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
-        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
-        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+        - Extensive analysis of internal and external service processes, e.g. with the help of qualitative interviews with representatives of the various target groups, as well as workshops with process experts from different departments
+        - Development of user profiles and mapping of the IS situation in customer journey maps
+        - Co-creative development of a mission statement for a unified customer interface, elaboration of a customer-centric service design concept and illustration in service blueprints
       results:
-        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+        - Forward-thinking service concept for the realization of a uniform customer interface, e.g. with the help of an online self-service portal for the various customer groups
 
     - lead: Projekt 02
       img1: dlabs_project02-img01.jpg
