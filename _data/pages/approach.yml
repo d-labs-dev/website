@@ -128,7 +128,7 @@ de:
 en:
   intro_lead: How we work
   intro_text: "
-    The D-LABS working method is based on the approaches and methods of **design Thinking** and **human-centred design** and always focuses on the user.
+    The D-LABS working method is based on the approaches and methods of **design thinking** and **human-centred design** and always focuses on the user.
   "
   intro_cta_text: Our approach in projects
 
@@ -150,7 +150,7 @@ en:
     - title: Business & Innovation
       text: Strategic advice in the development of digital solutions as well as in innovation and change processes
 
-  projects_link_text: Case Study
+  projects_link_text: Case Studies
   projects_title: Challenges where have supported our customers 
   projects_goal_title: Objectives
   projects_approach_title: Procedure
@@ -203,11 +203,14 @@ en:
         - Getting to know implementation strategies
         - Building knowledge about agile work in companies as well as planning projects and workshops
       approaches:
-        - Introduction to design thinking: Getting to know the entire design thinking process using a generic challenge
-        - Deepening and coaching: Processing an internal challenge, whereby the participants acted as coaches themselves
-        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+        - "Introduction to design thinking: Getting to know the entire design thinking process using a generic challenge"
+        - "Deepening and coaching: Processing an internal challenge, whereby the participants acted as coaches themselves"
+        - "Implementation strategies: Presentation of Business Model Canvas, Value Proposition Canvas and Systems Thinking; Location Determination - Agility in the Organization"
+        -	"Project and workshop planning: Order clarification and planning of internal projects"
       results:
-        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+        - Building knowledge on agile work within the company and practical experience in internal projects
+        -	Successful certification of participants as Design Thinking Facilitators
+
 
     - lead: Project 03
       img1: dlabs_project03-img01.jpg
@@ -219,25 +222,24 @@ en:
         engineering: 65
         consulting: 5
         training: 0
-      task: Wie können die Besucher einer Ausstellung digital unterstützt werden?
+      task: How can visitors to an exhibition be digitally supported?
       goals:
-        - Erhöhung der Kunden- und Service­orientierung
-        - Eine einheitliche Customer Experience über alle Kanäle hinweg
-        - Prozessautomatisierung und Digitalisierung
-        - Erhöhung der Transparenz für alle Beteiligten
+        - How can visitors to an exhibition be digitally supported?
+        - Delivery of additional information about the exhibits presented in the exhibition
+        - Support for the visitor orientation within the exhibition
       approaches:
-        - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe qualitativer Interviews mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen Fachbereichen
-        - Entwicklung von Personas und Abbildung der IST-Situation in Customer Journey Maps
-        - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines kundenzentrierten Service-Design-Konzeptes und Abbildung in ­Service Blueprints
+        - Definition of an MVP (Minimum Viable Product) together with the customer based on existing research results
+        - Deliver co-creative workshops with the customer and iterative development of concept and design based on prototypes
+        - Agile implementation of the MVP and its expansion
       results:
-        - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+        - Intuitively usable app for iOS and Android for visitor multimedia accompaniment and support during and after the exhibition visit
 
   contact:
-    title: Wie können wir Sie bei Ihren Herausforderungen unterstützen?
+    title: How can we help you with your challenges?
     avatar_img: dlabs_contact-till.jpg
     name: Till Heinrich
     position: Sales Manager
     tel: +49 331 97 992 303
     mobile: +49 151 46 756 702
     email: till.heinrich@d-labs.com
-    cta_text: Anfragen
+    cta_text: request
