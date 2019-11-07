@@ -113,6 +113,8 @@ de:
         - Agile Umsetzung des MVP sowie dessen Erweiterung
       results:
         - Intuitiv benutzbare App für iOS und Android für die multimediale Begleitung und Unterstützung des Besuchers während und nach dem Ausstellungsbesuch
+      image_source:
+        - "Bildquelle: © Staatliche Museen zu Berlin, Fabian Fröhlich"
 
   contact:
     title: Wie können wir Sie bei Ihren Herausforderungen unterstützen?
@@ -233,6 +235,8 @@ en:
         - Agile implementation of the MVP and its expansion
       results:
         - Intuitively usable app for iOS and Android for visitor multimedia accompaniment and support during and after the exhibition visit
+      image_source:
+        - "image source: © Staatliche Museen zu Berlin, Fabian Fröhlich"
 
   contact:
     title: How can we help you with your challenges?
