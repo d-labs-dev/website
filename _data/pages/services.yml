@@ -5,11 +5,11 @@ de:
 
   slides:
     - name: User Research
-      img: about.jpg
+      img: dlabs_approach-research.jpg
       text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
       color: yellow
     - name: Digital Experience Design
-      img: IMG_1455.jpg
+      img: dlabs_approach-design.jpg
       text: Wir sind Gestalter der Erfahrbarkeit von digitalen Produkten und Services. Im agilen Design-Prozess erarbeiten wir digitale Produkte und Services, die Menschen wirklich brauchen und optimal benutzen können. Wir arbeiten mit UX Researchern, Beratern und Software-Entwicklern Hand in Hand. Dabei beziehen wir den Kunden eng mit ein und validieren Lösungsansätze mit potenziellen Nutzern.
       color: darkBlue
     - name: Software Engineering
@@ -39,11 +39,11 @@ en:
 
   slides:
     - name: User Research
-      img: about.jpg
+      img: dlabs_approach-research.jpg
       text: We learn the needs and requirements; we test the usability and user experience. We are the experienced partner for our customers and accompany the conception and development. We then validate the prototypes and products.
       color: yellow
     - name: Digital Experience Design
-      img: IMG_1455.jpg
+      img: dlabs_approach-design.jpg
       text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
       color: darkBlue
     - name: Software Engineering
