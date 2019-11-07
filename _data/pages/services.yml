@@ -44,23 +44,23 @@ en:
       color: yellow
     - name: Digital Experience Design
       img: IMG_1455.jpg
-      text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
+      text: We are creators of the experienceability of digital products and services. In the agile design process, we develop digital products and services that people really need and can use optimally. We work hand in hand with UX researchers, consultants and software developers. In doing so, we closely involve the customer and validate solutions with potential users.
       color: darkBlue
     - name: Software Engineering
       img: dlabs_approach-engineering.jpg
-      text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
+      text: We are experts in the planning, analysis, conception and implementation of application software and web applications for desktop and mobile devices.
       color: red
     - name: Enabling & Coaching
       img: about.jpg
-      text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
+      text: We develop customized formats based on the needs of our participants. In these user-centered workshops and trainings, we provide the necessary skills which are especially needed in the context of innovation processes and agile working methods.
       color: green
     - name: Business & Innovation
       img: about.jpg
-      text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. Als kompetenter Begleiter fungieren wir bei Innovations- und Changeprozessen und helfen bei der Produkt- und Serviceoptimierung.
+      text: As specialists, we develop digital solutions together with our customers. We develop strategies and support our customers in their strategic realignment. We act as a competent companion in innovation and change processes and help with product and service optimization.
       color: purple
 
-  list_link_text: Zu unseren Leistungen und Methoden
-  services_title: Leistungen und Methoden
-  services_all_button: Alle
-  back_button_text: Zurück zur Übersicht
-  filter_button_label: Filter
+  list_link_text: Our services and methods
+  services_title: services and methods
+  services_all_button: All
+  back_button_text: Back to the overview
+  filter_button_label: Filters
