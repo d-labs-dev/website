@@ -73,26 +73,34 @@ de:
 
 
 en:
-  title_text: '**Zusammen arbeiten,**<br/>gestalten und erleben'
+  title_text: '**Your profile!**<br/>Our offer!'
 
-  intro_text: 'Und bei dir so? Bereichere unser Team mit deinen Fähigkeiten und deiner Persönlichkeit und starte eine nachhaltige Karriere.'
-  list_title: Wir suchen
+  intro_text: 'Would you like to join our creative, interdisciplinary team? Then take a look at our job offers for you and send us your contact details! The first step to a new job at D-LABS in Potsdam or at our Berlin location is quickly taken.'
+  list_title: We are looking for
 
-  initiative_text: 'Nichts Passendes dabei? Dann mach einen Vorschlag, wie du unser Team verstärken kannst. Wir freuen uns auf deine Unterlagen!'
-  initiative_button_label: Jetzt initiativ bewerben
+  initiative_text: 'Your dream job isn’t listed? No problem. Just write us anyway and show us how you could strengthen our team!'
+  initiative_button_label: apply now
   initiative_button_target: mailto:jobs@d-labs.com
 
-  slider_title: Menschen bei d-labs
+  slider_title: Why D-LABS?
 
   slides:
     - name: Peter Weller
-      position: Researcher
-      quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
+      position: Senior User Researcher
+      quote: Because we make the world a little more accessible every day. With our focus on end-user needs, we create solutions that inspire our customers. This is where user experience is lived.
       img: profil_peter.jpg
-    - name: Peter Weller
-      position: Researcher
-      quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
-      img: profil_peter.jpg
+    - name: Claudia Steinhoff
+      position: Director Digital Experience Design
+      quote: The close cooperation with experts from different fields and with different focal points is always exciting. The range of projects for well-known customers from a wide range of industries also ensures that I can still learn something about them. Last but not least, my heart beats for Potsdam.
+      img: profil_claudia-St.jpg
+    - name: Alexander Vielhaber 
+      position: User Researcher
+      quote: In the interests of the people for whom solutions are designed, my goal is to understand their needs and to incorporate them into the development process in order to improve their living and working conditions in a beneficial way.
+      img: profil_alex.jpg
+    - name: Doreen Pabst  
+      position: Senior Digital Experience Designer
+      quote: At D-LABS, I can work in such a way that I still have time for my family. At the same time, I have the opportunity to work on demanding projects. This compatibility is very important to me because here having a family does not mean having to give up anything in my professional development.
+      img: profil_doreen.jpg
 
   back_button_label: Alle Jobangebote
   learn_more: Mehr Erfahren
@@ -127,11 +135,11 @@ en:
   apply_now_button_label: Jetzt Kontaktdaten schicken!
 
   contact:
-    title: Für Fragen stehen wir Dir gern zur Verfügung.
+    title: If you have any questions, please do not hesitate to contact us.
     avatar_img: dlabs_contact-uta.jpg
     name: Uta Kanthack
     position: Business Administration & Controlling
     tel: +49 331 97 992 334
     mobile: +49 151 461 432 37
     email: jobs@d-labs.com
-    cta_text: Anfragen
+    cta_text: contact
