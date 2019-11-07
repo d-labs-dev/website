@@ -33,14 +33,14 @@ de:
   filter_button_label: Filter
 
 en:
-  intro_lead: Was wir machen
-  intro_text: Wir identifizieren die Bedürfnisse unserer Kunden, gestalten relevante Prozesse, konzipieren und optimieren digitale Produkte und Services, implementieren Software und befähigen unsere Kunden nachhaltig in diesen Aktivitäten.
-  intro_services_title: "Wir bieten Leistungen in den folgenden Kompetenzfeldern an:"
+  intro_lead: What We Do
+  intro_text: We identify the needs of our customers, design relevant processes, conceive and optimize digital products and services, implement software and sustainably enable our customers in these activities.
+  intro_services_title: Our Fields of Expertise
 
   slides:
     - name: User Research
       img: about.jpg
-      text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
+      text: We learn the needs and requirements; we test the usability and user experience. We are the experienced partner for our customers and accompany the conception and development. We then validate the prototypes and products.
       color: yellow
     - name: Digital Experience Design
       img: IMG_1455.jpg
