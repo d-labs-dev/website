@@ -108,7 +108,7 @@
   </div>
 </div>
 
-{%- assign latest_post = site.pages | where: "kind", "blogPost" | where: "locale", page.locale | first -%}
+{%- assign latest_post = site.pages | where: "kind", "blogPost" | where: "locale", page.locale | sort: 'date' | reverse | first -%}
 <div class="bg-blue col align-center text-white pl-4 q-md-px-0 relative zindex-1">
   <div class="maxwidth-7 width-full col sp-5">
     <div class="row sp-8 q-md-col q-md-sp-0">
