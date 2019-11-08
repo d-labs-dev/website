@@ -1,6 +1,6 @@
 {%- assign _ = site.data.pages.blog[page.locale] -%}
 
-{% assign blog_pages = site.pages | where: "kind", "blogPost" | where: "locale", page.locale %}
+{% assign blog_pages = site.pages | where: "kind", "blogPost" | where: "locale", page.locale | sort: 'date' | reverse %}
 {% assign latest_post = blog_pages | first %}
 
 <div class="col align-center py-7 pt-8 px-4 q-md-px-0">
