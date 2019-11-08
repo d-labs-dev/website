@@ -182,9 +182,9 @@ en:
         - Process automation and digitalization
         - Increasing transparency for all stakeholders
       approaches:
-        - Extensive analysis of internal and external service processes, e.g. with the help of qualitative interviews with representatives of the various target groups, as well as workshops with process experts from different departments
-        - Development of user profiles and mapping of the IS situation in customer journey maps
-        - Co-creative development of a mission statement for a unified customer interface, elaboration of a customer-centric service design concept and illustration in service blueprints
+        - Extensive analysis of internal and external service processes, e.g. with the help of [qualitative interviews](/en/methods/qualitative_survey.html) with representatives of the various target groups, as well as workshops with process experts from different departments
+        - Development of [personas](/en/methods/personas.html) and mapping of the IS situation in [customer journey maps](en/methods/customer_journey_maps.html)
+        - Co-creative development of a mission statement for a unified customer interface, elaboration of a customer-centric service design concept and illustration in [service blueprints](/en/methods/service_blueprint.html)
       results:
         - Forward-thinking service concept for the realization of a uniform customer interface, e.g. with the help of an online self-service portal for the various customer groups
 
@@ -205,7 +205,7 @@ en:
         - Getting to know implementation strategies
         - Building knowledge about agile work in companies as well as planning projects and workshops
       approaches:
-        - "Introduction to design thinking: Getting to know the entire design thinking process using a generic challenge"
+        - "[Introduction to design thinking](en/methods/qualifying_coaches.html): Getting to know the entire design thinking process using a generic challenge"
         - "Deepening and coaching: Processing an internal challenge, whereby the participants acted as coaches themselves"
         - "Implementation strategies: Presentation of Business Model Canvas, Value Proposition Canvas and Systems Thinking; Location Determination - Agility in the Organization"
         - "Project and workshop planning: Order clarification and planning of internal projects"
