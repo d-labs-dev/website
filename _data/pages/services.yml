@@ -17,11 +17,11 @@ de:
       text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
       color: red
     - name: Enabling & Coaching
-      img: about.jpg
+      img: dlabs_approach-coaching.jpg
       text: Wir entwickeln anhand der Bedürfnisse unserer Teilnehmer maßgeschneiderte Formate. In diesen nutzerzentrierten Workshops und Trainings vermitteln wir die erforderlichen Fähigkeiten, welche insbesondere im Kontext von Innovationsprozessen und agilen Arbeitsweisen benötigt werden. 
       color: green
     - name: Business & Innovation
-      img: about.jpg
+      img: dlabs_approach-business.jpg
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. 
       color: purple
 
@@ -51,11 +51,11 @@ en:
       text: We are experts in the planning, analysis, conception and implementation of application software and web applications for desktop and mobile devices.
       color: red
     - name: Enabling & Coaching
-      img: about.jpg
+      img: dlabs_approach-coaching.jpg
       text: We develop customized formats based on the needs of our participants. In these user-centered workshops and trainings, we provide the necessary skills which are especially needed in the context of innovation processes and agile working methods.
       color: green
     - name: Business & Innovation
-      img: about.jpg
+      img: dlabs_approach-business.jpg
       text: As specialists, we develop digital solutions together with our customers. We develop strategies and support our customers in their strategic realignment. We act as a competent companion in innovation and change processes and help with product and service optimization.
       color: purple
 
