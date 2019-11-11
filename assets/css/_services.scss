@@ -29,6 +29,17 @@
   }
 }
 
+.top {
+  @media only screen and (max-width: 40em) {
+    object-position: 50% 6%;
+  }
+}
+
+.center {
+  @media only screen and (max-width: 40em) {
+    object-position: center;
+  }
+}
 
 .service-carousel-indicator {
   .service-carousel-hidable-text {
