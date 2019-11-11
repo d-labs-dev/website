@@ -18,6 +18,12 @@
   }
 }
 
+.home-jobs-img {
+  @media only screen and (max-width: 40em) {
+    object-position: 50% 15%;
+  }
+}
+
 .t1 {
   display: flex;
   flex-direction: column;
