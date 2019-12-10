@@ -14,12 +14,18 @@ nationaler Datenschutzgesetze der Mitgliedsstaaten sowie sonstiger
 datenschutzrechtlicher Bestimmungen ist die:
 
 D-LABS GmbH
+
 Marlene-Dietrich-Allee 15
+
 14482 Potsdam
+
 Deutschland
 
+
 Tel.: 0331 97992 300
+
 Fax: 0331 97992 310
+
 E-Mail: info@d-labs.com
 
 ## Name und Anschrift des Datenschutzbeauftragten
@@ -27,12 +33,18 @@ E-Mail: info@d-labs.com
 Der Datenschutzbeauftragte des Verantwortlichen ist:
 
 datarea GmbH
+
 Meißner Straße 103
+
 01445 Radebeul
+
 Deutschland
 
+
 Tel.: 0351 27 22 08 80
+
 E-Mail: info@datarea.de
+
 Website: www.datarea.de
 
 ## Allgemeines zur Datenverarbeitung
