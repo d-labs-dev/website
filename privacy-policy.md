@@ -65,15 +65,15 @@ Bei jedem Aufruf unserer Internetseite erfasst unser System automatisiert Daten 
 
 Folgende Daten werden hierbei erhoben:
 
-1)  Informationen über den Browsertyp und die verwendete Version
-2)  Das Betriebssystem des Nutzers
-3)  Den Internet-Service-Provider des Nutzers
-4)  Die IP-Adresse des Nutzers
-5)  Datum und Uhrzeit des Zugriffs
-6)  Websites, von denen das System des Nutzers auf unsere Internetseite gelangt
-7)  Websites, die vom System des Nutzers über unsere Website aufgerufen werden
-8)  Name und URL der abgerufenen Datei
-9)  Meldung, ob der Abruf erfolgreich war
+1. Informationen über den Browsertyp und die verwendete Version
+2. Das Betriebssystem des Nutzers
+3. Den Internet-Service-Provider des Nutzers
+4. Die IP-Adresse des Nutzers
+5. Datum und Uhrzeit des Zugriffs
+6. Websites, von denen das System des Nutzers auf unsere Internetseite gelangt
+7. Websites, die vom System des Nutzers über unsere Website aufgerufen werden
+8. Name und URL der abgerufenen Datei
+9. Meldung, ob der Abruf erfolgreich war
 
 Die Daten werden ebenfalls in den Logfiles unseres Systems gespeichert. Eine Speicherung dieser Daten zusammen mit anderen personenbezogenen Daten des Nutzers findet nicht statt.
 
@@ -107,17 +107,16 @@ Unsere Webseite verwendet Cookies. Bei Cookies handelt es sich um Textdateien, d
 
 Wir setzen Cookies ein, um unsere Website nutzerfreundlicher zu gestalten. Einige Elemente unserer Internetseite erfordern es, dass der aufrufende Browser auch nach einem Seitenwechsel identifiziert werden kann.
 
-> In den Cookies werden dabei folgende Daten gespeichert und
-> übermittelt:
+In den Cookies werden dabei folgende Daten gespeichert und übermittelt:
 
-1)  Spracheinstellungen
+1. Spracheinstellungen
 
 Wir verwenden auf unserer Website darüber hinaus Cookies, die eine Analyse des Surfverhaltens der Nutzer ermöglichen.
 
-> Auf diese Weise können folgende Daten übermittelt werden:
+Auf diese Weise können folgende Daten übermittelt werden:
 
-1)  Häufigkeit von Seitenaufrufen
-2)  Inanspruchnahme von Website-Funktionen
+1. Häufigkeit von Seitenaufrufen
+2. Inanspruchnahme von Website-Funktionen
 
 Beim Aufruf unserer Website wird der Nutzer über die Verwendung von Cookies zu Analysezwecken informiert und seine Einwilligung zur Verarbeitung der in diesem Zusammenhang verwendeten personenbezogenen Daten eingeholt. In diesem Zusammenhang erfolgt auch ein Hinweis auf diese Datenschutzerklärung.
 
@@ -131,10 +130,10 @@ Die Rechtsgrundlage für die Verarbeitung personenbezogener Daten unter Verwendu
 
 Der Zweck der Verwendung technisch notwendiger Cookies ist, die Nutzung von Websites für die Nutzer zu vereinfachen. Einige Funktionen unserer Internetseite können ohne den Einsatz von Cookies nicht angeboten werden. Für diese ist es erforderlich, dass der Browser auch nach einem Seitenwechsel wiedererkannt wird.
 
-> Für folgende Anwendungen benötigen wir Cookies:
+Für folgende Anwendungen benötigen wir Cookies:
 
-1)  Übernahme von Spracheinstellungen
-2)  Merken von Suchbegriffen
+1. Übernahme von Spracheinstellungen
+2. Merken von Suchbegriffen
 
 Die durch technisch notwendige Cookies erhobenen Nutzerdaten werden nicht zur Erstellung von Nutzerprofilen verwendet.
 
@@ -176,7 +175,7 @@ Alle personenbezogenen Daten, die im Zuge der Kontaktaufnahme gespeichert wurden
 
 **Google Analytics**
 
-1)  > Umfang der Verarbeitung personenbezogener Daten
+1. Umfang der Verarbeitung personenbezogener Daten
 
 Diese Website nutzt Funktionen des Webanalysedienstes Google Analytics. Anbieter ist die Google LLC, 1600 Amphitheatre Parkway Mountain View, CA 94043, USA.
 
@@ -192,19 +191,19 @@ Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihr
 
 Weiterhin ist Google LLC im Privacy Shield vertreten: <https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active>.
 
-2)  > Rechtsgrundlage für die Verarbeitung personenbezogener Daten
+2. Rechtsgrundlage für die Verarbeitung personenbezogener Daten
 
 Rechtsgrundlage für die Verarbeitung der Daten ist bei Vorliegen einer Einwilligung des Nutzers Art. 6 Abs. 1 lit. a DS-GVO.
 
-3)  > Zweck der Datenverarbeitung
+3. Zweck der Datenverarbeitung
 
 Diese Webseite nutzt Google Analytics, um eine Analyse der Benutzung zu ermöglichen. *Die Verarbeitung der personenbezogenen Daten der Nutzer ermöglicht uns eine Analyse des Surfverhaltens unserer Nutzer. Wir sind in durch die Auswertung der gewonnen Daten in der Lage, Informationen über die Nutzung der einzelnen Komponenten unserer Webseite zusammenzustellen. Dies hilft uns dabei unsere Webseite und deren Nutzerfreundlichkeit stetig zu verbessern.*
 
-4)  > Dauer der Speicherung
+4. Dauer der Speicherung
 
 In der Regel werden die erhobenen Daten gelöscht, sobald sie nicht mehr benötigt werden. Eine Löschung erfolgt spätestens nach 26 Monaten.
 
-5)  > Widerspruchs- und Beseitigungsmöglichkeit
+5. Widerspruchs- und Beseitigungsmöglichkeit
 
 Der Datenerhebung kann jederzeit mit Wirkung für die Zukunft widersprochen werden, indem Sie unter folgendem Link das Browser-Add-on zur Deaktivierung von Google Analytics herunterladen und installieren: <https://tools.google.com/dlpage/gaoptout?hl=de>.
 
