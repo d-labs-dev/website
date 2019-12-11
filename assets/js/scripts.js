@@ -502,7 +502,7 @@ function doTheGoogleStuff() {
   var script = document.createElement('script');
   script.async = true;
   script.src = "https://www.googletagmanager.com/gtag/js?id=UA-46146953-1";
-  document.getElementsByTagName("head")[0].appendChild(gascript, document.getElementsByTagName("head")[0]); 
+  document.getElementsByTagName("head")[0].appendChild(script, document.getElementsByTagName("head")[0]); 
 }
 
 function cookieConsent() {
