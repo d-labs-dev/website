@@ -173,37 +173,37 @@ Alle personenbezogenen Daten, die im Zuge der Kontaktaufnahme gespeichert wurden
 
 ## Weitergabe personenbezogener Daten an Dritte
 
-**Google Analytics**
+### Google Analytics
 
-(1) Umfang der Verarbeitung personenbezogener Daten
+#### a) Umfang der Verarbeitung personenbezogener Daten
 
 Diese Website nutzt Funktionen des Webanalysedienstes Google Analytics. Anbieter ist die Google LLC, 1600 Amphitheatre Parkway Mountain View, CA 94043, USA.
 
 Google Analytics verwendet so genannte "Cookies". Das sind Textdateien, die auf Ihrem Computer gespeichert werden und die eine Analyse der Benutzung der Website durch Sie ermöglichen. Die durch den Cookie erzeugten Informationen über Ihre Benutzung dieser Website werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.
 
-**IP Anonymisierung**
+##### IP Anonymisierung
 
 Wir haben auf dieser Website die Funktion IP-Anonymisierung aktiviert. Dadurch wird Ihre IP-Adresse von Google innerhalb von Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum vor der Übermittlung in die USA gekürzt. Nur in Ausnahmefällen wird die volle IP-Adresse an einen Server von Google in den USA übertragen und dort gekürzt. Im Auftrag des Betreibers dieser Website wird Google diese Informationen benutzen, um Ihre Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen gegenüber dem Websitebetreiber zu erbringen. Die im Rahmen von Google Analytics von Ihrem Browser übermittelte IP-Adresse wird nicht mit anderen Daten von Google zusammengeführt.
 
-**Browser Plugin**
+##### Browser Plugin
 
 Sie können die Speicherung der Cookies durch eine entsprechende Einstellung Ihrer Browser-Software verhindern; wir weisen Sie jedoch darauf hin, dass Sie in diesem Fall gegebenenfalls nicht sämtliche Funktionen dieser Website vollumfänglich werden nutzen können. Sie können darüber hinaus die Erfassung der durch den Cookie erzeugten und auf Ihre Nutzung der Website bezogenen Daten (inkl. Ihrer IP-Adresse) an Google sowie die Verarbeitung dieser Daten durch Google verhindern, indem Sie das unter dem folgenden Link verfügbare Browser-Plugin herunterladen und installieren: <https://tools.google.com/dlpage/gaoptout?hl=de>.
 
 Weiterhin ist Google LLC im Privacy Shield vertreten: <https://www.privacyshield.gov/participant?id=a2zt000000001L5AAI&status=Active>.
 
-(2) Rechtsgrundlage für die Verarbeitung personenbezogener Daten
+#### b) Rechtsgrundlage für die Verarbeitung personenbezogener Daten
 
 Rechtsgrundlage für die Verarbeitung der Daten ist bei Vorliegen einer Einwilligung des Nutzers Art. 6 Abs. 1 lit. a DS-GVO.
 
-(3) Zweck der Datenverarbeitung
+#### C) Zweck der Datenverarbeitung
 
-Diese Webseite nutzt Google Analytics, um eine Analyse der Benutzung zu ermöglichen. *Die Verarbeitung der personenbezogenen Daten der Nutzer ermöglicht uns eine Analyse des Surfverhaltens unserer Nutzer. Wir sind in durch die Auswertung der gewonnen Daten in der Lage, Informationen über die Nutzung der einzelnen Komponenten unserer Webseite zusammenzustellen. Dies hilft uns dabei unsere Webseite und deren Nutzerfreundlichkeit stetig zu verbessern.*
+Diese Webseite nutzt Google Analytics, um eine Analyse der Benutzung zu ermöglichen. Die Verarbeitung der personenbezogenen Daten der Nutzer ermöglicht uns eine Analyse des Surfverhaltens unserer Nutzer. Wir sind in durch die Auswertung der gewonnen Daten in der Lage, Informationen über die Nutzung der einzelnen Komponenten unserer Webseite zusammenzustellen. Dies hilft uns dabei unsere Webseite und deren Nutzerfreundlichkeit stetig zu verbessern.
 
-(4) Dauer der Speicherung
+#### d) Dauer der Speicherung
 
 In der Regel werden die erhobenen Daten gelöscht, sobald sie nicht mehr benötigt werden. Eine Löschung erfolgt spätestens nach 26 Monaten.
 
-(5) Widerspruchs- und Beseitigungsmöglichkeit
+#### e) Widerspruchs- und Beseitigungsmöglichkeit
 
 Der Datenerhebung kann jederzeit mit Wirkung für die Zukunft widersprochen werden, indem Sie unter folgendem Link das Browser-Add-on zur Deaktivierung von Google Analytics herunterladen und installieren: <https://tools.google.com/dlpage/gaoptout?hl=de>.
 
@@ -211,7 +211,7 @@ Der Datenerhebung kann jederzeit mit Wirkung für die Zukunft widersprochen werd
 
 Werden personenbezogene Daten von Ihnen verarbeitet, sind Sie Betroffener i.S.d. DS-GVO und es stehen Ihnen folgende Rechte gegenüber dem Verantwortlichen zu:
 
-### Auskunftsrecht
+### 1. Auskunftsrecht
 
 Sie können von dem Verantwortlichen eine Bestätigung darüber verlangen, ob personenbezogene Daten, die Sie betreffen, von uns verarbeitet werden.
 
@@ -229,11 +229,11 @@ Liegt eine solche Verarbeitung vor, können Sie von dem Verantwortlichen über f
 
 Ihnen steht das Recht zu, Auskunft darüber zu verlangen, ob die Sie betreffenden personenbezogenen Daten in ein Drittland oder an eine internationale Organisation übermittelt werden. In diesem Zusammenhang können Sie verlangen, über die geeigneten Garantien gem. Art. 46 DS-GVO im Zusammenhang mit der Übermittlung unterrichtet zu werden.
 
-### Recht auf Berichtigung 
+### 2. Recht auf Berichtigung 
 
 Sie haben ein Recht auf Berichtigung und/oder Vervollständigung gegenüber dem Verantwortlichen, sofern die verarbeiteten personenbezogenen Daten, die Sie betreffen, unrichtig oder unvollständig sind. Der Verantwortliche hat die Berichtigung unverzüglich vorzunehmen.
 
-### Recht auf Einschränkung der Verarbeitung
+### 3. Recht auf Einschränkung der Verarbeitung
 
 Unter den folgenden Voraussetzungen können Sie die Einschränkung der Verarbeitung der Sie betreffenden personenbezogenen Daten verlangen:
 
@@ -246,7 +246,7 @@ Wurde die Verarbeitung der Sie betreffenden personenbezogenen Daten eingeschrän
 
 Wurde die Einschränkung der Verarbeitung nach den o.g. Voraussetzungen eingeschränkt, werden Sie von dem Verantwortlichen unterrichtet bevor die Einschränkung aufgehoben wird.
 
-### Recht auf Löschung
+### 4. Recht auf Löschung
 
 #### Löschungspflicht
 
@@ -273,13 +273,13 @@ Das Recht auf Löschung besteht nicht, soweit die Verarbeitung erforderlich ist
 4. für im öffentlichen Interesse liegende Archivzwecke, wissenschaftliche oder historische Forschungszwecke oder für statistische Zwecke gem. Art. 89 Abs. 1 DS-GVO, soweit das unter Abschnitt a) genannte Recht voraussichtlich die Verwirklichung der Ziele dieser Verarbeitung unmöglich macht oder ernsthaft beeinträchtigt, oder
 5. zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.
 
-### Recht auf Unterrichtung
+### 5. Recht auf Unterrichtung
 
 Haben Sie das Recht auf Berichtigung, Löschung oder Einschränkung der Verarbeitung gegenüber dem Verantwortlichen geltend gemacht, ist dieser verpflichtet, allen Empfängern, denen die Sie betreffenden personenbezogenen Daten offengelegt wurden, diese Berichtigung oder Löschung der Daten oder Einschränkung der Verarbeitung mitzuteilen, es sei denn, dies erweist sich als unmöglich oder ist mit einem unverhältnismäßigen Aufwand verbunden.
 
 Ihnen steht gegenüber dem Verantwortlichen das Recht zu, über diese Empfänger unterrichtet zu werden.
 
-### Recht auf Datenübertragbarkeit
+### 6. Recht auf Datenübertragbarkeit
 
 Sie haben das Recht, die Sie betreffenden personenbezogenen Daten, die Sie dem Verantwortlichen bereitgestellt haben, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten. Außerdem haben Sie das Recht diese Daten einem anderen Verantwortlichen ohne Behinderung durch den Verantwortlichen, dem die personenbezogenen Daten bereitgestellt wurden, zu übermitteln, sofern
 
@@ -290,7 +290,7 @@ In Ausübung dieses Rechts haben Sie ferner das Recht, zu erwirken, dass die Sie
 
 Das Recht auf Datenübertragbarkeit gilt nicht für eine Verarbeitung personenbezogener Daten, die für die Wahrnehmung einer Aufgabe erforderlich ist, die im öffentlichen Interesse liegt oder in Ausübung öffentlicher Gewalt erfolgt, die dem Verantwortlichen übertragen wurde.
 
-### Widerspruchsrecht
+### 7. Widerspruchsrecht
 
 Sie haben das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f DS-GVO erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmungen gestütztes Profiling.
 
@@ -302,11 +302,11 @@ Widersprechen Sie der Verarbeitung für Zwecke der Direktwerbung, so werden die 
 
 Sie haben die Möglichkeit, im Zusammenhang mit der Nutzung von Diensten der Informationsgesellschaft – ungeachtet der Richtlinie 2002/58/EG – Ihr Widerspruchsrecht mittels automatisierter Verfahren auszuüben, bei denen technische Spezifikationen verwendet werden.
 
-### Recht auf Widerruf der datenschutzrechtlichen Einwilligungserklärung
+### 8. Recht auf Widerruf der datenschutzrechtlichen Einwilligungserklärung
 
 Sie haben das Recht, Ihre datenschutzrechtliche Einwilligungserklärung jederzeit zu widerrufen. Durch den Widerruf der Einwilligung wird die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung nicht berührt.
 
-### Automatisierte Entscheidung im Einzelfall einschließlich Profiling
+### 9. Automatisierte Entscheidung im Einzelfall einschließlich Profiling
 
 Sie haben das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung – einschließlich Profiling – beruhenden Entscheidung unterworfen zu werden, die Ihnen gegenüber rechtliche Wirkung entfaltet oder Sie in ähnlicher Weise erheblich beeinträchtigt. Dies gilt nicht, wenn die Entscheidung
 
@@ -318,7 +318,7 @@ Allerdings dürfen diese Entscheidungen nicht auf besonderen Kategorien personen
 
 Hinsichtlich der in (1) und (3) genannten Fälle trifft der Verantwortliche angemessene Maßnahmen, um die Rechte und Freiheiten sowie Ihre berechtigten Interessen zu wahren, wozu mindestens das Recht auf Erwirkung des Eingreifens einer Person seitens des Verantwortlichen, auf Darlegung des eigenen Standpunkts und auf Anfechtung der Entscheidung gehört.
 
-### Recht auf Beschwerde bei einer Aufsichtsbehörde
+### 10. Recht auf Beschwerde bei einer Aufsichtsbehörde
 
 Unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs steht Ihnen das Recht auf Beschwerde bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres Aufenthaltsorts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes, zu, wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DS-GVO verstößt.
 
