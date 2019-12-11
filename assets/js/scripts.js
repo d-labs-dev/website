@@ -495,14 +495,14 @@ function setupImageFader() {
 }
 
 function doTheGoogleStuff() {
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga("create", "UA-46146953-1", "auto");
-  ga("set", "anonymizeIp", true);
-  ga("send", "pageview");
-  var gascript = document.createElement("script");
-  gascript.async = true;
-  gascript.src = "https://www.google-analytics.com/analytics.js";
-  document.getElementsByTagName("head")[0].appendChild(gascript, document.getElementsByTagName("head")[0]);   
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "UA-46146953-1", { "anonymize_ip": true });
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=UA-46146953-1";
+  document.getElementsByTagName("head")[0].appendChild(gascript, document.getElementsByTagName("head")[0]); 
 }
 
 function cookieConsent() {
