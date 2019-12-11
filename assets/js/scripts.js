@@ -494,6 +494,17 @@ function setupImageFader() {
   });
 }
 
+function doTheGoogleStuff() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "UA-46146953-1", { "anonymize_ip": true });
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = "https://www.googletagmanager.com/gtag/js?id=UA-46146953-1";
+  document.getElementsByTagName("head")[0].appendChild(script, document.getElementsByTagName("head")[0]); 
+}
+
 function cookieConsent() {
   if ($.cookie("accept_cookies") !== "true") {
     var container = $("#cookie-consent");
@@ -502,6 +513,8 @@ function cookieConsent() {
       $.cookie("accept_cookies", "true", {expires: 365});
       container.addClass("hidden");
     });
+  } else {
+    doTheGoogleStuff();
   }
 }
 
