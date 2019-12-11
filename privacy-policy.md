@@ -33,7 +33,7 @@ Deutschland
 
 Tel.: 0351 27 22 08 80
 E-Mail: <info@datarea.de>
-Website: <www.datarea.de>
+Website: <https://www.datarea.de>
 
 ## Allgemeines zur Datenverarbeitung
 
