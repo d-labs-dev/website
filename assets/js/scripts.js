@@ -494,6 +494,17 @@ function setupImageFader() {
   });
 }
 
+function doTheGoogleStuff() {
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga("create", "UA-46146953-1", "auto");
+  ga("set", "anonymizeIp", true);
+  ga("send", "pageview");
+  var gascript = document.createElement("script");
+  gascript.async = true;
+  gascript.src = "https://www.google-analytics.com/analytics.js";
+  document.getElementsByTagName("head")[0].appendChild(gascript, document.getElementsByTagName("head")[0]);   
+}
+
 function cookieConsent() {
   if ($.cookie("accept_cookies") !== "true") {
     var container = $("#cookie-consent");
@@ -502,6 +513,8 @@ function cookieConsent() {
       $.cookie("accept_cookies", "true", {expires: 365});
       container.addClass("hidden");
     });
+  } else {
+    doTheGoogleStuff();
   }
 }
 
