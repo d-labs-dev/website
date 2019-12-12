@@ -107,10 +107,6 @@ Unsere Webseite verwendet Cookies. Bei Cookies handelt es sich um Textdateien, d
 
 Wir setzen Cookies ein, um unsere Website nutzerfreundlicher zu gestalten. Einige Elemente unserer Internetseite erfordern es, dass der aufrufende Browser auch nach einem Seitenwechsel identifiziert werden kann.
 
-In den Cookies werden dabei folgende Daten gespeichert und übermittelt:
-
-1. Spracheinstellungen
-
 Wir verwenden auf unserer Website darüber hinaus Cookies, die eine Analyse des Surfverhaltens der Nutzer ermöglichen.
 
 Auf diese Weise können folgende Daten übermittelt werden:
@@ -129,11 +125,6 @@ Die Rechtsgrundlage für die Verarbeitung personenbezogener Daten unter Verwendu
 ### Zweck der Datenverarbeitung
 
 Der Zweck der Verwendung technisch notwendiger Cookies ist, die Nutzung von Websites für die Nutzer zu vereinfachen. Einige Funktionen unserer Internetseite können ohne den Einsatz von Cookies nicht angeboten werden. Für diese ist es erforderlich, dass der Browser auch nach einem Seitenwechsel wiedererkannt wird.
-
-Für folgende Anwendungen benötigen wir Cookies:
-
-1. Übernahme von Spracheinstellungen
-2. Merken von Suchbegriffen
 
 Die durch technisch notwendige Cookies erhobenen Nutzerdaten werden nicht zur Erstellung von Nutzerprofilen verwendet.
 
