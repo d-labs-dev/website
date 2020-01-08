@@ -5,13 +5,14 @@
 <style type="text/css">
 	.st0{opacity:0.6;fill:#FFFFFF;enable-background:new    ;}
 	.st1{fill:none;stroke:#E72D5F;stroke-width:6;stroke-miterlimit:10;}
-	.st2{fill:none;stroke:#87C745;stroke-width:6;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#813C96;stroke-width:6;stroke-miterlimit:10;}
 	.st3{fill:none;stroke:#FCBD29;stroke-width:6;stroke-miterlimit:10;}
-	.st4{fill:none;stroke:#813C96;stroke-width:6;stroke-miterlimit:10;}
+	.st4{fill:none;stroke:#1E4C62;stroke-width:6;stroke-miterlimit:10;}
 </style>
 <g id="Gruppe_6705" transform="translate(-310 -4625)">
 	<rect id="Rechteck_335" x="310" y="4625" class="st0" width="310" height="224.8"/>
-	<ellipse id="Ellipse_1" class="st1" cx="478.6" cy="4736.7" rx="55.5" ry="55.5"/>
+	
+		<ellipse id="Ellipse_1" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -3209.2092 1725.8395)" class="st1" cx="478.7" cy="4736.8" rx="55.5" ry="55.5"/>
 	<ellipse id="Ellipse_2" class="st2" cx="431.4" cy="4707.7" rx="14.9" ry="14.9"/>
 	<ellipse id="Ellipse_3" class="st3" cx="422.4" cy="4721.9" rx="16.1" ry="16.1"/>
 	<ellipse id="Ellipse_4" class="st4" cx="430.8" cy="4758" rx="34.9" ry="35.5"/>

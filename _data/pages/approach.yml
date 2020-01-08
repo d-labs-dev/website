@@ -49,10 +49,10 @@ de:
       circle_img: projects/circle-small_project01.svg
       percentages:
         user_research: 50
-        design: 30
+        design: 15
         engineering: 5
         training: 0
-        consulting: 15
+        consulting: 30
       task: Wie kann die Kundenschnittstelle eines Verteilnetz­betreibers einheitlich gestaltet werden?
       goals:
         - Erhöhung der Kunden- und Service­orientierung
@@ -72,10 +72,10 @@ de:
       circle_img: projects/circle-small_project02.svg
       percentages:
         user_research: 5
-        design: 10
+        design: 0
         engineering: 0
-        consulting: 0
         training: 85
+        consulting: 10
       task: Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären Teams?
       goals:
         - Ausbildung von 25 Mitarbeitern aus ganz ­Europa zu Design Thinking Facilitators 
@@ -97,10 +97,10 @@ de:
       circle_img: projects/circle-small_project03.svg
       percentages:
         user_research: 5
-        design: 0
+        design: 25
         engineering: 65
-        consulting: 25
-        training: 5
+        training: 0
+        consulting: 5
       task: Wie können die Besucher einer Ausstellung digital unterstützt werden?
       goals:
         - Aufwertung des Besuchserlebnisses im Museum
@@ -161,8 +161,8 @@ en:
   user_research: User Research
   design: Digital Experience Design
   engineering: Software Engineering
-  consulting: Consulting
-  training: Training
+  consulting: Business & Innovation
+  training: Enabling & Coaching
 
   projects:
     - lead: Project 01
@@ -173,8 +173,8 @@ en:
         user_research: 50
         design: 15
         engineering: 5
-        consulting: 30
         training: 0
+        consulting: 30
       task: How can the customer interface of a distribution system operator be designed in a uniform way?
       goals:
         - Increased customer and service orientation
@@ -196,8 +196,8 @@ en:
         user_research: 5
         design: 0
         engineering: 0
-        consulting: 10
         training: 85
+        consulting: 10
       task: How do you train the employees of a DAX Group to be fit for agile working in interdisciplinary teams?
       goals:
         - Training of 25 employees from all over Europe to be Design Thinking Facilitators
@@ -222,8 +222,8 @@ en:
         user_research: 5
         design: 25
         engineering: 65
-        consulting: 5
         training: 0
+        consulting: 5
       task: How can visitors to an exhibition be digitally supported?
       goals:
         - How can visitors to an exhibition be digitally supported?
