@@ -432,7 +432,6 @@
 .height-screen {
   min-height: 100vh;
   &:not(.sticky) {
-    min-height: -webkit-fill-available;
     body.is-safari & {
       min-height: 100vh;
     }
