@@ -98,13 +98,5 @@ layout: default
   </div>
 </div>
 
-<div class="fixed bottom-0 right-0 pb-2 pr-2 zindex-3">
-  <a href="{{_.whatsapp_url}}" class="button-text">
-    <div class="whatsapp-container rounded-full">
-      {% asset logo-whatsapp.svg %}
-    </div>
-  </a>
-</div>
-
 {%- include contact.html contact=_.contact is_white=true no_button=true-%}
 {%- include locations.html is_white=true with_map=true -%}
