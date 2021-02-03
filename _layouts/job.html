@@ -68,7 +68,7 @@ layout: default
   <div class="maxwidth-4 width-full col sp-6">
     <h2 class="font-heading text-xxl q-md-text-xl">{{page.third_headline}}</h2>
     <div class="markdown text-sm">{{page.third_paragraph | markdownify}}</div>
-    <a class="button-text is-blue" href="{{page.job_posting.url}}">
+    <a class="button-text is-blue" href="{{page.job_posting.url}}" target="_blank">
       <div class="row sp-2">
         {% asset icons/icon-download.svg @inline %}
         <div>{{_.download_button_label}}</div>
