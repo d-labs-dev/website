@@ -68,7 +68,7 @@ layout: default
   <div class="maxwidth-4 width-full col sp-6">
     <h2 class="font-heading text-xxl q-md-text-xl">{{page.third_headline}}</h2>
     <div class="markdown text-sm">{{page.third_paragraph | markdownify}}</div>
-    <a class="button-text is-blue" href="{{page.job_posting.url}}">
+    <a class="button-text is-blue" href="{{page.job_posting.url}}" target="_blank">
       <div class="row sp-2">
         {% asset icons/icon-download.svg @inline %}
         <div>{{_.download_button_label}}</div>
@@ -96,14 +96,6 @@ layout: default
     <div class="markdown text-sm text-white text-center">{{_.apply_now_description | markdownify}}</div>
     <a href="{{_.apply_now_url}}" class="button is-black">{{_.apply_now_button_label}}</a>
   </div>
-</div>
-
-<div class="fixed bottom-0 right-0 pb-2 pr-2 zindex-3">
-  <a href="{{_.whatsapp_url}}" class="button-text">
-    <div class="whatsapp-container rounded-full">
-      {% asset logo-whatsapp.svg %}
-    </div>
-  </a>
 </div>
 
 {%- include contact.html contact=_.contact is_white=true no_button=true-%}
