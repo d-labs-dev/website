@@ -8,7 +8,7 @@ task_types:
 de:
   intro_lead: Wie wir arbeiten
   intro_text: "
-    Die Arbeitsweise von D‑LABS orientiert sich an den Ansätzen und Methoden des **Design Thinking** und **Human-centred Design** und stellt immer den Nutzer in den Mittelpunkt.
+    Die Arbeitsweise von D‑LABS orientiert sich an den Ansätzen und Methoden des **Design Thinking** und **Human-centered Design** und stellt immer den Nutzer in den Mittelpunkt.
   "
   intro_cta_text: Unser Vorgehen in Projekten
 
@@ -130,7 +130,7 @@ de:
 en:
   intro_lead: How we work
   intro_text: "
-    The D-LABS working method is based on the approaches and methods of **design thinking** and **human-centred design** and always focuses on the user.
+    The D-LABS working method is based on the approaches and methods of **design thinking** and **human-centered design** and always focuses on the user.
   "
   intro_cta_text: Our approach in projects
 
