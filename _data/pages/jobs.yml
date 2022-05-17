@@ -93,8 +93,8 @@ en:
       quote: At D-LABS, I can work in such a way that I still have time for my family. At the same time, I have the opportunity to work on demanding projects. This compatibility is very important to me because here having a family does not mean having to give up anything in my professional development.
       img: profil_doreen.jpg
 
-  back_button_label: Alle Jobangebote
-  learn_more: Mehr Erfahren
+  back_button_label: All Job Offers
+  learn_more: Learn More
 
   benefits:
     - label: Weiterbildung
@@ -108,7 +108,7 @@ en:
 
   team_fit_heading: Du passt perfekt in unser Team?
   team_fit_url: mailto:jobs@d-labs.com
-  team_fit_button_label: Jetzt Unterlagen schicken!
+  team_fit_button_label: Apply now!
 
   download_button_label: Download PDF
 
