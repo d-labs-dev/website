@@ -4,6 +4,60 @@ layout: default
 
 {%- assign _ = site.data.pages.jobs[page.locale] -%}
 
+{% capture google_job_description %}
+
+  <h1 class='font-heading text-xxl q-md-text-xl'>{{page.first_headline | markdownify}}</h1>
+  <div class='markdown text-sm'>{{page.first_paragraph | markdownify}}</div>
+  <br>
+  {%- include jobs-description.html  -%}
+
+{% endcapture %}
+
+<script type="application/ld+json">
+{
+  "@context" : "https://schema.org/",
+  "@type" : "JobPosting",
+  "title" : "{{page.title}}",
+  "description" : "{{ google_job_description | strip_newlines | replace: '"', "'" }}",
+  "identifier": {
+    "@type": "PropertyValue",
+    "name": "D-LABS",
+    "value": "1234567"
+  },
+  "datePosted" : "2021-01-11T00:00:00",
+  "validThrough" : "2021-06-30T00:00:00",
+  "hiringOrganization" : {
+    "@type": "Organization",
+    "name": "D-LABS GmbH",
+    "sameAs": "http://www.d-labs.com",
+    "logo": "https://www.d-labs.com/assets/images/icon_d-labs.svg"
+  },
+  "jobLocation": [{
+    "@type": "Place",
+      "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Matkowskystraße 2",
+      "addressLocality": "Berlin",
+      "addressRegion": "Berlin",
+      "postalCode": "10245",
+      "addressCountry": "DE"
+      }
+    },{
+    "@type": "Place",
+      "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Marlene-Dietrich-Allee 15",
+      "addressLocality": "Potsdam",
+      "addressRegion": "Brandenburg",
+      "postalCode": "14482",
+      "addressCountry": "DE"
+      }
+  }],
+  "directApply": true,
+  "employmentType": ["FULL_TIME", "PART_TIME"]
+}
+</script>
+
 <div class="relative height-screen col q-lg-col q-lg-pt-7 justify-center q-lg-justify-stretch">
   <div class="row q-lg-col q-lg-sp-4 q-lg-fill-parent">
     <div class="relative minheight-13 q-lg-height-aspect-16-9 left-wide-img">
@@ -39,9 +93,13 @@ layout: default
 
 <div id="next" class="col align-center px-4 py-7 pt-8 q-lg-pt-2">
   <div class="maxwidth-4 width-full col sp-4 pt-6 q-lg-pt-0">
-    <h2 class="font-heading text-xxl q-md-text-xl">{{page.second_headline}}</h2>
-    <div class="markdown text-sm">{{page.second_paragraph | markdownify}}</div>
+    <h2 class="font-heading text-xxl q-md-text-xl">Was erwartet Dich bei uns?</h2>
+    <div class="markdown text-sm">Less but better – diese inspirierenden Worte von Dieter Rams findest du bei uns nicht nur in einem unserer vielen schönen Arbeitsräume, sondern auch in der Haltung des Designteams bei D-LABS. Dabei geht es uns um die Konzentration auf das Wesentliche eines Produkts, das Erforschen des eigentlichen Kerns einer gestalterischen Herausforderung und die zielführende Umsetzung der besten Lösung für jeden unserer vielseitigen Kunden. Dabei legen wir viel Wert auf die ausgewogene Balance zwischen viel Handlungs- und Gestaltungsspielraum jedes einzelnen Kreativen und den regen Austausch im gesamten Team.</div>
   </div>
+</div>
+
+<div class="col align-center px-4 py-7">
+{%- include jobs-description.html  -%}
 </div>
 
 <div class="col align-center px-4 py-7">
@@ -77,16 +135,10 @@ layout: default
   </div>
 </div>
 
-<div class="col align-center px-4 py-7">
-  <div class="maxwidth-5 width-full row q-lg-col sp-7 q-lg-sp-4">
-    <div class="col sp-4 width-1_2 q-lg-width-full">
-      <h4 class="uppercase font-heading text-sm">{{_.profile_heading}}</h4>
-      <div class="markdown text-sm">{{page.profile | markdownify}}</div>
-    </div>
-    <div class="col sp-4 width-1_2 q-lg-width-full">
-      <h4 class="uppercase font-heading text-sm">{{_.tasks_heading}}</h4>
-      <div class="markdown text-sm">{{page.tasks | markdownify}}</div>
-    </div>
+<div id="next" class="col align-center px-4 py-7 pb-8 q-lg-pt-2">
+  <div class="maxwidth-4 width-full col sp-4 yok-pt-6 q-lg-pt-0">
+    <h2 class="font-heading text-xxl q-md-text-xl">{{page.second_headline}}</h2>
+    <div class="markdown text-sm">{{page.second_paragraph | markdownify}}</div>
   </div>
 </div>
 

@@ -1,0 +1,12 @@
+{%- assign _ = site.data.pages.jobs[page.locale] -%}
+
+  <div class="maxwidth-5 width-full row q-lg-col sp-7 q-lg-sp-4">
+    <div class="col sp-4 width-1_2 q-lg-width-full">
+      <h4 class="uppercase font-heading text-sm">{{_.profile_heading}}</h4>
+      <div class="markdown text-sm">{{page.profile | markdownify}}</div>
+    </div>
+    <div class="col sp-4 width-1_2 q-lg-width-full">
+      <h4 class="uppercase font-heading text-sm">{{_.tasks_heading}}</h4>
+      <div class="markdown text-sm">{{page.tasks | markdownify}}</div>
+    </div>
+  </div>
