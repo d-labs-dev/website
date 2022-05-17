@@ -19,6 +19,8 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 markdown: kramdown
+port: 8080
+host: 0.0.0.0
 
 kramdown:
   hard_wrap: true
