@@ -2,10 +2,10 @@
 
 ## Setup
 
-1. Setup Ruby
-2. Install jekyll and bundler globally
+1. Setup Ruby (Ruby version must be lower than 3, some packages may not work with Ruby >=3.0)
+2. Install bundler globally
   ```bash
-  gem install jekyll bundler
+  gem install bundler
   ```
 3. Clone this repo and `cd` into it
 4. `bundle install`
