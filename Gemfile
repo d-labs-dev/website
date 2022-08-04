@@ -8,7 +8,9 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.8.6"
+
+# jekyll-assets is not compatible with Jekyll 4 and above
+gem "jekyll", "~> 3.9.2"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
@@ -34,5 +36,9 @@ gem "mini_magick"
 gem "image_optim"
 
 gem "uglifier"
-# JS runtime required by uglifier
-gem "therubyracer"
+
+# needed for jekyll serve
+gem "kramdown-parser-gfm"
+
+# jekyll serve requires version < 4, so we need to use the downgraded version
+gem "sprockets", "~> 3.7" 

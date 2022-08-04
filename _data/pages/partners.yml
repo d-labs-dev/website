@@ -1,5 +1,5 @@
 partners:
-  - name: Automotive BerlinBrandenbug
+  - name: Automotive BerlinBrandenburg
     logo: partners/logo_automotive-ber.svg
     link: https://www.ac-bb.de/
   - name: GERMAN UPA
@@ -14,6 +14,9 @@ partners:
   - name: Silicon Sanssouci
     logo: partners/logo_sisa.svg
     link: https://www.silicon-sanssouci.org/
+  - name: medianet
+    logo: partners/logo_medianet.svg
+    link: https://www.medianet-bb.de
 
 de:
   title: Wir sind Teil eines starken Netzwerks
