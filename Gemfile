@@ -42,3 +42,5 @@ gem "kramdown-parser-gfm"
 
 # jekyll serve requires version < 4, so we need to use the downgraded version
 gem "sprockets", "~> 3.7" 
+
+gem "mini_racer"
