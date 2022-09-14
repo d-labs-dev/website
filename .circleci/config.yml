@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/d-labs-website
     docker:
-      - image: dlabsdev/website-build:1.1.0
+      - image: dlabspotsdam/website-build:latest
     steps:
       - checkout
       - restore_cache:
