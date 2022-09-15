@@ -1,5 +1,5 @@
-{%- assign _ = site.data.pages.partners[page.locale] -%}
-
+{%- assign partners = site.data.pages.partners -%}
+{%- assign _ = partners[page.locale] -%}
 <div class="col sp-5">
   <div class="markdown">
     <h1>{{ _.title }}</h1>
@@ -7,12 +7,40 @@
   </div>
 
   <div class="row wrappable">
-    {%- for partner in site.data.pages.partners.partners -%}
-    <a href={{partner.link}} class="row justify-center align-center width-1_3 px-4 py-3 q-lg-width-1_2" target="_blank">
+    {%- for partner in partners.partners -%}
+    {%- case partner.name -%}
+    {%- when "Automotive BerlinBrandenburg" -%}
+    <a href={{partner.link}} class="row justify-center align-center width-1_3 py-4 pr-7 q-lg-px-3 q-lg-width-1_2"
+      target="_blank">
       {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
     </a>
+    {%- when "GERMAN UPA" -%}
+    <a href={{partner.link}} class="row justify-center align-center width-1_3 py-4 px-5 q-lg-px-3 q-lg-width-1_2"
+      target="_blank">
+      {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
+    </a>
+    {%- when "hpi" -%}
+    <a href={{partner.link}}
+      class="row justify-center align-center width-1_3 py-4 pl-7 pr-2 q-lg-pr-5 q-lg-pl-3 q-lg-width-1_2"
+      target="_blank">
+      {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
+    </a>
+    {%- when "hpi dschool" -%}
+    <a href={{partner.link}} class="row justify-center align-center width-1_3 py-4 pr-7 q-lg-px-3 q-lg-width-1_2"
+      target="_blank">
+      {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
+    </a>
+    {%- when "Silicon Sanssouci" -%}
+    <a href={{partner.link}}
+      class="row justify-center align-center width-1_3 py-4 px-6 q-lg-pl-2 q-lg-pr-5 q-lg-width-1_2" target="_blank">
+      {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
+    </a>
+    {%- when "medianet" -%}
+    <a href={{partner.link}} class="row justify-center align-center width-1_3 py-4 pl-7 q-lg-px-3 q-lg-width-1_2"
+      target="_blank">
+      {% asset {{partner.logo}} alt={{partner.name}} title={{partner.name}} class="full-width maxheight-6" %}
+    </a>
+    {%- endcase -%}
     {%- endfor -%}
   </div>
 </div>
-
-

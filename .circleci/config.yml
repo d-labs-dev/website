@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/d-labs-website
     docker:
-      - image: dlabsdev/website-build:1.1.0
+      - image: dlabspotsdam/website-build:latest
     steps:
       - checkout
       - restore_cache:
@@ -30,7 +30,7 @@ jobs:
   deploy:
     working_directory: ~/d-labs-website
     docker:
-      - image: dlabsdev/website-build:1.1.0
+      - image: dlabspotsdam/website-build:latest
     steps:
       - checkout
       - attach_workspace:
@@ -44,7 +44,7 @@ jobs:
   invalidate-cache:
     working_directory: ~/d-labs-website
     docker:
-      - image: dlabsdev/website-build:1.1.0
+      - image: dlabspotsdam/website-build:latest
     steps:
       - run: aws cloudfront create-invalidation --distribution-id E9ENVGAMEA762 --paths '/*'
 
