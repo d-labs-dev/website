@@ -567,7 +567,19 @@ function smoothAnchorScroll() {
   });
 }
 
+function disableGoogleFontsInGoogleMapsAPI(){
+  var head = document.getElementsByTagName('head')[0];
+  var insertBefore = head.insertBefore;
+  head.insertBefore = function (newElement, referenceElement) {
+    if (newElement.href && newElement.href.indexOf('https://fonts.googleapis.com/css?family=') > -1) {
+      return;
+    }
+    insertBefore.call(head, newElement, referenceElement);
+  }
+}
+
 $(function() {
+  disableGoogleFontsInGoogleMapsAPI();
   setupScrollSpy();
   toggleButton();
   headerScroll();
