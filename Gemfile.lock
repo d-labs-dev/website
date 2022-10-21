@@ -93,6 +93,7 @@ GEM
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     libv8-node (16.10.0.0-x86_64-darwin)
+    libv8-node (16.10.0.0-x86_64-linux)
     liquid (4.0.3)
     liquid-tag-parser (1.9.0)
       extras (~> 0.3)
@@ -106,7 +107,9 @@ GEM
       libv8-node (~> 16.10.0.0)
     minitest (5.16.3)
     multi_json (1.15.0)
-    nokogiri (1.13.8-x86_64-darwin)
+    nokogiri (1.13.9-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
@@ -144,6 +147,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   image_optim
