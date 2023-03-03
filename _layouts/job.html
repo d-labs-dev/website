@@ -20,7 +20,11 @@ layout: default
           <h1 class="font-heading text-xxl q-md-text-xl">{{page.first_headline | markdownify}}</h1>
           <div class="markdown text-sm">{{page.first_paragraph | markdownify}}</div>
         </div>
-        <div class="push"></div>
+        <div class="row justify-end pr-6">
+          <a class="button-text px-6 overflow-visible" href="#next">
+            {% asset {{_.apply_now_button}} %}
+          </a>
+        </div>
       </div>
     </div>
   </div>
