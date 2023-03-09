@@ -3,6 +3,7 @@
 
 <div class="height-screen text-white relative col justify-center align-center px-4 py-5">
   <div class="absolute inset-full bg-blue" data-image-fader>   
+    {% asset dlabs_jobs-slider-12.jpg class="absolute inset-full hidden"%}   
     {% asset dlabs_jobs-slider-2.jpg class="absolute inset-full hidden"%}
     {% asset dlabs_jobs-slider-3.jpg class="absolute inset-full hidden"%}
     {% asset dlabs_jobs-slider-4.jpg class="absolute inset-full hidden"%}
@@ -11,18 +12,19 @@
     {% asset dlabs_jobs-slider-7.jpg class="absolute inset-full hidden"%}
     {% asset dlabs_jobs-slider-8.jpg class="absolute inset-full hidden"%}
     {% asset dlabs_jobs-slider-9.jpg class="absolute inset-full hidden"%}
-    {% asset dlabs_jobs-slider-10.jpg class="absolute inset-full"%}
+    {% asset dlabs_jobs-slider-10.jpg class="absolute inset-full hidden"%}
+    <!-- last image should not be hidden, because it is shown first -->
+    {% asset dlabs_jobs-slider-11.jpg class="absolute inset-full"%}
   </div>
-
-  <!-- last image should not be hidden, because it is shown first -->
-
 
   <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.title_text | markdownify}}</div>
   <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh;bottom:-1px;">
     <polygon points="0 100, 100 100, 100 0" fill="white"/>
   </svg>
   <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1">
-    <a class="button-text" href="#list">{% asset icons/icon-arrow-down.svg @inline %}</a>
+    <a class="button-text" href="#list">
+      {% asset icons/icon-arrow-down.svg @inline %}
+    </a>
   </div>
 </div>
 
@@ -32,7 +34,9 @@
   </div>
   <div class="col sp-6 align-center width-full">
     <div class="maxwidth-7 width-full">
-      <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.list_title}}</div>
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line">
+        {{_.list_title}}
+      </div>
     </div>
 
     <div class="width-full maxwidth-5 col sp-2">
@@ -49,14 +53,21 @@
     </div>
 
     <div class="width-full maxwidth-5 col sp-6">
-      <div class="">{{_.initiative_text | markdownify}}</div>
+      <div class="col sp-4">
+        <div>{{_.initiative_text | markdownify}}</div>
+        <div>{{_.inclusivity_text | markdownify}}</div>
+      </div>
       <div class="col align-center">
-        <a class="button is-black" href="{{_.initiative_button_target}}">{{_.initiative_button_label}}</a>
+        <a class="button is-black" href="{{_.initiative_button_target}}">
+          {{_.initiative_button_label}}
+        </a>
       </div>
     </div>
   </div>
 
   {%- include jobs-slider.html  -%}
+
+  {%- include benefits-slider.html  -%}
 </div>
 
 

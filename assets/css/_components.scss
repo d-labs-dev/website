@@ -102,6 +102,61 @@
       color: $black;
     }
   }
+  &.is-wide {
+    padding: 1rem 4rem 0.85rem;
+  }
+}
+
+.button-circle {
+  @extend %raw-button;
+  @extend %button-with-text;
+  border-radius: 50%;
+  border: 2px solid $black;
+  width: 5rem;
+  height: 5rem;
+  // center the text inside the button
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // make the text inside the button thinner
+  font-weight: normal;
+  // make the line spacing a little bigger
+  line-height: 1.4;
+  // tilt the button a bit
+  transform: rotate(15deg);
+  color: $white;
+  background-color: $blue;
+  border: 2px solid $blue;
+  &:hover,
+  &:focus {
+    background-color: $white;
+    color: $blue;
+  }
+  &:focus {
+    outline: none;
+  }
+
+  &.is-white {
+    color: $blue;
+    background-color: $white;
+    border-color: $white;
+    &:hover {
+      color: $black;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem $white-a25;
+    }
+  }
+
+  &.is-black {
+    background-color: $black;
+    border-color: $black;
+    &:hover,
+    &:focus {
+      background-color: $white;
+      color: $black;
+    }
+  }
 }
 
 .button-ghost {

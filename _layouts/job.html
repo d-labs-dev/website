@@ -16,15 +16,20 @@ layout: default
         {% endlocale_link %}
         <div class="push"></div>
         <div class="col sp-3">
-          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{page.title}} – {{page.location}}</div>
-          <h1 class="font-heading text-xxl q-md-text-xl">{{page.first_headline | markdownify}}</h1>
+          <!-- <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{page.title}} – {{page.location}}</div> -->
+          <h1 class="font-heading text-xxl q-md-text-xl">{{page.title | markdownify}}</h1>
+          <h2 class="font-heading text-xl q-md-text-l">{{page.location | markdownify}}</h2>
           <div class="markdown text-sm">{{page.first_paragraph | markdownify}}</div>
         </div>
-        <div class="push"></div>
+        <div class="row justify-end pr-6 hide-lg overflow-visible">
+          <a href="{{_.team_fit_url}}" class="button-circle is-black">
+            {{_.circle_apply_now_button_label}}
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="absolute inset-x bottom-0 col align-center pb-5 hide-lg">
+  <div class="absolute inset-x-1_3 bottom-0 col align-center pb-5 hide-lg ">
     <a class="button-text is-blue hide-lg" href="#next">
     <div class="col sp-3 align-center hide-lg">
       <a class="button-text" href="#next">
@@ -37,7 +42,7 @@ layout: default
   </div>
 </div>
 
-<div id="next" class="col align-center px-4 py-7 pt-8 q-lg-pt-2">
+<!-- <div id="next" class="col align-center px-4 py-7 pt-8 q-lg-pt-2">
   <div class="maxwidth-4 width-full col sp-4 pt-6 q-lg-pt-0">
     <h2 class="font-heading text-xxl q-md-text-xl">{{page.second_headline}}</h2>
     <div class="markdown text-sm">{{page.second_paragraph | markdownify}}</div>
@@ -53,18 +58,18 @@ layout: default
     </div>
     {%- endfor -%}
   </div>
-</div>
+</div> -->
 
-<div class="col align-center px-4 py-7">
+<!-- <div class="col align-center px-4 py-7">
 {%- include jobs-slider.html  -%}
-</div>
+</div> -->
 
-<div class="col align-center px-4 py-7 bg-blue sp-5">
+<!-- <div class="col align-center px-4 py-7 bg-blue sp-5">
   <h3 class="font-heading text-xl q-md-text-lg text-white">{{_.team_fit_heading}}</h3>
   <a href="{{_.team_fit_url}}" class="button is-black">{{_.team_fit_button_label}}</a>
-</div>
+</div> -->
 
-<div class="col align-center px-4 py-7">
+<!-- <div class="col align-center px-4 py-7">
   <div class="maxwidth-4 width-full col sp-6">
     <h2 class="font-heading text-xxl q-md-text-xl">{{page.third_headline}}</h2>
     <div class="markdown text-sm">{{page.third_paragraph | markdownify}}</div>
@@ -75,9 +80,9 @@ layout: default
       </div>
     </a>
   </div>
-</div>
+</div> -->
 
-<div class="col align-center px-4 py-7">
+<!-- <div class="col align-center px-4 py-7">
   <div class="maxwidth-5 width-full row q-lg-col sp-7 q-lg-sp-4">
     <div class="col sp-4 width-1_2 q-lg-width-full">
       <h4 class="uppercase font-heading text-sm">{{_.profile_heading}}</h4>
@@ -88,13 +93,40 @@ layout: default
       <div class="markdown text-sm">{{page.tasks | markdownify}}</div>
     </div>
   </div>
+</div> -->
+<div id="next" class="col align-center px-4 py-7">
+  <div class="maxwidth-7 width-full">
+    <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.you_are_missing}}</div>
+  </div>
+  <div class="width-1_3 q-lg-width-full col pt-7">
+    <div class="col sp-4">
+      <h4 class="uppercase font-heading text-sm">{{_.profile_heading}}</h4>
+      <div class="markdown text-sm">{{page.profile | markdownify}}</div>
+    </div>
+    <div class="col sp-4 pt-7">
+      <h4 class="uppercase font-heading text-sm">{{_.tasks_heading}}</h4>
+      <div class="markdown text-sm">{{page.tasks | markdownify}}</div>
+    </div>
+  </div>
 </div>
 
 <div class="col align-center px-4 py-7 bg-blue">
-  <div class="maxwidth-4 width-full align-center col sp-5">
+  <div class="maxwidth-3 width-full align-center col sp-5">
     <h3 class="font-heading text-xl q-md-text-lg text-white text-center">{{_.apply_now_heading}}</h3>
     <div class="markdown text-sm text-white text-center">{{_.apply_now_description | markdownify}}</div>
-    <a href="{{_.apply_now_url}}" class="button is-black">{{_.apply_now_button_label}}</a>
+    <a href="{{_.apply_now_url}}" class="button is-black is-wide">{{_.apply_now_button_label}}</a>
+  </div>
+</div>
+
+<div class="col align-center px-4 py-7">
+  <div class="maxwidth-4 width-full col sp-6 align-center">
+    <div class="markdown font-medium">{{page.third_paragraph | markdownify}}</div>
+    <a class="button-text is-blue" href="{{page.job_posting.url}}" target="_blank">
+      <div class="row sp-2 align-center">
+        {% asset icons/icon-download.svg @inline %}
+        <div>{{_.download_button_label}}</div>
+      </div>
+    </a>
   </div>
 </div>
 

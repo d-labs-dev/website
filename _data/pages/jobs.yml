@@ -1,15 +1,16 @@
 de:
-  title_text: '**Dein Profil!**<br/>Unser Angebot!'
+  title_text: 'Wer uns fehlt,<br/>**bist du!**'
 
   intro_text: 'Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere Jobangebote für dich an und sende uns deine Kontaktdaten! Der erste Schritt zum neuen Job bei D-LABS in Potsdam oder am Standort Berlin ist schnell gemacht.'
-  list_title: Wir suchen
+  list_title: Wir suchen Dich*
 
   initiative_text: 'Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige uns, wie Du unser Team verstärken könntest!'
-  initiative_button_label: Jetzt initiativ bewerben
+  inclusivity_text: 'Ein Teil von D-LABS zu sein bedeutet so zu sein wie du bist!
+  Daher gelten unsere Personenbezeichnungen natürlich für alle Geschlechteridentitäten.'
+  initiative_button_label: Jetzt initiativ bewerben!
   initiative_button_target: mailto:jobs@d-labs.com
 
   slider_title: Warum D-LABS?
-
   slides:
     - name: Peter 
       position: Senior User Researcher
@@ -24,19 +25,24 @@ de:
       quote: Bei D-LABS kann ich so arbeiten, dass ich noch Zeit für meine Familie habe. Gleichzeitig habe ich die Möglichkeit auf anspruchsvollen Projekten zu arbeiten. Diese Vereinbarkeit ist mir sehr wichtig, weil Familie zu haben hier nicht bedeutet Abstriche in der beruflichen Entwicklung machen zu müssen.
       img: profil_doreen.jpg
 
-  back_button_label: Alle Jobangebote
-  learn_more: Mehr Erfahren
-
+  benefits_title: Unsere Benefits für Dich!
   benefits:
     - label: Weiterbildung
       img: job-benefits/icon-qualification.svg
-    - label: Mobiles Arbeiten
-      img: job-benefits/icon-homeoffice.svg
-    - label: Flexible Arbeitszeiten
+      text: "Sei es die klassische Fortbildung, eine neue Sprache, der Blick über den Tellerrand des eigenen Fachbereichs oder der Ausbau unserer D-LABS Bibliothek: D-LABS unterstützt Dich dabei, Dich dahin zu entwickeln, wo Du hinwillst. Interne Formate fördern den Wissenstransfer im Team, während für externe Formate alle Kosten übernommen werden."
+    - label: Flexibles Arbeiten
       img: job-benefits/icon-flexible-time.svg
-    - label: Teamevents
+      text: "New Work ist für uns Alltag. Bei D-LABS entscheidest Du, welche Arbeitsweise Dir am Besten gefällt. Ob Präsenzbüro oder Homeoffice, ob früher Vogel oder Nachteule – wir sagen: Die Mischung macht's! Auch zwischen unseren Standorten darf frei und bedarfsgerecht gewählt werden. Selbst wer gerne ein paar Monate im Jahr aus dem Ausland arbeitet, kommt auf seine Kosten. Das ist echte Flexibilität!"
+    - label: Unternehmenskulur
       img: job-benefits/icon-teamevent.svg
-
+      text: "Agil arbeiten heißt, auf Augenhöhe miteinander umzugehen. Teamübergreifend pflegen wir daher eine lockere und kreative Arbeitsatmosphäre und legen Wert darauf, dass jede Stimme Gewicht hat und gehört wird. So spannend unsere Projekte auch sind: Bei D-LABS arbeiten heißt, Mensch zu sein. Neben unseren Teammeetings organisieren wir daher regelmäßig Events, bei denen alle vorbeikommen und gemeinsam entspannen können."
+    - label: Familienfreundlichkeit
+      img: job-benefits/icon-family-friendliness.svg
+      text: "Für manche sind es die Kids, für andere der beste Freund des Menschen – zum Menschsein gehört die Familie und so ist es bei D-LABS selbstverständlich, Arbeitszeiten an den Zeitplan der Kinder anzupassen, für private Termine Platz im Kalender freizumachen oder den Familienhund mit in's Büro nehmen zu können."
+  
+  back_button_label: Alle Jobangebote
+  learn_more: Klingt spannend!
+ 
   team_fit_heading: Du passt perfekt in unser Team?
   team_fit_url: mailto:jobs@d-labs.com
   team_fit_button_label: Jetzt Unterlagen schicken!
@@ -46,14 +52,11 @@ de:
   profile_heading: Dein Profil
   tasks_heading: Deine Aufgaben
 
-  team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: mailto:jobs@d-labs.com
-  team_fit_button_label: Jetzt Unterlagen schicken!
-
-  apply_now_heading: Bewirb Dich jetzt!
-  apply_now_description: Gutes Arbeitsklima, Betreuung von regionalen und überregionalen Kunden sowie viel Gestaltungsspielraum und Freiraum sind für Dich vielleicht nur noch einen Klick entfernt!
+  circle_apply_now_button_label: Jetzt bewerben
+  apply_now_heading: Bist du bereit?
+  apply_now_description: "Sende uns deine Bewerbungsunterlagen oder erzähl uns in einem kurzen Video wer du bist!"
   apply_now_url: mailto:jobs@d-labs.com
-  apply_now_button_label: Jetzt Unterlagen schicken!
+  apply_now_button_label: Jetzt bewerben!
 
   contact:
     title: Für Fragen stehen wir Dir gern zur Verfügung.
@@ -65,15 +68,17 @@ de:
     email: jobs@d-labs.com
     cta_text: Anfragen
 
-
+  you_are_missing: Wer uns fehlt, bist Du!
 
 en:
-  title_text: '**Your profile!**<br/>Our offer!'
+  title_text: 'Who we are missing,<br/>**is you!**'
 
-  intro_text: 'Would you like to join our creative, interdisciplinary team? Then take a look at our job offers for you and send us your contact details! The first step to a new job at D-LABS in Potsdam or at our Berlin location is quickly taken.'
-  list_title: We are looking for
+  intro_text: 'Would you like to join our creative, interdisciplinary team? Then take a look at our job offers for you and send us your contact details! The first step to a new job at D-LABS is taken quickly.'
+  list_title: We are looking for you*
 
-  initiative_text: 'Your dream job isn’t listed? No problem. Just write us anyway and show us how you could strengthen our team!'
+  initiative_text: 'Your dream job isn’t listed? No problem. Just write us anyway and show us how you could strengthen our team!
+  We are always looking for new talents.'
+  inclusivity_text: 'To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally apply to all gender identities.'
   initiative_button_label: apply now
   initiative_button_target: mailto:jobs@d-labs.com
 
@@ -93,36 +98,34 @@ en:
       quote: At D-LABS, I can work in such a way that I still have time for my family. At the same time, I have the opportunity to work on demanding projects. This compatibility is very important to me because here having a family does not mean having to give up anything in my professional development.
       img: profil_doreen.jpg
 
-  back_button_label: Alle Jobangebote
-  learn_more: Mehr Erfahren
+  back_button_label: All job offers
+  learn_more: Sounds exciting!
 
+  benefits_title: Our benefits for You!
   benefits:
-    - label: Weiterbildung
+    - label: Advanced Training
       img: job-benefits/icon-qualification.svg
-    - label: Mobiles Arbeiten
-      img: job-benefits/icon-homeoffice.svg
-    - label: Flexible Arbeitszeiten
+      text: "Whether it's professional coaching, learning a new language, expanding your expertise beyond the boundaries of your discipline or adding books to our D-LABS library: D-LABS supports you in getting where you want to go. Team sessions promote the transfer of knowledge between team members, while costs are covered for external coaching."
+    - label: Flexibility
       img: job-benefits/icon-flexible-time.svg
-    - label: Teamevents
+      text: "We live and love New Work. At D-LABS, you decide when and where you want to work. In-person or at home, early bird or night owl – mix and match as you see fit! You may choose freely between our offices… or is your preferred environment abroad? No problem: For a few months, you can work from a country of your choice as well. That's true flexibility!"
+    - label: Company Culture
       img: job-benefits/icon-teamevent.svg
-
-  team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: mailto:jobs@d-labs.com
-  team_fit_button_label: Jetzt Unterlagen schicken!
+      text: "An agile mindset requires being on equal footing with everyone you work with. That's why we cultivate an easygoing and creative atmosphere across our teams and ensure every voice carries weight and is heard. As exciting as our projects can be: We're all human at D-LABS. Aside from our team meetings, we regularly organize events to come together and relax after a job well done."
+    - label: Family Friendliness
+      img: job-benefits/icon-family-friendliness.svg
+      text: "For some it's the kids, for others man's best friend – family is a crucial part of human experience. For us at D-LABS, it's only natural to adjust working hours to your child's schedule, to make room in your calendar for private appointments or take your family dog to the office."
 
   download_button_label: Download PDF
 
-  profile_heading: Dein Profil
-  tasks_heading: Deine Aufgaben
+  profile_heading: Your profile
+  tasks_heading: Your tasks
 
-  team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: mailto:jobs@d-labs.com
-  team_fit_button_label: Jetzt Unterlagen schicken!
-
-  apply_now_heading: Bewirb dich jetzt!
-  apply_now_description: Gutes Arbeitsklima, Betreuung von regionalen und überregionalen Kunden sowie viel Gestaltungsspielraum und Freiraum sind für dich vielleicht nur noch einen Klick entfernt!
+  circle_apply_now_button_label: Apply<br/>now
+  apply_now_heading: Are you ready?
+  apply_now_description: Send us your application documents or tell us in a short video who you are!
   apply_now_url: mailto:jobs@d-labs.com
-  apply_now_button_label: Jetzt Unterlagen schicken!
+  apply_now_button_label: Apply now!
 
   contact:
     title: If you have any questions, please do not hesitate to contact us.
@@ -133,3 +136,4 @@ en:
     mobile: +49 151 462 53 803
     email: jobs@d-labs.com
     cta_text: contact
+  you_are_missing: Who we are missing, is you!
