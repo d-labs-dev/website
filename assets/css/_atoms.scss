@@ -43,6 +43,19 @@
   align-items: baseline;
 }
 
+.align-self-start {
+  align-self: flex-start;
+}
+.align-self-center {
+  align-self: center;
+}
+.align-self-end {
+  align-self: flex-end;
+}
+.align-self-baseline {
+  align-self: baseline;
+}
+
 @each $key, $val in $media-queries {
   @media #{$val} {
     .q-#{$key}-align-start {
@@ -305,6 +318,11 @@
   left: 0;
 }
 
+.inset-x-1_3 {
+  right: 33%;
+  left: 33%;
+}
+
 .inset-y {
   top: 0;
   bottom: 0;
@@ -471,9 +489,17 @@
     }
   }
 }
-
+.font-light {
+  font-weight: 300;
+}
 .font-normal {
   font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
 }
 .font-bold {
   font-weight: bold;
