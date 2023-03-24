@@ -26,7 +26,7 @@ module Jekyll
       link_classes = (@attributes['class'] || "").to_s
       hash = @attributes['hash'].to_s
       site.pages.each do |node|
-        return "<a href=\"#{node.url}#{hash ? "##{hash}" : ''}\" class=\"#{page["url"] == node.url ? "is-active " : ""}#{@ref === "jobs" ? "is-badge " : ""}#{link_classes}\">#{text}</a>" if node["ref"] == @ref and node["locale"] == locale
+        return "<a href=\"#{node.url}#{hash ? "##{hash}" : ''}\" class=\"#{page["url"] == node.url ? "is-active " : ""}#{@ref === "jobs" ? "is-badge " : ""}#{link_classes}\"><div class=\"#{page["url"] == node.url && @ref === "jobs" ? "is-active-badge-text " : ""}\">#{text}</div></a>" if node["ref"] == @ref and node["locale"] == locale
       end
 
       raise ArgumentError, <<~MSG

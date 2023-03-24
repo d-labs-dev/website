@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="col sp-7 sroll-snap-start pt-7 pb-8" id="next">
+  <div class="col sp-7 pt-7 pb-t24" id="next">
     <div class="height-12 relative q-lg-height-aspect-16-9">
       {% asset {{_.about_image}} class="absolute inset-full"%}
     </div>
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<div>
+<div id="locations" class="scroll-margin-top">
 
   {%- assign _loc = site.data.includes.locations[page.locale] -%}
   <div class="bg-blue text-white col px-4 pt-7 pb-8 sp-4 align-center relative zindex-1">

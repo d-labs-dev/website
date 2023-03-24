@@ -112,16 +112,16 @@
   @extend %button-with-text;
   border-radius: 50%;
   border: 2px solid $black;
-  width: 5rem;
-  height: 5rem;
+  width: 5.5rem;
+  height: 5.5rem;
   // center the text inside the button
   display: flex;
   align-items: center;
   justify-content: center;
-  // make the text inside the button thinner
-  font-weight: normal;
+  // font medium
+  font-weight: 500;
   // make the line spacing a little bigger
-  line-height: 1.4;
+  line-height: 1.3;
   // tilt the button a bit
   transform: rotate(15deg);
   color: $white;
@@ -236,6 +236,15 @@
   text-decoration: none;
   &:hover {
     color: $darkBlue;
+  }
+}
+
+.link-white {
+  transition-property: color;
+  color: $white;
+  text-decoration: none;
+  &:hover {
+    color: $white-a90;
   }
 }
 
@@ -415,4 +424,8 @@
   @media #{$query-lg} {
     width: 100%;
   }
+}
+
+.scroll-margin-top {
+  scroll-margin-top: 8rem;
 }

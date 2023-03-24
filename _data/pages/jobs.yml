@@ -2,9 +2,9 @@ de:
   title_text: 'Wer uns fehlt,<br/>**bist du!**'
 
   intro_text: 'Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere Jobangebote für dich an und sende uns deine Kontaktdaten! Der erste Schritt zum neuen Job bei D-LABS in Potsdam oder am Standort Berlin ist schnell gemacht.'
-  list_title: Wir suchen Dich*
+  list_title: Wir suchen dich
 
-  initiative_text: 'Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige uns, wie Du unser Team verstärken könntest!'
+  initiative_text: 'Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige uns, wie du unser Team verstärken könntest!'
   inclusivity_text: 'Ein Teil von D-LABS zu sein bedeutet so zu sein wie du bist!
   Daher gelten unsere Personenbezeichnungen natürlich für alle Geschlechteridentitäten.'
   initiative_button_label: Jetzt initiativ bewerben!
@@ -15,24 +15,32 @@ de:
     - name: Peter 
       position: Senior User Researcher
       quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
-      img: profil_peter.jpg
+      img: quotes/quote-peter.png
     - name: Claudia 
       position: Director Digital Experience Design
       quote: Die enge Zusammenarbeit mit Experten aus verschiedenen Bereichen und mit unterschiedlichen Schwerpunkten ist immer wieder spannend. Auch die Bandbreite der Projekte für namhafte Kunden aus den unterschiedlichsten Branchen sorgt dafür, dass ich immer noch etwas dazu lernen kann. Nicht zuletzt schlägt mein Herz für Potsdam.
-      img: profil_claudia-St.jpg
+      img: quotes/quote-claudia.png
     - name: Doreen   
       position: Senior Digital Experience Designer
       quote: Bei D-LABS kann ich so arbeiten, dass ich noch Zeit für meine Familie habe. Gleichzeitig habe ich die Möglichkeit auf anspruchsvollen Projekten zu arbeiten. Diese Vereinbarkeit ist mir sehr wichtig, weil Familie zu haben hier nicht bedeutet Abstriche in der beruflichen Entwicklung machen zu müssen.
-      img: profil_doreen.jpg
+      img: quotes/quote-doreen.png
+    - name: Hagen
+      position: Sales, Networking & New Business
+      quote: D-LABS bedeutet für mich, im agilen Miteinander interessante Ideen und Projekte zu entwickeln und digitale Lösungen zu schaffen – mit Menschen und für Menschen.
+      img: quotes/quote-hagen.png
+    - name: Nina
+      position: Digital Experience Designer
+      quote: Wir sind Spürnasen und Macher. Wozu lange fackeln? Wir wollen der Ursache auf den Grund gehen – und zwar gründlich!
+      img: quotes/quote-nina.png
 
-  benefits_title: Unsere Benefits für Dich!
+  benefits_title: Unsere Benefits für dich!
   benefits:
     - label: Weiterbildung
       img: job-benefits/icon-qualification.svg
-      text: "Sei es die klassische Fortbildung, eine neue Sprache, der Blick über den Tellerrand des eigenen Fachbereichs oder der Ausbau unserer D-LABS Bibliothek: D-LABS unterstützt Dich dabei, Dich dahin zu entwickeln, wo Du hinwillst. Interne Formate fördern den Wissenstransfer im Team, während für externe Formate alle Kosten übernommen werden."
+      text: "Sei es die klassische Fortbildung, eine neue Sprache, der Blick über den Tellerrand des eigenen Fachbereichs oder der Ausbau unserer D-LABS Bibliothek: D-LABS unterstützt dich dabei, dich dahin zu entwickeln, wo Du hinwillst. Interne Formate fördern den Wissenstransfer im Team, während für externe Formate alle Kosten übernommen werden."
     - label: Flexibles Arbeiten
       img: job-benefits/icon-flexible-time.svg
-      text: "New Work ist für uns Alltag. Bei D-LABS entscheidest Du, welche Arbeitsweise Dir am Besten gefällt. Ob Präsenzbüro oder Homeoffice, ob früher Vogel oder Nachteule – wir sagen: Die Mischung macht's! Auch zwischen unseren Standorten darf frei und bedarfsgerecht gewählt werden. Selbst wer gerne ein paar Monate im Jahr aus dem Ausland arbeitet, kommt auf seine Kosten. Das ist echte Flexibilität!"
+      text: "New Work ist für uns Alltag. Bei D-LABS entscheidest du, welche Arbeitsweise dir am Besten gefällt. Ob Präsenzbüro oder Homeoffice, ob früher Vogel oder Nachteule – wir sagen: Die Mischung macht's! Auch zwischen unseren Standorten darf frei und bedarfsgerecht gewählt werden. Selbst wer gerne ein paar Monate im Jahr aus dem Ausland arbeitet, kommt auf seine Kosten. Das ist echte Flexibilität!"
     - label: Unternehmenskulur
       img: job-benefits/icon-teamevent.svg
       text: "Agil arbeiten heißt, auf Augenhöhe miteinander umzugehen. Teamübergreifend pflegen wir daher eine lockere und kreative Arbeitsatmosphäre und legen Wert darauf, dass jede Stimme Gewicht hat und gehört wird. So spannend unsere Projekte auch sind: Bei D-LABS arbeiten heißt, Mensch zu sein. Neben unseren Teammeetings organisieren wir daher regelmäßig Events, bei denen alle vorbeikommen und gemeinsam entspannen können."
@@ -59,24 +67,25 @@ de:
   apply_now_button_label: Jetzt bewerben!
 
   contact:
-    title: Für Fragen stehen wir Dir gern zur Verfügung.
+    title: Für Fragen stehen wir dir gern zur Verfügung.
     avatar_img: dlabs_contact-julia.jpg
     name: Julia Heyland
-    position: HR Assistentin
+    position: Human Resources Manager
     tel: +49 331 97 992 334
     mobile: +49 151 462 53 803
     email: jobs@d-labs.com
+    our_locations: Zu unseren Standorten
     cta_text: Anfragen
 
-  you_are_missing: Wer uns fehlt, bist Du!
+  you_are_missing: Wer uns fehlt, bist du!
 
 en:
   title_text: 'Who we are missing,<br/>**is you!**'
 
   intro_text: 'Would you like to join our creative, interdisciplinary team? Then take a look at our job offers for you and send us your contact details! The first step to a new job at D-LABS is taken quickly.'
-  list_title: We are looking for you*
+  list_title: We are looking for you
 
-  initiative_text: 'Your dream job isn’t listed? No problem. Just write us anyway and show us how you could strengthen our team!
+  initiative_text: 'Your dream job isn’t listed? No problem. Just contact us anyway and show us how you could strengthen our team!
   We are always looking for new talents.'
   inclusivity_text: 'To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally apply to all gender identities.'
   initiative_button_label: apply now
@@ -88,20 +97,29 @@ en:
     - name: Peter 
       position: Senior User Researcher
       quote: Because we make the world a little more accessible every day. With our focus on end-user needs, we create solutions that inspire our customers. This is where user experience is lived.
-      img: profil_peter.jpg
+      img: quotes/quote-peter.png
     - name: Claudia 
       position: Director Digital Experience Design
       quote: The close cooperation with experts from different fields and with different focal points is always exciting. The range of projects for well-known customers from a wide range of industries also ensures that I can still learn something about them. Last but not least, my heart beats for Potsdam.
-      img: profil_claudia-St.jpg
+      img: quotes/quote-claudia.png
     - name: Doreen   
       position: Senior Digital Experience Designer
       quote: At D-LABS, I can work in such a way that I still have time for my family. At the same time, I have the opportunity to work on demanding projects. This compatibility is very important to me because here having a family does not mean having to give up anything in my professional development.
-      img: profil_doreen.jpg
+      img: quotes/quote-doreen.png
+    - name: Hagen
+      position: Sales, Networking & New Business
+      quote: Developing interesting ideas and projects within an agile framework, and creating digital solutions with humans in mind – that's what D-LABS means to me.
+      img: quotes/quote-hagen.png
+    - name: Nina
+      position: Digital Experience Designer
+      quote: We have a nose for what makes people tick and get things done. Why wait? We want to get to the bottom of the users' needs and understand them in all their complexity.
+      img: quotes/quote-nina.png
+
 
   back_button_label: All job offers
   learn_more: Sounds exciting!
 
-  benefits_title: Our benefits for You!
+  benefits_title: Our benefits for you!
   benefits:
     - label: Advanced Training
       img: job-benefits/icon-qualification.svg
@@ -131,9 +149,10 @@ en:
     title: If you have any questions, please do not hesitate to contact us.
     avatar_img: dlabs_contact-julia.jpg
     name: Julia Heyland
-    position: HR Assistant
+    position: Human Resources Manager
     tel: +49 331 97 992 334
     mobile: +49 151 462 53 803
     email: jobs@d-labs.com
+    our_locations: View our locations
     cta_text: contact
   you_are_missing: Who we are missing, is you!
