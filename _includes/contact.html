@@ -1,6 +1,6 @@
 {%- assign contact = include.contact -%}
 <div class="{%if include.is_white %}bg-white text-black{%else%}bg-blue text-white{%endif%} col px-4 pt-7 pb-8 sp-4 align-center">
-  <div class="maxwidth-7 width-full sp-3 row q-xl-col q-xl-sp-6">
+  <div class="maxwidth-7 width-full sp-3 row q-xl-col q-xl-sp-6 pb-0 q-xl-pb-t6">
     <h2 class="font-heading text-xl maxwidth-4">{{contact.title}}</h2>
     <div class="push hide-lg"></div>
     <div class="row sp-5 q-md-col q-md-align-center">
@@ -23,4 +23,5 @@
       </div>
     </div>
   </div>
+  <a href='/about.html#locations' class="{%if include.is_white %}link{%else%}link-white{%endif%} header-link width-full maxwidth-7"><h2 class="font-heading text-xl maxwidth-4">{{contact.our_locations}} {% asset icons/icon-arrow-right-up.svg @inline %}</h2></a>
 </div>

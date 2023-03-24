@@ -12,17 +12,19 @@ layout: default
     <div class="q-lg-width-full col fill-parent">
       <div class="width-full sp-4 pl-6 col fill-parent maxwidth-4 q-lg-maxwidth-6 q-lg-px-4">
         {% locale_link jobs class:"button-text" hash:"list"%}
-          ← {{_.back_button_label}}
+          ←&nbsp;&nbsp;{{_.back_button_label}}
         {% endlocale_link %}
         <div class="push"></div>
         <div class="col sp-3">
-          <h1 class="font-heading text-xxl q-md-text-xl">{{page.title | markdownify}}</h1>
+          <h1 class="font-heading text-xxl q-md-text-xl">{{page.title}}<a href="/jobs#inclusivity" class="link link-blue">*</a></h1>
           <h2 class="font-heading text-xl q-md-text-l">{{page.location | markdownify}}</h2>
           <div class="markdown text-sm">{{page.first_paragraph | markdownify}}</div>
         </div>
         <div class="row justify-end pr-6 hide-lg overflow-visible">
           <a href="{{_.team_fit_url}}" class="button-circle is-black">
-            {{_.circle_apply_now_button_label}}
+            <div class="pb-t1">
+              {{_.circle_apply_now_button_label}}
+            </div>
           </a>
         </div>
       </div>
@@ -59,8 +61,8 @@ layout: default
 
 <div class="col align-center px-4 py-7 bg-blue">
   <div class="maxwidth-3 width-full align-center col sp-5">
-    <h3 class="font-heading text-xl q-md-text-lg text-white text-center">{{_.apply_now_heading}}</h3>
-    <div class="markdown text-sm text-white text-center">{{_.apply_now_description | markdownify}}</div>
+    <h3 class="font-heading text-xl q-md-text-lg text-white text-center">{{page.second_headline}}</h3>
+    <div class="markdown text-sm text-white text-center">{{page.second_paragraph | markdownify}}</div>
     <a href="{{_.apply_now_url}}" class="button is-black is-wide">{{_.apply_now_button_label}}</a>
   </div>
 </div>
@@ -77,5 +79,5 @@ layout: default
   </div>
 </div>
 
-{%- include contact.html contact=_.contact is_white=true no_button=true-%}
-{%- include locations.html is_white=true with_map=true -%}
+{%- include contact.html contact=_.contact is_white=true no_button=true -%}
+<!-- {%- include locations.html is_white=true with_map=true -%} -->
