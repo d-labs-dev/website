@@ -1,21 +1,21 @@
 locations:
   - name: Potsdam
     is_main: true
-    img: dlabs_about-us-potsdam.jpg
+    img: about-us/dlabs_about-us-potsdam.jpg
     street: Marlene-Dietrich-Allee 15
     zip: 14482
     city: Potsdam
     tel: +49 331 97 992 300
     email: potsdam@d-labs.com
   - name: Berlin
-    img: dlabs_about-us-berlin.jpg
+    img: about-us/dlabs_about-us-berlin.jpg
     street: Matkowskystraße 2
     zip: 10245
     city: Berlin
     tel: +49 30 29 387 978
     email: berlin@d-labs.com
   - name: Stuttgart
-    img: dlabs_about-us-stuttgart.jpg
+    img: about-us/dlabs_about-us-stuttgart.jpg
     street: Königstraße 21
     zip: 70173
     city: Stuttgart

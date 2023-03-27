@@ -5,27 +5,27 @@ de:
 
   slides:
     - name: User Research
-      img: dlabs_approach-research.jpg
+      img: approach/dlabs_approach-research.jpg
       img-position: center
       text: Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience. Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im Anschluss validieren wir die Prototypen und Produkte.
       color: yellow
     - name: Digital Experience Design
-      img: dlabs_approach-design.jpg
+      img: approach/dlabs_approach-design.jpg
       img-position: center
       text: Wir sind Gestalter der Erfahrbarkeit von digitalen Produkten und Services. Im agilen Design-Prozess erarbeiten wir digitale Produkte und Services, die Menschen wirklich brauchen und optimal benutzen können. Wir arbeiten mit UX Researchern, Beratern und Software-Entwicklern Hand in Hand. Dabei beziehen wir den Kunden eng mit ein und validieren Lösungsansätze mit potenziellen Nutzern.
       color: darkBlue
     - name: Software Engineering
-      img: dlabs_approach-engineering.jpg
+      img: approach/dlabs_approach-engineering.jpg
       img-position: center
       text: Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware und Webapplikationen für Desktop und Mobile.
       color: red
     - name: Enabling & Coaching
-      img: dlabs_approach-coaching.jpg
+      img: approach/dlabs_approach-coaching.jpg
       img-position: top
       text: Wir befähigen unsere Kunden darin agil und nutzerzentriert zu arbeiten – nachhaltig und auf die jeweiligen individuellen Kundenbedürfnisse zugeschnitten. Dabei schöpfen unsere Coaches aus unseren jahrelangen Projekterfahrungen und den verschiedenen Expertisen eines interdisziplinären Teams.
       color: green
     - name: Business & Innovation
-      img: dlabs_approach-business.jpg
+      img: approach/dlabs_approach-business.jpg
       img-position: center
       text: Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen Services zu kreieren. Wir entwickeln Strategien und unterstützen unsere Kunden bei der strategischen Neuausrichtung. 
       color: purple
@@ -44,27 +44,27 @@ en:
 
   slides:
     - name: User Research
-      img: dlabs_approach-research.jpg
+      img: approach/dlabs_approach-research.jpg
       img-position: center
       text: We learn the needs and requirements; we test the usability and user experience. We are the experienced partner for our customers and accompany the conception and development. We then validate the prototypes and products.
       color: yellow
     - name: Digital Experience Design
-      img: dlabs_approach-design.jpg
+      img: approach/dlabs_approach-design.jpg
       img-position: center
       text: We are creators of the experienceability of digital products and services. In the agile design process, we develop digital products and services that people really need and can use optimally. We work hand in hand with UX researchers, consultants and software developers. In doing so, we closely involve the customer and validate solutions with potential users.
       color: darkBlue
     - name: Software Engineering
-      img: dlabs_approach-engineering.jpg
+      img: approach/dlabs_approach-engineering.jpg
       img-position: center
       text: We are experts in the planning, analysis, conception and implementation of application software and web applications for desktop and mobile devices.
       color: red
     - name: Enabling & Coaching
-      img: dlabs_approach-coaching.jpg
+      img: approach/dlabs_approach-coaching.jpg
       img-position: top
       text: We enable our customers to work in an agile and user-centered way - sustainable and tailored to the individual needs of each customer. Our coaches draw on our many years of project experience and the various expertise of an interdisciplinary team.
       color: green
     - name: Business & Innovation
-      img: dlabs_approach-business.jpg
+      img: approach/dlabs_approach-business.jpg
       img-position: center
       text: As specialists, we develop digital solutions together with our customers. We develop strategies and support our customers in their strategic realignment. We act as a competent companion in innovation and change processes and help with product and service optimization.
       color: purple

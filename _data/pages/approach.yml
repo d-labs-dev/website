@@ -44,8 +44,8 @@ de:
 
   projects:
     - lead: Projekt 01
-      img1: dlabs_project01-img01.jpg
-      img2: dlabs_project01-img02.jpg
+      img1: projects/dlabs_project01-img01.jpg
+      img2: projects/dlabs_project01-img02.jpg
       circle_img: projects/circle-small_project01.svg
       percentages:
         user_research: 50
@@ -67,8 +67,8 @@ de:
         - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
 
     - lead: Projekt 02
-      img1: dlabs_project02-img01.jpg
-      img2: dlabs_project02-img02.jpg
+      img1: projects/dlabs_project02-img01.jpg
+      img2: projects/dlabs_project02-img02.jpg
       circle_img: projects/circle-small_project02.svg
       percentages:
         user_research: 5
@@ -92,8 +92,8 @@ de:
         - Erfolgreiche Zertifizierung der Teilnehmer als Design Thinking Facilitatoren
 
     - lead: Projekt 03
-      img1: dlabs_project03-img01.jpg
-      img2: dlabs_project03-img02.jpg
+      img1: projects/dlabs_project03-img01.jpg
+      img2: projects/dlabs_project03-img02.jpg
       circle_img: projects/circle-small_project03.svg
       percentages:
         user_research: 5
@@ -166,8 +166,8 @@ en:
 
   projects:
     - lead: Project 01
-      img1: dlabs_project01-img01.jpg
-      img2: dlabs_project01-img02.jpg
+      img1: projects/dlabs_project01-img01.jpg
+      img2: projects/dlabs_project01-img02.jpg
       circle_img: projects/circle-small_project01.svg
       percentages:
         user_research: 50
@@ -189,8 +189,8 @@ en:
         - Forward-thinking service concept for the realization of a uniform customer interface, e.g. with the help of an online self-service portal for the various customer groups
 
     - lead: Project 02
-      img1: dlabs_project02-img01.jpg
-      img2: dlabs_project02-img02.jpg
+      img1: projects/dlabs_project02-img01.jpg
+      img2: projects/dlabs_project02-img02.jpg
       circle_img: projects/circle-small_project02.svg
       percentages:
         user_research: 5
@@ -215,8 +215,8 @@ en:
 
 
     - lead: Project 03
-      img1: dlabs_project03-img01.jpg
-      img2: dlabs_project03-img02.jpg
+      img1: projects/dlabs_project03-img01.jpg
+      img2: projects/dlabs_project03-img02.jpg
       circle_img: projects/circle-small_project03.svg
       percentages:
         user_research: 5
