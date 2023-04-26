@@ -328,6 +328,13 @@
   bottom: 0;
 }
 
+.inset-header {
+  top: 4.5rem;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 4.5rem);
+}
+
 .rounded-xs {
   border-radius: 0.2rem;
 }
