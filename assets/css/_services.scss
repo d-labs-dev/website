@@ -18,9 +18,10 @@
     }
   }
 
-  .service-carousel-indicator.is-active &, &.is-active {
+  .service-carousel-indicator.is-active &,
+  &.is-active {
     background-color: transparent;
-    transform: scale(1)
+    transform: scale(1);
   }
 
   .button-ghost & {
@@ -44,12 +45,12 @@
 .service-carousel-indicator {
   .service-carousel-hidable-text {
     transition-property: opacity;
-    opacity: 0
+    opacity: 0;
   }
 
   &.is-active {
     .service-carousel-hidable-text {
-      opacity: 1
+      opacity: 1;
     }
   }
 }
