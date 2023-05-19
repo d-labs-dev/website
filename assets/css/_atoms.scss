@@ -442,10 +442,10 @@
 
 .minheight-75vh {
   min-height: 75vh;
-  @media only screen and (min-width : 150vh) {
+  @media only screen and (min-width: 150vh) {
     min-height: 70vh;
   }
-  @media only screen and (min-width : 200vh) {
+  @media only screen and (min-width: 200vh) {
     min-height: 67vh;
   }
 }
@@ -539,6 +539,7 @@
 .font-heading {
   font-family: LetterGothic, sans-serif;
   line-height: 1.3;
+  letter-spacing: 0.02rem;
 }
 
 .font-small-heading {
