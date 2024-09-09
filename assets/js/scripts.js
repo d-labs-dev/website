@@ -303,7 +303,7 @@ function initMap() {
     {featureType: "transit.line", elementType: "geometry", stylers: [{color: "#e5e5e5"}]},
     {featureType: "transit.station", elementType: "geometry", stylers: [{color: "#eeeeee"}]},
     {featureType: "water", elementType: "geometry", stylers: [{color: "#c9c9c9"}]},
-    {featureType: "water", elementType: "geometry.fill", stylers: [{color: "#009fe3"}]},
+    {featureType: "water", elementType: "geometry.fill", stylers: [{color: "#007ABD"}]},
     {featureType: "water", elementType: "labels.text.fill", stylers: [{color: "#9e9e9e"}]},
   ];
   var map = new google.maps.Map(document.getElementById("map"), {
