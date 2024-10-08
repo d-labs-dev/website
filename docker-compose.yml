@@ -1,0 +1,12 @@
+services:
+  jekyll:
+    build: .
+    container_name: jekyll_server
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - CONTENTFUL_SPACE_ID=${CONTENTFUL_SPACE_ID}
+      - CONTENTFUL_ACCESS_TOKEN=${CONTENTFUL_ACCESS_TOKEN}
+    command: bash -c "env $(cat .env | xargs) bundle exec jekyll contentful && bundle exec jekyll serve --livereload --host 0.0.0.0"
