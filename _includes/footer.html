@@ -15,18 +15,19 @@
         </a>
       </div>
       <div class="push"></div>
-      <div class="row sp-6 q-md-sp-3">
-        {% for name in site.data.includes.footer.pages %}
-        {% locale_link {{ name }} class:"link text-xs footer-link" %}
-        {{_[name]}}
-        {% endlocale_link %}
-        {% endfor %}
+      <div
+        class="row sp-6 q-md-sp-3"
+        style="display: flex; justify-content: space-between; align-items: center"
+      >
+        {% for name in site.data.includes.footer.pages %} {% locale_link {{ name }} class:"link
+        text-xs footer-link" style="flex-grow: 1; /* All anchors take equal space */ text-align:
+        center; /* Center the text */ padding: 10px; /* Optional: Add padding for better click area
+        */ border: 1px solid transparent; /* Optional: Add a border if needed */ " %} {{_[name]}} {%
+        endlocale_link %} {% endfor %}
       </div>
       <div class="push"></div>
       <div class="col pl-7 q-lg-pl-0 sp-2 flex-footer-space">
-        <div class="row text-xxs font-bold">
-          Mitglied im
-        </div>
+        <div class="row text-xxs font-bold">Mitglied im</div>
         <div class="row pb-1">
           <a class="button-text" href="https://www.silicon-sanssouci.org/" target="_blank">
             <img alt="Silicon Sanssouci" class="height-5" src="/assets/images/logo_sisa.svg" />
@@ -40,14 +41,18 @@
       </div>
     </div>
     <div class="col align-center">
-      <div class="text-xxs">© D‑LABS GmbH
-        {{ 'now' | date: "%Y" }}</div>
+      <div class="text-xxs">© D‑LABS GmbH {{ 'now' | date: "%Y" }}</div>
     </div>
   </div>
 </footer>
-<div class="fixed inset-x bottom-0 col align-center px-4 py-2 bg-black zindex-5 hidden" id="cookie-consent">
+<div
+  class="fixed inset-x bottom-0 col align-center px-4 py-2 bg-black zindex-5 hidden"
+  id="cookie-consent"
+>
   <div class="maxwidth-7 width-full row sp-5 q-md-col align-center q-md-sp-1">
-    <div class="text-white text-xs maxwidth-4 markdown">{{_.cookie_consent_text | markdownify}}</div>
+    <div class="text-white text-xs maxwidth-4 markdown">
+      {{_.cookie_consent_text | markdownify}}
+    </div>
     <div class="push"></div>
     <button class="button-ghost is-white">{{_.cookie_consent_button_label}}</button>
   </div>

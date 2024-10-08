@@ -1,12 +1,14 @@
 pages:
   - privacy
   - imprint
+  - accessibility
   - partners
 
 de:
   imprint: Impressum
   privacy: Datenschutz
-  partners: Partner
+  accessibility: Barrierefreiheit
+  partners: Partnerschaften
 
   cookie_consent_text: Diese Website verwendet Cookies. Durch die fortgesetzte Nutzung dieser Website stimmen Sie dem Einsatz von Cookies zu. [Details ansehen](/privacy-policy.html).
   cookie_consent_button_label: Akzeptieren
@@ -14,7 +16,9 @@ de:
 en:
   imprint: Imprint
   privacy: Privacy
-  partners: Partners
+  accessibility: Accessibility
+  partners: Partnerships
+
 
   cookie_consent_text: This website uses cookies. By continuing to use this site, you consent to the use of cookies. [View details](/en/privacy-policy.html).
   cookie_consent_button_label: Accept
