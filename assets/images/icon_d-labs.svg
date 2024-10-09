@@ -1,4 +1,7 @@
 <svg id="favicon" xmlns="http://www.w3.org/2000/svg" width="48.002" height="48.002" viewBox="0 0 48.002 48.002">
-  <path id="Fill-1" d="M48,24A24,24,0,1,1,24,0,24,24,0,0,1,48,24" transform="translate(0 0)" fill="#009ee2" fill-rule="evenodd"/>
-  <path id="Fill-4" d="M29.876,40.909H22.912V14.184h7.353c6.691,0,9.609,3.929,9.609,13.226,0,9.376-2.956,13.5-10,13.5M29.6,18.657H28.125V36.4H29.6c3.54,0,4.94-1.829,4.94-8.909,0-7.041-1.4-8.831-4.94-8.831" transform="translate(-5.727 -3.545)" fill="#fefefe" fill-rule="evenodd"/>
+  <path id="Fill-1" d="M48,24A24,24,0,1,1,24,0,24,24,0,0,1,48,24" transform="translate(0 0)" fill="#007ABD"
+    fill-rule="evenodd" />
+  <path id="Fill-4"
+    d="M29.876,40.909H22.912V14.184h7.353c6.691,0,9.609,3.929,9.609,13.226,0,9.376-2.956,13.5-10,13.5M29.6,18.657H28.125V36.4H29.6c3.54,0,4.94-1.829,4.94-8.909,0-7.041-1.4-8.831-4.94-8.831"
+    transform="translate(-5.727 -3.545)" fill="#fefefe" fill-rule="evenodd" />
 </svg>
