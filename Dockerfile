@@ -1,5 +1,6 @@
 # Use official Ruby image
 FROM ruby:2.7.6
+# We use ruby 2 because some packages may not work with ruby >= 3
 
 # Install necessary dependencies for Jekyll, AWS CLI, and ImageMagick
 RUN apt-get update && apt-get install -y \
