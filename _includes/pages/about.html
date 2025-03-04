@@ -1,17 +1,21 @@
 {%- assign _ = site.data.pages.about[page.locale] -%}
 <div class="relative">
   <div class="relative height-screen row q-lg-col q-lg-pt-7">
-    <div class="width-2_3 pt-8 q-lg-pt-4 pb-6 col justify-center align-end q-lg-align-start q-lg-width-full pl-4 fill-parent">
-      <div style="max-width: calc(30rem + 25%);" class="width-full">
+    <div
+      class="width-2_3 pt-8 q-lg-pt-4 pb-6 col justify-center align-end q-lg-align-start q-lg-width-full pl-4 fill-parent"
+    >
+      <div style="max-width: calc(30rem + 25%)" class="width-full">
         <div class="col sp-4 pr-6 maxwidth-5">
-          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
+          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">
+            {{_.intro_lead}}
+          </div>
           <h1 class="font-heading text-xxl font-normal q-md-text-xl">{{_.intro_title}}</h1>
           <div class="markdown text-md q-md-text-sm">{{_.intro_text | markdownify}}</div>
         </div>
       </div>
     </div>
     <div class="width-1_3 relative q-lg-width-full q-lg-height-10 q-lg-first">
-      {% asset {{_.intro_image}} class="absolute inset-full"%}
+      {% asset {{_.intro_image}} class="absolute inset-full" alt="" %}
     </div>
     <div class="absolute inset-x bottom-0 col align-center text-black pb-6 hide-lg">
       <a class="button-text" href="#next">{% asset icons/icon-arrow-down.svg @inline %}</a>
@@ -20,18 +24,15 @@
 
   <div class="col sp-7 pt-7 pb-t24" id="next">
     <div class="height-12 relative q-lg-height-aspect-16-9">
-      {% asset {{_.about_image}} class="absolute inset-full"%}
+      {% asset {{_.about_image}} class="absolute inset-full" alt="" %}
     </div>
     <div class="col align-center px-4">
-      <div class="maxwidth-4 markdown">
-        {{_.about_text | markdownify}}
-      </div>
+      <div class="maxwidth-4 markdown">{{_.about_text | markdownify}}</div>
     </div>
   </div>
 </div>
 
 <div id="locations" class="scroll-margin-top">
-
   {%- assign _loc = site.data.includes.locations[page.locale] -%}
   <div class="bg-blue text-white col px-4 pt-7 pb-8 sp-4 align-center relative zindex-1">
     <div class="maxwidth-7 width-full col sp-5 q-xl-sp-6">
@@ -46,36 +47,27 @@
         </div>
         <div class="row sp-3 q-lg-col fill-parent q-lg-sp-7">
           {%- for location in site.data.includes.locations.locations -%}
-            <div class="col sp-5 fill-parent q-lg-sp-2">
-              <div class="col align-start q-lg-pb-4">
-                {% asset {{location.img}}
-                  srcset:width="400"
-                  srcset:width="200"
-                  srcset:width="100"
-                  sizes="10em"
-                  class="rounded-full width-10"
-                %}
+          <div class="col sp-5 fill-parent q-lg-sp-2">
+            <div class="col align-start q-lg-pb-4">
+              {% asset {{location.img}} srcset:width="400" srcset:width="200" srcset:width="100"
+              sizes="10em" class="rounded-full width-10" alt="" %}
+            </div>
+            <div class="col sp-4">
+              <div class="font-heading uppercase text-sm hide-lg">
+                {%-if location.is_main -%} {{_loc.main}}{% else %}&nbsp; {% endif %}
               </div>
-              <div class="col sp-4">
-                <div class="font-heading uppercase text-sm hide-lg">
-                  {%-if location.is_main -%}
-                    {{_loc.main}}{% else %}&nbsp;
-                  {% endif %}
-                </div>
-                <div class="text-lg pb-1">{{location.name}}</div>
-                <div>
-                  {{location.street}}<br/>{{location.zip}}
-                  {{location.city}}
-                </div>
-                <div>
-                  {{location.tel}}<br/><a class="link-light" href="mailto:{{location.email}}">{{location.email}}</a>
-                </div>
+              <div class="text-lg pb-1">{{location.name}}</div>
+              <div>{{location.street}}<br />{{location.zip}} {{location.city}}</div>
+              <div>
+                {{location.tel}}<br /><a class="link-light" href="mailto:{{location.email}}"
+                  >{{location.email}}</a
+                >
               </div>
             </div>
+          </div>
           {%- endfor -%}
         </div>
       </div>
     </div>
   </div>
-
 </div>

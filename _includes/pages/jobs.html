@@ -1,25 +1,39 @@
-{%- assign _ = site.data.pages.jobs[page.locale] -%}
-{% assign job_pages = site.pages | where: "kind", "jobPosting" | where: "locale", page.locale %}
+{%- assign _ = site.data.pages.jobs[page.locale] -%} {% assign job_pages = site.pages | where:
+"kind", "jobPosting" | where: "locale", page.locale %}
 
 <div class="height-screen text-white relative col justify-center align-center px-4 py-5">
-  <div class="absolute inset-header bg-blue" data-image-fader>   
-    {% asset jobs-slider/jobs-slider-2.jpg class="absolute inset-full hidden"%}
-    {% asset jobs-slider/jobs-slider-3.jpg class="absolute inset-full hidden"%}
-    {% asset jobs-slider/jobs-slider-4.jpg class="absolute inset-full hidden"%}
-    {% asset jobs-slider/jobs-slider-5.jpg class="absolute inset-full hidden"%}
-    {% asset jobs-slider/jobs-slider-6.jpg class="absolute inset-full hidden"%}
-    {% asset jobs-slider/jobs-slider-7.jpg class="absolute inset-full hidden"%}
+  <div class="absolute inset-header bg-blue" data-image-fader>
+    {% asset jobs-slider/jobs-slider-2.jpg class="absolute inset-full hidden" alt="Mitarbeitende von
+    D-Labs bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%} {% asset
+    jobs-slider/jobs-slider-3.jpg class="absolute inset-full hidden" alt="Mitarbeitende von D-Labs
+    bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%} {% asset
+    jobs-slider/jobs-slider-4.jpg class="absolute inset-full hidden" alt="Mitarbeitende von D-Labs
+    bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%} {% asset
+    jobs-slider/jobs-slider-5.jpg class="absolute inset-full hidden" alt="Mitarbeitende von D-Labs
+    bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%} {% asset
+    jobs-slider/jobs-slider-6.jpg class="absolute inset-full hidden" alt="Mitarbeitende von D-Labs
+    bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%} {% asset
+    jobs-slider/jobs-slider-7.jpg class="absolute inset-full hidden" alt="Mitarbeitende von D-Labs
+    bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%}
     <!-- last image should not be hidden, because it is shown first -->
-    {% asset jobs-slider/jobs-slider-1.jpg class="absolute inset-full"%}   
-
+    {% asset jobs-slider/jobs-slider-1.jpg class="absolute inset-full" alt="Mitarbeitende von D-Labs
+    bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"%}
   </div>
 
-  <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">{{_.title_text | markdownify}}</div>
-  <svg viewbox="0 0 100 100" class="absolute width-full bottom-0 non-interactive zindex-1" preserveAspectRatio="none" style="height:20vh;bottom:-1px;">
-    <polygon points="0 100, 100 100, 100 0" fill="white"/>
+  <div class="font-heading text-xxxl q-md-text-xl maxwidth-7 width-full relative zindex-3">
+    {{_.title_text | markdownify}}
+  </div>
+  <svg
+    viewbox="0 0 100 100"
+    class="absolute width-full bottom-0 non-interactive zindex-1"
+    preserveAspectRatio="none"
+    style="height: 20vh; bottom: -1px"
+    aria-hidden
+  >
+    <polygon points="0 100, 100 100, 100 0" fill="white" />
   </svg>
   <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1">
-    <a class="button-text" href="#list">
+    <a class="button-text" href="#list" aria-label="Zur nächsten Seite scrollen">
       {% asset icons/icon-arrow-down.svg @inline %}
     </a>
   </div>
@@ -38,35 +52,38 @@
 
     <div class="width-full maxwidth-5 col sp-2">
       {%- for job in job_pages -%}
-        <a class="reset-link row align-baseline sp-3 list-entry pb-2" href="{{job.url}}">
-          <div class="">{{job.title}}</div>
-          <div class="push"></div>
-          <div class="uppercase text-xs font-heading">{{job.location}}</div>
-          <div class="text-blue relative" style="top: 0.15rem;">
-            {% asset icons/icon-arrow-right.svg @inline %}
-          </div>
-        </a>
+      <a class="reset-link row align-baseline sp-3 list-entry pb-2" href="{{job.url}}">
+        <div>{{job.title}}</div>
+        <div class="push"></div>
+        <div class="uppercase text-xs font-heading">{{job.location}}</div>
+        <div class="text-blue relative" style="top: 0.15rem">
+          {% asset icons/icon-arrow-right.svg @inline aria-hidden %}
+        </div>
+      </a>
       {%- endfor -%}
     </div>
 
     <div class="width-full maxwidth-5 col sp-6">
       <div class="col sp-4">
-        <div id="inclusivity" class="scroll-margin-top"><span class="text-blue">*</span>{{_.inclusivity_text}}</div>
+        <div id="inclusivity" class="scroll-margin-top">
+          <span class="text-blue">*</span>{{_.inclusivity_text}}
+        </div>
         <div>{{_.initiative_text | markdownify}}</div>
       </div>
       <div class="col align-center">
-        <a class="button is-black" href="{{_.initiative_button_target}}">
+        <a
+          class="button is-black"
+          href="{{_.apply_now_target}}"
+          aria-label="{{_.apply_now_aria_label}}"
+        >
           {{_.initiative_button_label}}
         </a>
       </div>
     </div>
   </div>
 
-  {%- include jobs-slider.html  -%}
-
-  {%- include benefits-slider.html  -%}
+  {%- include jobs-slider.html -%} {%- include benefits-slider.html -%}
 </div>
-
 
 {%- include contact.html contact=_.contact-%}
 <!-- {%- include locations.html is_white=true with_map=true -%} -->

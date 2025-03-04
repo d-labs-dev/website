@@ -16,12 +16,12 @@ layout: default
         {% endlocale_link %}
         <div class="push"></div>
         <div class="col sp-3">
-          <h1 class="font-heading text-xxl q-md-text-xl">{{page.title}}<a href="/jobs#inclusivity" class="link link-blue">*</a></h1>
+          <h1 class="font-heading text-xxl q-md-text-xl">{{page.title}}<a href="/jobs#inclusivity" class="link link-blue" aria-label="{{_.inclusivity_aria_label}}">*</a></h1>
           <h2 class="font-heading text-xl q-md-text-l">{{page.location | markdownify}}</h2>
           <div class="markdown text-sm">{{page.first_paragraph | markdownify}}</div>
         </div>
         <div class="row justify-end pr-6 hide-lg overflow-visible">
-          <a href="{{_.team_fit_url}}" class="button-circle is-black">
+          <a href="{{_.apply_now_target}}" class="button-circle is-black" aria-label="{{_.apply_now_aria_label}}">
             <div class="pb-t1">
               {{_.circle_apply_now_button_label}}
             </div>

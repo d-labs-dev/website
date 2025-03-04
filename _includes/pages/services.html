@@ -1,29 +1,34 @@
 {%- assign _ = site.data.pages.services[page.locale] -%}
 
-<div class="relative col justify-center align-center pt-8 px-4 q-md-height-screen minheight-75vh q-md-pt-4">
+<div
+  class="relative col justify-center align-center pt-8 px-4 q-md-height-screen minheight-75vh q-md-pt-4"
+>
   <div class="maxwidth-7 width-full col sp-4">
     <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.intro_lead}}</div>
-    <div class="markdown text-xxl q-md-text-xl q-sm-text-lg font-heading">{{_.intro_text | markdownify}}</div>
+    <div class="markdown text-xxl q-md-text-xl q-sm-text-lg font-heading">
+      {{_.intro_text | markdownify}}
+    </div>
   </div>
 
   <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1 show-md">
-    <a class="button-text" href="#overview">
-      {% asset icons/icon-arrow-down.svg @inline %}
-    </a>
+    <a class="button-text" href="#overview"> {% asset icons/icon-arrow-down.svg @inline %} </a>
   </div>
 </div>
 <div class="relative" data-scrollspy id="overview">
-  <div class="height-1" data-keyframe-marker>
-  </div>
+  <div class="height-1" data-keyframe-marker></div>
   <div class="absolute inset-full non-interactive">
     <div class="height-screen sticky col align-center">
       <div class="maxwidth-7 width-full col sp-4 pt-8 q-md-pt-7-5 px-4" id="services-top-area">
-        <div class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs opacity-0">{{_.intro_services_title}}</div>
+        <div
+          class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs opacity-0"
+        >
+          {{_.intro_services_title}}
+        </div>
         <div class="row justify-center sp-3 q-md-col q-md-sp-1 pb-3 relative">
           <div class="absolute inset-full top-0 col align-center">
             <div class="service-circle is-blue is-active"></div>
           </div>
-        {%- for slide in _.slides -%}
+          {%- for slide in _.slides -%}
           <a
             href="#n{{forloop.index}}"
             class="row align-start service-carousel-indicator fill-parent sp-1 interactive reset-link"
@@ -34,7 +39,7 @@
             </div>
             <div class="text-sm service-label opacity-0">{{slide.name}}</div>
           </a>
-        {%- endfor -%}
+          {%- endfor -%}
         </div>
       </div>
       <div class="push"></div>
@@ -51,10 +56,11 @@
           "
         >
           {%- for slide in _.slides -%}
-          <div class="width-full no-shrink px-4" >
+          <div class="width-full no-shrink px-4">
             <div class="row sp-4 q-md-col q-md-align-center">
               <div class="width-1_3 no-shrink q-md-width-full">
-                {% asset {{slide.img}} class="width-full q-md-height-8 {{slide.img-position}}" %}
+                {% asset {{slide.img}} class="width-full q-md-height-8 {{slide.img-position}}"
+                alt="" %}
               </div>
               <div class="markdown px-4 q-md-text-xs">{{slide.text}}</div>
             </div>
@@ -75,10 +81,8 @@
       <div class="push" style="flex-grow: 2"></div>
       <div class="absolute inset-x bottom-0 pb-5 col align-center hide-md">
         <div class="col sp-3 align-center interactive">
-          <a class="button-text" href="#list">
-            {{_.list_link_text}}
-          </a>
-          <a class="button-text" href="#list">
+          <a class="button-text" href="#list"> {{_.list_link_text}} </a>
+          <a class="button-text" href="#list" aria-hidden>
             {% asset icons/icon-arrow-down.svg @inline %}
           </a>
         </div>
@@ -87,27 +91,36 @@
   </div>
 
   {%- for slide in _.slides -%}
-  <div class="{% if forloop.last %}minheight-100vh{% else %}height-15{% endif %}" id="n{{forloop.index}}" data-keyframe-marker>
-  </div>
+  <div
+    class="{% if forloop.last %}minheight-100vh{% else %}height-15{% endif %}"
+    id="n{{forloop.index}}"
+    data-keyframe-marker
+  ></div>
   {%- endfor -%}
 </div>
-
 
 <div class="col align-center px-4 pb-7" id="list" data-search>
   <div class="maxwidth-7 width-full col sp-6 q-md-sp-2">
     <div class="sticky pt-8 pb-2 col sp-4 bg-white q-md-sp-1 q-md-pt-7-5">
       <div class="row sp-2 align-end q-md-col q-md-align-stretch">
-        <h2 class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">{{_.services_title}}</h2>
+        <h2 class="uppercase font-heading font-bold text-blue text-sm lead-line q-md-text-xs">
+          {{_.services_title}}
+        </h2>
         <div class="push"></div>
-        <div class="relative hidden" data-search-input style="margin-bottom: 0.3rem;">
-          <input class="input q-md-width-full" placeholder="{{_.search_placeholder}}"/>
+        <div class="relative hidden" data-search-input style="margin-bottom: 0.3rem">
+          <input class="input q-md-width-full" placeholder="{{_.search_placeholder}}" />
           <button class="button-text is-mini absolute inset-y right-0" type="search">
             {% asset icons/icon-search.svg @inline %}
           </button>
         </div>
         <div class="row sp-2">
           <div class="show-lg fill-parent col">
-            <button class="button-ghost is-mini fill-parent" data-toggle="#services-filter" data-toggle-style="slide" data-filter-toggle-query="only screen and (max-width : 50em)">
+            <button
+              class="button-ghost is-mini fill-parent"
+              data-toggle="#services-filter"
+              data-toggle-style="slide"
+              data-filter-toggle-query="only screen and (max-width : 50em)"
+            >
               <div class="row align-center py-1 px-2">
                 <div data-default-label="{{_.filter_button_label}}">{{_.filter_button_label}}</div>
                 {% asset icons/icon-caret-down.svg @inline %}
@@ -121,21 +134,27 @@
       </div>
       <div class="hide-lg q-md-pt-3 pb-2" id="services-filter">
         <div class="row justify-center sp-3 q-lg-col align-start">
-          <button class="button-transparent service-carousel-indicator is-active" data-services-filter="all">
+          <button
+            class="button-transparent service-carousel-indicator is-active"
+            data-services-filter="all"
+          >
             <div class="row align-start sp-1">
               <div class="width-3 height-3 no-shrink">
                 <div class="service-circle is-blue"></div>
               </div>
-              <div class="text-xs" style="padding-top:0.2rem;">{{_.services_all_button}}</div>
+              <div class="text-xs" style="padding-top: 0.2rem">{{_.services_all_button}}</div>
             </div>
           </button>
           {%- for slide in _.slides -%}
-          <button class="button-transparent service-carousel-indicator" data-services-filter="{{slide.name}}">
+          <button
+            class="button-transparent service-carousel-indicator"
+            data-services-filter="{{slide.name}}"
+          >
             <div class="row align-start sp-1">
               <div class="width-3 height-3 no-shrink">
                 <div class="service-circle is-{{slide.color}}"></div>
               </div>
-              <div class="text-xs"  style="padding-top:0.2rem;">{{slide.name}}</div>
+              <div class="text-xs" style="padding-top: 0.2rem">{{slide.name}}</div>
             </div>
           </button>
           {%- endfor -%}
@@ -146,10 +165,17 @@
     {% assign method_pages = site.pages | where: "kind", "method" | where: "locale", page.locale %}
     <div class="grid sp-6 q-lg-4">
       {%- for method in method_pages -%}
-      <div class="col sp-4 width-1_3 q-lg-width-1_2 q-sm-width-full" data-search-tile data-method-tile="{%- for domain in method.domains -%}{{domain.title}},{%- endfor -%}">
+      <div
+        class="col sp-4 width-1_3 q-lg-width-1_2 q-sm-width-full"
+        data-search-tile
+        data-method-tile="{%- for domain in method.domains -%}{{domain.title}},{%- endfor -%}"
+      >
         <a href="{{method.url}}">
-          <img src="{{method.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
-            alt="{{method.hero_image.description}}" class="width-full" />
+          <img
+            src="{{method.hero_image.url}}?w={{400}}&h={{400 | times: 3 | divided_by: 4}}&fit=fill&f=faces"
+            alt="{{method.hero_image.description}}"
+            class="width-full"
+          />
         </a>
         <div class="col sp-3">
           <a href="{{method.url}}" class="reset-link">
