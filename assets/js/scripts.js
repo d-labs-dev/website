@@ -11,7 +11,7 @@ function constructTransform(attrSprings, opts) {
       attrSprings.translateY ? attrSprings.translateY.currentValue : 0,
     ];
     if (opts.asStyle) {
-      parts.push("translate3d(" + vals.map(v => v + "%").join(", ") + ", 0)");
+      parts.push("translate3d(" + vals.map((v) => v + "%").join(", ") + ", 0)");
     } else {
       parts.push("translate(" + vals.join(" ") + ")");
     }
@@ -54,12 +54,12 @@ function createKeyframeListener(el, opts) {
   el.data(opts.asStyle ? "style-keyframes" : "keyframes")
     .trim()
     .split(/\s+/g)
-    .forEach(keyframe => {
+    .forEach((keyframe) => {
       var m = keyframe.trim().match(/(-?[\d.]+):(.*)/);
       if (m) {
         var keyframeVal = parseFloat(m[1]);
         var springs = [];
-        m[2].split(",").map(attr => {
+        m[2].split(",").map((attr) => {
           var splitted = attr.split("=");
           var attr = splitted[0];
           var val = parseFloat(splitted[1]);
@@ -82,7 +82,7 @@ function createKeyframeListener(el, opts) {
                 }
               });
             } else {
-              spring.onUpdate(s => {
+              spring.onUpdate((s) => {
                 if (enable) {
                   applyAttr(attr, s.currentValue);
                 } else {
@@ -104,9 +104,11 @@ function createKeyframeListener(el, opts) {
   targetVals.reverse();
 
   function handleProgress(progress) {
-    var firstValidTargetVal = targetVals.filter(targetVal => progress >= targetVal.keyframeVal)[0];
+    var firstValidTargetVal = targetVals.filter(
+      (targetVal) => progress >= targetVal.keyframeVal
+    )[0];
     if (!firstValidTargetVal) return;
-    firstValidTargetVal.springs.forEach(data => {
+    firstValidTargetVal.springs.forEach((data) => {
       data.spring.updateConfig({toValue: data.targetValue});
       data.spring.start();
     });
@@ -119,7 +121,7 @@ function createClassOnRangeListener(el) {
   el.data("class-on-range")
     .trim()
     .split(/\s+/g)
-    .forEach(keyframe => {
+    .forEach((keyframe) => {
       var m = keyframe.trim().match(/(-?[\d.]+)-([\d.]+):(.*)/);
       if (m) {
         classList.push({
@@ -130,7 +132,7 @@ function createClassOnRangeListener(el) {
       }
     });
   function handleProgress(progress) {
-    classList.forEach(data => {
+    classList.forEach((data) => {
       if (progress >= data.start && progress < data.end) {
         el.addClass(data.className);
       } else {
@@ -142,7 +144,7 @@ function createClassOnRangeListener(el) {
 }
 
 function setupScrollSpy() {
-  $("[data-scrollspy]").each(function() {
+  $("[data-scrollspy]").each(function () {
     var scrollArea = $(this);
     var keyframeEls = [];
     var scrollListeners = [];
@@ -152,7 +154,7 @@ function setupScrollSpy() {
 
     function handleResize() {
       keyframeEls = [];
-      scrollArea.find("[data-keyframe-marker]").each(function(idx) {
+      scrollArea.find("[data-keyframe-marker]").each(function (idx) {
         var el = $(this);
         maxIdx = idx;
         keyframeEls.push({
@@ -161,7 +163,7 @@ function setupScrollSpy() {
           height: el.height(),
         });
       });
-      resizeListeners.forEach(checkerFn => checkerFn());
+      resizeListeners.forEach((checkerFn) => checkerFn());
       handleScroll();
     }
 
@@ -169,7 +171,7 @@ function setupScrollSpy() {
       var prevIdx = currIdx;
       currIdx = -1;
       var currMin = 9999;
-      keyframeEls.forEach(el => {
+      keyframeEls.forEach((el) => {
         if (window.scrollY + window.innerHeight < el.top) {
           // below fold
           return;
@@ -188,27 +190,27 @@ function setupScrollSpy() {
         }
       });
       if (prevIdx !== currIdx) {
-        scrollListeners.forEach(fn => fn(currIdx));
+        scrollListeners.forEach((fn) => fn(currIdx));
         scrollArea.find("[data-prev-button]").attr("disabled", currIdx <= 1);
         scrollArea.find("[data-next-button]").attr("disabled", currIdx >= maxIdx);
       }
     }
 
-    scrollArea.find("[data-keyframes]").each(function() {
+    scrollArea.find("[data-keyframes]").each(function () {
       var el = $(this);
       var retVal = createKeyframeListener(el);
       scrollListeners.push(retVal.handleProgress);
       if (retVal.handleResize) resizeListeners.push(retVal.handleResize);
     });
 
-    scrollArea.find("[data-style-keyframes]").each(function() {
+    scrollArea.find("[data-style-keyframes]").each(function () {
       var el = $(this);
       var retVal = createKeyframeListener(el, {asStyle: true});
       scrollListeners.push(retVal.handleProgress);
       if (retVal.handleResize) resizeListeners.push(retVal.handleResize);
     });
 
-    scrollArea.find("[data-class-on-range]").each(function() {
+    scrollArea.find("[data-class-on-range]").each(function () {
       var el = $(this);
       scrollListeners.push(createClassOnRangeListener(el));
     });
@@ -220,16 +222,16 @@ function setupScrollSpy() {
       $("html, body").animate({scrollTop: scrollTo}, 100);
     }
 
-    scrollArea.find("[data-prev-button]").on("click", function() {
+    scrollArea.find("[data-prev-button]").on("click", function () {
       if (currIdx > 1) scrollToTargetIdx(currIdx - 1, "up");
     });
-    scrollArea.find("[data-next-button]").on("click", function() {
+    scrollArea.find("[data-next-button]").on("click", function () {
       if (currIdx < maxIdx) scrollToTargetIdx(currIdx + 1, "down");
     });
 
-    scrollArea.find("[data-prev-button]").each(function() {
+    scrollArea.find("[data-prev-button]").each(function () {
       var btn = $(this);
-      btn.on("click", function() {
+      btn.on("click", function () {
         if (currIdx > 1) {
           var target = keyframeEls[currIdx - 1];
           $("html, body").animate(
@@ -248,11 +250,11 @@ function setupScrollSpy() {
 }
 
 function toggleButton() {
-  $("[data-toggle]").each(function() {
+  $("[data-toggle]").each(function () {
     var el = $(this);
     var hasHidden = el.children(".hidden").length > 0;
     var style = el.data("toggle-style") || "fade";
-    el.on("click", function() {
+    el.on("click", function () {
       $(el.data("toggle"))[style + "Toggle"](250);
       if (hasHidden) el.children().toggleClass("hidden");
     });
@@ -385,7 +387,7 @@ function setupMethodFilter() {
     matchesQuery = () => mql.matches;
   }
 
-  $("[data-services-filter]").each(function() {
+  $("[data-services-filter]").each(function () {
     var button = $(this);
     var filter = button.data("services-filter");
     buttons[filter] = button;
@@ -393,7 +395,7 @@ function setupMethodFilter() {
       if (filter === "all") {
         activeFilters = [];
       } else if (activeFilters.indexOf(filter) >= 0) {
-        activeFilters = activeFilters.filter(f => f !== filter);
+        activeFilters = activeFilters.filter((f) => f !== filter);
       } else {
         activeFilters = [filter];
       }
@@ -401,41 +403,38 @@ function setupMethodFilter() {
     });
   });
 
-  $("[data-search]").each(function() {
+  $("[data-search]").each(function () {
     var container = $(this);
     var inputArea = container.find("[data-search-input]");
     var input = inputArea.find("input");
     var inputAreaButton = inputArea.find("button");
     var button = container.find("[data-search-button]");
     var nonSearchInput = container.find("[data-search-button],[data-toggle]");
-    button.on("click", function() {
+    button.on("click", function () {
       nonSearchInput.hide();
       inputArea.show();
       input.focus();
     });
-    inputAreaButton.on("click", function() {
+    inputAreaButton.on("click", function () {
       inputArea.hide();
       nonSearchInput.show();
       query = null;
       sync();
     });
-    input.on("input", function(e) {
+    input.on("input", function (e) {
       query = e.target.value.toLowerCase();
       sync();
     });
   });
 
-  $("[data-search-tile]").each(function() {
+  $("[data-search-tile]").each(function () {
     var el = $(this);
-    var domainKeys = el
-      .data("method-tile")
-      .split(",")
-      .filter(Boolean);
+    var domainKeys = el.data("method-tile").split(",").filter(Boolean);
     var domains = {};
-    domainKeys.forEach(key => (domains[key] = true));
+    domainKeys.forEach((key) => (domains[key] = true));
 
     var texts = [];
-    el.find("[data-search-text]").each(function() {
+    el.find("[data-search-text]").each(function () {
       texts.push($(this).text());
     });
     tiles.push({el: el, domains: domains, text: texts.join(" ").toLowerCase()});
@@ -446,7 +445,7 @@ function setupMethodFilter() {
     if (activeFilters.length === 0) {
       filterLabel.text(filterLabel.data("default-label"));
       buttons.all.addClass("is-active");
-      tiles.forEach(tile => {
+      tiles.forEach((tile) => {
         if (!query || tile.text.indexOf(query) >= 0) {
           tile.el.removeClass("hidden");
         } else {
@@ -454,8 +453,8 @@ function setupMethodFilter() {
         }
       });
     } else {
-      tiles.forEach(tile => tile.el.addClass("hidden"));
-      activeFilters.forEach(f => {
+      tiles.forEach((tile) => tile.el.addClass("hidden"));
+      activeFilters.forEach((f) => {
         var button = buttons[f];
         button.addClass("is-active");
         filterLabel
@@ -464,7 +463,7 @@ function setupMethodFilter() {
           .addClass("sp-2")
           .find(".service-circle")
           .addClass("is-active");
-        tiles.forEach(tile => {
+        tiles.forEach((tile) => {
           if (tile.domains[f] && (!query || tile.text.indexOf(query) >= 0))
             tile.el.removeClass("hidden");
         });
@@ -477,7 +476,7 @@ function setupMethodFilter() {
 }
 
 function setupImageFader() {
-  $("[data-image-fader]").each(function() {
+  $("[data-image-fader]").each(function () {
     var children = $(this).children();
     var currentIndex = children.length - 1;
     setInterval(() => {
@@ -497,20 +496,24 @@ function setupImageFader() {
 
 function doTheGoogleStuff() {
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag("js", new Date());
-  gtag("config", "UA-46146953-1", { "anonymize_ip": true });
-  var script = document.createElement('script');
+  gtag("config", "UA-46146953-1", {anonymize_ip: true});
+  var script = document.createElement("script");
   script.async = true;
   script.src = "https://www.googletagmanager.com/gtag/js?id=UA-46146953-1";
-  document.getElementsByTagName("head")[0].appendChild(script, document.getElementsByTagName("head")[0]); 
+  document
+    .getElementsByTagName("head")[0]
+    .appendChild(script, document.getElementsByTagName("head")[0]);
 }
 
 function cookieConsent() {
   if ($.cookie("accept_cookies") !== "true") {
     var container = $("#cookie-consent");
     container.removeClass("hidden");
-    container.find("button").on("click", function() {
+    container.find("button").on("click", function () {
       $.cookie("accept_cookies", "true", {expires: 365});
       container.addClass("hidden");
     });
@@ -524,7 +527,7 @@ function setupServicesAnimation() {
   if (!container.length) return;
   var blue = container.find(".service-circle.is-blue");
   var bluePos = blue.offset();
-  container.find(".service-circle:not(.is-blue)").each(function() {
+  container.find(".service-circle:not(.is-blue)").each(function () {
     var circle = $(this);
     var circlePos = circle.offset();
     circle.addClass("is-active");
@@ -552,14 +555,14 @@ function setupServicesAnimation() {
 }
 
 function setupFadeInit() {
-  $("[data-init-fade]").each(function() {
+  $("[data-init-fade]").each(function () {
     var el = $(this);
     setTimeout(() => el.removeClass("opacity-0").addClass("opacity-1"), 250);
   });
 }
 
 function smoothAnchorScroll() {
-  $(document).on("click", "a[href*='#']", function(e) {
+  $(document).on("click", "a[href*='#']", function (e) {
     var $target = $($(this).attr("href"));
     if ($target.length) {
       $("html, body").animate({scrollTop: $target.offset().top - 50}, 500);
@@ -568,18 +571,21 @@ function smoothAnchorScroll() {
   });
 }
 
-function disableGoogleFontsInGoogleMapsAPI(){
-  var head = document.getElementsByTagName('head')[0];
+function disableGoogleFontsInGoogleMapsAPI() {
+  var head = document.getElementsByTagName("head")[0];
   var insertBefore = head.insertBefore;
   head.insertBefore = function (newElement, referenceElement) {
-    if (newElement.href && newElement.href.indexOf('https://fonts.googleapis.com/css?family=') > -1) {
+    if (
+      newElement.href &&
+      newElement.href.indexOf("https://fonts.googleapis.com/css?family=") > -1
+    ) {
       return;
     }
     insertBefore.call(head, newElement, referenceElement);
-  }
+  };
 }
 
-$(function() {
+$(function () {
   disableGoogleFontsInGoogleMapsAPI();
   setupScrollSpy();
   toggleButton();
@@ -598,4 +604,67 @@ $(function() {
   } else if (/^((?!chrome|android).)*safari/i.test(ua)) {
     $("body").addClass("is-safari");
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Get all scroll indicators
+  const scrollIndicators = document.querySelectorAll(".scroll-indicator");
+
+  // Set up observer to watch for class changes on indicators
+  const observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.attributeName === "class") {
+        updateScrollIndicatorLabels();
+      }
+    });
+  });
+
+  // Initialize observation of class changes for each indicator
+  scrollIndicators.forEach((indicator) => {
+    observer.observe(indicator, {attributes: true});
+  });
+
+  // Function to update aria-labels based on active state
+  function updateScrollIndicatorLabels() {
+    let activeIndex = -1;
+
+    // Find which indicator is active
+    scrollIndicators.forEach((indicator, index) => {
+      if (indicator.classList.contains("is-active")) {
+        activeIndex = index;
+        indicator.setAttribute("aria-label", indicator.dataset.ariaLabelActive);
+        indicator.setAttribute("aria-current", "page");
+      } else {
+        indicator.removeAttribute("aria-current");
+        indicator.setAttribute("aria-label", `Seite ${index + 1}`);
+      }
+    });
+
+    // Update next and previous labels if applicable
+    if (activeIndex !== -1) {
+      // Update next indicator if it exists
+      if (activeIndex < scrollIndicators.length - 1) {
+        scrollIndicators[activeIndex + 1].setAttribute(
+          "aria-label",
+          scrollIndicators[activeIndex + 1].dataset.ariaLabelNext
+        );
+      }
+
+      // Update previous indicator if it exists
+      if (activeIndex > 0) {
+        scrollIndicators[activeIndex - 1].setAttribute(
+          "aria-label",
+          scrollIndicators[activeIndex - 1].dataset.ariaLabelPrev
+        );
+      }
+    }
+  }
+
+  // Initial setup of labels
+  updateScrollIndicatorLabels();
+
+  // Additional trigger for scroll events (in case they don't trigger class changes)
+  window.addEventListener("scroll", function () {
+    updateScrollIndicatorLabels();
+  });
 });

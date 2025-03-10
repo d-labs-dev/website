@@ -8,7 +8,13 @@ de:
   inclusivity_text: 'Ein Teil von D-LABS zu sein bedeutet so zu sein wie du bist!
   Daher gelten unsere Personenbezeichnungen natürlich für alle Geschlechteridentitäten.'
   initiative_button_label: Jetzt initiativ bewerben!
-  initiative_button_target: mailto:jobs@d-labs.com
+  apply_now_aria_label: Email an jobs@d-labs.com
+  apply_now_target: mailto:jobs@d-labs.com
+  apply_now_heading: Bist du bereit?
+  apply_now_description: "Sende uns deine Bewerbungsunterlagen oder erzähl uns in einem kurzen Video wer du bist!"
+  apply_now_button_label: Jetzt bewerben!
+  circle_apply_now_button_label: Jetzt bewerben
+  inclusivity_aria_label: Erklärung zur Personenbezeichnung
 
   slider_title: Warum D-LABS?
   slides:
@@ -20,10 +26,6 @@ de:
       position: Director Digital Experience Design
       quote: Die enge Zusammenarbeit mit Experten aus verschiedenen Bereichen und mit unterschiedlichen Schwerpunkten ist immer wieder spannend. Auch die Bandbreite der Projekte für namhafte Kunden aus den unterschiedlichsten Branchen sorgt dafür, dass ich immer noch etwas dazu lernen kann. Nicht zuletzt schlägt mein Herz für Potsdam.
       img: quotes/quote-claudia.png
-    - name: Doreen   
-      position: Senior Digital Experience Designer
-      quote: Bei D-LABS kann ich so arbeiten, dass ich noch Zeit für meine Familie habe. Gleichzeitig habe ich die Möglichkeit auf anspruchsvollen Projekten zu arbeiten. Diese Vereinbarkeit ist mir sehr wichtig, weil Familie zu haben hier nicht bedeutet Abstriche in der beruflichen Entwicklung machen zu müssen.
-      img: quotes/quote-doreen.png
     - name: Hagen
       position: Sales, Networking & New Business
       quote: D-LABS bedeutet für mich, im agilen Miteinander interessante Ideen und Projekte zu entwickeln und digitale Lösungen zu schaffen – mit Menschen und für Menschen.
@@ -51,20 +53,10 @@ de:
   back_button_label: Alle Jobangebote
   learn_more: Klingt spannend!
  
-  team_fit_heading: Du passt perfekt in unser Team?
-  team_fit_url: mailto:jobs@d-labs.com
-  team_fit_button_label: Jetzt Unterlagen schicken!
-
   download_button_label: Download PDF
 
   profile_heading: Dein Profil
   tasks_heading: Deine Aufgaben
-
-  circle_apply_now_button_label: Jetzt bewerben
-  apply_now_heading: Bist du bereit?
-  apply_now_description: "Sende uns deine Bewerbungsunterlagen oder erzähl uns in einem kurzen Video wer du bist!"
-  apply_now_url: mailto:jobs@d-labs.com
-  apply_now_button_label: Jetzt bewerben!
 
   contact:
     title: Für Fragen stehen wir dir gern zur Verfügung.
@@ -89,7 +81,9 @@ en:
   We are always looking for new talents.'
   inclusivity_text: 'To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally apply to all gender identities.'
   initiative_button_label: apply now
-  initiative_button_target: mailto:jobs@d-labs.com
+  apply_now_aria_label: Email jobs@d-labs.com
+  apply_now_target: mailto:jobs@d-labs.com
+  inclusivity_aria_label: Statement on gender-inclusive language
 
   slider_title: Why D-LABS?
 
@@ -142,7 +136,6 @@ en:
   circle_apply_now_button_label: Apply<br/>now
   apply_now_heading: Are you ready?
   apply_now_description: Send us your application documents or tell us in a short video who you are!
-  apply_now_url: mailto:jobs@d-labs.com
   apply_now_button_label: Apply now!
 
   contact:

@@ -8,7 +8,7 @@
       <polygon points="0 0,100 0,100 80,0 100" class="show-md" />
     </svg>
     <div class="absolute inset-x bottom-0 col align-center text-black pb-5">
-      <a class="button-text" href="#n1">{% asset icons/icon-arrow-down.svg @inline %}</a>
+      <a class="button-text" href="#n1" aria-label="Nach unten scrollen">{% asset icons/icon-arrow-down.svg @inline %}</a>
     </div>
   </div>
   <div class="absolute inset-full col align-center non-interactive md-py-7">
@@ -22,7 +22,7 @@
     <div class="absolute inset-full non-interactive zindex-1">
       <div class="height-screen width-full sticky">
         <div class="absolute inset-x bottom-0 col align-center text-black pb-5 zindex-1 hide-md">
-          <a class="button-text interactive" href="#clients">{% asset icons/icon-arrow-down.svg @inline %}</a>
+          <a class="button-text interactive" href="#clients" aria-label="Nach unten scrollen">{% asset icons/icon-arrow-down.svg @inline %}</a>
         </div>
       </div>
     </div>
@@ -64,7 +64,18 @@
           href="#n{{forloop.index}}"
           class="scroll-indicator"
           data-class-on-range="{{forloop.index}}-{{forloop.index | plus: 1}}:is-active"
-        >
+          aria-label="Seite {{forloop.index}}"
+          data-aria-label-active="Aktuelle Seite: Seite {{forloop.index}}"
+          data-aria-label-next="Nächste Seite: Seite {{forloop.index}}"
+          data-aria-label-prev="Vorherige Seite: Seite {{forloop.index}}"
+          {%
+          if
+          forloop.first
+          %}aria-current="page"
+          {%
+          endif
+          %}
+            >
         </a>
         {%- endfor -%}
       </div>
@@ -95,11 +106,11 @@
     </div>
     <div class="col align-center">
       <button class="button-text is-blue" data-toggle="#more-clients" data-toggle-style="slide">
-        <div class="row align-center sp-3">
+        <div class="row align-center sp-3" aria-label="show more clients">
           {% asset icons/icon-arrow-down.svg @inline %}
           <div>{{_.clients_show_more}}</div>
         </div>
-        <div class="row align-center sp-3 hidden">
+        <div class="row align-center sp-3 hidden" aria-label="show less clients">
           {% asset icons/icon-arrow-up.svg @inline %}
           <div>{{_.clients_show_less}}</div>
         </div>
@@ -140,7 +151,7 @@
 
 <div class="bg-white row q-md-col relative zindex-1">
   <div class="width-1_2 relative minheight-9 q-md-width-full">
-    {% asset {{_.jobs_image}} class="absolute inset-full home-jobs-img "%}
+    {% asset {{_.jobs_image}} class="absolute inset-full home-jobs-img" alt="" %}
   </div>
   <div class="width-1_2 q-md-width-full">
     <div class="py-8 pl-6 pr-4 maxwidth-10 col sp-3">

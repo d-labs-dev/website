@@ -1,9 +1,9 @@
 first_clients:
-  - name: Addidas
+  - name: Adidas
     logo: clients/logo-addidas.svg
   - name: Airbus
     logo: clients/logo-airbus.svg
-  - name: Amg
+  - name: AMG
     logo: clients/logo-amg.svg
   - name: Arvato
     logo: clients/logo-arvato.svg
@@ -11,21 +11,21 @@ first_clients:
     logo: clients/logo-aspo.svg
   - name: Audi
     logo: clients/logo-audi.svg
-  - name: Basf
+  - name: BASF
     logo: clients/logo-basf.svg
-  - name: Bayer Businesscience
+  - name: Bayer Business Services
     logo: clients/logo-bayer-businesscience.svg
-  - name: Bayer Cropscience
+  - name: Bayer CropScience
     logo: clients/logo-bayer-cropscience.svg
-  - name: Bwb
+  - name: Berliner Wasserbetriebe
     logo: clients/logo-bwb.svg
   - name: Daimler
     logo: clients/logo-daimler.svg
-  - name: Db
+  - name: Deutsche Bahn
     logo: clients/logo-db.svg
 
 rest_clients:
-  - name: Dp
+  - name: Deutsche Post
     logo: clients/logo-dp.svg
   - name: E-on
     logo: clients/logo-e-on.svg
@@ -33,23 +33,23 @@ rest_clients:
     logo: clients/logo-evonik.svg
   - name: Gasag
     logo: clients/logo-gasag.svg
-  - name: Ilb
+  - name: Investitionsbank des Landes Brandenburg
     logo: clients/logo-ilb.svg
   - name: Innogy
     logo: clients/logo-innogy.svg
-  - name: Lbs
+  - name: Landesbausparkasse
     logo: clients/logo-lbs.svg
   - name: Lidl
     logo: clients/logo-lidl.svg
-  - name: Mobile-de
+  - name: mobile.de
     logo: clients/logo-mobile-de.svg
-  - name: Mvs
+  - name: Medizinverlage Stuttgart
     logo: clients/logo-mvs.svg
-  - name: Randstad
+  - name: randstad
     logo: clients/logo-randstad.svg
   - name: Roche
     logo: clients/logo-roche.svg
-  - name: Sap
+  - name: SAP
     logo: clients/logo-sap.svg
   - name: Siemens
     logo: clients/logo-siemens.svg
@@ -57,19 +57,19 @@ rest_clients:
     logo: clients/logo-telekom.svg
   - name: Thieme
     logo: clients/logo-thieme.svg
-  - name: Tuev
+  - name: TÜV Nord
     logo: clients/logo-tuev.svg
   - name: Vattenfall
     logo: clients/logo-vattenfall.svg
-  - name: Vodafon
+  - name: Vodafone
     logo: clients/logo-vodafon.svg
   - name: Vorwerk
     logo: clients/logo-vorwerk.svg
-  - name: Vw
+  - name: Volkswagen
     logo: clients/logo-vw.svg
   - name: Westnetz
     logo: clients/logo-westnetz.svg
-  - name: Wfbb
+  - name: Wirtschaftsförderung Brandenburg
     logo: clients/logo-wfbb.svg
   - name: Xing
     logo: clients/logo-xing.svg

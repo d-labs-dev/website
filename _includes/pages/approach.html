@@ -1,9 +1,13 @@
 {%- assign _ = site.data.pages.approach[page.locale] -%}
 
 <div class="relative" data-scrollspy>
-  <div class="relative height-screen col align-center justify-center py-7 px-4 overflow-hidden relative zindex-1">
+  <div
+    class="relative height-screen col align-center justify-center py-7 px-4 overflow-hidden relative zindex-1"
+  >
     <div class="maxwidth-7 width-full col sp-4 pb-6 relative zindex-1">
-      <div class="uppercase font-heading font-bold text-blue text-sm lead-line" >{{_.intro_lead}}</div>
+      <div class="uppercase font-heading font-bold text-blue text-sm lead-line">
+        {{_.intro_lead}}
+      </div>
       <div class="markdown text-xxl q-md-text-xl font-heading">{{_.intro_text | markdownify}}</div>
     </div>
     <div class="absolute non-interactive inset-full col">
@@ -11,26 +15,22 @@
     </div>
     <div class="absolute inset-x bottom-0 col align-center text-black pb-4 zindex-1">
       <div class="col sp-3 align-center">
-        <a class="button-text" href="#n1">
-          {{_.intro_cta_text}}
-        </a>
-        <a class="button-text" href="#n1">
-          {% asset icons/icon-arrow-down.svg @inline %}
-        </a>
+        <a class="button-text" href="#n1"> {{_.intro_cta_text}} </a>
+        <a class="button-text" href="#n1"> {% asset icons/icon-arrow-down.svg @inline %} </a>
       </div>
     </div>
   </div>
 
-  <div class="relative" style="padding-bottom:40vh">
+  <div class="relative" style="padding-bottom: 40vh">
     <div class="absolute inset-full col align-center non-interactive zindex-1">
-      <div class="maxwidth-8 width-full sticky height-screen row align-center overflow-hidden q-md-align-end q-md-pb-7">
+      <div
+        class="maxwidth-8 width-full sticky height-screen row align-center overflow-hidden q-md-align-end q-md-pb-7"
+      >
         {%- include approach-image.html -%}
         <div class="absolute inset-x bottom-0 pb-4 col align-center q-md-pb-2">
           <div class="col sp-3 align-center interactive">
-            <a class="button-text" href="#projects">
-              {{_.projects_link_text}}
-            </a>
-            <a class="button-text" href="#projects">
+            <a class="button-text" href="#projects"> {{_.projects_link_text}} </a>
+            <a class="button-text" href="#projects" aria-hidden>
               {% asset icons/icon-arrow-down.svg @inline %}
             </a>
           </div>
@@ -39,16 +39,15 @@
     </div>
     <div class="absolute inset-full col align-center relative zindex-1 non-interactive">
       <div class="maxwidth-7 width-full sticky q-md-px-4 pt-8 height-screen">
-        <div class="uppercase font-heading font-bold text-blue text-xs lead-line sticky">{{_.slider_lead}}</div>
+        <div class="uppercase font-heading font-bold text-blue text-xs lead-line sticky">
+          {{_.slider_lead}}
+        </div>
       </div>
     </div>
     <div class="height-5" data-keyframe-marker></div>
     {%- for screen in _.screens -%}
-    <div class="height-13 q-md-height-12" id="n{{forloop.index}}" data-keyframe-marker>
-    </div>
-    {%- endfor -%}
-
-    {%- for screen in _.screens -%}
+    <div class="height-13 q-md-height-12" id="n{{forloop.index}}" data-keyframe-marker></div>
+    {%- endfor -%} {%- for screen in _.screens -%}
     <div
       class="absolute inset-full"
       style="opacity: 0"
@@ -60,13 +59,13 @@
     >
       <div class="sticky height-screen col px-4 align-center">
         <div class="maxwidth-7 width-full">
-            <div class="approach-scroll-screen relative col sp-4 pt-8 pb-7">
-              <h2 class="font-heading text-xl q-md-text-md pt-5">{{screen.title}}</h2>
-              {%- if screen.text - %}
-              <div class="q-md-text-xs maxwidth-2 approach-scroll-screen-text">{{screen.text}}</div>
-              {%- endif- %}
-            </div>
+          <div class="approach-scroll-screen relative col sp-4 pt-8 pb-7">
+            <h2 class="font-heading text-xl q-md-text-md pt-5">{{screen.title}}</h2>
+            {%- if screen.text - %}
+            <div class="q-md-text-xs maxwidth-2 approach-scroll-screen-text">{{screen.text}}</div>
+            {%- endif- %}
           </div>
+        </div>
       </div>
     </div>
     {%- endfor -%}
@@ -78,6 +77,15 @@
           href="#n{{forloop.index}}"
           class="scroll-indicator"
           data-class-on-range="{{forloop.index}}-{{forloop.index | plus: 1}}:is-active"
+          role="button"
+          aria-label="{% if forloop.first %}Aktuelle Seite: {% elsif forloop.index == 2 %}Nächste Seite: {% elsif forloop.index0 == 0 %}Vorherige Seite: {% endif %}Seite {{forloop.index}}"
+          {%
+          if
+          forloop.first
+          %}aria-current="page"
+          {%
+          endif
+          %}
         >
         </a>
         {%- endfor -%}
@@ -90,30 +98,33 @@
   <div class="maxwidth-7 width-full col sp-6">
     <h2 class="font-heading text-xl maxwidth-4">{{_.projects_title}}</h2>
     <div class="col sp-8">
-    {%- for project in _.projects -%}
+      {%- for project in _.projects -%}
       <div class="col" id="project{{forloop.index}}">
         <div class="pb-4">
-          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{project.lead}}</div>
+          <div class="uppercase font-heading font-bold text-blue text-sm lead-line">
+            {{project.lead}}
+          </div>
         </div>
         <div class="row sp-3 height-14 q-md-height-10">
           <div class="width-11 no-shrink relative q-md-width-1_3">
-            {% asset {{project.img1}} class="absolute inset-full"%}
+            {% asset {{project.img1}} class="absolute inset-full" alt="" %}
           </div>
           <div class="fill-parent relative">
-            {% asset {{project.img2}} class="absolute inset-full"%}
+            {% asset {{project.img2}} class="absolute inset-full" alt="" %}
           </div>
         </div>
         <div class="row sp-3 relative align-start q-md-col q-md-align-center">
-          <div class="width-11 no-shrink sticky col sp-5 align-center pt-7 pb-5 q-md-relative q-md-py-2">
-            {% asset {{project.circle_img}} class="width-full"%}
+          <div
+            class="width-11 no-shrink sticky col sp-5 align-center pt-7 pb-5 q-md-relative q-md-py-2"
+          >
+            {% asset {{project.circle_img}} class="width-full" alt="" %}
             <div class="col sp-2">
-              {%- for type in site.data.pages.approach.task_types -%}
-              {%- assign key = type[0] -%}
+              {%- for type in site.data.pages.approach.task_types -%} {%- assign key = type[0] -%}
               {% if project.percentages[key] == 0 %}{% continue %}{% endif %}
-                <div class="row sp-1 font-heading text-xs text-{{type[1]}}">
-                  <div class="width-4 text-right">{{project.percentages[key]}}%</div>
-                  <div>{{_[key]}}</div>
-                </div>
+              <div class="row sp-1 font-heading text-xs text-{{type[1]}}">
+                <div class="width-4 text-right">{{project.percentages[key]}}%</div>
+                <div>{{_[key]}}</div>
+              </div>
               {% endfor %}
             </div>
           </div>
@@ -147,13 +158,11 @@
               </ul>
             </div>
 
-            <div class="approach-project-image_source">
-              {{project.image_source}}
-            </div>
+            <div class="approach-project-image_source">{{project.image_source}}</div>
           </div>
         </div>
       </div>
-    {%- endfor -%}
+      {%- endfor -%}
     </div>
   </div>
 </div>

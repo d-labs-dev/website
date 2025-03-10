@@ -1,23 +1,26 @@
 {%- assign _ = site.data.pages.jobs[page.locale] -%}
 
 <div class="maxwidth-7 width-full col sp-4 pb-7">
-  <div class="uppercase font-heading font-bold text-blue text-sm lead-line">{{_.benefits_title}}</div>
+  <div class="uppercase font-heading font-bold text-blue text-sm lead-line">
+    {{_.benefits_title}}
+  </div>
   <div class="carousel">
     {%- for benefit in _.benefits -%}
-      <div>
-        <div class="row sp-5 px-5 q-md-col q-md-sp-2 align-center">
-          <div class="no-shrink py-3">
-            <div class="relative">
-              {% asset {{benefit.img}} class="rounded-full width-10 height-10" %}
-            </div>
-          </div>
-          <div class="col sp-3">
-            <div class="text-xl q-md-text-lg q-sm-text-md font-heading">{{benefit.text | markdownify}}</div>
-            <div class="row sp-1 text-sm">
-            </div>
+    <div>
+      <div class="row sp-5 px-5 q-md-col q-md-sp-2 align-center">
+        <div class="no-shrink py-3">
+          <div class="relative">
+            {% asset {{benefit.img}} class="rounded-full width-10 height-10" alt="" %}
           </div>
         </div>
+        <div class="col sp-3">
+          <div class="text-xl q-md-text-lg q-sm-text-md font-heading">
+            {{benefit.text | markdownify}}
+          </div>
+          <div class="row sp-1 text-sm"></div>
+        </div>
       </div>
+    </div>
     {%- endfor -%}
   </div>
 </div>
