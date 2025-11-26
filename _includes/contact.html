@@ -14,8 +14,8 @@
           <div class="text-sm">{{contact.position}}</div>
         </div>
         <div class="col text-sm">
-          <div>T {{contact.tel}}</div>
-          <div>M {{contact.mobile}}</div>
+          {% if contact.tel %}<div>T {{contact.tel}}</div>{% endif %}
+          {% if contact.mobile %}<div>M {{contact.mobile}}</div>{% endif %}
           <a class="reset-link" href="mailto:{{contact.email}}">{{contact.email}}</a>
         </div>
         {% if include.no_button != true %}
