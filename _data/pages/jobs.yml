@@ -1,12 +1,11 @@
 de:
-  title_text: 'Wer uns fehlt,<br/>**bist du!**'
+  title_text: "Wer uns fehlt,<br/>**bist du!**"
 
-  intro_text: 'Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere Jobangebote für dich an und sende uns deine Kontaktdaten! Der erste Schritt zum neuen Job bei D-LABS in Potsdam oder am Standort Berlin ist schnell gemacht.'
+  intro_text: "Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere Jobangebote für dich an und sende uns deine Kontaktdaten! Der erste Schritt zum neuen Job bei D-LABS in Potsdam oder am Standort Berlin ist schnell gemacht."
   list_title: Wir suchen dich
 
-  initiative_text: 'Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige uns, wie du unser Team verstärken könntest!'
-  inclusivity_text: 'Ein Teil von D-LABS zu sein bedeutet so zu sein wie du bist!
-  Daher gelten unsere Personenbezeichnungen natürlich für alle Geschlechteridentitäten.'
+  initiative_text: "Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige uns, wie du unser Team verstärken könntest!"
+  inclusivity_text: "Ein Teil von D-LABS zu sein bedeutet so zu sein wie du bist! Daher gelten unsere Personenbezeichnungen natürlich für alle Geschlechteridentitäten."
   initiative_button_label: Jetzt initiativ bewerben!
   apply_now_aria_label: Email an jobs@d-labs.com
   apply_now_target: mailto:jobs@d-labs.com
@@ -18,11 +17,11 @@ de:
 
   slider_title: Warum D-LABS?
   slides:
-    - name: Peter 
+    - name: Peter
       position: Senior User Researcher
       quote: Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
       img: quotes/quote-peter.jpeg
-    - name: Claudia 
+    - name: Claudia
       position: Director Digital Experience Design
       quote: Die enge Zusammenarbeit mit Experten aus verschiedenen Bereichen und mit unterschiedlichen Schwerpunkten ist immer wieder spannend. Auch die Bandbreite der Projekte für namhafte Kunden aus den unterschiedlichsten Branchen sorgt dafür, dass ich immer noch etwas dazu lernen kann. Nicht zuletzt schlägt mein Herz für Potsdam.
       img: quotes/quote-claudia.png
@@ -49,10 +48,10 @@ de:
     - label: Familienfreundlichkeit
       img: job-benefits/icon-family-friendliness.svg
       text: "Für manche sind es die Kids, für andere der beste Freund des Menschen – zum Menschsein gehört die Familie und so ist es bei D-LABS selbstverständlich, Arbeitszeiten an den Zeitplan der Kinder anzupassen, für private Termine Platz im Kalender freizumachen oder den Familienhund mit in's Büro nehmen zu können."
-  
+
   back_button_label: Alle Jobangebote
   learn_more: Klingt spannend!
- 
+
   download_button_label: Download PDF
 
   profile_heading: Dein Profil
@@ -60,10 +59,11 @@ de:
 
   contact:
     title: Für Fragen stehen wir dir gern zur Verfügung.
-    avatar_img: dlabs_contact-inka.jpg
-    name: Inka Storm
-    position: Human Resources Assistant
-    mobile: +49 170 248 62 44
+    avatar_img: dlabs_contact-julia.png
+    name: Julia Heyland
+    position: Human Resources Manager
+    tel: +49 331 97 992 334
+    mobile: +49 151 462 53 803
     email: jobs@d-labs.com
     our_locations: Zu unseren Standorten
     cta_text: Anfragen
@@ -71,14 +71,13 @@ de:
   you_are_missing: Wer uns fehlt, bist du!
 
 en:
-  title_text: 'Who we are missing,<br/>**is you!**'
+  title_text: "Who we are missing,<br/>**is you!**"
 
-  intro_text: 'Would you like to join our creative, interdisciplinary team? Then take a look at our job offers for you and send us your contact details! The first step to a new job at D-LABS is taken quickly.'
+  intro_text: "Would you like to join our creative, interdisciplinary team? Then take a look at our job offers for you and send us your contact details! The first step to a new job at D-LABS is taken quickly."
   list_title: We are looking for you
 
-  initiative_text: 'Your dream job isn’t listed? No problem. Just contact us anyway and show us how you could strengthen our team!
-  We are always looking for new talents.'
-  inclusivity_text: 'To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally apply to all gender identities.'
+  initiative_text: "Your dream job isn’t listed? No problem. Just contact us anyway and show us how you could strengthen our team! We are always looking for new talents."
+  inclusivity_text: "To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally apply to all gender identities."
   initiative_button_label: apply now
   apply_now_aria_label: Email jobs@d-labs.com
   apply_now_target: mailto:jobs@d-labs.com
@@ -87,15 +86,15 @@ en:
   slider_title: Why D-LABS?
 
   slides:
-    - name: Peter 
+    - name: Peter
       position: Senior User Researcher
       quote: Because we make the world a little more accessible every day. With our focus on end-user needs, we create solutions that inspire our customers. This is where user experience is lived.
       img: quotes/quote-peter.jpeg
-    - name: Claudia 
+    - name: Claudia
       position: Director Digital Experience Design
       quote: The close cooperation with experts from different fields and with different focal points is always exciting. The range of projects for well-known customers from a wide range of industries also ensures that I can still learn something about them. Last but not least, my heart beats for Potsdam.
       img: quotes/quote-claudia.png
-    - name: Doreen   
+    - name: Doreen
       position: Senior Digital Experience Designer
       quote: At D-LABS, I can work in such a way that I still have time for my family. At the same time, I have the opportunity to work on demanding projects. This compatibility is very important to me because here having a family does not mean having to give up anything in my professional development.
       img: quotes/quote-doreen.png
@@ -107,7 +106,6 @@ en:
       position: Digital Experience Designer
       quote: We have a nose for what makes people tick and get things done. Why wait? We want to get to the bottom of the users' needs and understand them in all their complexity.
       img: quotes/quote-nina.png
-
 
   back_button_label: All job offers
   learn_more: Sounds exciting!
