@@ -1,0 +1,141 @@
+---
+/**
+ * Contact block: a named person with their photo and details, plus a link
+ * through to the office addresses. Used at the foot of the jobs and approach
+ * pages.
+ *
+ * The avatar is referenced by filename in the page YAML, so the images are
+ * imported here through a glob rather than by a literal path — content should
+ * not have to know where the assets directory is.
+ */
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+import { pageUrl, type Locale } from "@/lib/i18n";
+
+export interface ContactDetails {
+  title: string;
+  name: string;
+  position: string;
+  email: string;
+  tel?: string;
+  mobile?: string;
+  cta_text?: string;
+  our_locations: string;
+  avatar_img: string;
+}
+
+interface Props {
+  locale: Locale;
+  contact: ContactDetails;
+  /** Light variant, on white rather than blue. */
+  light?: boolean;
+  /** The job page shows the details without the mail button. */
+  withButton?: boolean;
+}
+
+const { locale, contact, light = false, withButton = true } = Astro.props;
+
+const avatars = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/**/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const avatarPath = `/src/assets/images/${contact.avatar_img}`;
+const avatar = avatars[avatarPath]?.default;
+
+if (!avatar) {
+  throw new Error(`Contact avatar not found: ${avatarPath}. Check avatar_img in the page's YAML.`);
+}
+---
+
+<div
+  class:list={[
+    "flex flex-col items-center gap-6 px-6 pt-16 pb-24",
+    light ? "bg-white text-black" : "bg-dlabs-blue text-white",
+  ]}
+>
+  <div class="flex w-full max-w-[60rem] flex-col gap-12 lg:flex-row lg:gap-4">
+    <h2 class="font-heading tracking-heading max-w-[30rem] text-xl">{contact.title}</h2>
+
+    <div class="hidden flex-auto lg:block"></div>
+
+    <div class="flex flex-col items-center gap-8 sm:flex-row sm:items-start">
+      <Image
+        src={avatar}
+        alt={`${contact.name}`}
+        width={288}
+        height={288}
+        class="h-32 w-32 shrink-0 rounded-full object-cover"
+        loading="lazy"
+      />
+
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-col">
+          <div class="font-bold">{contact.name}</div>
+          <div class="text-sm">{contact.position}</div>
+        </div>
+
+        <div class="flex flex-col text-sm">
+          {contact.tel && <div>T {contact.tel}</div>}
+          {contact.mobile && <div>M {contact.mobile}</div>}
+          <a class="contact-mail" href={`mailto:${contact.email}`}>{contact.email}</a>
+        </div>
+
+        {
+          withButton && contact.cta_text && (
+            <div class="flex flex-col items-start">
+              <Button
+                variant="solid"
+                color={light ? "blue" : "white"}
+                href={`mailto:${contact.email}`}
+              >
+                {contact.cta_text}
+              </Button>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <a
+    href={`${pageUrl("about", locale)}#locations`}
+    class:list={["locations-link w-full max-w-[60rem]", light ? "is-light" : "is-dark"]}
+  >
+    <h2 class="font-heading tracking-heading max-w-[30rem] text-xl">
+      {contact.our_locations}
+      <span aria-hidden="true">↗</span>
+    </h2>
+  </a>
+</div>
+
+<style>
+  .contact-mail {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .contact-mail:hover {
+    text-decoration: underline;
+  }
+
+  .locations-link {
+    text-decoration: none;
+    transition-property: color, opacity;
+  }
+
+  .locations-link.is-dark {
+    color: #fff;
+  }
+
+  .locations-link.is-dark:hover {
+    color: var(--color-white-a90);
+  }
+
+  .locations-link.is-light {
+    color: var(--color-black);
+  }
+
+  .locations-link.is-light:hover {
+    color: var(--color-dlabs-blue);
+  }
+</style>

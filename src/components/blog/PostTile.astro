@@ -1,0 +1,79 @@
+---
+/**
+ * Blog post tile for the index grid. The category renders as a small dark chip
+ * sitting inside the heading, as on the current site.
+ */
+import type { CollectionEntry } from "astro:content";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import Markdown from "@/components/Markdown.astro";
+import { entryUrl, type Locale } from "@/lib/i18n";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  locale: Locale;
+}
+
+const { post, locale } = Astro.props;
+const data = post.data;
+const href = entryUrl("blog", data.slug, locale);
+
+/** 4:3, matching the old `?w=400&h=300` tile crop. */
+const TILE_WIDTH = 400;
+const TILE_HEIGHT = 300;
+---
+
+<div class="flex flex-col gap-4">
+  <a href={href} tabindex="-1" aria-hidden="true">
+    {
+      data.heroImage && (
+        <img
+          src={contentfulImage(data.heroImage, {
+            width: TILE_WIDTH,
+            height: TILE_HEIGHT,
+            fit: "fill",
+            focus: "faces",
+          })}
+          alt={assetAlt(data.heroImage)}
+          width={TILE_WIDTH}
+          height={TILE_HEIGHT}
+          class="w-full"
+          loading="lazy"
+        />
+      )
+    }
+  </a>
+
+  <a href={href} class="tile-link">
+    <h3 class="text-base leading-tight font-bold">
+      {data.category && <span class="category-chip">{data.category}</span>}
+      {data.title}
+    </h3>
+  </a>
+
+  <Markdown source={data.description} size="sm" />
+</div>
+
+<style>
+  .tile-link {
+    color: inherit;
+    text-decoration: none;
+    transition-property: color;
+  }
+
+  .tile-link:hover {
+    color: var(--color-dlabs-blue);
+  }
+
+  /* Was .category-tile. Sits slightly high so it reads as a label on the line. */
+  .category-chip {
+    display: inline-block;
+    position: relative;
+    top: -0.2em;
+    padding: 0.3em 0.75em 0.15em;
+    background-color: var(--color-black);
+    color: #fff;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>

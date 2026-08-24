@@ -1,0 +1,58 @@
+---
+/**
+ * Google Map showing the three offices.
+ *
+ * Click-to-load, unlike the current site, which injects the Maps script on every
+ * page view. That matters: this site sets no cookies and therefore needs no
+ * consent banner, and loading Google Maps unprompted would send the visitor's IP
+ * to Google before they asked for it — undoing exactly that. Nothing is
+ * requested until the placeholder is clicked.
+ *
+ * The API key is public by necessity (it ships in the page), so it must be
+ * HTTP-referrer restricted in the Google Cloud console.
+ */
+import { getSharedCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getSharedCopy("locations", locale);
+
+const labels =
+  locale === "de"
+    ? {
+        prompt: "Karte laden",
+        note: "Beim Laden werden Daten an Google übertragen.",
+      }
+    : {
+        prompt: "Load map",
+        note: "Loading the map sends data to Google.",
+      };
+---
+
+<div
+  id="map"
+  class="bg-dlabs-gray-100 relative z-1 h-[25rem] md:h-[30rem]"
+  data-map
+  aria-label={copy.title}
+>
+  <button
+    type="button"
+    class="group flex h-full w-full cursor-pointer flex-col items-center justify-center gap-4"
+    data-map-load
+  >
+    <span
+      class="font-heading border-dlabs-blue text-dlabs-blue group-hover:bg-dlabs-blue border-2 px-4 pt-4 pb-[0.85rem] text-xs font-bold tracking-[0.1em] uppercase transition-colors group-hover:text-white"
+    >
+      {labels.prompt}
+    </span>
+    <span class="text-dlabs-gray-300 text-2xs">{labels.note}</span>
+  </button>
+</div>
+
+<script>
+  import { setupMap } from "./map";
+  setupMap();
+</script>

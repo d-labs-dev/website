@@ -203,6 +203,69 @@ const pages = defineCollection({
 });
 
 /**
+ * Office locations. One entry, id "offices". Not localized: the addresses are
+ * identical in both languages, so duplicating them per locale would only invite
+ * drift. The translated labels are in content/shared/<locale>/locations.yml.
+ */
+const offices = defineCollection({
+  loader: glob({ pattern: "offices.yml", base: "./content" }),
+  schema: z.object({
+    offices: z.array(
+      z.object({
+        name: z.string(),
+        /** Marks the head office. */
+        is_main: z.boolean().optional(),
+        /** Path under src/assets/images/, resolved by the component that shows it. */
+        image: z.string(),
+        street: z.string(),
+        zip: z.string(),
+        city: z.string(),
+        tel: z.string(),
+        email: z.string(),
+      }),
+    ),
+  }),
+});
+
+/**
+ * Partner organisations. Not localized, for the same reason as offices.
+ */
+const partners = defineCollection({
+  loader: glob({ pattern: "partners.yml", base: "./content/partners" }),
+  schema: z.object({
+    partners: z.array(
+      z.object({
+        name: z.string(),
+        /** Path under src/assets/images/. */
+        logo: z.string(),
+        link: z.string().url(),
+        /**
+         * Per-logo padding, because the artwork has wildly different amounts of
+         * built-in whitespace. Replaces a {% case %} on the partner name in the
+         * old template.
+         */
+        padding: z.string().optional(),
+      }),
+    ),
+  }),
+});
+
+/**
+ * Imprint, privacy policy and accessibility statement — long prose that is
+ * edited as markdown rather than held in Contentful, as on the current site.
+ *
+ * The `title` is new: production has no per-page title, so jekyll-seo-tag
+ * emitted a bare "D‑LABS GmbH" for all three. Each page's H1 is a better one.
+ */
+const legal = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/legal" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
+/**
  * Copy that appears on every page (header nav, footer links). Kept separate from
  * `pages` so a page file never has to restate the nav.
  */
@@ -211,4 +274,4 @@ const shared = defineCollection({
   schema: z.record(z.string(), z.string()),
 });
 
-export const collections = { methods, blog, jobs, pages, shared };
+export const collections = { methods, blog, jobs, pages, shared, legal, offices, partners };

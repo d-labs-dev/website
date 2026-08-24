@@ -1,0 +1,106 @@
+---
+/**
+ * Blog index: the newest post as a wide feature, the rest as a tile grid.
+ *
+ * The old markup used `.grid`, which was flex-wrap plus negative-margin gutters
+ * and percentage widths on the children. CSS Grid gives the same result with
+ * none of the arithmetic.
+ */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import PostTile from "@/components/blog/PostTile.astro";
+import arrowRight from "@/assets/images/icons/icon-arrow-right.svg";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+import { formatPostDate } from "@/lib/dates";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("blog", locale);
+
+const posts = (await getCollection("blog", (entry) => entry.data.locale === locale)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const [featured, ...rest] = posts;
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("blog", otherLocale(locale)) }];
+---
+
+<BaseLayout title="Blog" activeRef="blog" alternates={alternates}>
+  <div class="flex flex-col items-center px-0 py-16 pt-24 sm:px-6">
+    <div class="flex w-full max-w-[60rem] flex-col gap-16">
+      {
+        featured && (
+          <div class="flex flex-col gap-12 pt-8 sm:flex-row">
+            <div class="relative aspect-video w-full shrink-0 sm:aspect-square sm:w-2/5">
+              {featured.data.heroImage && (
+                <img
+                  src={contentfulImage(featured.data.heroImage, {
+                    width: 800,
+                    height: 800,
+                    fit: "fill",
+                    focus: "faces",
+                  })}
+                  alt={assetAlt(featured.data.heroImage)}
+                  class="absolute inset-0 h-full w-full object-cover"
+                  loading="eager"
+                />
+              )}
+            </div>
+
+            <div class="flex flex-col gap-4 px-6 sm:px-0">
+              <LeadLine>
+                {featured.data.category
+                  ? `${featured.data.category} | ${formatPostDate(featured.data.date)}`
+                  : formatPostDate(featured.data.date)}
+              </LeadLine>
+
+              <a href={entryUrl("blog", featured.data.slug, locale)} class="feature-link">
+                <h2 class="font-heading tracking-heading text-xl">{featured.data.title}</h2>
+              </a>
+
+              <Markdown source={featured.data.description} />
+
+              <div class="flex flex-col items-start">
+                <Button
+                  variant="ghost"
+                  color="black"
+                  href={entryUrl("blog", featured.data.slug, locale)}
+                >
+                  <span class="flex items-center gap-4">
+                    <span>{copy.cta_learn_more}</span>
+                    <Image src={arrowRight} alt="" class="w-4" />
+                  </span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      <div class="grid grid-cols-1 gap-6 px-6 sm:grid-cols-2 sm:px-0 md:grid-cols-3 md:gap-12">
+        {rest.map((post) => <PostTile post={post} locale={locale} />)}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .feature-link {
+    color: inherit;
+    text-decoration: none;
+    transition-property: color;
+  }
+
+  .feature-link:hover {
+    color: var(--color-dlabs-blue);
+  }
+</style>
