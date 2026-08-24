@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Absolute or site-relative URL of the social preview image. */
+  image?: string;
+  /** Set on pages that should not be indexed (e.g. the styleguide). */
+  noindex?: boolean;
+}
+
+const { title, description, image, noindex = false } = Astro.props;
+
+const lang = Astro.currentLocale === "en" ? "en" : "de";
+
+const SITE_NAME = "D‑LABS GmbH";
+const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {
+      /* Letter Gothic uses font-display: block, so it gates first paint of every
+        heading. Preloading it removes that stall. */
+    }
+    <link
+      rel="preload"
+      href="/fonts/LetterGothicTextWeb.woff"
+      as="font"
+      type="font/woff"
+      crossorigin
+    />
+
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical.href} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title ?? SITE_NAME} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical.href} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+  </head>
+
+  <body class="flex min-h-screen flex-col">
+    <main class="flex-auto">
+      <slot />
+    </main>
+  </body>
+</html>

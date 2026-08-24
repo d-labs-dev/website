@@ -1,0 +1,178 @@
+---
+/**
+ * Replaces the old .button / .button-ghost / .button-text / .button-transparent
+ * / .button-circle classes and their is-white / is-black / is-blue / is-mini /
+ * is-wide modifiers.
+ *
+ * Renders an <a> when `href` is given, otherwise a <button>.
+ *
+ * Classes are assembled from non-overlapping groups (layout, type, padding,
+ * background, text colour, border) and each group contributes at most one
+ * utility. That matters: Tailwind resolves conflicting utilities by their
+ * position in the generated stylesheet, not by order in the class attribute, so
+ * two utilities for the same property is a coin flip, not an override.
+ *
+ * Deliberate change from production: the old CSS set `outline: none` on :focus
+ * and only restored a visible ring for the white variants, so most buttons had
+ * no keyboard focus indicator. Every variant here gets a focus-visible ring.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "solid" | "ghost" | "text" | "transparent" | "circle";
+type Color = "blue" | "white" | "black";
+type Size = "default" | "mini" | "wide";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+  href?: string;
+  variant?: Variant;
+  color?: Color;
+  size?: Size;
+  /** Only used when rendering a <button>. */
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "solid",
+  color = "blue",
+  size = "default",
+  type = "button",
+  disabled = false,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+/**
+ * Shared, and free of any property a variant also sets (was %raw-button).
+ *
+ * Note what is deliberately NOT here: display, width, background, border,
+ * text-align, line-height and font-weight are all set per-variant. Tailwind
+ * resolves competing utilities by their position in the generated stylesheet,
+ * not by order in the class attribute, so a shared `w-auto` here silently beats
+ * a variant's `w-[5.5rem]` — with no warning and no way to override it locally.
+ * One utility per property, chosen in one place, is the whole trick.
+ */
+const LAYOUT =
+  "cursor-pointer select-none no-underline transition-[background-color,color,box-shadow,border-color,opacity] disabled:opacity-35 focus-visible:outline-2 focus-visible:outline-offset-2";
+
+/**
+ * The uppercase Letter Gothic treatment (was %button-with-text), split so the
+ * circle can supply its own line-height and weight without two utilities
+ * fighting over the same property.
+ */
+const TYPE_FACE = "font-heading text-xs tracking-[0.1em] uppercase";
+const TYPE_WEIGHT_BOX = "leading-none font-bold";
+const TYPE_WEIGHT_CIRCLE = "leading-tight font-medium";
+
+/** Variants that render as a padded box rather than bare text. */
+const isBox = variant === "solid" || variant === "ghost" || variant === "circle";
+const isFilled = variant === "solid" || variant === "circle";
+
+/**
+ * Asymmetric vertical padding is intentional — it optically centres uppercase
+ * Letter Gothic, which sits high in its em box.
+ */
+const padding: Record<Size, string> = {
+  default: "px-4 pt-4 pb-[0.85rem]",
+  wide: "px-16 pt-4 pb-[0.85rem]",
+  mini: "px-1 pt-1 pb-[0.15rem]",
+};
+
+const bg: Record<Color, string> = {
+  blue: "bg-dlabs-blue hover:bg-white",
+  white: "bg-white",
+  black: "bg-black hover:bg-white",
+};
+
+const filledText: Record<Color, string> = {
+  blue: "text-white hover:text-dlabs-blue",
+  white: "text-dlabs-blue hover:text-black",
+  black: "text-white hover:text-black",
+};
+
+const ghostText: Record<Color, string> = {
+  blue: "text-dlabs-blue hover:text-white",
+  black: "text-black hover:text-white",
+  white: "text-white hover:text-dlabs-blue",
+};
+
+const bareText: Record<Color, string> = {
+  black: "text-black hover:text-dlabs-blue",
+  blue: "text-dlabs-blue hover:text-black",
+  white: "text-white hover:text-black",
+};
+
+const ghostHoverBg: Record<Color, string> = {
+  blue: "hover:bg-dlabs-blue",
+  black: "hover:bg-black",
+  white: "hover:bg-white",
+};
+
+const borderColor: Record<Color, string> = {
+  blue: "border-dlabs-blue",
+  white: "border-white",
+  black: "border-black",
+};
+
+const focusRing: Record<Color, string> = {
+  blue: "focus-visible:outline-dlabs-blue",
+  white: "focus-visible:outline-white",
+  black: "focus-visible:outline-black",
+};
+
+const groups: string[] = [LAYOUT, focusRing[color]];
+
+if (variant !== "transparent") {
+  groups.push(TYPE_FACE, variant === "circle" ? TYPE_WEIGHT_CIRCLE : TYPE_WEIGHT_BOX);
+}
+
+if (variant === "circle") {
+  // `min-w-0` is load-bearing: as a flex item of its own parent, the circle's
+  // `min-width: auto` resolves to min-content, which beats the fixed width and
+  // stretches it into an oval instead of letting the label wrap.
+  groups.push(
+    "inline-flex h-[5.5rem] w-[5.5rem] min-w-0 rotate-15 items-center justify-center rounded-full text-center",
+  );
+} else if (isBox) {
+  groups.push("inline-block text-center", padding[size]);
+} else {
+  // Bare text: padding gives the focus ring somewhere to sit, the negative
+  // margin keeps it from shifting surrounding layout. Alignment is inherited,
+  // matching the old .button-transparent.
+  groups.push("inline-block p-1 -m-1 [text-align:inherit]");
+}
+
+if (isBox) {
+  groups.push("border-2");
+  // The old .button-ghost.is-mini used a grey border regardless of colour.
+  groups.push(
+    variant === "ghost" && size === "mini" ? "border-dlabs-gray-200" : borderColor[color],
+  );
+}
+
+if (isFilled) {
+  groups.push(bg[color], filledText[color]);
+} else if (variant === "ghost") {
+  groups.push(ghostText[color], ghostHoverBg[color]);
+} else {
+  groups.push(bareText[color]);
+}
+
+if (className) groups.push(className);
+
+const classes = groups.filter(Boolean).join(" ");
+---
+
+{
+  href ? (
+    <a href={href} class={classes} aria-disabled={disabled ? "true" : undefined} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} disabled={disabled} {...rest}>
+      <slot />
+    </button>
+  )
+}

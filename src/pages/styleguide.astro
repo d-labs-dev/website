@@ -1,0 +1,233 @@
+---
+/**
+ * Phase 1 gate: every primitive on one page, so the foundation can be compared
+ * against production before any real page is built. Not linked from anywhere
+ * and marked noindex.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import { renderMarkdown } from "@/lib/markdown";
+
+const typeScale = [
+  { cls: "text-3xl", name: "text-3xl", rem: "3.6rem", was: "xxxl" },
+  { cls: "text-2xl", name: "text-2xl", rem: "2.4rem", was: "xxl" },
+  { cls: "text-xl", name: "text-xl", rem: "1.8rem", was: "xl" },
+  { cls: "text-lg", name: "text-lg", rem: "1.2rem", was: "lg" },
+  { cls: "text-base", name: "text-base", rem: "1rem", was: "md" },
+  { cls: "text-sm", name: "text-sm", rem: "0.9rem", was: "sm" },
+  { cls: "text-xs", name: "text-xs", rem: "0.8rem", was: "xs" },
+  { cls: "text-2xs", name: "text-2xs", rem: "0.7rem", was: "xxs" },
+];
+
+const palette = [
+  { cls: "bg-black", name: "black", hex: "#152935" },
+  { cls: "bg-dlabs-blue", name: "dlabs-blue", hex: "#007abd" },
+  { cls: "bg-dlabs-dark-blue", name: "dlabs-dark-blue", hex: "#1e4c62" },
+  { cls: "bg-dlabs-yellow", name: "dlabs-yellow", hex: "#fcbd29" },
+  { cls: "bg-dlabs-green", name: "dlabs-green", hex: "#87c745" },
+  { cls: "bg-dlabs-red", name: "dlabs-red", hex: "#e72d5f" },
+  { cls: "bg-dlabs-purple", name: "dlabs-purple", hex: "#813c96" },
+  { cls: "bg-dlabs-gray-100", name: "dlabs-gray-100", hex: "#fafafa" },
+  { cls: "bg-dlabs-gray-200", name: "dlabs-gray-200", hex: "#dee3e6" },
+  { cls: "bg-dlabs-gray-300", name: "dlabs-gray-300", hex: "#bac0c4" },
+];
+
+const alphas = [
+  "bg-black-a05",
+  "bg-black-a10",
+  "bg-black-a25",
+  "bg-dlabs-blue-a10",
+  "bg-dlabs-blue-a25",
+];
+
+// Exercises everything a Contentful body can contain.
+const sampleMarkdown = `
+## Gut zu wissen
+
+Die Adjektiv-Assoziation ist eine Assoziationstechnik, bei der User Adjektive zu
+bestimmten Bildern oder Begriffen zuordnen. Sie eignet sich für
+[Produkttests](https://d-labs.com/methods/usability_testing) und Workshops.
+
+### Wann einsetzen?
+
+- Früh in der Konzeptphase, wenn Richtungen noch offen sind
+- Bei **emotionalen** Fragestellungen, die sich schlecht direkt abfragen lassen
+- Wenn ein Team sich auf eine gemeinsame Sprache einigen muss
+
+1. Bilder oder Begriffe vorbereiten
+2. Adjektive sammeln lassen
+3. Cluster bilden und auswerten
+
+> Assoziationstechniken lassen sich schnell und mit geringem Aufwand einsetzen.
+
+Ein Absatz mit \`inline code\`.
+Diese Zeile stand im Quelltext hinter einem einzelnen
+Zeilenumbruch — mit hard_wrap wird daraus ein <br>.
+`;
+
+const sampleHtml = renderMarkdown(sampleMarkdown);
+---
+
+<BaseLayout title="Styleguide" noindex={true}>
+  <div class="flex flex-col items-center gap-24 px-6 py-16">
+    <!-- Type scale -->
+    <section class="flex w-full max-w-[60rem] flex-col gap-6">
+      <h2 class="font-heading text-dlabs-blue text-sm font-bold tracking-widest uppercase">
+        Type scale
+      </h2>
+      <div class="flex flex-col gap-4">
+        {
+          typeScale.map((t) => (
+            <div class="border-dlabs-gray-200 flex items-baseline gap-6 border-b pb-3">
+              <div class="text-dlabs-gray-300 w-32 shrink-0 font-mono text-xs">
+                {t.name}
+                <span class="block">
+                  {t.rem} · was {t.was}
+                </span>
+              </div>
+              <div class={`font-heading ${t.cls}`}>Wir gestalten Digitalisierung</div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="flex flex-col gap-4">
+        <p class="text-base">
+          Roboto regular at <code>text-base</code>. Der schnelle braune Fuchs springt über den
+          faulen Hund. Größe, Maß, Übung.
+        </p>
+        <p class="text-base font-bold">
+          Roboto bold at <code>text-base</code> — note this resolves to the Medium (500) file, as on production.
+        </p>
+        <p class="text-base italic">Roboto italic at <code>text-base</code>.</p>
+      </div>
+    </section>
+
+    <!-- Headings -->
+    <section class="flex w-full max-w-[60rem] flex-col gap-6">
+      <h2 class="font-heading text-dlabs-blue text-sm font-bold tracking-widest uppercase">
+        Headings
+      </h2>
+      <div class="flex flex-col gap-4">
+        <h1 class="font-heading tracking-heading text-3xl">h1 · Digitalisierung gestalten</h1>
+        <h2 class="font-heading tracking-heading text-2xl">h2 · Digitalisierung gestalten</h2>
+        <h3 class="font-heading tracking-heading text-xl">h3 · Digitalisierung gestalten</h3>
+        <h4 class="font-heading tracking-heading text-lg">h4 · Digitalisierung gestalten</h4>
+        <h5 class="font-heading tracking-heading text-base font-bold">
+          h5 · Digitalisierung gestalten
+        </h5>
+      </div>
+    </section>
+
+    <!-- Palette -->
+    <section class="flex w-full max-w-[60rem] flex-col gap-6">
+      <h2 class="font-heading text-dlabs-blue text-sm font-bold tracking-widest uppercase">
+        Palette
+      </h2>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-5">
+        {
+          palette.map((c) => (
+            <div class="flex flex-col gap-2">
+              <div class={`border-dlabs-gray-200 h-16 w-full border ${c.cls}`} />
+              <div class="text-2xs font-mono leading-snug">
+                {c.name}
+                <span class="text-dlabs-gray-300 block">{c.hex}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-dlabs-gray-300 text-xs">
+        Translucent variants (over a checker to show alpha):
+      </p>
+      <div
+        class="flex flex-wrap gap-4 bg-[repeating-conic-gradient(#eee_0_25%,#fff_0_50%)] bg-[length:16px_16px] p-4"
+      >
+        {
+          alphas.map((a) => (
+            <div class="flex flex-col gap-1">
+              <div class={`size-16 ${a}`} />
+              <span class="text-2xs font-mono">{a.replace("bg-", "")}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="bg-dlabs-blue flex flex-wrap gap-4 p-4">
+        {
+          ["bg-white-a05", "bg-white-a10", "bg-white-a25", "bg-white-a90"].map((a) => (
+            <div class="flex flex-col gap-1">
+              <div class={`size-16 ${a}`} />
+              <span class="text-2xs font-mono text-white">{a.replace("bg-", "")}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="flex w-full max-w-[60rem] flex-col gap-8">
+      <h2 class="font-heading text-dlabs-blue text-sm font-bold tracking-widest uppercase">
+        Buttons
+      </h2>
+
+      <div class="flex flex-col gap-4">
+        <span class="text-dlabs-gray-300 font-mono text-xs">solid</span>
+        <div class="flex flex-wrap items-start gap-6">
+          <Button variant="solid" color="blue">Jetzt bewerben</Button>
+          <Button variant="solid" color="black">Jetzt bewerben</Button>
+          <Button variant="solid" color="blue" size="wide">Wide</Button>
+          <Button variant="solid" color="blue" disabled>Disabled</Button>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <span class="text-dlabs-gray-300 font-mono text-xs">ghost</span>
+        <div class="flex flex-wrap items-start gap-6">
+          <Button variant="ghost" color="black">Mehr erfahren</Button>
+          <Button variant="ghost" color="blue">Mehr erfahren</Button>
+          <Button variant="ghost" color="black" size="mini">Filter</Button>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <span class="text-dlabs-gray-300 font-mono text-xs">text / transparent</span>
+        <div class="flex flex-wrap items-start gap-8">
+          <Button variant="text" color="black">← Zurück zum Blog</Button>
+          <Button variant="text" color="blue">← Zurück zum Blog</Button>
+          <Button variant="transparent" color="black">Transparent (inherits type)</Button>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <span class="text-dlabs-gray-300 font-mono text-xs">circle</span>
+        <p class="text-dlabs-gray-300 text-2xs">
+          Real labels from jobs.yml — the German one has to wrap inside the circle.
+        </p>
+        <div class="flex flex-wrap items-start gap-10 pt-4">
+          <Button variant="circle" color="blue">Jetzt bewerben</Button>
+          <Button variant="circle" color="black">Jetzt bewerben</Button>
+          <Button variant="circle" color="black">Apply<br />now</Button>
+        </div>
+      </div>
+
+      <div class="bg-dlabs-blue flex flex-col gap-4 p-8">
+        <span class="font-mono text-xs text-white/70">on blue — white variants</span>
+        <div class="flex flex-wrap items-start gap-6">
+          <Button variant="solid" color="white">Kontakt aufnehmen</Button>
+          <Button variant="ghost" color="white">Mehr erfahren</Button>
+          <Button variant="text" color="white">← Zurück</Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prose -->
+    <section class="flex w-full max-w-[60rem] flex-col gap-6">
+      <h2 class="font-heading text-dlabs-blue text-sm font-bold tracking-widest uppercase">
+        Markdown body (prose)
+      </h2>
+      <p class="text-dlabs-gray-300 text-xs">
+        This is how Contentful method / blog / job bodies render.
+      </p>
+      <article class="prose max-w-none" set:html={sampleHtml} />
+    </section>
+  </div>
+</BaseLayout>
