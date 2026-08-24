@@ -45,7 +45,7 @@ body {
   min-height: 100%;
   margin: 0;
   background-color: #fff;
-  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   color: var(--color-black);
 }

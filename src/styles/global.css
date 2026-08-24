@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@import "./fonts.css";
 @import "./base.css" layer(base);
 
 /*
@@ -84,8 +83,10 @@
   --color-white-a25: color-mix(in srgb, #fff 25%, transparent);
   --color-white-a90: color-mix(in srgb, #fff 90%, transparent);
 
-  --font-sans: "Roboto", "Helvetica Neue", Arial, sans-serif;
-  --font-heading: "LetterGothic", "Letter Gothic", monospace;
+  /* Provided by Astro's font API (see `fonts` in astro.config.mjs), which
+     appends its generated metric-matched fallbacks to each. */
+  --font-sans: var(--font-roboto);
+  --font-heading: var(--font-letter-gothic);
 
   --default-transition-duration: 150ms;
   --default-transition-timing-function: ease-out;
@@ -177,9 +178,8 @@
       }
     }
   }
-}
 
-.prose {
+  /* Plugin colour variables. */
   --tw-prose-body: var(--color-black);
   --tw-prose-headings: var(--color-black);
   --tw-prose-lead: var(--color-black);

@@ -95,7 +95,16 @@ values. The main content column is `maxwidth-7` → `max-w-[60rem]`.
   are unaffected. Deliberate for now; revisit with the redesign.
 - **`text-black` is not `#000`.** `--color-black` is overridden to `#152935`; the design has no true
   black.
-- **`font-bold` loads Roboto Medium (500).** There is no Roboto 700 in the design.
+- **This design has no Roboto Bold — its bold is the Roboto Medium cut.** `roboto-latin-500.woff2`
+  is internally "Roboto Medium", `usWeightClass: 500`, and there is no 700 file anywhere in the
+  design. Fonts are declared through Astro's font API in `astro.config.mjs`, where that Medium file
+  is registered at **both 500 and 700**. So `font-medium` and `font-bold` each hit a real declared
+  face — no synthetic bolding, and both render Medium letterforms. To introduce a true bold later,
+  drop in a `roboto-latin-700` and change only the 700 entry. Letter Gothic's bold is a genuine 700
+  and needs none of this.
+  <br>The old site declared the Medium file at `bold` only, with nothing at 500, so its
+  `font-medium` silently fell back to Regular. We render Medium there instead — the weight the old
+  CSS was asking for.
 - **Markdown is rendered with `breaks: true`.** The old site ran kramdown with `hard_wrap: true`, so
   a single newline in a Contentful field is a `<br>`. Editors have written against that for years.
   See `src/lib/markdown.ts`.

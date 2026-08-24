@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { Font } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -35,17 +36,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-    {
-      /* Letter Gothic uses font-display: block, so it gates first paint of every
-        heading. Preloading it removes that stall. */
-    }
-    <link
-      rel="preload"
-      href="/fonts/LetterGothicTextWeb.woff"
-      as="font"
-      type="font/woff"
-      crossorigin
-    />
+    {/* Astro emits the @font-face rules, fallback metrics and preload hints. */}
+    <Font cssVariable="--font-letter-gothic" preload />
+    <Font cssVariable="--font-roboto" preload />
 
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}

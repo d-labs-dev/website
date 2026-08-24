@@ -171,36 +171,35 @@ const contactSchema = z.object({
 
 const pages = defineCollection({
   loader: glob({ pattern: "**/*.yml", base: "./content/pages" }),
-  schema: z
-    .object({
-      // blog
-      cta_learn_more: z.string().optional(),
-      back_button_text: z.string().optional(),
-      by_author: z.string().optional(),
+  // z.looseObject keeps unknown keys, replacing Zod 3's deprecated
+  // .passthrough(). Page files carry a lot of copy that only their own page
+  // uses; those keys are validated by the page components that read them.
+  schema: z.looseObject({
+    // blog
+    cta_learn_more: z.string().optional(),
+    back_button_text: z.string().optional(),
+    by_author: z.string().optional(),
 
-      // services
-      services_title: z.string().optional(),
-      // Absent from the English file — the current site renders the English
-      // methods search box with no placeholder.
-      search_placeholder: z.string().optional(),
+    // services
+    services_title: z.string().optional(),
+    // Absent from the English file — the current site renders the English
+    // methods search box with no placeholder.
+    search_placeholder: z.string().optional(),
 
-      // jobs
-      back_button_label: z.string().optional(),
-      learn_more: z.string().optional(),
-      you_are_missing: z.string().optional(),
-      profile_heading: z.string().optional(),
-      tasks_heading: z.string().optional(),
-      download_button_label: z.string().optional(),
-      apply_now_target: z.string().optional(),
-      apply_now_aria_label: z.string().optional(),
-      apply_now_button_label: z.string().optional(),
-      circle_apply_now_button_label: z.string().optional(),
-      inclusivity_aria_label: z.string().optional(),
-      contact: contactSchema.optional(),
-    })
-    // Page files carry a lot of copy that only their own page uses; those keys
-    // are validated by the page components that read them rather than here.
-    .passthrough(),
+    // jobs
+    back_button_label: z.string().optional(),
+    learn_more: z.string().optional(),
+    you_are_missing: z.string().optional(),
+    profile_heading: z.string().optional(),
+    tasks_heading: z.string().optional(),
+    download_button_label: z.string().optional(),
+    apply_now_target: z.string().optional(),
+    apply_now_aria_label: z.string().optional(),
+    apply_now_button_label: z.string().optional(),
+    circle_apply_now_button_label: z.string().optional(),
+    inclusivity_aria_label: z.string().optional(),
+    contact: contactSchema.optional(),
+  }),
 });
 
 export const collections = { methods, blog, jobs, pages };
