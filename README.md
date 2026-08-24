@@ -4,10 +4,10 @@
 will replace it. They coexist until cutover so the branch stays reviewable and `master` keeps
 building and deploying exactly as before.
 
-| | Lives in | Status |
-| --- | --- | --- |
-| **Astro** | repo root — `src/`, `content/`, `astro.config.mjs` | In progress. See [`docs/astro.md`](docs/astro.md). |
-| **Jekyll** | `_config.yml`, `_layouts/`, `_includes/`, `_data/`, `assets/`, `en/` | Live. Untouched by this branch. |
+|            | Lives in                                                             | Status                                             |
+| ---------- | -------------------------------------------------------------------- | -------------------------------------------------- |
+| **Astro**  | repo root — `src/`, `content/`, `astro.config.mjs`                   | In progress. See [`docs/astro.md`](docs/astro.md). |
+| **Jekyll** | `_config.yml`, `_layouts/`, `_includes/`, `_data/`, `assets/`, `en/` | Live. Untouched by this branch.                    |
 
 The rewrite exists because the Jekyll stack is a dead end: Jekyll is pinned at 3.9 (jekyll-assets
 never supported 4), which pins Ruby to 2.7 and bundler to 2.4.22, and routing plus i18n are three
@@ -22,13 +22,13 @@ pnpm install
 pnpm dev            # localhost:4321
 ```
 
-| Command | Does |
-| --- | --- |
-| `pnpm dev` | Dev server. `pnpm astro dev --background` to detach, then `astro dev stop` / `status` / `logs`. |
-| `pnpm build` | Static build to `dist/`. |
-| `pnpm preview` | Serve `dist/` locally. |
-| `pnpm typecheck` | `astro check`. |
-| `pnpm format` | Prettier over the repo. |
+| Command          | Does                                                                                            |
+| ---------------- | ----------------------------------------------------------------------------------------------- |
+| `pnpm dev`       | Dev server. `pnpm astro dev --background` to detach, then `astro dev stop` / `status` / `logs`. |
+| `pnpm build`     | Static build to `dist/`.                                                                        |
+| `pnpm preview`   | Serve `dist/` locally.                                                                          |
+| `pnpm typecheck` | `astro check`.                                                                                  |
+| `pnpm format`    | Prettier over the repo.                                                                         |
 
 `/styleguide` renders every primitive on one page — check design-system changes there first. It is
 `noindex` and unlinked.

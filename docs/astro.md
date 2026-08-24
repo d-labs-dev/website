@@ -45,8 +45,22 @@ beats `w-[5.5rem]` in a variant string, with no warning and no local override. W
 classes in component frontmatter, make each group contribute at most one utility per CSS property.
 `src/components/Button.astro` is the reference for this.
 
+**Scroll-driven sections** use `src/lib/scroll-progress.ts` (which marker is active) and
+`src/lib/spring.ts` (wobble springs, transform formatters). Each animated section gets its own
+module that reads the active index and says what should happen — there is no shared interpreter and
+no `data-keyframes` attribute language any more. `src/components/dev/scroll-lab.ts` plus
+`/styleguide/scroll` is the working reference; read it before writing a new section.
+
+Two things that are easy to get wrong there: apply the _initial_ state with `set()` rather than
+`to()`, because a spring whose target already equals its current value never emits an update and the
+attribute stays unset; and give a tracked section more than one viewport of content after its last
+marker, or the "past the section" index is unreachable and the last screen can never animate out.
+
 **Behaviour lives next to its markup.** `Foo.astro` imports `foo.ts` from a scoped `<script>`. No
 global behaviour file, no framework, nothing hydrates.
+
+One exception: everything under `src/pages/` is a route, so a `.ts` file there is served as a broken
+endpoint. Page-level behaviour modules go in `src/components/` and are imported by path.
 
 ### Porting reference: old atomic classes → Tailwind
 

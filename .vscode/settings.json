@@ -1,3 +1,8 @@
 {
-  "prettier.enable": false
+  "// prettier": "Enabled for the Astro site. It was previously off repo-wide because Prettier reformats the Jekyll Liquid templates and, with prettier-plugin-tailwindcss, reorders their class attributes. .prettierignore now excludes every Jekyll path instead, so formatting is safe to leave on.",
+  "prettier.enable": true,
+  "editor.formatOnSave": true,
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
