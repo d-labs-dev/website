@@ -1,0 +1,97 @@
+---
+/**
+ * Client logo grid. Twelve show by default; the rest expand on request.
+ *
+ * The hidden logos are in the HTML rather than fetched, so the expand is
+ * instant and the names are indexable. `hidden` on the group is enough — the
+ * images inside are lazy, so nothing is downloaded until they are revealed.
+ */
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+
+interface Props {
+  heading: string;
+  showMore: string;
+  showLess: string;
+}
+
+const { heading, showMore, showLess } = Astro.props;
+
+const entry = await getEntry("clients", "clients");
+const first = entry?.data.first ?? [];
+const rest = entry?.data.rest ?? [];
+
+const logos = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/clients/*.svg", {
+  eager: true,
+});
+
+function resolve(path: string) {
+  const logo = logos[`/src/assets/images/${path}`]?.default;
+  if (!logo) throw new Error(`Client logo not found: src/assets/images/${path}`);
+  return logo;
+}
+---
+
+<div
+  class="relative z-2 flex flex-col items-center bg-white px-6 pt-8 pb-24 md:pt-24"
+  id="clients"
+  data-client-grid
+>
+  <div class="flex w-full max-w-[60rem] flex-col gap-8">
+    <h2 class="font-heading tracking-heading text-xl">{heading}</h2>
+
+    <div class="grid grid-cols-3 items-center gap-8 sm:grid-cols-4 md:grid-cols-6">
+      {
+        first.map((client) => (
+          <Image
+            src={resolve(client.logo)}
+            alt={client.name}
+            title={client.name}
+            class="max-h-12 w-full object-contain"
+            loading="lazy"
+          />
+        ))
+      }
+    </div>
+
+    <div class="hidden" data-client-rest>
+      <div class="grid grid-cols-3 items-center gap-8 sm:grid-cols-4 md:grid-cols-6">
+        {
+          rest.map((client) => (
+            <Image
+              src={resolve(client.logo)}
+              alt={client.name}
+              title={client.name}
+              class="max-h-12 w-full object-contain"
+              loading="lazy"
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      rest.length > 0 && (
+        <div class="flex flex-col items-start">
+          <Button
+            variant="ghost"
+            color="black"
+            data-client-toggle
+            data-label-more={showMore}
+            data-label-less={showLess}
+            aria-expanded="false"
+            aria-controls="client-rest"
+          >
+            {showMore}
+          </Button>
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  import { setupClientGrid } from "./client-grid";
+  setupClientGrid();
+</script>

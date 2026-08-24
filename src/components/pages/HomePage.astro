@@ -1,0 +1,258 @@
+---
+/**
+ * Home: the angled blue hero, then a pinned section where the circle diagram
+ * rearranges behind four cross-fading screens, then clients, a blog teaser, a
+ * jobs teaser and the office addresses.
+ */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import Locations from "@/components/Locations.astro";
+import HomeCircles from "@/components/home/HomeCircles.astro";
+import ClientGrid from "@/components/home/ClientGrid.astro";
+import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("home", locale);
+
+const jobsImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const jobsImage = jobsImages[`/src/assets/images/${copy.jobs_image}`]?.default;
+if (!jobsImage) throw new Error(`home jobs_image not found: ${copy.jobs_image}`);
+
+/** Newest post, for the blog teaser. */
+const posts = (await getCollection("blog", (entry) => entry.data.locale === locale)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const latest = posts[0];
+
+const screens = copy.screens as { title: string; text?: string; cta: string; cta_target: string }[];
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLocale(locale)) }];
+---
+
+<BaseLayout description={copy.hero_claim} blueHeader={true} alternates={alternates}>
+  <div class="relative" data-home-scroll>
+    {/* Hero: claim over the angled blue field */}
+    <div
+      class="relative z-2 flex min-h-screen flex-col items-center justify-center px-6 py-8 text-white"
+    >
+      <h1
+        class="font-heading tracking-heading relative z-4 w-full max-w-[60rem] text-xl sm:text-2xl md:text-3xl"
+      >
+        <Markdown source={copy.hero_claim} size="inherit" tone="on-dark" />
+      </h1>
+
+      <svg
+        viewBox="0 0 100 100"
+        class="text-dlabs-blue pointer-events-none absolute top-0 right-0 h-full w-full fill-current"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <polygon points="0 0,100 0,100 70,0 100" class="hidden md:block"></polygon>
+        <polygon points="0 0,100 0,100 80,0 100" class="md:hidden"></polygon>
+      </svg>
+
+      <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-8 text-black">
+        <a href="#n1" aria-label={locale === "de" ? "Nach unten scrollen" : "Scroll down"}>
+          <Image src={arrowDown} alt="" class="w-4" />
+        </a>
+      </div>
+    </div>
+
+    {/* The circle diagram, pinned behind the screens */}
+    <div
+      class="pointer-events-none absolute top-0 right-0 flex h-full w-full flex-col items-center py-16 md:py-0"
+    >
+      <div
+        class="sticky top-0 flex min-h-screen w-full max-w-[60rem] flex-col justify-center pt-8 max-sm:justify-start md:pt-0"
+      >
+        <div class="w-full md:w-2/5">
+          <HomeCircles />
+        </div>
+      </div>
+    </div>
+
+    {/* Screens */}
+    <div class="relative pt-16">
+      <div class="h-8" data-keyframe-marker></div>
+      {
+        screens.map((_, i) => (
+          <div
+            class={i === screens.length - 1 ? "min-h-screen" : "h-[40rem]"}
+            id={`n${i + 1}`}
+            data-keyframe-marker
+          />
+        ))
+      }
+
+      {
+        screens.map((screen, i) => (
+          <div
+            class="pointer-events-none absolute top-0 right-0 h-full w-full"
+            style="opacity: 0"
+            data-home-screen={i}
+          >
+            <div class="sticky top-0 flex min-h-screen flex-col items-center justify-center px-6">
+              <div class="w-full max-w-[60rem]">
+                <div class="flex min-h-screen max-w-[30rem] flex-col justify-center gap-6 py-8 max-sm:justify-end md:mr-12 md:ml-[45%] md:min-h-[60vh]">
+                  <h2 class="font-heading text-base font-bold">{screen.title}</h2>
+                  {screen.text && <div class="text-xs md:text-base">{screen.text}</div>}
+                  <div class="flex flex-col items-start">
+                    <Button variant="ghost" color="black" href={screen.cta_target}>
+                      {screen.cta}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+
+      {/* Screen indicator rail */}
+      <div class="absolute inset-y-0 right-0 hidden md:block">
+        <div class="sticky flex flex-col justify-center gap-4 pr-4" style="height: 60vh; top: 20vh">
+          {
+            screens.map((_, i) => (
+              <button
+                type="button"
+                class="screen-dot"
+                data-home-indicator={i}
+                aria-label={`${locale === "de" ? "Seite" : "Screen"} ${i + 1}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ClientGrid
+    heading={copy.clients_heading}
+    showMore={copy.clients_show_more}
+    showLess={copy.clients_show_less}
+  />
+
+  {/* Blog teaser */}
+  {
+    latest && (
+      <div class="bg-dlabs-blue relative z-2 flex flex-col items-center justify-center text-white">
+        <div class="w-full max-w-[60rem]">
+          <div class="w-full max-sm:w-full sm:w-2/3">
+            <div class="flex flex-col gap-4 px-6 py-24 sm:pl-12">
+              <LeadLine color="white">Blog</LeadLine>
+              <div class="flex flex-col gap-8">
+                <div class="flex flex-col gap-4">
+                  <a href={entryUrl("blog", latest.data.slug, locale)} class="teaser-link">
+                    <h2 class="font-heading tracking-heading text-xl">{latest.data.title}</h2>
+                  </a>
+                  <Markdown source={latest.data.description} tone="on-dark" />
+                </div>
+                <div class="flex flex-col items-start">
+                  <Button
+                    variant="ghost"
+                    color="white"
+                    href={entryUrl("blog", latest.data.slug, locale)}
+                  >
+                    {copy.blog_cta_text}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {latest.data.heroImage && (
+          <div class="absolute inset-y-0 right-0 hidden w-1/3 sm:block">
+            <img
+              src={contentfulImage(latest.data.heroImage, {
+                width: 1200,
+                height: 1200,
+                fit: "fill",
+                focus: "faces",
+              })}
+              alt={assetAlt(latest.data.heroImage)}
+              class="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  {/* Jobs teaser */}
+  <div class="relative z-2 flex flex-col bg-white sm:flex-row">
+    <div class="relative min-h-32 w-full sm:w-1/2">
+      <Image
+        src={jobsImage}
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+      />
+    </div>
+    <div class="w-full sm:w-1/2">
+      <div class="flex flex-col gap-4 px-6 py-24 sm:pl-12">
+        <LeadLine>{copy.jobs_lead}</LeadLine>
+        <h2 class="font-heading tracking-heading text-xl">{copy.jobs_title}</h2>
+        <div class="flex flex-col items-start gap-8">
+          <div>{copy.jobs_desc}</div>
+          <Button variant="ghost" color="blue" href={copy.jobs_cta_url ?? pageUrl("jobs", locale)}>
+            {copy.jobs_cta_text}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Locations locale={locale} light={true} withMap={true} />
+</BaseLayout>
+
+<style>
+  .teaser-link {
+    color: inherit;
+    text-decoration: none;
+    transition-property: opacity;
+  }
+
+  .teaser-link:hover {
+    opacity: 0.85;
+  }
+
+  /* Was .scroll-indicator. */
+  .screen-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background-color: var(--color-dlabs-gray-200);
+    cursor: pointer;
+    transition-property: background-color, transform;
+  }
+
+  .screen-dot:hover {
+    background-color: var(--color-dlabs-gray-300);
+  }
+
+  .screen-dot[data-active] {
+    background-color: var(--color-dlabs-blue);
+    transform: scale(1.4);
+  }
+</style>
+
+<script>
+  import { setupHome } from "@/components/home/home";
+  setupHome();
+</script>

@@ -228,6 +228,17 @@ const offices = defineCollection({
 });
 
 /**
+ * Client logos. Not localized. `first` shows by default, `rest` when expanded.
+ */
+const clients = defineCollection({
+  loader: glob({ pattern: "clients.yml", base: "./content/clients" }),
+  schema: z.object({
+    first: z.array(z.object({ name: z.string(), logo: z.string() })),
+    rest: z.array(z.object({ name: z.string(), logo: z.string() })),
+  }),
+});
+
+/**
  * Partner organisations. Not localized, for the same reason as offices.
  */
 const partners = defineCollection({
@@ -274,4 +285,14 @@ const shared = defineCollection({
   schema: z.record(z.string(), z.string()),
 });
 
-export const collections = { methods, blog, jobs, pages, shared, legal, offices, partners };
+export const collections = {
+  methods,
+  blog,
+  jobs,
+  pages,
+  shared,
+  legal,
+  offices,
+  partners,
+  clients,
+};
