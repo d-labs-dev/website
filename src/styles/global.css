@@ -1,4 +1,17 @@
-@import "tailwindcss";
+/*
+ * `source(none)` turns off Tailwind's automatic source detection, and the
+ * @source below restricts scanning to this site's own files.
+ *
+ * This matters while the Jekyll site still shares the repo: automatic detection
+ * walks the whole project, so the old templates' atomic classes get read as
+ * Tailwind candidates. Anything that happens to be a real utility name is then
+ * generated as dead CSS — `inset-full` from `_includes/` was one, and the
+ * stylesheet carried ~2.5 kB of rules no Astro page references. It also means
+ * every build scans a couple of MB of Liquid and SCSS for nothing.
+ */
+@import "tailwindcss" source(none);
+@source "../**/*.{astro,ts,js,md}";
+
 @plugin "@tailwindcss/typography";
 
 @import "./base.css" layer(base);
