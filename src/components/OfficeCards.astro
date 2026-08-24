@@ -1,0 +1,105 @@
+---
+/**
+ * Offices shown as cards with a round photo — the richer treatment used on the
+ * about page. The plain address-only variant is `Locations.astro`.
+ */
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Markdown from "@/components/Markdown.astro";
+import { getSharedCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  /** Heading above the cards. May contain inline markup. */
+  title: string;
+}
+
+const { locale, title } = Astro.props;
+
+const copy = await getSharedCopy("locations", locale);
+const entry = await getEntry("offices", "offices");
+const offices = entry?.data.offices ?? [];
+
+const photos = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/about-us/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+---
+
+<div id="locations" class="scroll-mt-32">
+  <div
+    class="bg-dlabs-blue relative z-1 flex flex-col items-center gap-6 px-6 pt-16 pb-24 text-white"
+  >
+    <div class="flex w-full max-w-[60rem] flex-col gap-12 lg:gap-8">
+      <h2 class="font-heading tracking-heading max-w-[40rem] text-xl">
+        <Markdown source={title} size="inherit" tone="on-dark" />
+      </h2>
+
+      <div class="flex flex-col gap-12 lg:flex-row lg:gap-24">
+        <div class="flex flex-col gap-8">
+          {/* Spacer aligning this column with the cards' text on wide screens. */}
+          <div class="hidden h-40 lg:block"></div>
+          <div class="flex flex-col">
+            <div>D‑LABS GmbH</div>
+            <a class="office-link" href={`mailto:${copy.company_email}`}>{copy.company_email}</a>
+          </div>
+        </div>
+
+        <div class="flex flex-1 flex-col gap-16 md:flex-row md:gap-4">
+          {
+            offices.map((office) => {
+              const photo = photos[`/src/assets/images/${office.image}`]?.default;
+              if (!photo) throw new Error(`Office photo not found: ${office.image}`);
+              return (
+                <div class="flex flex-1 flex-col gap-3 md:gap-8">
+                  <div class="flex flex-col items-start pb-6 md:pb-0">
+                    <Image
+                      src={photo}
+                      alt={office.city}
+                      widths={[100, 200, 400]}
+                      sizes="10rem"
+                      class="h-40 w-40 rounded-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-6">
+                    {/* Only the head office is labelled; the others keep the row
+                        height with a blank line, as on the current site. */}
+                    <div class="font-heading hidden text-sm uppercase md:block">
+                      {office.is_main ? copy.main : " "}
+                    </div>
+                    <div class="pb-2 text-lg">{office.name}</div>
+                    <div>
+                      {office.street}
+                      <br />
+                      {office.zip} {office.city}
+                    </div>
+                    <div>
+                      {office.tel}
+                      <br />
+                      <a class="office-link" href={`mailto:${office.email}`}>
+                        {office.email}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .office-link {
+    color: #fff;
+    text-decoration: none;
+    transition-property: color;
+  }
+
+  .office-link:hover {
+    color: var(--color-white-a90);
+  }
+</style>

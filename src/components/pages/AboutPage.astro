@@ -1,0 +1,98 @@
+---
+/**
+ * About: a full-height intro with the photo on the right, a wide photo and the
+ * longer text, then the office cards.
+ *
+ * The old markup put the intro photo *after* the text in source order and used
+ * `q-lg-first` to pull it above on narrow screens. Here the source order is
+ * text-then-photo and `order-first md:order-none` does the same thing, so the
+ * reading order is right without relying on a bespoke class.
+ */
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import OfficeCards from "@/components/OfficeCards.astro";
+import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+import { getPageCopy, pageUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("about", locale);
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/about-us/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const introImage = images[`/src/assets/images/${copy.intro_image}`]?.default;
+const aboutImage = images[`/src/assets/images/${copy.about_image}`]?.default;
+if (!introImage) throw new Error(`about intro_image not found: ${copy.intro_image}`);
+if (!aboutImage) throw new Error(`about about_image not found: ${copy.about_image}`);
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("about", otherLocale(locale)) }];
+---
+
+<BaseLayout
+  title={copy.intro_lead}
+  description={copy.intro_title}
+  activeRef="about"
+  alternates={alternates}
+>
+  <div class="relative">
+    <div class="relative flex flex-col pt-16 md:min-h-screen md:flex-row md:pt-0">
+      <div
+        class="flex flex-1 flex-col justify-center pt-6 pb-12 pl-6 md:w-2/3 md:items-end md:pt-24"
+      >
+        <div class="w-full" style="max-width: calc(30rem + 25%)">
+          <div class="flex max-w-[40rem] flex-col gap-6 pr-12">
+            <LeadLine>{copy.intro_lead}</LeadLine>
+            <h1 class="font-heading tracking-heading text-xl font-normal sm:text-2xl">
+              {copy.intro_title}
+            </h1>
+            <div class="text-sm sm:text-base">
+              <Markdown source={copy.intro_text} size="inherit" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative order-first h-60 w-full md:order-none md:h-auto md:w-1/3">
+        <Image
+          src={introImage}
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+        />
+      </div>
+
+      <div
+        class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-12 text-black md:flex"
+      >
+        <a href="#next" aria-label={locale === "de" ? "Weiter" : "Continue"}>
+          <Image src={arrowDown} alt="" class="w-4" />
+        </a>
+      </div>
+    </div>
+
+    <div id="next" class="flex flex-col gap-16 pt-16 pb-24">
+      <div class="relative aspect-video md:aspect-auto md:h-[20rem]">
+        <Image
+          src={aboutImage}
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div class="flex flex-col items-center px-6">
+        <div class="w-full max-w-[30rem]">
+          <Markdown source={copy.about_text} />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <OfficeCards locale={locale} title={copy.location_title} />
+</BaseLayout>
