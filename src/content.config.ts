@@ -202,4 +202,13 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { methods, blog, jobs, pages };
+/**
+ * Copy that appears on every page (header nav, footer links). Kept separate from
+ * `pages` so a page file never has to restate the nav.
+ */
+const shared = defineCollection({
+  loader: glob({ pattern: "**/*.yml", base: "./content/shared" }),
+  schema: z.record(z.string(), z.string()),
+});
+
+export const collections = { methods, blog, jobs, pages, shared };

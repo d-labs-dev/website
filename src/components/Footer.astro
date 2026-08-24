@@ -1,0 +1,132 @@
+---
+/**
+ * Site footer: social links, legal/partner nav, and the association logos.
+ *
+ * The old footer also carried a cookie-consent bar. It is gone: with no
+ * analytics the site sets no cookies, so there is nothing to consent to.
+ */
+import { Image } from "astro:assets";
+import instagramIcon from "@/assets/images/icons/icon-instagram.svg";
+import xIcon from "@/assets/images/icons/icon-x.svg";
+import linkedinIcon from "@/assets/images/icons/icon-linkedin.svg";
+import sisaLogo from "@/assets/images/logo_sisa.svg";
+import medianetLogo from "@/assets/images/partners/logo_medianet.svg";
+import automotiveLogo from "@/assets/images/partners/logo_automotive-ber.svg";
+import { FOOTER_ITEMS, pageUrl, getSharedCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  activeRef?: string;
+}
+
+const { locale, activeRef } = Astro.props;
+
+const labels = await getSharedCopy("footer", locale);
+
+const socials = [
+  { href: "https://www.instagram.com/dlabs_potsdam/", icon: instagramIcon, label: "Instagram" },
+  { href: "https://x.com/d_labs", icon: xIcon, label: "X" },
+  { href: "https://de.linkedin.com/company/d-labs", icon: linkedinIcon, label: "LinkedIn" },
+];
+
+/** Associations D-LABS is a member of. Heights differ per logo, as on the current site. */
+const memberships = [
+  {
+    href: "https://www.silicon-sanssouci.org/",
+    logo: sisaLogo,
+    label: "Silicon Sanssouci",
+    class: "h-8",
+  },
+  {
+    href: "https://www.medianet-bb.de",
+    logo: medianetLogo,
+    label: "media:net berlinbrandenburg",
+    class: "h-6",
+  },
+  {
+    href: "https://www.ac-bb.de/",
+    logo: automotiveLogo,
+    label: "Automotive Berlin Brandenburg",
+    class: "h-6",
+  },
+];
+
+const links = FOOTER_ITEMS.map((ref) => ({
+  ref,
+  label: labels[ref] ?? ref,
+  href: pageUrl(ref, locale),
+  isActive: ref === activeRef,
+}));
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-dlabs-gray-100 flex flex-col items-center px-6 py-8">
+  <div class="flex w-full max-w-[60rem] flex-col gap-12 md:gap-3">
+    <div class="flex flex-col items-center gap-8 md:flex-row md:gap-4">
+      <div class="flex flex-1 flex-row gap-3">
+        {
+          socials.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-opacity hover:opacity-70"
+            >
+              <Image src={social.icon} alt={social.label} class="h-4 w-auto" loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
+
+      <nav
+        class="flex flex-1 flex-col items-center gap-3 md:flex-row md:justify-center md:gap-12"
+        aria-label="Rechtliches"
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="footer-link text-xs"
+              aria-current={link.isActive ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="flex flex-1 flex-col gap-3 md:items-end">
+        <div class="text-2xs font-bold">{labels.member_of}</div>
+        {
+          memberships.map((m) => (
+            <a
+              href={m.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-opacity hover:opacity-70"
+            >
+              <Image src={m.logo} alt={m.label} class={`${m.class} w-auto`} loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="text-2xs">© D‑LABS GmbH {year}</div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-link {
+    color: var(--color-black);
+    text-decoration: none;
+    transition-property: color;
+  }
+
+  .footer-link:hover {
+    color: var(--color-dlabs-blue);
+  }
+</style>

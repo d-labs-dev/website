@@ -1,0 +1,243 @@
+---
+/**
+ * Fixed site header with the main nav, the rotated JOBS badge, a language
+ * switcher and a full-screen mobile menu.
+ *
+ * Two stateful behaviours, both from the old `_header.scss` + `headerScroll()`:
+ *
+ *  - `blueOnTop` (was `body.with-blue-header`, set only by the home layout):
+ *    the bar starts transparent-over-blue with white text and an inverted logo,
+ *    then flips to the normal white bar once you've scrolled about a screen.
+ *  - the JOBS item renders as a tilted blue circle — but on a blue header it
+ *    stays a plain link until that flip, otherwise blue-on-blue would vanish.
+ *
+ * The scroll flip is a `data-scrolled` attribute set by ./header.ts. Those two
+ * states need a pseudo-element and a filter, so this component carries a scoped
+ * <style> rather than doing it all with utilities.
+ */
+import { Image } from "astro:assets";
+import dlabsLogo from "@/assets/images/logo_d-labs.svg";
+import menuIcon from "@/assets/images/icons/icon-menu.svg";
+import closeIcon from "@/assets/images/icons/icon-close.svg";
+import {
+  NAV_ITEMS,
+  pageUrl,
+  otherLocale,
+  LOCALE_NAMES,
+  getSharedCopy,
+  type Locale,
+} from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  /** Ref of the current page, so its nav item can be marked active. */
+  activeRef?: string;
+  /** Where the language switcher points. */
+  switcherUrl: string;
+  /** Home page only: start over the blue hero. */
+  blueOnTop?: boolean;
+}
+
+const { locale, activeRef, switcherUrl, blueOnTop = false } = Astro.props;
+
+const labels = await getSharedCopy("header", locale);
+const target = otherLocale(locale);
+
+const nav = NAV_ITEMS.map((ref) => ({
+  ref,
+  label: labels[ref] ?? ref,
+  href: pageUrl(ref, locale),
+  isActive: ref === activeRef,
+  isBadge: ref === "jobs",
+}));
+---
+
+<header
+  class="site-header fixed top-0 z-10 flex w-full flex-col items-center bg-white px-6 py-6"
+  data-site-header
+  data-blue-top={blueOnTop ? "" : undefined}
+>
+  <div class="flex w-full max-w-[60rem] flex-row items-center gap-4">
+    <a href={pageUrl("home", locale)} aria-label="D-LABS">
+      <Image src={dlabsLogo} alt="D-LABS" class="site-logo h-4 w-auto" loading="eager" />
+    </a>
+
+    <div class="flex-auto"></div>
+
+    <nav class="hidden flex-row items-baseline gap-16 md:flex" aria-label="Hauptnavigation">
+      <div class="flex flex-row items-baseline gap-12 lg:gap-12">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class="nav-link text-xs"
+              data-badge={item.isBadge ? "" : undefined}
+              data-active={item.isActive ? "" : undefined}
+              aria-current={item.isActive ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+
+      <a
+        href={switcherUrl}
+        class="lang-link text-2xs font-bold uppercase"
+        title={LOCALE_NAMES[target]}
+        hreflang={target}>{target}</a
+      >
+    </nav>
+
+    <div class="md:hidden">
+      <button
+        type="button"
+        class="menu-button cursor-pointer"
+        data-menu-open
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+      >
+        <Image src={menuIcon} alt="Menü öffnen" class="w-4" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="fixed inset-0 z-20 hidden bg-white" id="mobile-nav" data-mobile-nav>
+  <div class="relative flex h-full w-full flex-col items-center px-8 py-6">
+    <div class="absolute top-6 right-6">
+      <button type="button" class="cursor-pointer" data-menu-close aria-label="Menü schließen">
+        <Image src={closeIcon} alt="" class="w-3" />
+      </button>
+    </div>
+
+    <div class="flex-auto"></div>
+
+    <nav class="flex flex-col items-center gap-6" aria-label="Hauptnavigation">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="nav-link text-base"
+            data-active={item.isActive ? "" : undefined}
+            aria-current={item.isActive ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="h-10"></div>
+
+    <a
+      href={switcherUrl}
+      class="lang-link text-sm font-bold uppercase"
+      title={LOCALE_NAMES[target]}
+      hreflang={target}>{target}</a
+    >
+
+    <div class="flex-auto"></div>
+  </div>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .site-header {
+    border-top: 0.1rem solid var(--color-dlabs-blue);
+    transition-property: padding, box-shadow, background-color;
+  }
+
+  .site-logo,
+  .menu-button {
+    filter: grayscale(0) brightness(1);
+    transition-property: filter;
+  }
+
+  .nav-link {
+    padding-top: 2px;
+    border-bottom: 2px solid transparent;
+    color: var(--color-black);
+    text-decoration: none;
+    transition-property: color, border-color;
+  }
+
+  .nav-link:hover {
+    color: var(--color-dlabs-blue);
+  }
+
+  .nav-link[data-active] {
+    border-bottom-color: var(--color-dlabs-blue);
+  }
+
+  .lang-link {
+    color: var(--color-dlabs-blue);
+    text-decoration: none;
+    transition-property: color;
+  }
+
+  .lang-link:hover {
+    color: var(--color-dlabs-dark-blue);
+  }
+
+  /*
+   * The JOBS badge: a tilted blue disc behind the label. Shown whenever the
+   * header is white — i.e. always, except while a blue header is still at the
+   * top of the page.
+   */
+  .site-header:not([data-blue-top]) .nav-link[data-badge],
+  .site-header[data-blue-top][data-scrolled] .nav-link[data-badge] {
+    position: relative;
+    transform: rotate(15deg);
+    color: #fff;
+    font-size: var(--text-2xs);
+    font-weight: normal;
+    text-transform: uppercase;
+    border-bottom-color: transparent;
+  }
+
+  .site-header:not([data-blue-top]) .nav-link[data-badge]::before,
+  .site-header[data-blue-top][data-scrolled] .nav-link[data-badge]::before {
+    content: "";
+    position: absolute;
+    top: -1.15rem;
+    left: -0.9rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--color-dlabs-blue);
+    z-index: -1;
+    transition-property: background-color;
+  }
+
+  .site-header:not([data-blue-top]) .nav-link[data-badge]:hover::before,
+  .site-header[data-blue-top][data-scrolled] .nav-link[data-badge]:hover::before {
+    background-color: var(--color-dlabs-dark-blue);
+  }
+
+  .site-header:not([data-blue-top]) .nav-link[data-badge][data-active],
+  .site-header[data-blue-top][data-scrolled] .nav-link[data-badge][data-active] {
+    border-bottom: 2px solid #fff;
+  }
+
+  /* Blue header, before the scroll flip. */
+  .site-header[data-blue-top]:not([data-scrolled]) {
+    background-color: var(--color-dlabs-blue);
+  }
+
+  .site-header[data-blue-top]:not([data-scrolled]) .nav-link,
+  .site-header[data-blue-top]:not([data-scrolled]) .lang-link {
+    color: #fff;
+  }
+
+  .site-header[data-blue-top]:not([data-scrolled]) .site-logo,
+  .site-header[data-blue-top]:not([data-scrolled]) .menu-button {
+    filter: grayscale(1) brightness(10);
+  }
+</style>
+
+<script>
+  import { setupHeader } from "./header";
+  setupHeader();
+</script>

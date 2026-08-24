@@ -42,12 +42,28 @@ export function localePrefix(locale: Locale): string {
  * The current site is Jekyll, so these carry a .html extension — /about.html,
  * /en/services.html. The home page is the one exception: `/` and `/en/`.
  */
+/**
+ * Page refs whose URL slug differs from the ref itself. The old site addressed
+ * pages by a `ref` in their front matter, and every ref matches its filename
+ * except this one — the footer links to `privacy`, which lives at
+ * privacy-policy.html.
+ */
+const REF_TO_SLUG: Record<string, string> = {
+  privacy: "privacy-policy",
+};
+
+/** Main nav, in order. Labels come from content/shared/<locale>/header.yml. */
+export const NAV_ITEMS = ["about", "approach", "services", "blog", "jobs"] as const;
+
+/** Footer links, in order. Labels from content/shared/<locale>/footer.yml. */
+export const FOOTER_ITEMS = ["privacy", "imprint", "accessibility", "partners"] as const;
+
 export function pageUrl(ref: string, locale: Locale): string {
   const prefix = localePrefix(locale);
   if (ref === "index" || ref === "home" || ref === "") {
     return prefix === "" ? "/" : `${prefix}/`;
   }
-  return `${prefix}/${ref}.html`;
+  return `${prefix}/${REF_TO_SLUG[ref] ?? ref}.html`;
 }
 
 /** URL of a Contentful-backed entry page, e.g. /en/methods/adjektiv-assoziation.html */
@@ -60,6 +76,18 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   de: "Deutsche Version",
   en: "English version",
 };
+
+/**
+ * Shared copy for one locale, from `content/shared/<locale>/<name>.yml`.
+ * Used for the header and footer, which appear on every page.
+ */
+export async function getSharedCopy(name: string, locale: Locale) {
+  const entry = await getEntry("shared", `${locale}/${name}`);
+  if (!entry) {
+    throw new Error(`Missing shared copy: content/shared/${locale}/${name}.yml`);
+  }
+  return entry.data as Record<string, string>;
+}
 
 /**
  * Page copy for one locale, from `content/pages/<locale>/<name>.yml`.

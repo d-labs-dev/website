@@ -1,6 +1,9 @@
 ---
 import "../styles/global.css";
 import { Font } from "astro:assets";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { resolveLocale, otherLocale, pageUrl } from "@/lib/i18n";
 
 interface Props {
   title?: string;
@@ -15,11 +18,36 @@ interface Props {
    * page that was never built is worse than omitting it.
    */
   alternates?: { locale: string; url: string }[];
+  /** Ref of this page, so the header/footer can mark the matching link active. */
+  activeRef?: string;
+  /** Home page only: the header starts over the blue hero. */
+  blueHeader?: boolean;
+  /** Omit the header and footer (the styleguide). */
+  bare?: boolean;
 }
 
-const { title, description, image, noindex = false, alternates = [] } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  noindex = false,
+  alternates = [],
+  activeRef,
+  blueHeader = false,
+  bare = false,
+} = Astro.props;
 
-const lang = Astro.currentLocale === "en" ? "en" : "de";
+const lang = resolveLocale(Astro.currentLocale);
+
+/**
+ * The switcher points at this page's translation when one exists, and otherwise
+ * at the other locale's home page — the same fallback the old
+ * language_switcher_tag.rb used. `alternates` already encodes that: a page
+ * without a translation passes an empty array.
+ */
+const switcherUrl =
+  alternates.find((alt) => alt.locale === otherLocale(lang))?.url ??
+  pageUrl("index", otherLocale(lang));
 
 const SITE_NAME = "D‑LABS GmbH";
 const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
@@ -62,8 +90,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
 
   <body class="flex min-h-screen flex-col">
-    <main class="flex-auto">
+    {
+      !bare && (
+        <Header
+          locale={lang}
+          activeRef={activeRef}
+          switcherUrl={switcherUrl}
+          blueOnTop={blueHeader}
+        />
+      )
+    }
+    <main class="flex-auto" aria-label="Content">
       <slot />
     </main>
+    {!bare && <Footer locale={lang} activeRef={activeRef} />}
   </body>
 </html>
