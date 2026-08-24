@@ -34,8 +34,13 @@ export default defineConfig({
   // Astro's default 'directory' format would emit /about/ instead and break
   // every inbound link — including the absolute d-labs.com/methods/... links
   // that editors have written inside Contentful bodies.
+  //
+  // "preserve" rather than "file": with "file", an index page inside a
+  // subdirectory is flattened, so src/pages/en/index.astro emitted en.html and
+  // /en/ — the English home page — 404'd. "preserve" mirrors src/pages exactly,
+  // which is what Jekyll did.
   build: {
-    format: "file",
+    format: "preserve",
   },
   trailingSlash: "never",
 

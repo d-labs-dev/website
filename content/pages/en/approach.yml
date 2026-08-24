@@ -1,0 +1,123 @@
+intro_lead: How we work
+intro_text: ' The D-LABS working method is based on the approaches and methods of **design thinking**
+  and **human-centered design** and always focuses on the user. '
+intro_cta_text: Our approach in projects
+slider_lead: Our approach
+screens:
+- title: Overview
+  text: Depending on the task at hand, services from our various fields of expertise are used in the project.
+- title: 360° View
+  text: Holistic analysis of the project environment and comprehensive examination of user needs
+- title: Synthesis
+  text: Summary, structuring and evaluation of the findings of the 360-degree view and definition of the
+    requirements for the solution
+- title: Concept & Design
+  text: Development of ideas, prototyping and elaboration of first solutions by an interdisciplinary team
+- title: Implementation
+  text: Iterative optimization of the concept up to the solution that meets the needs of all stakeholders
+- title: Enabling & Coaching
+  text: Empowerment and support of all stakeholders in innovation processes and agile working methods
+    as well as trainings on digital solutions
+- title: Business & Innovation
+  text: Strategic advice in the development of digital solutions as well as in innovation and change processes
+projects_link_text: Case Studies
+projects_title: Challenges where we have supported our customers
+projects_goal_title: Objectives
+projects_approach_title: Procedure
+projects_result_title: Result
+user_research: User Research
+design: Digital Experience Design
+engineering: Software Engineering
+consulting: Business & Innovation
+training: Enabling & Coaching
+projects:
+- lead: Project 01
+  img1: projects/dlabs_project01-img01.jpg
+  img2: projects/dlabs_project01-img02.jpg
+  circle_img: projects/circle-small_project01.svg
+  percentages:
+    user_research: 50
+    design: 15
+    engineering: 5
+    training: 0
+    consulting: 30
+  task: How can the customer interface of a distribution system operator be designed in a uniform way?
+  goals:
+  - Increased customer and service orientation
+  - A unified customer experience across all channels
+  - Process automation and digitalization
+  - Increasing transparency for all stakeholders
+  approaches:
+  - Extensive analysis of internal and external service processes, e.g. with the help of [qualitative
+    interviews](/en/methods/qualitative_survey.html) with representatives of the various target groups,
+    as well as workshops with process experts from different departments
+  - Development of [personas](/en/methods/personas.html) and mapping of the IS situation in [customer
+    journey maps](/en/methods/customer_journey_maps.html)
+  - Co-creative development of a mission statement for a unified customer interface, elaboration of a
+    customer-centric service design concept and illustration in [service blueprints](/en/methods/service_blueprint.html)
+  results:
+  - Forward-thinking service concept for the realization of a uniform customer interface, e.g. with the
+    help of an online self-service portal for the various customer groups
+- lead: Project 02
+  img1: projects/dlabs_project02-img01.jpg
+  img2: projects/dlabs_project02-img02.jpg
+  circle_img: projects/circle-small_project02.svg
+  percentages:
+    user_research: 5
+    design: 0
+    engineering: 0
+    training: 85
+    consulting: 10
+  task: How do you train the employees of a DAX Group to be fit for agile working in interdisciplinary
+    teams?
+  goals:
+  - Training of 25 employees from all over Europe to be Design Thinking Facilitators
+  - Learn design thinking through generic challenges and internal projects and whereby teams coach themselves
+  - Getting to know implementation strategies
+  - Building knowledge about agile work in companies as well as planning projects and workshops
+  approaches:
+  - '[Introduction to design thinking](/en/methods/qualifying_coaches.html): Getting to know the entire
+    design thinking process using a generic challenge'
+  - 'Deepening and coaching: Processing an internal challenge, whereby the participants acted as coaches
+    themselves'
+  - 'Implementation strategies: Presentation of Business Model Canvas, Value Proposition Canvas and Systems
+    Thinking; Location Determination - Agility in the Organization'
+  - 'Project and workshop planning: Order clarification and planning of internal projects'
+  results:
+  - Building knowledge on agile work within the company and practical experience in internal projects
+  - Successful certification of participants as Design Thinking Facilitators
+- lead: Project 03
+  img1: projects/dlabs_project03-img01.jpg
+  img2: projects/dlabs_project03-img02.jpg
+  circle_img: projects/circle-small_project03.svg
+  percentages:
+    user_research: 5
+    design: 25
+    engineering: 65
+    training: 0
+    consulting: 5
+  task: How can visitors to an exhibition be digitally supported?
+  goals:
+  - How can visitors to an exhibition be digitally supported?
+  - Delivery of additional information about the exhibits presented in the exhibition
+  - Support for the visitor orientation within the exhibition
+  approaches:
+  - Definition of an MVP (Minimum Viable Product) together with the customer based on existing research
+    results
+  - Deliver [co-creative workshops](/en/methods/co-creation.html) with the customer and iterative development
+    of concept and design based on [prototypes](/en/methods/evolutionary_prototyping.html)
+  - Agile implementation of the MVP and its expansion
+  results:
+  - Intuitively usable app for iOS and Android for visitor multimedia accompaniment and support during
+    and after the exhibition visit
+  image_source:
+  - 'image source: © Staatliche Museen zu Berlin, Fabian Fröhlich'
+contact:
+  title: How can we help you with your challenges?
+  avatar_img: dlabs_contact-till.jpg
+  name: Till Heinrich
+  position: Sales Manager
+  tel: +49 331 97 992 303
+  mobile: +49 151 46 756 702
+  email: till.heinrich@d-labs.com
+  cta_text: request

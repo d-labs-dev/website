@@ -1,0 +1,132 @@
+intro_lead: Wie wir arbeiten
+intro_text:
+  " Die Arbeitsweise von D‑LABS orientiert sich an den Ansätzen und Methoden des **Design Thinking**
+  und **Human-centered Design** und stellt immer den Nutzer in den Mittelpunkt. "
+intro_cta_text: Unser Vorgehen in Projekten
+slider_lead: Unser Vorgehen
+screens:
+  - title: Überblick
+    text:
+      In Abhängigkeit von der Aufgabenstellung kommen Leistungen aus unseren verschiedenen Kompetenzfeldern
+      im Projekt zur Anwendung.
+  - title: 360°-Sicht
+    text: Ganzheitliche Analyse des Projekt­umfeldes und umfassende Untersuchung der Nutzer­bedürfnisse
+  - title: Synthese
+    text:
+      Zusammenfassung, Strukturierung und Bewertung der in der 360°-Sicht gewonnenen Erkenntnisse und
+      Definition der Anforderungen an die Lösung
+  - title: Konzept & Design
+    text: Ideenentwicklung, Prototyping und Ausarbeitung erster ­Lösungs­ansätze im interdisziplinären Team
+  - title: Umsetzung
+    text:
+      Iterative Optimierung des ­Konzeptes bis hin zur Lösung, die den ­Bedürfnissen aller Stakeholder
+      ­gerecht wird
+  - title: Enabling & Coaching
+    text:
+      Befähigung und Begleitung aller Stakeholder in Innovations­prozessen und agilen Arbeits­weisen
+      sowie Trainings zu digitalen Lösungen
+  - title: Business & Innovation
+    text: Strategische Beratung bei der Entwicklung digitaler Lösungen sowie in Innovations- und Changeprozessen
+projects_link_text: Projektbeispiele
+projects_title: Herausforderungen, bei denen wir unsere Kunden unterstützt haben
+projects_goal_title: Ziele
+projects_approach_title: Vorgehen
+projects_result_title: Ergebnis
+user_research: User Research
+design: Digital Experience Design
+engineering: Software Engineering
+consulting: Business & Innovation
+training: Enabling & Coaching
+projects:
+  - lead: Projekt 01
+    img1: projects/dlabs_project01-img01.jpg
+    img2: projects/dlabs_project01-img02.jpg
+    circle_img: projects/circle-small_project01.svg
+    percentages:
+      user_research: 50
+      design: 15
+      engineering: 5
+      training: 0
+      consulting: 30
+    task: Wie kann die Kundenschnittstelle eines Verteilnetz­betreibers einheitlich gestaltet werden?
+    goals:
+      - Erhöhung der Kunden- und Service­orientierung
+      - Eine einheitliche Customer Experience über alle Kanäle hinweg
+      - Prozessautomatisierung und Digitalisierung
+      - Erhöhung der Transparenz für alle Beteiligten
+    approaches:
+      - Umfangreiche Analyse der internen und externen Service-Prozesse, z.B. mit Hilfe [qualitativer Interviews](/methods/qualitative_befragung.html)
+        mit Vertretern der verschiedenen Zielgruppen, sowie Workshops mit Prozess­experten aus verschiedenen
+        Fachbereichen
+      - Entwicklung von [Personas](/methods/personas.html) und Abbildung der IST-Situation in [Customer Journey
+        Maps](/methods/customer_journey_maps.html)
+      - Co-kreative Entwicklung eines Leitbildes für die einheitliche Kundenschnittstelle, Ausarbeitung eines
+        kundenzentrierten Service-Design-Konzeptes und Abbildung in ­[Service Blueprints](/methods/service_blueprint.html)
+    results:
+      - Zukunftsweisendes Service-Konzept zur Realisierung der einheitlichen Kundenschnittstelle, z.B. mit
+        Hilfe eines Online-Self-Service-Portals für die verschiedenen Kundengruppen
+  - lead: Projekt 02
+    img1: projects/dlabs_project02-img01.jpg
+    img2: projects/dlabs_project02-img02.jpg
+    circle_img: projects/circle-small_project02.svg
+    percentages:
+      user_research: 5
+      design: 0
+      engineering: 0
+      training: 85
+      consulting: 10
+    task:
+      Wie macht man die Mitarbeiter eines DAX-Konzerns fit für agiles Arbeiten in interdisziplinären
+      Teams?
+    goals:
+      - Ausbildung von 25 Mitarbeitern aus ganz ­Europa zu Design Thinking Facilitators
+      - Anhand von generischen Challenges und internen Projekten Design Thinking erfahren und Teams selbst
+        darin coachen
+      - Kennenlernen von Implementierungsstrategien
+      - Aufbau von Wissen zu agilem Arbeiten in Unternehmen sowie der Planung von Projekten und Workshops
+    approaches:
+      - "[Einführung in Design Thinking:](/methods/qualifying_coaches.html) Kennenlernen des gesamten Design
+        Thinking Prozesses anhand einer generischen Challenge"
+      - "Vertiefung und Coaching: Bearbeitung einer konzerninternen Challenge, wobei die Teilnehmer selbst
+        als Coaches agierten"
+      - "Implementierungsstrategien: Vorstellung von Business Model Canvas, Value Proposition Canvas und Systems
+        Thinking; Standortbestimmung – Agilität in der Organisation"
+      - "Projekt- und Workshopplanung: Auftragsklärung und Planung interner Projekte"
+    results:
+      - Aufbau von Wissen zu agilem Arbeiten im Unternehmen und Praxiserfahrung in internen Projekten
+      - Erfolgreiche Zertifizierung der Teilnehmer als Design Thinking Facilitatoren
+  - lead: Projekt 03
+    img1: projects/dlabs_project03-img01.jpg
+    img2: projects/dlabs_project03-img02.jpg
+    circle_img: projects/circle-small_project03.svg
+    percentages:
+      user_research: 5
+      design: 25
+      engineering: 65
+      training: 0
+      consulting: 5
+    task: Wie können die Besucher einer Ausstellung digital unterstützt werden?
+    goals:
+      - Aufwertung des Besuchserlebnisses im Museum
+      - Vermittlung von Zusatzinformationen, über die in der Ausstellung präsentierten Exponate
+      - Prozessautomatisierung und Digitalisierung
+      - Unterstützung der Orientierung des Besuchers innerhalb der Ausstellung
+    approaches:
+      - Definition eines MVP (Minimum Viable Product) gemeinsam mit dem Kunden auf Basis vorhandener Research-Ergebnisse
+      - Durchführung [Co-Creativer Workshops](/methods/co-creation.html) mit dem Kunden und iterative Entwicklung
+        von Konzept und Design auf Basis von [Prototypen](/methods/evolutionary_prototyping.html)
+      - Agile Umsetzung des MVP sowie dessen Erweiterung
+    results:
+      - Intuitiv benutzbare App für iOS und Android für die multimediale Begleitung und Unterstützung des
+        Besuchers während und nach dem Ausstellungsbesuch
+    image_source:
+      - "Bildquelle: © Staatliche Museen zu Berlin, Fabian Fröhlich"
+contact:
+  title: Wie können wir Sie bei Ihren Herausforderungen unterstützen?
+  avatar_img: dlabs_contact-till.jpg
+  name: Till Heinrich
+  position: Sales Manager
+  tel: +49 331 97 992 303
+  mobile: +49 151 46 756 702
+  email: till.heinrich@d-labs.com
+  cta_text: Anfragen

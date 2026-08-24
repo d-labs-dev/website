@@ -20,7 +20,7 @@ export interface ContactDetails {
   tel?: string;
   mobile?: string;
   cta_text?: string;
-  our_locations: string;
+  our_locations?: string;
   avatar_img: string;
 }
 
@@ -97,15 +97,19 @@ if (!avatar) {
     </div>
   </div>
 
-  <a
-    href={`${pageUrl("about", locale)}#locations`}
-    class:list={["locations-link w-full max-w-[60rem]", light ? "is-light" : "is-dark"]}
-  >
-    <h2 class="font-heading tracking-heading max-w-[30rem] text-xl">
-      {contact.our_locations}
-      <span aria-hidden="true">↗</span>
-    </h2>
-  </a>
+  {
+    contact.our_locations && (
+      <a
+        href={`${pageUrl("about", locale)}#locations`}
+        class:list={["locations-link w-full max-w-[60rem]", light ? "is-light" : "is-dark"]}
+      >
+        <h2 class="font-heading tracking-heading max-w-[30rem] text-xl">
+          {contact.our_locations}
+          <span aria-hidden="true">↗</span>
+        </h2>
+      </a>
+    )
+  }
 </div>
 
 <style>

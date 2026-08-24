@@ -1,0 +1,44 @@
+import { trackScroll } from "@/lib/scroll-progress";
+import { createSpring, applyOpacity, prefersReducedMotion } from "@/lib/spring";
+import { setupApproachDiagram } from "./approach-diagram";
+
+/**
+ * The approach page's pinned section: seven captions cross-fading over the
+ * diagram, which reveals a further part of itself at each step.
+ *
+ * One tracker drives both. A leading spacer marker means caption `i` is active
+ * at index `i + 1`.
+ */
+export function setupApproach(): void {
+  const root = document.querySelector<HTMLElement>("[data-approach-scroll]");
+  if (!root) return;
+
+  const screens = Array.from(root.querySelectorAll<HTMLElement>("[data-approach-screen]"));
+  const indicators = Array.from(root.querySelectorAll<HTMLElement>("[data-approach-indicator]"));
+
+  const reduced = prefersReducedMotion();
+  const applyDiagram = setupApproachDiagram(root);
+
+  const screenSprings = screens.map((screen) =>
+    createSpring(0, (value) => applyOpacity(screen, value)),
+  );
+
+  function render(index: number, immediate = false) {
+    screens.forEach((_, i) => {
+      const target = index === i + 1 ? 1 : 0;
+      if (reduced || immediate) screenSprings[i]!.set(target);
+      else screenSprings[i]!.to(target);
+    });
+
+    indicators.forEach((indicator, i) => {
+      const active = index === i + 1;
+      indicator.toggleAttribute("data-active", active);
+      indicator.setAttribute("aria-current", active ? "true" : "false");
+    });
+
+    applyDiagram(index);
+  }
+
+  const tracker = trackScroll({ root, onChange: (index) => render(index) });
+  render(tracker.index, true);
+}

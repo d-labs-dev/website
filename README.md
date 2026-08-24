@@ -61,6 +61,11 @@ CONTENTFUL_ACCESS_TOKEN=…
    `_site/`. Everything else — the branch-conditional S3 sync, the CloudFront invalidation,
    `preview.d-labs.com` for non-master — stays as it is.
 3. Move `assets/app-live-release.apk` (46 MB) to S3 directly rather than carrying it over.
+4. Add a CloudFront redirect for `/jobs/` → `/jobs.html`. The Jekyll site has a `jobs/index.html`
+   from 2022 (`ref: old_jobs`) serving the jobs page at both URLs. Reproducing it as a page collides
+   with `jobs.astro` over the same route — and two URLs for one page is duplicate content anyway —
+   so the alias belongs at the edge as a 301. It is the only URL the old build published that this
+   one does not.
 
 Until then CircleCI on this branch still builds the Jekyll site, which is intentional: the branch
 changes nothing about what deploys.

@@ -1,0 +1,276 @@
+---
+/**
+ * Approach: an intro, the scroll-driven diagram with seven captions over it, then
+ * three project case studies, then the contact block.
+ */
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import Contact from "@/components/Contact.astro";
+import ApproachDiagram from "@/components/approach/ApproachDiagram.astro";
+import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+import { getPageCopy, pageUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("approach", locale);
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/projects/*.{jpg,jpeg,png,webp,svg}",
+  { eager: true },
+);
+
+function resolve(path: string) {
+  const image = images[`/src/assets/images/${path}`]?.default;
+  if (!image) throw new Error(`Approach project image not found: src/assets/images/${path}`);
+  return image;
+}
+
+/** Task type -> brand colour. Mapped explicitly so Tailwind sees the class names. */
+const TASK_COLOURS: Record<string, string> = {
+  yellow: "text-dlabs-yellow",
+  darkBlue: "text-dlabs-dark-blue",
+  red: "text-dlabs-red",
+  green: "text-dlabs-green",
+  purple: "text-dlabs-purple",
+};
+
+const TASK_TYPES: Record<string, string> = {
+  user_research: "yellow",
+  design: "darkBlue",
+  engineering: "red",
+  training: "green",
+  consulting: "purple",
+};
+
+const screens = copy.screens as { title: string; text?: string }[];
+const projects = copy.projects as {
+  lead: string;
+  img1: string;
+  img2: string;
+  circle_img: string;
+  percentages: Record<string, number>;
+  task: string;
+  goals: string[];
+  approaches: string[];
+  results: string[];
+  image_source?: string;
+}[];
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", otherLocale(locale)) }];
+---
+
+<BaseLayout
+  title={copy.intro_lead}
+  description={copy.intro_text}
+  activeRef="approach"
+  alternates={alternates}
+>
+  <div class="relative" data-approach-scroll>
+    {/* Intro */}
+    <div
+      class="relative z-1 flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-16"
+    >
+      <div class="relative z-1 flex w-full max-w-[60rem] flex-col gap-6 pb-12">
+        <LeadLine>{copy.intro_lead}</LeadLine>
+        <div class="font-heading tracking-heading text-lg sm:text-xl md:text-2xl">
+          <Markdown source={copy.intro_text} size="inherit" />
+        </div>
+      </div>
+
+      <div class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black">
+        <div class="flex flex-col items-center gap-4">
+          <a href="#n1" class="text-dlabs-blue text-xs font-bold tracking-widest uppercase">
+            {copy.intro_cta_text}
+          </a>
+          <a href="#n1" aria-hidden="true" tabindex="-1">
+            <Image src={arrowDown} alt="" class="w-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* The diagram, pinned, with the captions over it */}
+    <div class="relative" style="padding-bottom: 40vh">
+      <div class="pointer-events-none absolute inset-0 z-1 flex flex-col items-center">
+        <div
+          class="sticky top-0 flex min-h-screen w-full max-w-[80rem] flex-row items-end overflow-hidden pb-16 md:items-center md:pb-0"
+        >
+          <ApproachDiagram />
+        </div>
+      </div>
+
+      <div class="pointer-events-none absolute inset-0 z-1 flex flex-col items-center">
+        <div class="sticky top-0 min-h-screen w-full max-w-[60rem] px-6 pt-24">
+          <LeadLine>{copy.slider_lead}</LeadLine>
+        </div>
+      </div>
+
+      <div class="h-8" data-keyframe-marker></div>
+      {
+        screens.map((_, i) => (
+          <div class="h-[25rem] md:h-[20rem]" id={`n${i + 1}`} data-keyframe-marker />
+        ))
+      }
+
+      {
+        screens.map((screen, i) => (
+          <div
+            class="pointer-events-none absolute inset-0"
+            style="opacity: 0"
+            data-approach-screen={i}
+          >
+            <div class="sticky top-0 flex min-h-screen flex-col items-center px-6">
+              <div class="w-full max-w-[60rem]">
+                <div class="relative flex flex-col gap-6 pt-16 pb-16">
+                  <h2 class="font-heading tracking-heading pt-8 text-base md:text-xl">
+                    {screen.title}
+                  </h2>
+                  {screen.text && (
+                    <div class="max-w-[15rem] text-xs md:text-base">{screen.text}</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="absolute inset-y-0 right-0 z-1 hidden md:block">
+        <div class="sticky flex min-h-screen flex-col justify-center gap-4 pr-3">
+          {
+            screens.map((_, i) => (
+              <a
+                href={`#n${i + 1}`}
+                class="screen-dot"
+                data-approach-indicator={i}
+                aria-label={`${locale === "de" ? "Seite" : "Screen"} ${i + 1}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Projects */}
+  <div id="projects" class="flex flex-col items-center px-6 pt-24 pb-16">
+    <div class="flex w-full max-w-[60rem] flex-col gap-12">
+      <h2 class="font-heading tracking-heading max-w-[30rem] text-xl">{copy.projects_title}</h2>
+
+      <div class="flex flex-col gap-24">
+        {
+          projects.map((project, index) => (
+            <div class="flex flex-col" id={`project${index + 1}`}>
+              <div class="pb-6">
+                <LeadLine>{project.lead}</LeadLine>
+              </div>
+
+              <div class="flex h-40 flex-row gap-4 md:h-[30rem]">
+                <div class="relative w-1/3 shrink-0 md:w-[15rem]">
+                  <Image
+                    src={resolve(project.img1)}
+                    alt=""
+                    class="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="relative flex-1">
+                  <Image
+                    src={resolve(project.img2)}
+                    alt=""
+                    class="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              <div class="relative flex flex-col items-center gap-4 md:flex-row md:items-start">
+                <div class="flex w-full shrink-0 flex-col items-center gap-8 py-3 md:sticky md:top-24 md:w-[15rem] md:pt-16 md:pb-8">
+                  <Image src={resolve(project.circle_img)} alt="" class="w-full" loading="lazy" />
+
+                  <div class="flex flex-col gap-3">
+                    {Object.entries(TASK_TYPES).map(([key, colour]) => {
+                      const percentage = project.percentages[key] ?? 0;
+                      if (percentage === 0) return null;
+                      return (
+                        <div
+                          class:list={[
+                            "font-heading flex flex-row gap-2 text-xs",
+                            TASK_COLOURS[colour],
+                          ]}
+                        >
+                          <div class="w-6 text-right">{percentage}%</div>
+                          <div>{copy[key]}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div class="relative flex flex-1 flex-col gap-8 pt-16 max-md:py-6">
+                  <h3 class="font-heading tracking-heading max-w-[30rem] text-xl">
+                    {project.task}
+                  </h3>
+
+                  {(
+                    [
+                      [copy.projects_goal_title, project.goals],
+                      [copy.projects_approach_title, project.approaches],
+                      [copy.projects_result_title, project.results],
+                    ] as [string, string[]][]
+                  ).map(([heading, items]) => (
+                    <div class="flex flex-col gap-6">
+                      <h4 class="font-heading text-xs uppercase">{heading}</h4>
+                      <ul class="prose flex flex-col gap-3">
+                        {items.map((item) => (
+                          <li>
+                            <Markdown source={item} inline />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+
+                  {project.image_source && (
+                    <div class="text-dlabs-gray-300 text-2xs">{project.image_source}</div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <Contact locale={locale} contact={copy.contact} light={true} />
+</BaseLayout>
+
+<style>
+  .screen-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-dlabs-gray-200);
+    transition-property: background-color, transform;
+  }
+
+  .screen-dot:hover {
+    background-color: var(--color-dlabs-gray-300);
+  }
+
+  .screen-dot[data-active] {
+    background-color: var(--color-dlabs-blue);
+    transform: scale(1.4);
+  }
+</style>
+
+<script>
+  import { setupApproach } from "@/components/approach/approach";
+  setupApproach();
+</script>

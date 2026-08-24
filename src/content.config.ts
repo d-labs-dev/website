@@ -165,7 +165,12 @@ const contactSchema = z.object({
   tel: z.string().optional(),
   mobile: z.string().optional(),
   cta_text: z.string().optional(),
-  our_locations: z.string(),
+  /**
+   * Optional: the approach page's contact block has no `our_locations`, so
+   * production renders an empty heading there with a stray arrow after it. The
+   * link is omitted entirely instead.
+   */
+  our_locations: z.string().optional(),
   avatar_img: z.string(),
 });
 
