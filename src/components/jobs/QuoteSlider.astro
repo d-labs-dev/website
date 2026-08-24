@@ -1,0 +1,76 @@
+---
+/**
+ * "Why D-LABS?" — staff quotes, one per slide: round portrait with a quote mark,
+ * the quote, and the person's name and role.
+ */
+import { Image } from "astro:assets";
+import Carousel from "@/components/Carousel.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import quoteIcon from "@/assets/images/icons/icon-quotes.svg";
+
+export interface QuoteSlide {
+  name: string;
+  position: string;
+  quote: string;
+  img: string;
+}
+
+interface Props {
+  title: string;
+  slides: QuoteSlide[];
+}
+
+const { title, slides } = Astro.props;
+
+const portraits = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/quotes/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+---
+
+<div class="flex w-full max-w-[60rem] flex-col gap-6 pb-16">
+  <LeadLine>{title}</LeadLine>
+
+  <Carousel label={title} loop={true}>
+    {
+      slides.map((slide) => {
+        const portrait = portraits[`/src/assets/images/${slide.img}`]?.default;
+        if (!portrait) throw new Error(`Quote portrait not found: ${slide.img}`);
+        return (
+          <div class="flex flex-col items-center gap-3 px-8 sm:flex-row sm:gap-8">
+            <div class="shrink-0 py-4">
+              <div class="relative">
+                <Image
+                  src={portrait}
+                  alt={`${slide.name}`}
+                  width={320}
+                  height={320}
+                  class="h-40 w-40 rounded-full object-cover"
+                  loading="lazy"
+                />
+                <Image
+                  src={quoteIcon}
+                  alt=""
+                  class="absolute h-12"
+                  style="bottom: -0.5rem; right: -0.5rem"
+                />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <div class="font-heading text-base sm:text-lg md:text-xl">
+                <Markdown source={slide.quote} inline />
+              </div>
+              <div class="flex flex-row gap-2 text-sm">
+                <div>{slide.name}</div>
+                <div aria-hidden="true">—</div>
+                <div class="font-bold">{slide.position}</div>
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </Carousel>
+</div>

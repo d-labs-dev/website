@@ -1,0 +1,125 @@
+---
+/**
+ * Single-slide carousel with dots and side arrows. Replaces slick (and with it
+ * jQuery); the mechanics are Embla, the appearance is the old `.carousel`.
+ *
+ * Slides are whatever is passed in — each direct child of the slot becomes one.
+ * Progressive enhancement: with no JS the first slide is visible and the rest
+ * follow in the flow, which is more useful than an empty box.
+ */
+import { Image } from "astro:assets";
+import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
+import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
+
+interface Props {
+  /** Announced to screen readers, since a carousel is otherwise anonymous. */
+  label: string;
+  loop?: boolean;
+  class?: string;
+}
+
+const { label, loop = false, class: className = "" } = Astro.props;
+---
+
+<div
+  class:list={["carousel relative", className]}
+  data-carousel
+  data-loop={loop ? "" : undefined}
+  role="group"
+  aria-roledescription="carousel"
+  aria-label={label}
+>
+  <div class="carousel-viewport overflow-hidden" data-carousel-viewport>
+    <div class="carousel-track flex" data-carousel-track>
+      <slot />
+    </div>
+  </div>
+
+  <div
+    class="pointer-events-none absolute inset-y-0 right-full hidden flex-col justify-center md:flex"
+  >
+    <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous">
+      <Image src={arrowLeft} alt="" class="h-8 max-w-none" />
+    </button>
+  </div>
+
+  <div
+    class="pointer-events-none absolute inset-y-0 left-full hidden flex-col justify-center md:flex"
+  >
+    <button type="button" class="carousel-arrow" data-carousel-next aria-label="Next">
+      <Image src={arrowRight} alt="" class="h-8 max-w-none" />
+    </button>
+  </div>
+
+  <div class="carousel-dots" data-carousel-dots role="tablist" aria-label={label}></div>
+</div>
+
+<style>
+  /* Each direct child of the track is one slide, full width and not shrinking. */
+  .carousel-track > :global(*) {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  .carousel-arrow {
+    pointer-events: auto;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0.25rem;
+    transition-property: opacity;
+  }
+
+  .carousel-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  /* Dots sit under the text column, indented past the portrait. */
+  .carousel-dots {
+    position: absolute;
+    bottom: -2rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: start;
+    list-style: none;
+  }
+
+  @media (width >= 40rem) {
+    .carousel-dots {
+      left: 14rem;
+    }
+  }
+
+  .carousel-dots :global(button) {
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-dlabs-gray-200);
+    cursor: pointer;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    transition-property: background-color;
+  }
+
+  .carousel-dots :global(button:not(:last-child)) {
+    margin-right: 18px;
+  }
+
+  .carousel-dots :global(button:hover) {
+    background-color: var(--color-dlabs-gray-300);
+  }
+
+  .carousel-dots :global(button[aria-selected="true"]) {
+    background-color: var(--color-dlabs-blue);
+  }
+</style>
+
+<script>
+  import { setupCarousels } from "./carousel";
+  setupCarousels();
+</script>

@@ -1,0 +1,58 @@
+---
+/**
+ * "Our benefits" — one benefit per slide: round icon, then the description.
+ *
+ * Same shape as the quote slider but without the attribution, matching the two
+ * near-identical includes on the current site.
+ */
+import { Image } from "astro:assets";
+import Carousel from "@/components/Carousel.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+
+export interface Benefit {
+  label: string;
+  img: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  benefits: Benefit[];
+}
+
+const { title, benefits } = Astro.props;
+
+const icons = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/job-benefits/*.svg",
+  { eager: true },
+);
+---
+
+<div class="flex w-full max-w-[60rem] flex-col gap-6 pb-16">
+  <LeadLine>{title}</LeadLine>
+
+  <Carousel label={title} loop={true}>
+    {
+      benefits.map((benefit) => {
+        const icon = icons[`/src/assets/images/${benefit.img}`]?.default;
+        if (!icon) throw new Error(`Benefit icon not found: ${benefit.img}`);
+        return (
+          <div class="flex flex-col items-center gap-3 px-8 sm:flex-row sm:gap-8">
+            <div class="shrink-0 py-4">
+              <div class="border-dlabs-gray-200 flex h-40 w-40 items-center justify-center rounded-full border">
+                <Image src={icon} alt="" class="h-20 w-20" loading="lazy" />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <div class="font-heading text-base sm:text-lg md:text-xl">
+                <Markdown source={benefit.text} inline />
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </Carousel>
+</div>

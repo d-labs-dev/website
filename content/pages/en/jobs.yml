@@ -20,33 +20,33 @@ slides:
     quote:
       Because we make the world a little more accessible every day. With our focus on end-user needs,
       we create solutions that inspire our customers. This is where user experience is lived.
-    img: quotes/quote-peter.jpeg
+    img: quotes/quote-peter.jpg
   - name: Claudia
     position: Director Digital Experience Design
     quote:
       The close cooperation with experts from different fields and with different focal points is always
       exciting. The range of projects for well-known customers from a wide range of industries also ensures
       that I can still learn something about them. Last but not least, my heart beats for Potsdam.
-    img: quotes/quote-claudia.png
+    img: quotes/quote-claudia.jpg
   - name: Doreen
     position: Senior Digital Experience Designer
     quote:
       At D-LABS, I can work in such a way that I still have time for my family. At the same time, I
       have the opportunity to work on demanding projects. This compatibility is very important to me because
       here having a family does not mean having to give up anything in my professional development.
-    img: quotes/quote-doreen.png
+    img: quotes/quote-doreen.jpg
   - name: Hagen
     position: Sales, Networking & New Business
     quote:
       Developing interesting ideas and projects within an agile framework, and creating digital solutions
       with humans in mind – that's what D-LABS means to me.
-    img: quotes/quote-hagen.png
+    img: quotes/quote-hagen.jpg
   - name: Nina
     position: Digital Experience Designer
     quote:
       We have a nose for what makes people tick and get things done. Why wait? We want to get to the
       bottom of the users' needs and understand them in all their complexity.
-    img: quotes/quote-nina.png
+    img: quotes/quote-nina.jpg
 back_button_label: All job offers
 learn_more: Sounds exciting!
 benefits_title: Our benefits for you!
@@ -87,7 +87,7 @@ apply_now_description: Send us your application documents or tell us in a short 
 apply_now_button_label: Apply now!
 contact:
   title: If you have any questions, please do not hesitate to contact us.
-  avatar_img: dlabs_contact-julia.png
+  avatar_img: dlabs_contact-julia.jpg
   name: Julia Heyland
   position: Human Resources Manager
   tel: +49 331 97 992 334

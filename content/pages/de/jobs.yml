@@ -27,7 +27,7 @@ slides:
     quote:
       Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen
       der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
-    img: quotes/quote-peter.jpeg
+    img: quotes/quote-peter.jpg
   - name: Claudia
     position: Director Digital Experience Design
     quote:
@@ -35,19 +35,19 @@ slides:
       ist immer wieder spannend. Auch die Bandbreite der Projekte für namhafte Kunden aus den unterschiedlichsten
       Branchen sorgt dafür, dass ich immer noch etwas dazu lernen kann. Nicht zuletzt schlägt mein Herz
       für Potsdam.
-    img: quotes/quote-claudia.png
+    img: quotes/quote-claudia.jpg
   - name: Hagen
     position: Sales, Networking & New Business
     quote:
       D-LABS bedeutet für mich, im agilen Miteinander interessante Ideen und Projekte zu entwickeln
       und digitale Lösungen zu schaffen – mit Menschen und für Menschen.
-    img: quotes/quote-hagen.png
+    img: quotes/quote-hagen.jpg
   - name: Nina
     position: Digital Experience Designer
     quote:
       Wir sind Spürnasen und Macher. Wozu lange fackeln? Wir wollen der Ursache auf den Grund gehen
       – und zwar gründlich!
-    img: quotes/quote-nina.png
+    img: quotes/quote-nina.jpg
 benefits_title: Unsere Benefits für dich!
 benefits:
   - label: Weiterbildung
@@ -86,7 +86,7 @@ profile_heading: Dein Profil
 tasks_heading: Deine Aufgaben
 contact:
   title: Für Fragen stehen wir dir gern zur Verfügung.
-  avatar_img: dlabs_contact-julia.png
+  avatar_img: dlabs_contact-julia.jpg
   name: Julia Heyland
   position: Human Resources Manager
   tel: +49 331 97 992 334

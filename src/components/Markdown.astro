@@ -15,8 +15,14 @@ interface Props {
    * on most pages. The plugin's own `prose-sm` is not used: it sets 0.875rem and
    * rewrites the internal margins, whereas the current site just changes the
    * container size and lets the em-based children scale from it.
+   *
+   * `inherit` emits no text-size utility at all, for the places where the
+   * *parent* sets the size — the jobs hero headline, for instance, is
+   * `text-xl sm:text-2xl md:text-3xl` on the wrapper. Passing a size there would
+   * silently override all three, which is how that headline first rendered at
+   * 1rem instead of 3.6rem.
    */
-  size?: "sm" | "base";
+  size?: "sm" | "base" | "inherit";
   /** Render without a wrapping block element, for short single-line fields. */
   inline?: boolean;
   /** Use on a dark background (the blue panels). */
@@ -57,9 +63,14 @@ const onDark = {
   "--tw-prose-code": "#fff",
 };
 
-const classes = ["prose", size === "sm" ? "text-sm" : "text-base", "max-w-none", className]
-  .filter(Boolean)
-  .join(" ");
+/*
+ * `inherit` needs an explicit font-size, not merely the absence of one: the
+ * typography plugin's `.prose` rule sets `font-size: 1rem` itself, so leaving
+ * the utility off still clamps the text to 1rem regardless of the parent.
+ */
+const sizeClass = size === "sm" ? "text-sm" : size === "base" ? "text-base" : "[font-size:inherit]";
+
+const classes = ["prose", sizeClass, "max-w-none", className].filter(Boolean).join(" ");
 ---
 
 {
