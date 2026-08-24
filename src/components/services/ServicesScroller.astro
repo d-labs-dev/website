@@ -1,0 +1,203 @@
+---
+/**
+ * The five competence fields, as a horizontal track that advances while the page
+ * scrolls. The pinned area holds the indicator row and the track; markers below
+ * it set the scroll distance each slide gets.
+ *
+ * Uses lib/scroll-progress.ts via ./services-scroller.ts. There is a leading
+ * spacer marker, so slide `i` is active at index `i + 1`.
+ */
+import { Image } from "astro:assets";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
+import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
+import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+
+export interface ServiceSlide {
+  name: string;
+  img: string;
+  "img-position"?: string;
+  text: string;
+  color: string;
+}
+
+interface Props {
+  title: string;
+  slides: ServiceSlide[];
+  /** Link text for the jump down to the methods list. */
+  listLinkText: string;
+}
+
+const { title, slides, listLinkText } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/approach/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+
+/**
+ * The YAML names a brand colour per slide. Mapped explicitly rather than
+ * interpolated into a class name, because Tailwind only generates classes it can
+ * see as literal text.
+ */
+const CIRCLE_COLOURS: Record<string, string> = {
+  blue: "bg-dlabs-blue",
+  yellow: "bg-dlabs-yellow",
+  darkBlue: "bg-dlabs-dark-blue",
+  red: "bg-dlabs-red",
+  green: "bg-dlabs-green",
+  purple: "bg-dlabs-purple",
+};
+
+const OBJECT_POSITION: Record<string, string> = {
+  center: "object-center",
+  top: "object-top",
+  bottom: "object-bottom",
+};
+---
+
+<div class="relative" id="overview" data-services-scroller>
+  {/* Leading spacer, so the first slide animates in rather than starting put. */}
+  <div class="h-1" data-keyframe-marker></div>
+
+  <div class="pointer-events-none absolute inset-0">
+    <div class="sticky top-0 flex min-h-screen flex-col items-center">
+      <div class="flex w-full max-w-[60rem] flex-col gap-6 px-6 pt-24" id="services-top">
+        <LeadLine class="opacity-0" data-scroller-lead>{title}</LeadLine>
+
+        <div class="relative flex flex-col justify-center gap-2 pb-4 md:flex-row md:gap-4">
+          {/* The blue dot that sits behind the row until a slide takes over. */}
+          <div class="absolute inset-0 flex flex-col items-center">
+            <div class="bg-dlabs-blue h-3 w-3 rounded-full" data-scroller-home-dot></div>
+          </div>
+
+          {
+            slides.map((slide, i) => (
+              <button
+                type="button"
+                class="pointer-events-auto flex flex-1 flex-row items-start gap-2 text-left"
+                data-scroller-indicator={i}
+              >
+                <div class="w-4 shrink-0">
+                  <div
+                    class:list={[
+                      "h-3 w-3 rounded-full opacity-0",
+                      CIRCLE_COLOURS[slide.color] ?? "bg-dlabs-blue",
+                    ]}
+                    data-scroller-dot
+                  />
+                </div>
+                <div class="text-xs opacity-0" data-scroller-label>
+                  {slide.name}
+                </div>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="relative flex w-full flex-col items-center overflow-hidden">
+        <div class="flex w-full max-w-[60rem] flex-row" data-scroller-track>
+          {
+            slides.map((slide) => {
+              const image = images[`/src/assets/images/${slide.img}`]?.default;
+              if (!image) throw new Error(`Service slide image not found: ${slide.img}`);
+              return (
+                <div class="w-full shrink-0 px-6">
+                  <div class="flex flex-col items-center gap-6 md:flex-row md:items-start">
+                    {/*
+                      Eager, not lazy: the slides sit side by side inside the track,
+                      so the ones off to the right never intersect the viewport and
+                      would pop in mid-animation rather than being ready. Five
+                      images, and they are this section's actual content.
+                    */}
+                    <div class="w-full shrink-0 md:w-1/3">
+                      <Image
+                        src={image}
+                        alt=""
+                        class:list={[
+                          "h-32 w-full object-cover md:h-auto",
+                          OBJECT_POSITION[slide["img-position"] ?? "center"],
+                        ]}
+                        loading="eager"
+                      />
+                    </div>
+                    <div class="pointer-events-auto px-6 text-xs md:text-base">
+                      <Markdown source={slide.text} size="inherit" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+
+        <div class="absolute inset-y-0 left-0 flex flex-row items-center pl-3">
+          <button
+            type="button"
+            class="scroller-arrow pointer-events-auto"
+            data-scroller-prev
+            aria-label="Previous"
+            disabled
+          >
+            <Image src={arrowLeft} alt="" class="w-6" />
+          </button>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex flex-row items-center pr-3">
+          <button
+            type="button"
+            class="scroller-arrow pointer-events-auto"
+            data-scroller-next
+            aria-label="Next"
+          >
+            <Image src={arrowRight} alt="" class="w-6" />
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-auto" style="flex-grow: 2"></div>
+
+      <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 md:flex">
+        <div class="pointer-events-auto flex flex-col items-center gap-4">
+          <a href="#list" class="text-dlabs-blue text-xs font-bold tracking-widest uppercase">
+            {listLinkText}
+          </a>
+          <a href="#list" aria-hidden="true" tabindex="-1">
+            <Image src={arrowDown} alt="" class="w-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {
+    slides.map((_, i) => (
+      <div
+        class={i === slides.length - 1 ? "min-h-screen" : "h-[40rem]"}
+        id={`n${i + 1}`}
+        data-keyframe-marker
+      />
+    ))
+  }
+</div>
+
+<style>
+  .scroller-arrow {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0.25rem;
+    transition-property: opacity;
+  }
+
+  .scroller-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+</style>
+
+<script>
+  import { setupServicesScroller } from "./services-scroller";
+  setupServicesScroller();
+</script>
