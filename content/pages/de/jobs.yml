@@ -1,0 +1,97 @@
+title_text: Wer uns fehlt,<br/>**bist du!**
+intro_text:
+  Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere
+  Jobangebote für dich an und sende uns deine Kontaktdaten! Der erste Schritt zum neuen Job bei D-LABS
+  in Potsdam oder am Standort Berlin ist schnell gemacht.
+list_title: Wir suchen dich
+initiative_text:
+  Dein Traumjob ist nicht aufgeführt? Kein Problem. Schreib uns einfach trotzdem und zeige
+  uns, wie du unser Team verstärken könntest!
+inclusivity_text:
+  Ein Teil von D-LABS zu sein bedeutet so zu sein wie du bist! Daher gelten unsere Personenbezeichnungen
+  natürlich für alle Geschlechteridentitäten.
+initiative_button_label: Jetzt initiativ bewerben!
+apply_now_aria_label: Email an jobs@d-labs.com
+apply_now_target: mailto:jobs@d-labs.com
+apply_now_heading: Bist du bereit?
+apply_now_description:
+  Sende uns deine Bewerbungsunterlagen oder erzähl uns in einem kurzen Video wer
+  du bist!
+apply_now_button_label: Jetzt bewerben!
+circle_apply_now_button_label: Jetzt bewerben
+inclusivity_aria_label: Erklärung zur Personenbezeichnung
+slider_title: Warum D-LABS?
+slides:
+  - name: Peter
+    position: Senior User Researcher
+    quote:
+      Weil wir die Welt jeden Tag ein Stück zugänglicher machen. Mit unserem Fokus auf den Bedürfnissen
+      der Endanwender, schaffen wir Lösungen die unsere Kunden begeistern. Hier wird User Experience gelebt.
+    img: quotes/quote-peter.jpeg
+  - name: Claudia
+    position: Director Digital Experience Design
+    quote:
+      Die enge Zusammenarbeit mit Experten aus verschiedenen Bereichen und mit unterschiedlichen Schwerpunkten
+      ist immer wieder spannend. Auch die Bandbreite der Projekte für namhafte Kunden aus den unterschiedlichsten
+      Branchen sorgt dafür, dass ich immer noch etwas dazu lernen kann. Nicht zuletzt schlägt mein Herz
+      für Potsdam.
+    img: quotes/quote-claudia.png
+  - name: Hagen
+    position: Sales, Networking & New Business
+    quote:
+      D-LABS bedeutet für mich, im agilen Miteinander interessante Ideen und Projekte zu entwickeln
+      und digitale Lösungen zu schaffen – mit Menschen und für Menschen.
+    img: quotes/quote-hagen.png
+  - name: Nina
+    position: Digital Experience Designer
+    quote:
+      Wir sind Spürnasen und Macher. Wozu lange fackeln? Wir wollen der Ursache auf den Grund gehen
+      – und zwar gründlich!
+    img: quotes/quote-nina.png
+benefits_title: Unsere Benefits für dich!
+benefits:
+  - label: Weiterbildung
+    img: job-benefits/icon-qualification.svg
+    text:
+      "Sei es die klassische Fortbildung, eine neue Sprache, der Blick über den Tellerrand des eigenen
+      Fachbereichs oder der Ausbau unserer D-LABS Bibliothek: D-LABS unterstützt dich dabei, dich dahin
+      zu entwickeln, wo Du hinwillst. Interne Formate fördern den Wissenstransfer im Team, während für externe
+      Formate alle Kosten übernommen werden."
+  - label: Flexibles Arbeiten
+    img: job-benefits/icon-flexible-time.svg
+    text:
+      "New Work ist für uns Alltag. Bei D-LABS entscheidest du, welche Arbeitsweise dir am Besten gefällt.
+      Ob Präsenzbüro oder Homeoffice, ob früher Vogel oder Nachteule – wir sagen: Die Mischung macht's!
+      Auch zwischen unseren Standorten darf frei und bedarfsgerecht gewählt werden. Selbst wer gerne ein
+      paar Monate im Jahr aus dem Ausland arbeitet, kommt auf seine Kosten. Das ist echte Flexibilität!"
+  - label: Unternehmenskulur
+    img: job-benefits/icon-teamevent.svg
+    text:
+      "Agil arbeiten heißt, auf Augenhöhe miteinander umzugehen. Teamübergreifend pflegen wir daher
+      eine lockere und kreative Arbeitsatmosphäre und legen Wert darauf, dass jede Stimme Gewicht hat und
+      gehört wird. So spannend unsere Projekte auch sind: Bei D-LABS arbeiten heißt, Mensch zu sein. Neben
+      unseren Teammeetings organisieren wir daher regelmäßig Events, bei denen alle vorbeikommen und gemeinsam
+      entspannen können."
+  - label: Familienfreundlichkeit
+    img: job-benefits/icon-family-friendliness.svg
+    text:
+      Für manche sind es die Kids, für andere der beste Freund des Menschen – zum Menschsein gehört
+      die Familie und so ist es bei D-LABS selbstverständlich, Arbeitszeiten an den Zeitplan der Kinder
+      anzupassen, für private Termine Platz im Kalender freizumachen oder den Familienhund mit in's Büro
+      nehmen zu können.
+back_button_label: Alle Jobangebote
+learn_more: Klingt spannend!
+download_button_label: Download PDF
+profile_heading: Dein Profil
+tasks_heading: Deine Aufgaben
+contact:
+  title: Für Fragen stehen wir dir gern zur Verfügung.
+  avatar_img: dlabs_contact-julia.png
+  name: Julia Heyland
+  position: Human Resources Manager
+  tel: +49 331 97 992 334
+  mobile: +49 151 462 53 803
+  email: jobs@d-labs.com
+  our_locations: Zu unseren Standorten
+  cta_text: Anfragen
+you_are_missing: Wer uns fehlt, bist du!

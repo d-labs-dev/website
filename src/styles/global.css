@@ -96,7 +96,89 @@
 /*
  * Typography plugin theme, for Contentful markdown bodies. Unlayered so these
  * reliably win over the plugin's own `.prose` declarations.
+ *
+ * The metrics below are taken from the live site's `.markdown` rules rather than
+ * left at the plugin's defaults — these bodies are ~217 pages of CMS content, so
+ * a different heading scale or bullet is the most visible drift there is.
+ * Measured on d-labs.com: line-height 1.6, li margin 0.5rem, ul padding-left
+ * 1.5em, custom SVG bullet at 0.5em x 0.5833em.
  */
+.prose {
+  line-height: 1.6;
+
+  & p:not(:last-child),
+  & pre:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  & :is(h1, h2, h3, h4, h5, h6) {
+    line-height: 1.2;
+    margin-top: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  & h1 {
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+  }
+
+  & h2 {
+    font-size: 1.2rem;
+  }
+
+  & h3 {
+    font-size: 1.2rem;
+    font-weight: normal;
+  }
+
+  & h4 {
+    font-size: 1rem;
+  }
+
+  & h5 {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+
+  & :is(ul, ol) {
+    padding-left: 2rem;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  & li:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Top-level lists use the D-LABS bullet mark. Nested lists keep the browser
+     default, as on the current site. */
+  & > ul {
+    list-style: none;
+    padding-left: 1.5em;
+
+    & > li {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0.4em;
+        left: -1.5em;
+        width: 0.5em;
+        height: 0.583333em;
+        background-image: url("../assets/images/list-bullet.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+    }
+  }
+}
+
 .prose {
   --tw-prose-body: var(--color-black);
   --tw-prose-headings: var(--color-black);

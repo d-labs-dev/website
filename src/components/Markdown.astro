@@ -1,0 +1,71 @@
+---
+/**
+ * Renders a markdown *string* (from Contentful) as styled HTML.
+ *
+ * Uses the typography plugin's `prose`, themed in global.css. This is the one
+ * place custom CSS is unavoidable: the HTML is generated at build time, so it
+ * can't carry utility classes.
+ */
+import { renderMarkdown, renderMarkdownInline } from "@/lib/markdown";
+
+interface Props {
+  source: string | null | undefined;
+  /**
+   * `sm` reproduces the old `markdown text-sm` treatment (0.9rem container) used
+   * on most pages. The plugin's own `prose-sm` is not used: it sets 0.875rem and
+   * rewrites the internal margins, whereas the current site just changes the
+   * container size and lets the em-based children scale from it.
+   */
+  size?: "sm" | "base";
+  /** Render without a wrapping block element, for short single-line fields. */
+  inline?: boolean;
+  /** Use on a dark background (the blue panels). */
+  tone?: "default" | "on-dark";
+  class?: string;
+}
+
+const {
+  source,
+  size = "base",
+  inline = false,
+  tone = "default",
+  class: className = "",
+} = Astro.props;
+
+const html = inline ? renderMarkdownInline(source) : renderMarkdown(source);
+
+/**
+ * The plugin's own `prose-invert` utility is deliberately not used. It works by
+ * reassigning `--tw-prose-body` and friends to their `--tw-prose-invert-*`
+ * counterparts, but global.css assigns those same variables directly on
+ * `.prose` from an unlayered rule — which wins, so `prose-invert` silently does
+ * nothing. Setting the variables inline is specificity-proof and needs no
+ * knowledge of the plugin's internals.
+ */
+const onDark = {
+  "--tw-prose-body": "#fff",
+  "--tw-prose-headings": "#fff",
+  "--tw-prose-lead": "#fff",
+  "--tw-prose-links": "#fff",
+  "--tw-prose-bold": "#fff",
+  "--tw-prose-counters": "#fff",
+  "--tw-prose-bullets": "#fff",
+  "--tw-prose-quotes": "#fff",
+  "--tw-prose-quote-borders": "var(--color-white-a25)",
+  "--tw-prose-hr": "var(--color-white-a25)",
+  "--tw-prose-captions": "var(--color-white-a90)",
+  "--tw-prose-code": "#fff",
+};
+
+const classes = ["prose", size === "sm" ? "text-sm" : "text-base", "max-w-none", className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+{
+  inline ? (
+    <Fragment set:html={html} />
+  ) : (
+    html && <div class={classes} style={tone === "on-dark" ? onDark : undefined} set:html={html} />
+  )
+}

@@ -1,0 +1,76 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  entry: CollectionEntry<"methods">;
+  /** Slug of the same method in the other locale, if it exists. */
+  counterpartSlug: string | null;
+}
+
+const { entry, counterpartSlug } = Astro.props;
+const method = entry.data;
+const locale = method.locale as Locale;
+
+const copy = await getPageCopy("services", locale);
+
+const alternates = counterpartSlug
+  ? [
+      {
+        locale: otherLocale(locale),
+        url: entryUrl("methods", counterpartSlug, otherLocale(locale)),
+      },
+    ]
+  : [];
+---
+
+<BaseLayout
+  title={method.title}
+  description={method.description}
+  image={method.heroImage ? contentfulImage(method.heroImage, { width: 1200 }) : undefined}
+  alternates={alternates}
+>
+  <div class="flex flex-col items-center px-6 py-16 pt-24">
+    <div class="flex w-full max-w-[40rem] flex-col gap-12">
+      <div class="flex flex-col gap-6">
+        <LeadLine>{copy.services_title}</LeadLine>
+
+        <h1 class="font-heading tracking-heading text-xl">{method.title}</h1>
+
+        {
+          method.heroImage && (
+            <img
+              src={contentfulImage(method.heroImage, { width: 800 })}
+              alt={assetAlt(method.heroImage)}
+              width={800}
+              height={
+                method.heroImage.width && method.heroImage.height
+                  ? Math.round((800 * method.heroImage.height) / method.heroImage.width)
+                  : undefined
+              }
+              class="w-full"
+              loading="eager"
+            />
+          )
+        }
+
+        <div class="flex flex-col items-center">
+          <div class="flex w-full max-w-[30rem] flex-col gap-8">
+            <Markdown source={method.body} />
+          </div>
+        </div>
+
+        <div class="flex flex-col items-start pt-12">
+          <Button variant="text" color="black" href={`${pageUrl("services", locale)}#list`}>
+            ←&nbsp;&nbsp;{copy.back_button_text}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

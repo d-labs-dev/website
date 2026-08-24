@@ -8,9 +8,15 @@ interface Props {
   image?: string;
   /** Set on pages that should not be indexed (e.g. the styleguide). */
   noindex?: boolean;
+  /**
+   * Translations of this page, for hreflang. Omit an entry when no translation
+   * exists — 5 blog posts have no English version, and pointing hreflang at a
+   * page that was never built is worse than omitting it.
+   */
+  alternates?: { locale: string; url: string }[];
 }
 
-const { title, description, image, noindex = false } = Astro.props;
+const { title, description, image, noindex = false, alternates = [] } = Astro.props;
 
 const lang = Astro.currentLocale === "en" ? "en" : "de";
 
@@ -44,10 +50,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical.href} />
+    {
+      alternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.locale} href={new URL(alt.url, Astro.site).href} />
+      ))
+    }
+    {alternates.length > 0 && <link rel="alternate" hreflang={lang} href={canonical.href} />}
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
     <meta property="og:title" content={title ?? SITE_NAME} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:url" content={canonical.href} />

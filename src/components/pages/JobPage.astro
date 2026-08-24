@@ -1,0 +1,145 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+import downloadIcon from "@/assets/images/icons/icon-download.svg";
+import arrowDownIcon from "@/assets/images/icons/icon-arrow-down.svg";
+import { Image } from "astro:assets";
+
+interface Props {
+  entry: CollectionEntry<"jobs">;
+  counterpartSlug: string | null;
+}
+
+const { entry, counterpartSlug } = Astro.props;
+const job = entry.data;
+const locale = job.locale as Locale;
+
+const copy = await getPageCopy("jobs", locale);
+
+const alternates = counterpartSlug
+  ? [{ locale: otherLocale(locale), url: entryUrl("jobs", counterpartSlug, otherLocale(locale)) }]
+  : [];
+
+const jobsUrl = pageUrl("jobs", locale);
+---
+
+<BaseLayout
+  title={job.title}
+  description={job.firstParagraph}
+  image={job.heroImage ? contentfulImage(job.heroImage, { width: 1200 }) : undefined}
+  alternates={alternates}
+>
+  {/* Hero: image on the left, intro and apply circle on the right. */}
+  <div class="relative flex flex-col pt-16 md:min-h-screen md:justify-center md:pt-0">
+    <div class="flex flex-col gap-6 md:flex-1 md:flex-row md:gap-0">
+      <div class="relative aspect-video md:aspect-auto md:min-h-[25rem] md:w-[calc(50%-6rem)]">
+        {
+          job.heroImage && (
+            <img
+              src={contentfulImage(job.heroImage, { width: 800 })}
+              alt={assetAlt(job.heroImage)}
+              class="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+            />
+          )
+        }
+      </div>
+
+      <div class="flex w-full flex-col md:flex-1">
+        <div class="flex w-full max-w-[50rem] flex-1 flex-col gap-6 px-6 md:max-w-[30rem] md:pl-12">
+          <Button variant="text" color="black" href={`${jobsUrl}#list`}>
+            ←&nbsp;&nbsp;{copy.back_button_label}
+          </Button>
+
+          <div class="flex-auto"></div>
+
+          <div class="flex flex-col gap-4">
+            <h1 class="font-heading tracking-heading text-xl sm:text-2xl">
+              {job.title}<a
+                href={`${jobsUrl}#inclusivity`}
+                class="text-dlabs-blue hover:text-dlabs-dark-blue transition-colors"
+                aria-label={copy.inclusivity_aria_label}>*</a
+              >
+            </h1>
+            <h2 class="font-heading tracking-heading text-lg sm:text-xl">
+              <Markdown source={job.location} inline />
+            </h2>
+            <Markdown source={job.firstParagraph} size="sm" />
+          </div>
+
+          <div class="hidden justify-end overflow-visible pr-12 md:flex">
+            <Button
+              variant="circle"
+              color="black"
+              href={copy.apply_now_target}
+              aria-label={copy.apply_now_aria_label}
+            >
+              {copy.circle_apply_now_button_label}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center gap-4 pb-8 md:flex">
+      <Button variant="text" color="blue" href="#next">{copy.learn_more}</Button>
+      <a href="#next" aria-hidden="true" tabindex="-1">
+        <Image src={arrowDownIcon} alt="" class="w-4" />
+      </a>
+    </div>
+  </div>
+
+  {/* Profile and tasks */}
+  <div id="next" class="flex flex-col items-center px-6 py-16">
+    <div class="w-full max-w-[60rem]">
+      <LeadLine>{copy.you_are_missing}</LeadLine>
+    </div>
+    <div class="flex w-full flex-col pt-16 md:w-1/3">
+      <div class="flex flex-col gap-6">
+        <h3 class="font-heading text-sm uppercase">{copy.profile_heading}</h3>
+        <Markdown source={job.profile} size="sm" />
+      </div>
+      <div class="flex flex-col gap-6 pt-16">
+        <h3 class="font-heading text-sm uppercase">{copy.tasks_heading}</h3>
+        <Markdown source={job.tasks} size="sm" />
+      </div>
+    </div>
+  </div>
+
+  {/* Apply call to action */}
+  <div class="bg-dlabs-blue flex flex-col items-center px-6 py-16">
+    <div class="flex w-full max-w-[20rem] flex-col items-center gap-8">
+      <h2 class="font-heading tracking-heading text-center text-lg text-white sm:text-xl">
+        {job.secondHeadline}
+      </h2>
+      <div class="text-center">
+        <Markdown source={job.secondParagraph} size="sm" tone="on-dark" />
+      </div>
+      <Button variant="solid" color="black" size="wide" href={copy.apply_now_target}>
+        {copy.apply_now_button_label}
+      </Button>
+    </div>
+  </div>
+
+  {/* Closing note and PDF download */}
+  <div class="flex flex-col items-center px-6 py-16">
+    <div class="flex w-full max-w-[30rem] flex-col items-center gap-12">
+      <Markdown source={job.thirdParagraph} class="font-medium" />
+      {
+        job.posting && (
+          <Button variant="text" color="blue" href={job.posting.url} target="_blank" rel="noopener">
+            <span class="flex items-center gap-3">
+              <Image src={downloadIcon} alt="" class="w-4" />
+              <span>{copy.download_button_label}</span>
+            </span>
+          </Button>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

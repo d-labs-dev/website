@@ -9,6 +9,16 @@ export default defineConfig({
   site: "https://d-labs.com",
   output: "static",
 
+  // The current site is Jekyll, so every URL carries a .html extension:
+  // /about.html, /methods/adjektiv-assoziation.html, /en/blog/foo.html.
+  // Astro's default 'directory' format would emit /about/ instead and break
+  // every inbound link — including the absolute d-labs.com/methods/... links
+  // that editors have written inside Contentful bodies.
+  build: {
+    format: "file",
+  },
+  trailingSlash: "never",
+
   // Astro 7 defaults this to 'jsx', which strips whitespace between adjacent
   // inline elements (`<span>a</span><em>b</em>` -> "ab"). Several places in the
   // design depend on that space surviving — the footnote marker on the jobs
