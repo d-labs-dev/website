@@ -1,0 +1,109 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+  counterpartSlug: string | null;
+}
+
+const { entry, counterpartSlug } = Astro.props;
+const post = entry.data;
+const locale = post.locale as Locale;
+
+const copy = await getPageCopy("blog", locale);
+
+/**
+ * The old template formatted dates with Liquid's `%d. %m. %Y`, which is
+ * zero-padded numeric in both locales — "17. 12. 2018". Reproduced literally
+ * rather than localised, so the two locales keep rendering the same string.
+ */
+const dd = String(post.date.getUTCDate()).padStart(2, "0");
+const mm = String(post.date.getUTCMonth() + 1).padStart(2, "0");
+const formattedDate = `${dd}. ${mm}. ${post.date.getUTCFullYear()}`;
+
+const alternates = counterpartSlug
+  ? [{ locale: otherLocale(locale), url: entryUrl("blog", counterpartSlug, otherLocale(locale)) }]
+  : [];
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  image={post.heroImage ? contentfulImage(post.heroImage, { width: 1200 }) : undefined}
+  alternates={alternates}
+>
+  <article class="flex flex-col items-center px-6 py-16 pt-24">
+    <div class="flex w-full max-w-[40rem] flex-col gap-12">
+      <div class="flex flex-col gap-6">
+        <LeadLine>
+          <time datetime={post.date.toISOString().slice(0, 10)}>{formattedDate}</time>
+        </LeadLine>
+
+        <h1 class="font-heading tracking-heading text-xl">{post.title}</h1>
+
+        {
+          post.heroImage && (
+            <img
+              src={contentfulImage(post.heroImage, { width: 800 })}
+              alt={assetAlt(post.heroImage)}
+              width={800}
+              height={
+                post.heroImage.width && post.heroImage.height
+                  ? Math.round((800 * post.heroImage.height) / post.heroImage.width)
+                  : undefined
+              }
+              class="w-full"
+              loading="eager"
+            />
+          )
+        }
+
+        <div class="flex flex-col items-center">
+          <div class="flex w-full max-w-[30rem] flex-col gap-12">
+            <Markdown source={post.body} />
+
+            {
+              post.author && (
+                <div class="flex flex-col items-start gap-3">
+                  {post.author.image && (
+                    <img
+                      src={contentfulImage(post.author.image, {
+                        width: 100,
+                        height: 100,
+                        fit: "fill",
+                        focus: "faces",
+                      })}
+                      alt={post.author.image.title || post.author.name}
+                      width={100}
+                      height={100}
+                      class="h-24 w-24 rounded-full"
+                      loading="lazy"
+                    />
+                  )}
+                  <div class="flex flex-col">
+                    <div class="text-sm">
+                      {copy.by_author} {post.author.name}
+                    </div>
+                    <div class="text-sm font-bold">{post.author.title}</div>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col items-start pt-12">
+          <Button variant="text" color="black" href={pageUrl("blog", locale)}>
+            ←&nbsp;&nbsp;{copy.back_button_text}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

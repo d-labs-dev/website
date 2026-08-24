@@ -1,8 +1,30 @@
+# ── Astro (the new site, at the repo root) ────────────────────────────────────
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Jekyll (the current site, still here until cutover) ───────────────────────
 _site
 .sass-cache
 .jekyll-metadata
 .jekyll-cache
+# Contentful was dumped to disk by jekyll-contentful-data-import; the Astro
+# build fetches it at build time instead.
 _data/contentful/*.yaml
+
+# ── Both ─────────────────────────────────────────────────────────────────────
 .env
+.env.production
 
 .DS_Store
+.idea/

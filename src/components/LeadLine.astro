@@ -1,0 +1,60 @@
+---
+/**
+ * The small uppercase blue label with a rule running out to its left, used as a
+ * section eyebrow throughout the site (was `.lead-line` plus the
+ * `uppercase font-heading font-bold text-blue text-sm` cluster).
+ *
+ * The rule is a pseudo-element, so this is one of the few components that needs
+ * a scoped <style> rather than utilities alone.
+ */
+interface Props {
+  /** Renders as a heading when the label is the section's actual title. */
+  as?: "div" | "h2" | "h3" | "h4";
+  /** White on dark backgrounds. */
+  color?: "blue" | "white";
+  class?: string;
+}
+
+const { as: Tag = "div", color = "blue", class: className = "" } = Astro.props;
+
+const colorClass = color === "white" ? "text-white" : "text-dlabs-blue";
+---
+
+<Tag
+  class:list={[
+    "lead-line font-heading text-sm font-bold tracking-widest uppercase sm:text-xs",
+    colorClass,
+    className,
+  ]}
+>
+  <slot />
+</Tag>
+
+<style>
+  /* The rule sits to the left of the label, outside its box. `margin-left`
+     reserves the space it occupies so it doesn't overhang the container. */
+  .lead-line {
+    position: relative;
+    margin-left: 3em;
+  }
+
+  .lead-line::before {
+    content: "";
+    position: absolute;
+    top: 40%;
+    right: 100%;
+    left: -3em;
+    margin-right: 1em;
+    border-bottom: 1px solid;
+  }
+
+  @media (width >= 48rem) {
+    .lead-line {
+      margin-left: 6em;
+    }
+
+    .lead-line::before {
+      left: -6em;
+    }
+  }
+</style>
