@@ -42,7 +42,11 @@ export default defineConfig({
   build: {
     format: "preserve",
   },
-  trailingSlash: "never",
+  // "ignore", not "never": the index routes are served at /en/ and / with a
+  // trailing slash, which is what Jekyll did and what the internal links and
+  // canonicals use. With "never" the dev server 404s on /en/ — the English home
+  // page — even though the build emits en/index.html and S3 serves it fine.
+  trailingSlash: "ignore",
 
   // Astro 7 defaults this to 'jsx', which strips whitespace between adjacent
   // inline elements (`<span>a</span><em>b</em>` -> "ab"). Several places in the

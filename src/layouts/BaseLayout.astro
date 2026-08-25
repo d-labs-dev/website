@@ -51,7 +51,14 @@ const switcherUrl =
 
 const SITE_NAME = "D‑LABS GmbH";
 const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+/**
+ * Index routes canonicalise with a trailing slash — `/` and `/en/` — matching
+ * the current site. Astro reports their pathname without one, so a bare path
+ * with no .html extension gets the slash back.
+ */
+const path = Astro.url.pathname;
+const canonicalPath = path.endsWith("/") || path.endsWith(".html") ? path : `${path}/`;
+const canonical = new URL(canonicalPath, Astro.site);
 ---
 
 <!doctype html>
