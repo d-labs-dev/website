@@ -1,3 +1,8 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_title: Jobs
+seo_description: Du möchtest dich in unser kreatives, interdisziplinäres D-LABS-Team einbringen?
 title_text: Wer uns fehlt,<br/>**bist du!**
 intro_text:
   Du möchtest dich in unser kreatives, interdisziplinäres Team einbringen? Dann schau dir unsere

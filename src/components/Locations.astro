@@ -50,7 +50,9 @@ const offices = officesEntry?.data.offices ?? [];
                 <div>
                   {office.street}
                   <br />
-                  {office.zip}{" "}
+                  {/* One space, not `{" "}` plus a source newline — with
+                      compressHTML: true both survive and you get two. */}
+                  {`${office.zip} `}
                   <b class:list={[light ? "text-dlabs-blue" : "text-white"]}>{office.city}</b>
                 </div>
                 <div>

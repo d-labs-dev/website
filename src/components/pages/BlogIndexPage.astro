@@ -34,7 +34,12 @@ const [featured, ...rest] = posts;
 const alternates = [{ locale: otherLocale(locale), url: pageUrl("blog", otherLocale(locale)) }];
 ---
 
-<BaseLayout title="Blog" activeRef="blog" alternates={alternates}>
+<BaseLayout
+  title={copy.seo_title ?? "Blog"}
+  description={copy.seo_description}
+  activeRef="blog"
+  alternates={alternates}
+>
   <div class="flex flex-col items-center px-0 py-16 pt-24 sm:px-6">
     <div class="flex w-full max-w-[60rem] flex-col gap-16">
       {

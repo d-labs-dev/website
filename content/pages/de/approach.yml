@@ -1,3 +1,10 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_title: Arbeitsweise
+seo_description:
+  D-LABS arbeitet nach den Ansätzen und Methoden des Design Thinking und Human-Centered
+  Design.
 intro_lead: Wie wir arbeiten
 intro_text:
   " Die Arbeitsweise von D‑LABS orientiert sich an den Ansätzen und Methoden des **Design Thinking**

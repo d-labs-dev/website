@@ -36,8 +36,8 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("about", otherLo
 ---
 
 <BaseLayout
-  title={copy.intro_lead}
-  description={copy.intro_title}
+  title={copy.seo_title ?? copy.intro_lead}
+  description={copy.seo_description ?? copy.intro_title}
   activeRef="about"
   alternates={alternates}
 >

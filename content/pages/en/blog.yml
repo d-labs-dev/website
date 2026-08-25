@@ -1,3 +1,8 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_title: Blog
+seo_description: News about methods, D-LABS events and our projects.
 cta_learn_more: learn more
 back_button_text: back to the overview
 by_author: by

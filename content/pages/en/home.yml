@@ -1,3 +1,8 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_description: We are a consulting and design company that designs, optimizes and implements user-centric
+  digital products and services.
 hero_claim: Understand needs. Identify potentials. Set the right focus.<br/><b>magnifying potentials</b>
 screens:
 - title: We provide companies security to use the potential of digitalization for themselves quickly,

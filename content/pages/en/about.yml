@@ -1,3 +1,8 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_title: About us
+seo_description: D-LABS was founded in 2006 on the initiative of Hasso Plattner.
 intro_lead: About us
 intro_title: Humans are our main focus. For them, we create tangible added value.
 intro_text: " D-LABS is a consulting and design company which was founded on the initiative of Hasso Plattner\

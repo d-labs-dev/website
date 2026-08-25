@@ -24,6 +24,8 @@ interface Props {
   blueHeader?: boolean;
   /** Omit the header and footer (the styleguide). */
   bare?: boolean;
+  /** og:type. "article" for blog posts, as on the current site. */
+  ogType?: "website" | "article";
 }
 
 const {
@@ -35,9 +37,19 @@ const {
   activeRef,
   blueHeader = false,
   bare = false,
+  ogType = "website",
 } = Astro.props;
 
-const lang = resolveLocale(Astro.currentLocale);
+const locale = resolveLocale(Astro.currentLocale);
+
+/**
+ * The `lang` attribute uses the region-qualified tag the current site declares
+ * in its front matter — `de` and `en-US`. (Production also gets this wrong on
+ * most pages: the layout reads `page.lang`, but the pages set `locale`, so every
+ * German method, blog and job page claims `lang="en"`.)
+ */
+const HTML_LANG: Record<typeof locale, string> = { de: "de", en: "en-US" };
+const lang = HTML_LANG[locale];
 
 /**
  * The switcher points at this page's translation when one exists, and otherwise
@@ -46,11 +58,16 @@ const lang = resolveLocale(Astro.currentLocale);
  * without a translation passes an empty array.
  */
 const switcherUrl =
-  alternates.find((alt) => alt.locale === otherLocale(lang))?.url ??
-  pageUrl("index", otherLocale(lang));
+  alternates.find((alt) => alt.locale === otherLocale(locale))?.url ??
+  pageUrl("index", otherLocale(locale));
 
 const SITE_NAME = "D‑LABS GmbH";
-const pageTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+/** Contentful and YAML copy carries stray whitespace; meta tags should not. */
+const trimmed = (value?: string) => value?.replace(/\s+/g, " ").trim() || undefined;
+const metaTitle = trimmed(title);
+const metaDescription = trimmed(description);
+
+const pageTitle = metaTitle ? `${metaTitle} | ${SITE_NAME}` : SITE_NAME;
 /**
  * Index routes canonicalise with a trailing slash — `/` and `/en/` — matching
  * the current site. Astro reports their pathname without one, so a bare path
@@ -76,21 +93,21 @@ const canonical = new URL(canonicalPath, Astro.site);
     <Font cssVariable="--font-roboto" preload />
 
     <title>{pageTitle}</title>
-    {description && <meta name="description" content={description} />}
+    {metaDescription && <meta name="description" content={metaDescription} />}
     <link rel="canonical" href={canonical.href} />
     {
       alternates.map((alt) => (
         <link rel="alternate" hreflang={alt.locale} href={new URL(alt.url, Astro.site).href} />
       ))
     }
-    {alternates.length > 0 && <link rel="alternate" hreflang={lang} href={canonical.href} />}
+    {alternates.length > 0 && <link rel="alternate" hreflang={locale} href={canonical.href} />}
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
-    <meta property="og:title" content={title ?? SITE_NAME} />
-    {description && <meta property="og:description" content={description} />}
+    <meta property="og:locale" content={locale === "de" ? "de_DE" : "en_US"} />
+    <meta property="og:title" content={metaTitle ?? SITE_NAME} />
+    {metaDescription && <meta property="og:description" content={metaDescription} />}
     <meta property="og:url" content={canonical.href} />
     {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
     <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
@@ -100,7 +117,7 @@ const canonical = new URL(canonicalPath, Astro.site);
     {
       !bare && (
         <Header
-          locale={lang}
+          locale={locale}
           activeRef={activeRef}
           switcherUrl={switcherUrl}
           blueOnTop={blueHeader}
@@ -110,6 +127,6 @@ const canonical = new URL(canonicalPath, Astro.site);
     <main class="flex-auto" aria-label="Content">
       <slot />
     </main>
-    {!bare && <Footer locale={lang} activeRef={activeRef} />}
+    {!bare && <Footer locale={locale} activeRef={activeRef} />}
   </body>
 </html>

@@ -1,13 +1,15 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_title: Jobs
+seo_description: Would you like to join our creative, interdisciplinary D-LABS team?
 title_text: Who we are missing,<br/>**is you!**
-intro_text:
-  Would you like to join our creative, interdisciplinary team? Then take a look at our job offers
+intro_text: Would you like to join our creative, interdisciplinary team? Then take a look at our job offers
   for you and send us your contact details! The first step to a new job at D-LABS is taken quickly.
 list_title: We are looking for you
-initiative_text:
-  Your dream job isn’t listed? No problem. Just contact us anyway and show us how you could
+initiative_text: Your dream job isn’t listed? No problem. Just contact us anyway and show us how you could
   strengthen our team! We are always looking for new talents.
-inclusivity_text:
-  To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally
+inclusivity_text: To be a part of D-LABS means to be who you are! Therefore, our personal pronouns naturally
   apply to all gender identities.
 initiative_button_label: apply now
 apply_now_aria_label: Email jobs@d-labs.com
@@ -15,69 +17,60 @@ apply_now_target: mailto:jobs@d-labs.com
 inclusivity_aria_label: Statement on gender-inclusive language
 slider_title: Why D-LABS?
 slides:
-  - name: Peter
-    position: Senior User Researcher
-    quote:
-      Because we make the world a little more accessible every day. With our focus on end-user needs,
-      we create solutions that inspire our customers. This is where user experience is lived.
-    img: quotes/quote-peter.jpg
-  - name: Claudia
-    position: Director Digital Experience Design
-    quote:
-      The close cooperation with experts from different fields and with different focal points is always
-      exciting. The range of projects for well-known customers from a wide range of industries also ensures
-      that I can still learn something about them. Last but not least, my heart beats for Potsdam.
-    img: quotes/quote-claudia.jpg
-  - name: Doreen
-    position: Senior Digital Experience Designer
-    quote:
-      At D-LABS, I can work in such a way that I still have time for my family. At the same time, I
-      have the opportunity to work on demanding projects. This compatibility is very important to me because
-      here having a family does not mean having to give up anything in my professional development.
-    img: quotes/quote-doreen.jpg
-  - name: Hagen
-    position: Sales, Networking & New Business
-    quote:
-      Developing interesting ideas and projects within an agile framework, and creating digital solutions
-      with humans in mind – that's what D-LABS means to me.
-    img: quotes/quote-hagen.jpg
-  - name: Nina
-    position: Digital Experience Designer
-    quote:
-      We have a nose for what makes people tick and get things done. Why wait? We want to get to the
-      bottom of the users' needs and understand them in all their complexity.
-    img: quotes/quote-nina.jpg
+- name: Peter
+  position: Senior User Researcher
+  quote: Because we make the world a little more accessible every day. With our focus on end-user needs,
+    we create solutions that inspire our customers. This is where user experience is lived.
+  img: quotes/quote-peter.jpg
+- name: Claudia
+  position: Director Digital Experience Design
+  quote: The close cooperation with experts from different fields and with different focal points is always
+    exciting. The range of projects for well-known customers from a wide range of industries also ensures
+    that I can still learn something about them. Last but not least, my heart beats for Potsdam.
+  img: quotes/quote-claudia.jpg
+- name: Doreen
+  position: Senior Digital Experience Designer
+  quote: At D-LABS, I can work in such a way that I still have time for my family. At the same time, I
+    have the opportunity to work on demanding projects. This compatibility is very important to me because
+    here having a family does not mean having to give up anything in my professional development.
+  img: quotes/quote-doreen.jpg
+- name: Hagen
+  position: Sales, Networking & New Business
+  quote: Developing interesting ideas and projects within an agile framework, and creating digital solutions
+    with humans in mind – that's what D-LABS means to me.
+  img: quotes/quote-hagen.jpg
+- name: Nina
+  position: Digital Experience Designer
+  quote: We have a nose for what makes people tick and get things done. Why wait? We want to get to the
+    bottom of the users' needs and understand them in all their complexity.
+  img: quotes/quote-nina.jpg
 back_button_label: All job offers
 learn_more: Sounds exciting!
 benefits_title: Our benefits for you!
 benefits:
-  - label: Advanced Training
-    img: job-benefits/icon-qualification.svg
-    text:
-      "Whether it's professional coaching, learning a new language, expanding your expertise beyond
-      the boundaries of your discipline or adding books to our D-LABS library: D-LABS supports you in getting
-      where you want to go. Team sessions promote the transfer of knowledge between team members, while
-      costs are covered for external coaching."
-  - label: Flexibility
-    img: job-benefits/icon-flexible-time.svg
-    text:
-      "We live and love New Work. At D-LABS, you decide when and where you want to work. In-person or
-      at home, early bird or night owl – mix and match as you see fit! You may choose freely between our
-      offices… or is your preferred environment abroad? No problem: For a few months, you can work from
-      a country of your choice as well. That's true flexibility!"
-  - label: Company Culture
-    img: job-benefits/icon-teamevent.svg
-    text:
-      "An agile mindset requires being on equal footing with everyone you work with. That's why we
-      cultivate an easygoing and creative atmosphere across our teams and ensure every voice carries weight
-      and is heard. As exciting as our projects can be: We're all human at D-LABS. Aside from our team
-      meetings, we regularly organize events to come together and relax after a job well done."
-  - label: Family Friendliness
-    img: job-benefits/icon-family-friendliness.svg
-    text:
-      For some it's the kids, for others man's best friend – family is a crucial part of human experience.
-      For us at D-LABS, it's only natural to adjust working hours to your child's schedule, to make room
-      in your calendar for private appointments or take your family dog to the office.
+- label: Advanced Training
+  img: job-benefits/icon-qualification.svg
+  text: 'Whether it''s professional coaching, learning a new language, expanding your expertise beyond
+    the boundaries of your discipline or adding books to our D-LABS library: D-LABS supports you in getting
+    where you want to go. Team sessions promote the transfer of knowledge between team members, while
+    costs are covered for external coaching.'
+- label: Flexibility
+  img: job-benefits/icon-flexible-time.svg
+  text: 'We live and love New Work. At D-LABS, you decide when and where you want to work. In-person or
+    at home, early bird or night owl – mix and match as you see fit! You may choose freely between our
+    offices… or is your preferred environment abroad? No problem: For a few months, you can work from
+    a country of your choice as well. That''s true flexibility!'
+- label: Company Culture
+  img: job-benefits/icon-teamevent.svg
+  text: 'An agile mindset requires being on equal footing with everyone you work with. That''s why we
+    cultivate an easygoing and creative atmosphere across our teams and ensure every voice carries weight
+    and is heard. As exciting as our projects can be: We''re all human at D-LABS. Aside from our team
+    meetings, we regularly organize events to come together and relax after a job well done.'
+- label: Family Friendliness
+  img: job-benefits/icon-family-friendliness.svg
+  text: For some it's the kids, for others man's best friend – family is a crucial part of human experience.
+    For us at D-LABS, it's only natural to adjust working hours to your child's schedule, to make room
+    in your calendar for private appointments or take your family dog to the office.
 download_button_label: Download PDF
 profile_heading: Your profile
 tasks_heading: Your tasks

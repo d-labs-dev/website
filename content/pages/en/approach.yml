@@ -1,3 +1,9 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_title: Approach
+seo_description: The D-LABS working method is based on the approaches and methods of design thinking and
+  human-centered design.
 intro_lead: How we work
 intro_text: ' The D-LABS working method is based on the approaches and methods of **design thinking**
   and **human-centered design** and always focuses on the user. '

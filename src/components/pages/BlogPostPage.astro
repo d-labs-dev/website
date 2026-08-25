@@ -29,6 +29,7 @@ const alternates = counterpartSlug
   description={post.description}
   image={post.heroImage ? contentfulImage(post.heroImage, { width: 1200 }) : undefined}
   alternates={alternates}
+  ogType="article"
 >
   <article class="flex flex-col items-center px-6 py-16 pt-24">
     <div class="flex w-full max-w-[40rem] flex-col gap-12">

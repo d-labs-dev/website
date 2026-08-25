@@ -42,7 +42,12 @@ const screens = copy.screens as { title: string; text?: string; cta: string; cta
 const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLocale(locale)) }];
 ---
 
-<BaseLayout description={copy.hero_claim} blueHeader={true} alternates={alternates}>
+<BaseLayout
+  title={copy.seo_title}
+  description={copy.seo_description ?? copy.hero_claim}
+  blueHeader={true}
+  alternates={alternates}
+>
   <div class="relative" data-home-scroll>
     {/* Hero: claim over the angled blue field */}
     <div

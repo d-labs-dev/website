@@ -180,6 +180,16 @@ const pages = defineCollection({
   // .passthrough(). Page files carry a lot of copy that only their own page
   // uses; those keys are validated by the page components that read them.
   schema: z.looseObject({
+    /**
+     * Curated SEO values from the Jekyll page's front matter, which
+     * jekyll-seo-tag used for <title>, meta description and the og tags. They
+     * are deliberately different from the on-page copy — "Leistungen" rather
+     * than "Was wir machen" — so pages must prefer these over their own
+     * headings.
+     */
+    seo_title: z.string().optional(),
+    seo_description: z.string().optional(),
+
     // blog
     cta_learn_more: z.string().optional(),
     back_button_text: z.string().optional(),
