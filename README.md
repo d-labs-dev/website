@@ -15,6 +15,51 @@ custom Ruby Liquid plugins. The goal of the first pass is **design parity** — 
 content, same DE/EN split — on a stack that can be worked on. The cosmetic redesign lands after
 parity.
 
+## What's implemented
+
+**All pages are ported.** 240 routes build; 224 of the 225 URLs the old build published exist here
+with identical filenames (the exception is `/jobs/`, see the cutover checklist). Not yet verified
+against production beyond spot checks — see _Still to do_.
+
+| Page                              | DE  | EN  | Notes                                                                             |
+| --------------------------------- | :-: | :-: | --------------------------------------------------------------------------------- |
+| Home                              | ✅  | ✅  | Angled hero, circle diagram, 4 cross-fading screens, clients, blog + jobs teasers |
+| About                             | ✅  | ✅  | Office cards with photos                                                          |
+| Approach                          | ✅  | ✅  | Scroll-driven diagram, 7 captions, 3 project case studies                         |
+| Services                          | ✅  | ✅  | Scroll-driven scroller + method browser (filter and search over 56 methods)       |
+| Jobs                              | ✅  | ✅  | Photo hero, openings list, quote + benefits sliders                               |
+| Blog index                        | ✅  | ✅  | Feature + tile grid                                                               |
+| Partners                          | ✅  | ✅  |                                                                                   |
+| Imprint / Privacy / Accessibility | ✅  | ✅  | Markdown collection                                                               |
+| 404                               | ✅  |  —  | German only, as today                                                             |
+| Method pages                      | 56  | 56  | From Contentful                                                                   |
+| Blog posts                        | 52  | 47  | 5 have no English translation, as today                                           |
+| Job postings                      |  3  |  3  | From Contentful                                                                   |
+
+Header, footer, language switcher, cookie-free analytics story and click-to-load map are all in.
+`/styleguide` shows every primitive; `/styleguide/scroll` is a lab for the scroll engine.
+
+### Still to do
+
+Phase 5 of the migration plan — parity verification — is mostly outstanding:
+
+- [x] Route diff against the old build (scripted, 224/225)
+- [x] hreflang integrity (464/464 resolve)
+- [ ] Visual diff vs production at 375 / 768 / 1440 and ~1100px
+- [ ] `<head>` / SEO parity across all 240 pages
+- [ ] Link check: internal links, `mailto:`, the job posting PDF
+- [ ] Whitespace spot-check on the inline-adjacency cases (see `compressHTML` in astro.config.mjs)
+- [ ] Lighthouse + axe, one page per template type
+
+Then Phase 6, the cutover, is the checklist at the bottom of this file.
+
+Open questions for the team:
+
+- `search_placeholder` is missing from `content/pages/en/services.yml`, so the English method search
+  box has no placeholder. That gap exists on production too — fill it or keep it?
+- The approach page's contact block has no `our_locations`, so the link to the offices is omitted
+  there. Production renders an empty heading and a stray arrow instead.
+
 ## Running the Astro site
 
 ```bash
