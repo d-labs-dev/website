@@ -65,12 +65,12 @@ const nav = NAV_ITEMS.map((ref) => ({
     <div class="flex-auto"></div>
 
     <nav class="hidden flex-row items-baseline gap-16 md:flex" aria-label="Hauptnavigation">
-      <div class="flex flex-row items-baseline gap-12 lg:gap-12">
+      <div class="flex flex-row items-baseline gap-8 lg:gap-12">
         {
           nav.map((item) => (
             <a
               href={item.href}
-              class="nav-link text-xs"
+              class="nav-link text-xs font-bold"
               data-badge={item.isBadge ? "" : undefined}
               data-active={item.isActive ? "" : undefined}
               aria-current={item.isActive ? "page" : undefined}
@@ -118,7 +118,7 @@ const nav = NAV_ITEMS.map((ref) => ({
         nav.map((item) => (
           <a
             href={item.href}
-            class="nav-link text-base"
+            class="nav-link text-base font-bold"
             data-active={item.isActive ? "" : undefined}
             aria-current={item.isActive ? "page" : undefined}
           >

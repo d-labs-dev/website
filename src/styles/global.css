@@ -20,8 +20,8 @@
  * ---------------------------------------------------------------------------
  * Design tokens
  * ---------------------------------------------------------------------------
- * Values come from the Jekyll site's assets/css/_tokens.scss. Breakpoints are
- * deliberately absent: we use Tailwind's defaults (40rem/48rem/64rem/80rem).
+ * Values come from the Jekyll site's assets/css/_tokens.scss, breakpoints
+ * included — see the @theme block below.
  *
  * Porting reference — old atomic class -> Tailwind:
  *
@@ -51,12 +51,27 @@
  */
 @theme {
   /*
-   * Tailwind's defaults plus one extra step. The old design has a real 480px
-   * breakpoint (`q-sm`) that changes type size in three places — the services
-   * intro and the two jobs sliders — and without it those all render one step
-   * too small between 480 and 640.
+   * Breakpoints. Tailwind's names, the design's actual values.
+   *
+   * The plan started from Tailwind's defaults and accepted the resulting drift,
+   * but the drift is visible: at 1066px the nav gap was 3rem where the live site
+   * shows 2rem, because the old design switches at 1120px and Tailwind's `lg`
+   * is 1024. Setting the values to the design's own removes that whole class of
+   * difference — every `sm:`/`md:`/`lg:` in the codebase was ported from the
+   * corresponding `q-*` class, so they all become exact rather than approximate.
+   *
+   *   xs  30rem  480px   was q-sm  (<=30em)  — type-size steps only
+   *   sm  40rem  640px   was q-md  (<=40em)  — already Tailwind's default
+   *   md  50rem  800px   was q-lg  (<=50em)  — Tailwind's default is 768
+   *   lg  70rem  1120px  was q-xl  (<=70em)  — Tailwind's default is 1024
+   *
+   * Remember the inversion: the old classes were max-width, these are
+   * min-width, so `q-md-col` becomes `flex-col sm:flex-row`.
    */
   --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 50rem;
+  --breakpoint-lg: 70rem;
 
   /* Reset Tailwind's default type ladder so nothing off-scale is reachable. */
   --text-*: initial;
