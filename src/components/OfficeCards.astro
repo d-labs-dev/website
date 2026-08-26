@@ -35,7 +35,15 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
         <Markdown source={title} size="inherit" tone="on-dark" />
       </h2>
 
-      <div class="flex flex-col gap-12 lg:flex-row lg:gap-24">
+      {
+        /*
+        6rem in both states. The original is `row sp-8 q-xl-col`, and
+        `.q-xl-col.sp-8` only flips the axis — margin-right 0, margin-bottom
+        6rem — so the gap does not shrink when it stacks. (The responsive step
+        is on the wrapper above, which is `sp-8 q-xl-sp-6`.)
+      */
+      }
+      <div class="flex flex-col gap-24 lg:flex-row">
         <div class="flex flex-col gap-8">
           {/* Spacer aligning this column with the cards' text on wide screens. */}
           <div class="hidden h-40 lg:block"></div>
@@ -93,9 +101,14 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
 </div>
 
 <style>
+  /*
+   * `.link-light` in the original, which sets only colour — so these keep the
+   * browser's underline. Stated explicitly because Tailwind's preflight makes
+   * anchors inherit text-decoration, which resolves to none.
+   */
   .office-link {
     color: #fff;
-    text-decoration: none;
+    text-decoration: underline;
     transition-property: color;
   }
 

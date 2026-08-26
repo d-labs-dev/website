@@ -50,6 +50,24 @@ body {
   color: var(--color-black);
 }
 
+/*
+ * Headings are bold, as they are on the live site.
+ *
+ * Tailwind's preflight sets `font-weight: inherit` on h1-h6 so that headings
+ * carry no opinion; the old stylesheet never reset them, so they kept the
+ * browser default. Without this every heading on the site rendered regular
+ * where live is bold. Where a heading should be light — the about page's h1 —
+ * the markup says so with `font-normal`, exactly as the old markup did.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+
 img,
 svg {
   display: block;

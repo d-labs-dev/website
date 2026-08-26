@@ -31,7 +31,15 @@ const offices = officesEntry?.data.offices ?? [];
   <div class="flex w-full max-w-[60rem] flex-col gap-12 lg:gap-24">
     <h2 class="font-heading tracking-heading max-w-[40rem] text-xl">{copy.title}</h2>
 
-    <div class="flex flex-col gap-12 lg:flex-row lg:gap-24">
+    {
+      /*
+        6rem in both states. The original is `row sp-8 q-xl-col`, and
+        `.q-xl-col.sp-8` only flips the axis — margin-right 0, margin-bottom
+        6rem — so the gap does not shrink when it stacks. (The responsive step
+        is on the wrapper above, which is `sp-8 q-xl-sp-6`.)
+      */
+    }
+    <div class="flex flex-col gap-24 lg:flex-row">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col">
           <div>D‑LABS GmbH</div>
@@ -77,22 +85,30 @@ const offices = officesEntry?.data.offices ?? [];
 {withMap && <Map locale={locale} />}
 
 <style>
-  /* Was .link-blue / .link-light in the old stylesheet. */
+  /*
+   * Was `.link-blue` (light ground) and `.link-light` (blue ground). Only
+   * `.link-blue` sets `text-decoration: none` — `.link-light` does not, so on the
+   * blue block these links keep the browser's underline. That difference is
+   * deliberate in the original and was flattened here.
+   */
   .office-link {
-    text-decoration: none;
     transition-property: color;
   }
 
   .office-link.is-light {
     color: var(--color-dlabs-blue);
+    text-decoration: none;
   }
 
   .office-link.is-light:hover {
     color: var(--color-dlabs-dark-blue);
   }
 
+  /* `.link-light`: colour only, so the underline stays. Explicit because
+     Tailwind's preflight has anchors inherit text-decoration. */
   .office-link.is-dark {
     color: #fff;
+    text-decoration: underline;
   }
 
   .office-link.is-dark:hover {

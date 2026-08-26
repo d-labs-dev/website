@@ -133,25 +133,27 @@
 
 /*
  * The heading face carries its own line-height and letter-spacing, exactly as
- * the old `.font-heading` class did. Tailwind generates this class from the
- * --font-heading theme token as font-family only; these are the other two thirds
- * of the same design decision, so they belong on the same utility rather than
- * being repeated at every call site.
+ * the old `.font-heading` class did — Tailwind generates the class from the
+ * --font-heading token as font-family only, and these are the other two thirds
+ * of the same design decision.
+ *
+ * In the `base` layer deliberately, not `utilities`: a utility must be able to
+ * override it. `leading-none` on a button and `uppercase`'s 0.1em tracking both
+ * have to win, and they only do if this sits in a lower layer.
  */
-@layer utilities {
+@layer base {
   .font-heading {
     line-height: 1.3;
     letter-spacing: 0.02rem;
   }
+}
 
-  /*
-   * The design tracks all uppercase text at 0.1em — the old `.uppercase` class
-   * set text-transform *and* letter-spacing together, and it is declared after
-   * `.font-heading` so it wins where both apply. Tailwind's `uppercase` is
-   * transform-only, so without this every uppercase label on the site — lead
-   * lines, the "Hauptsitz" marker, section eyebrows — sat tighter than the live
-   * site. Declared second here for the same reason.
-   */
+/*
+ * The design tracks all uppercase text at 0.1em — the old `.uppercase` class set
+ * text-transform *and* letter-spacing together. Tailwind's is transform-only, so
+ * without this every uppercase label on the site sat tighter than live.
+ */
+@layer utilities {
   .uppercase {
     letter-spacing: 0.1em;
   }

@@ -51,7 +51,18 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLoc
 >
   {/* Hero */}
   <div class="relative flex min-h-screen flex-col items-center justify-center px-6 py-8 text-white">
-    <ImageFader images={heroImages} alt={heroAlt} class="absolute inset-0" />
+    {
+      /*
+      Inset below the header, not full-bleed. The original used `.inset-header`
+      — `top: 4.5rem; height: calc(100% - 4.5rem)` — so the photo starts under
+      the fixed bar instead of running behind it.
+    */
+    }
+    <ImageFader
+      images={heroImages}
+      alt={heroAlt}
+      class="absolute inset-x-0 top-[4.5rem] h-[calc(100%-4.5rem)]"
+    />
 
     <div
       class="font-heading tracking-heading relative z-3 w-full max-w-[60rem] text-xl sm:text-2xl md:text-3xl"

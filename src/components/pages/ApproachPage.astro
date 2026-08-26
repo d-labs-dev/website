@@ -5,6 +5,7 @@
  */
 import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
 import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
 import Contact from "@/components/Contact.astro";
@@ -84,9 +85,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
 
       <div class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black">
         <div class="flex flex-col items-center gap-4">
-          <a href="#n1" class="text-dlabs-blue text-xs font-bold tracking-widest uppercase">
-            {copy.intro_cta_text}
-          </a>
+          <Button variant="text" color="black" href="#n1">{copy.intro_cta_text}</Button>
           <a href="#n1" aria-hidden="true" tabindex="-1">
             <Image src={arrowDown} alt="" class="w-4" />
           </a>

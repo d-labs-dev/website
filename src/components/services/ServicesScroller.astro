@@ -8,6 +8,7 @@
  * spacer marker, so slide `i` is active at index `i + 1`.
  */
 import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
 import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
 import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
@@ -161,9 +162,7 @@ const OBJECT_POSITION: Record<string, string> = {
 
       <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 md:flex">
         <div class="pointer-events-auto flex flex-col items-center gap-4">
-          <a href="#list" class="text-dlabs-blue text-xs font-bold tracking-widest uppercase">
-            {listLinkText}
-          </a>
+          <Button variant="text" color="black" href="#list">{listLinkText}</Button>
           <a href="#list" aria-hidden="true" tabindex="-1">
             <Image src={arrowDown} alt="" class="w-4" />
           </a>

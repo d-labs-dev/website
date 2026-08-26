@@ -75,7 +75,14 @@ const year = new Date().getFullYear();
 <footer class="bg-dlabs-gray-100 flex flex-col items-center px-6 py-8">
   <div class="flex w-full max-w-[60rem] flex-col gap-12 md:gap-3">
     <div class="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
-      <div class="flex flex-row gap-3 md:basis-48">
+      {
+        /*
+        gap-4, not the 0.75rem the spacing class suggests: in the original each
+        icon sits in a `.button-text` anchor with 0.2rem padding and -0.2rem
+        margins, so the icons end up ~1rem apart rather than 0.75rem.
+      */
+      }
+      <div class="flex flex-row gap-4 md:basis-48">
         {
           socials.map((social) => (
             <a

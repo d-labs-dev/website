@@ -92,7 +92,7 @@ const nav = NAV_ITEMS.map((ref) => ({
 
       <a
         href={switcherUrl}
-        class="lang-link text-2xs font-bold uppercase"
+        class="lang-link text-2xs font-bold"
         title={LOCALE_NAMES[target]}
         hreflang={target}>{target}</a
       >
@@ -145,7 +145,7 @@ const nav = NAV_ITEMS.map((ref) => ({
 
     <a
       href={switcherUrl}
-      class="lang-link text-sm font-bold uppercase"
+      class="lang-link text-sm font-bold"
       title={LOCALE_NAMES[target]}
       hreflang={target}>{target}</a
     >
@@ -184,7 +184,14 @@ const nav = NAV_ITEMS.map((ref) => ({
     border-bottom-color: var(--color-dlabs-blue);
   }
 
+  /*
+   * Uppercased here rather than with the utility: the old
+   * `.lang-switcher-link` set text-transform in CSS and no letter-spacing, so
+   * it is one of the few uppercase things on the site that is *not* tracked at
+   * 0.1em. Using the utility would pick that tracking up.
+   */
   .lang-link {
+    text-transform: uppercase;
     color: var(--color-dlabs-blue);
     text-decoration: none;
     transition-property: color;
