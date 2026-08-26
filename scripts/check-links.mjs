@@ -17,16 +17,41 @@ const DIST = "dist";
 const CONCURRENCY = 16;
 
 /**
- * Known-broken links that are broken on production too, so a red run means a
- * *new* break rather than this backlog. All four are Contentful copy and the
- * approach page text pointing at methods that no longer exist; fixing them is a
- * content edit, not a code change.
+ * Links that are broken on production today, so a red run means a *new* break
+ * rather than this backlog. Every one is Contentful copy or approach page text
+ * pointing at a method page that no longer exists — a content edit, not a code
+ * change. Each was verified 404 on d-labs.com.
+ *
+ * See docs/content-backlog.md for the list with the pages that link them.
  */
 const KNOWN_BROKEN = new Set([
-  "/methods/qualitative_befragung.html",
-  "/methods/qualifying_coaches.html",
-  "/en/methods/qualitative_survey.html",
-  "/en/methods/qualifying_coaches.html",
+  "/en/methods/business_process_modeling/",
+  "/en/methods/online_training_creativity_techniques/",
+  "/en/methods/online_training_home_office/",
+  "/en/methods/online_training_micorosoft-365_teams/",
+  "/en/methods/online_training_user_research/",
+  "/en/methods/online_training_visualization_training/",
+  "/en/methods/qualifying_coaches/",
+  "/en/methods/qualitative_survey/",
+  "/en/methods/user_research/",
+  "/en/methods/visualization_training/",
+  "/en/services-and-methods/qualitative_survey/",
+  "/journal/fehlerquellen_im_user_research_-_teil_1/",
+  "/journal/von_interviews__fokusgruppen_und_co-creation_-_welche_methode_ist_die_richtige_/",
+  "/journal/wer_sind_lead_user_/",
+  "/leistungen-und-methoden/qualitative_befragung/",
+  "/methods/business_process_modelling_mit_greifbarem_material/",
+  "/methods/online_schulung_home_office/",
+  "/methods/online_schulung_kreativitatstechniken/",
+  "/methods/online_schulung_microsoft_365_teams/",
+  "/methods/online_schulung_use_research/",
+  "/methods/online_schulung_visualisierungstraining/",
+  "/methods/qualifying_coaches/",
+  "/methods/qualitative_befragung/",
+  "/methods/quantitative_umfragen/",
+  "/methods/scrum/",
+  "/methods/user_research/",
+  "/methods/visualisierungstraining/",
 ]);
 
 const TYPES = {

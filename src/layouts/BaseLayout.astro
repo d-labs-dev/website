@@ -69,13 +69,12 @@ const metaDescription = trimmed(description);
 
 const pageTitle = metaTitle ? `${metaTitle} | ${SITE_NAME}` : SITE_NAME;
 /**
- * Index routes canonicalise with a trailing slash — `/` and `/en/` — matching
- * the current site. Astro reports their pathname without one, so a bare path
- * with no .html extension gets the slash back.
+ * Every URL ends in a slash (`trailingSlash: "always"`). Astro reports the
+ * pathname without one for some routes, so normalise before building the
+ * canonical.
  */
 const path = Astro.url.pathname;
-const canonicalPath = path.endsWith("/") || path.endsWith(".html") ? path : `${path}/`;
-const canonical = new URL(canonicalPath, Astro.site);
+const canonical = new URL(path.endsWith("/") ? path : `${path}/`, Astro.site);
 ---
 
 <!doctype html>

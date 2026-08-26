@@ -8,21 +8,21 @@ screens:
 - title: We provide companies security to use the potential of digitalization for themselves quickly,
     purposefully and sustainably.
   cta: Who We Are
-  cta_target: /en/about.html
+  cta_target: /en/about/
 - title: How can the customer interface of a distribution system operator be designed in a uniform way?
   text: Forward-looking service concept for the realization of a uniform customer interface.
   cta: MORE ABOUT THE PROJECT
-  cta_target: /en/approach.html#project1
+  cta_target: /en/approach/#project1
 - title: How do you train the employees of a DAX Group to be fit for agile working in interdisciplinary
     teams?
   text: Building knowledge on agile work in the company and application in internal projects.
   cta: MORE ABOUT THE PROJECT
-  cta_target: /en/approach.html#project2
+  cta_target: /en/approach/#project2
 - title: How can visitors to an exhibition be digitally supported?
   text: Intuitively usable app for iOS and Android for visitor multimedia accompaniment and support during
     and after the exhibition visit.
   cta: MORE ABOUT THE PROJECT
-  cta_target: /en/approach.html#project3
+  cta_target: /en/approach/#project3
 clients_heading: Our Customers
 clients_show_more: See more
 clients_show_less: Show less

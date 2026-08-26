@@ -29,24 +29,17 @@ export default defineConfig({
   site: "https://d-labs.com",
   output: "static",
 
-  // The current site is Jekyll, so every URL carries a .html extension:
-  // /about.html, /methods/adjektiv-assoziation.html, /en/blog/foo.html.
-  // Astro's default 'directory' format would emit /about/ instead and break
-  // every inbound link — including the absolute d-labs.com/methods/... links
-  // that editors have written inside Contentful bodies.
-  //
-  // "preserve" rather than "file": with "file", an index page inside a
-  // subdirectory is flattened, so src/pages/en/index.astro emitted en.html and
-  // /en/ — the English home page — 404'd. "preserve" mirrors src/pages exactly,
-  // which is what Jekyll did.
+  // Astro's own URL shape: /about/ and /methods/personas/, each emitted as
+  // <route>/index.html. The Jekyll site served /about.html, and the old
+  // .html URLs are kept alive by redirects rather than by shaping the new site
+  // around them — see redirects.json in the build output and the cutover notes
+  // in README.md.
   build: {
-    format: "preserve",
+    format: "directory",
   },
-  // "ignore", not "never": the index routes are served at /en/ and / with a
-  // trailing slash, which is what Jekyll did and what the internal links and
-  // canonicals use. With "never" the dev server 404s on /en/ — the English home
-  // page — even though the build emits en/index.html and S3 serves it fine.
-  trailingSlash: "ignore",
+  // Every URL ends in a slash, and internal links are written that way, so
+  // visitors never take a redirect hop to reach the canonical form.
+  trailingSlash: "always",
 
   // Astro 7 defaults this to 'jsx', which strips whitespace between adjacent
   // inline elements (`<span>a</span><em>b</em>` -> "ab"). Several places in the

@@ -1,4 +1,5 @@
 import { Marked } from "marked";
+import { normalizeInternalLinks } from "./internal-links";
 
 /**
  * Renderer for markdown that arrives as a *string* from Contentful (method,
@@ -15,10 +16,17 @@ const marked = new Marked({
   breaks: true,
 });
 
-/** Render a markdown string to an HTML string. */
+/**
+ * Render a markdown string to an HTML string.
+ *
+ * Own-site `.html` links in the copy are rewritten to the current URL shape —
+ * see lib/internal-links.ts. Editors have years of
+ * `https://d-labs.com/methods/x.html` in Contentful and should not have to
+ * revisit it.
+ */
 export function renderMarkdown(source: string | null | undefined): string {
   if (!source) return "";
-  return marked.parse(source, { async: false });
+  return normalizeInternalLinks(marked.parse(source, { async: false }));
 }
 
 /**
@@ -28,5 +36,5 @@ export function renderMarkdown(source: string | null | undefined): string {
  */
 export function renderMarkdownInline(source: string | null | undefined): string {
   if (!source) return "";
-  return marked.parseInline(source, { async: false });
+  return normalizeInternalLinks(marked.parseInline(source, { async: false }));
 }

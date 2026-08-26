@@ -55,12 +55,12 @@ projects:
   - Increasing transparency for all stakeholders
   approaches:
   - Extensive analysis of internal and external service processes, e.g. with the help of [qualitative
-    interviews](/en/methods/qualitative_survey.html) with representatives of the various target groups,
+    interviews](/en/methods/qualitative_survey/) with representatives of the various target groups,
     as well as workshops with process experts from different departments
-  - Development of [personas](/en/methods/personas.html) and mapping of the IS situation in [customer
-    journey maps](/en/methods/customer_journey_maps.html)
+  - Development of [personas](/en/methods/personas/) and mapping of the IS situation in [customer
+    journey maps](/en/methods/customer_journey_maps/)
   - Co-creative development of a mission statement for a unified customer interface, elaboration of a
-    customer-centric service design concept and illustration in [service blueprints](/en/methods/service_blueprint.html)
+    customer-centric service design concept and illustration in [service blueprints](/en/methods/service_blueprint/)
   results:
   - Forward-thinking service concept for the realization of a uniform customer interface, e.g. with the
     help of an online self-service portal for the various customer groups
@@ -82,7 +82,7 @@ projects:
   - Getting to know implementation strategies
   - Building knowledge about agile work in companies as well as planning projects and workshops
   approaches:
-  - '[Introduction to design thinking](/en/methods/qualifying_coaches.html): Getting to know the entire
+  - '[Introduction to design thinking](/en/methods/qualifying_coaches/): Getting to know the entire
     design thinking process using a generic challenge'
   - 'Deepening and coaching: Processing an internal challenge, whereby the participants acted as coaches
     themselves'
@@ -110,8 +110,8 @@ projects:
   approaches:
   - Definition of an MVP (Minimum Viable Product) together with the customer based on existing research
     results
-  - Deliver [co-creative workshops](/en/methods/co-creation.html) with the customer and iterative development
-    of concept and design based on [prototypes](/en/methods/evolutionary_prototyping.html)
+  - Deliver [co-creative workshops](/en/methods/co-creation/) with the customer and iterative development
+    of concept and design based on [prototypes](/en/methods/evolutionary_prototyping/)
   - Agile implementation of the MVP and its expansion
   results:
   - Intuitively usable app for iOS and Android for visitor multimedia accompaniment and support during

@@ -89,15 +89,37 @@ pnpm dev            # localhost:4321
 `/styleguide` renders every primitive on one page — check design-system changes there first. It is
 `noindex` and unlinked.
 
-> **If a page 404s in `pnpm dev`, restart the dev server.** Astro 7's dev server fails to register
-> newly added route files, logging `Failed to update routes via HMR: TypeError: undefined is not a
-function` and serving 404 for pages the production build has. Changes to `astro.config.mjs` also
+function`and serving 404 for pages the production build has. Changes to`astro.config.mjs` also
+
 > need a restart. `pnpm verify` tests the real build and is the source of truth.
 
 > **If a page 404s in `pnpm dev`, restart the dev server.** Astro 7 fails to register newly added
 > route files, logging `Failed to update routes via HMR` and serving 404 for pages the production
 > build has. Changes to `astro.config.mjs` also need a restart. `pnpm verify` tests the real build
 > and is the source of truth.
+
+## URLs
+
+Astro's own shape: `/about/`, `/methods/personas/`, `/en/blog/microcopy/` — each emitted as
+`<route>/index.html`, every link written with the trailing slash so nothing takes a redirect hop.
+
+The Jekyll site served `/about.html`. Those URLs are kept alive rather than shaping the new site
+around them:
+
+- **Links in CMS copy are rewritten at render time.** Years of
+  `https://d-labs.com/methods/x.html` in Contentful become `/methods/x/` in the output, so they
+  point at the canonical URL with no redirect and work on preview too. Editors can keep writing
+  either form. See `src/lib/internal-links.ts`.
+- **Inbound links need one edge rule.** `pnpm redirects` writes `dist/legacy-redirects.json`,
+  the full old → new map (240 entries, every URL the old build published bar `/404.html`). The
+  mapping is mechanical, so a single CloudFront Function covers all of it:
+
+  ```
+  if (uri.endsWith(".html")) return 301 to uri.slice(0, -5) + "/"
+  ```
+
+  The JSON exists to prove that rule is right and to catch anything it would miss. Adding it is a
+  cutover step; until then old links 404 on the preview bucket, which is expected.
 
 Read [`docs/astro.md`](docs/astro.md) before porting a page. It carries the old-atomic-class →
 Tailwind mapping and a list of things that look wrong but aren't.
@@ -127,11 +149,8 @@ CONTENTFUL_ACCESS_TOKEN=…
    `_site/`. Everything else — the branch-conditional S3 sync, the CloudFront invalidation,
    `preview.d-labs.com` for non-master — stays as it is.
 3. Move `assets/app-live-release.apk` (46 MB) to S3 directly rather than carrying it over.
-4. Add a CloudFront redirect for `/jobs/` → `/jobs.html`. The Jekyll site has a `jobs/index.html`
-   from 2022 (`ref: old_jobs`) serving the jobs page at both URLs. Reproducing it as a page collides
-   with `jobs.astro` over the same route — and two URLs for one page is duplicate content anyway —
-   so the alias belongs at the edge as a 301. It is the only URL the old build published that this
-   one does not.
+4. Add the CloudFront Function that 301s `*.html` to its trailing-slash form (see **URLs** above).
+   That one rule covers all 240 legacy URLs, including the 2022 `/jobs/` alias.
 
 Until then CircleCI on this branch still builds the Jekyll site, which is intentional: the branch
 changes nothing about what deploys.

@@ -14,7 +14,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check:links": "node scripts/check-links.mjs",
-    "verify": "astro build && node scripts/check-links.mjs"
+    "verify": "astro build && node scripts/legacy-redirects.mjs && node scripts/check-links.mjs",
+    "redirects": "node scripts/legacy-redirects.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

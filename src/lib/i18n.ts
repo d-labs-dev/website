@@ -37,16 +37,10 @@ export function localePrefix(locale: Locale): string {
 }
 
 /**
- * URL of a top-level page.
- *
- * The current site is Jekyll, so these carry a .html extension — /about.html,
- * /en/services.html. The home page is the one exception: `/` and `/en/`.
- */
-/**
- * Page refs whose URL slug differs from the ref itself. The old site addressed
- * pages by a `ref` in their front matter, and every ref matches its filename
- * except this one — the footer links to `privacy`, which lives at
- * privacy-policy.html.
+ * Page refs whose URL segment differs from the ref itself. The old site
+ * addressed pages by a `ref` in their front matter, and every ref matches its
+ * route except this one — the footer links to `privacy`, served at
+ * /privacy-policy/.
  */
 const REF_TO_SLUG: Record<string, string> = {
   privacy: "privacy-policy",
@@ -58,17 +52,22 @@ export const NAV_ITEMS = ["about", "approach", "services", "blog", "jobs"] as co
 /** Footer links, in order. Labels from content/shared/<locale>/footer.yml. */
 export const FOOTER_ITEMS = ["privacy", "imprint", "accessibility", "partners"] as const;
 
+/**
+ * URL of a top-level page: `/about/`, `/en/services/`, and `/` or `/en/` for
+ * the home pages. Trailing slashes throughout, matching
+ * `trailingSlash: "always"`, so no internal link costs a redirect hop.
+ */
 export function pageUrl(ref: string, locale: Locale): string {
   const prefix = localePrefix(locale);
   if (ref === "index" || ref === "home" || ref === "") {
-    return prefix === "" ? "/" : `${prefix}/`;
+    return `${prefix}/`;
   }
-  return `${prefix}/${REF_TO_SLUG[ref] ?? ref}.html`;
+  return `${prefix}/${REF_TO_SLUG[ref] ?? ref}/`;
 }
 
-/** URL of a Contentful-backed entry page, e.g. /en/methods/adjektiv-assoziation.html */
+/** URL of a Contentful-backed entry page, e.g. /en/methods/adjective-association/ */
 export function entryUrl(section: Section, slug: string, locale: Locale): string {
-  return `${localePrefix(locale)}/${section}/${slug}.html`;
+  return `${localePrefix(locale)}/${section}/${slug}/`;
 }
 
 /** Language names for the switcher's `title`, matching the old plugin. */
