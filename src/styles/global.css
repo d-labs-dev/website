@@ -73,25 +73,26 @@
   --breakpoint-md: 50rem;
   --breakpoint-lg: 70rem;
 
-  /* Reset Tailwind's default type ladder so nothing off-scale is reachable. */
+  /*
+   * Reset Tailwind's default type ladder so nothing off-scale is reachable.
+   *
+   * Deliberately font-size only, no per-step line-height — the old `.text-*`
+   * classes set font-size and nothing else, so line-height came from `body`
+   * (1.5) or from `.font-heading` (1.3) when a heading face was in play.
+   * Attaching a line-height to each step meant `font-heading` could never apply
+   * its 1.3, which is why headings and lead lines sat differently to the live
+   * site. Use a `leading-*` utility where a specific value is wanted.
+   */
   --text-*: initial;
 
   --text-2xs: 0.7rem;
-  --text-2xs--line-height: 1.5;
   --text-xs: 0.8rem;
-  --text-xs--line-height: 1.5;
   --text-sm: 0.9rem;
-  --text-sm--line-height: 1.5;
   --text-base: 1rem;
-  --text-base--line-height: 1.5;
   --text-lg: 1.2rem;
-  --text-lg--line-height: 1.3;
   --text-xl: 1.8rem;
-  --text-xl--line-height: 1.3;
   --text-2xl: 2.4rem;
-  --text-2xl--line-height: 1.3;
   --text-3xl: 3.6rem;
-  --text-3xl--line-height: 1.3;
 
   /* Brand palette. Note --color-black is overridden: the design has no true
      #000, so `text-black` resolves to the D-LABS ink colour throughout. */
@@ -128,6 +129,32 @@
   --default-transition-timing-function: ease-out;
 
   --tracking-heading: 0.02rem;
+}
+
+/*
+ * The heading face carries its own line-height and letter-spacing, exactly as
+ * the old `.font-heading` class did. Tailwind generates this class from the
+ * --font-heading theme token as font-family only; these are the other two thirds
+ * of the same design decision, so they belong on the same utility rather than
+ * being repeated at every call site.
+ */
+@layer utilities {
+  .font-heading {
+    line-height: 1.3;
+    letter-spacing: 0.02rem;
+  }
+
+  /*
+   * The design tracks all uppercase text at 0.1em — the old `.uppercase` class
+   * set text-transform *and* letter-spacing together, and it is declared after
+   * `.font-heading` so it wins where both apply. Tailwind's `uppercase` is
+   * transform-only, so without this every uppercase label on the site — lead
+   * lines, the "Hauptsitz" marker, section eyebrows — sat tighter than the live
+   * site. Declared second here for the same reason.
+   */
+  .uppercase {
+    letter-spacing: 0.1em;
+  }
 }
 
 /*

@@ -2,6 +2,17 @@
 /**
  * Site footer: social links, legal/partner nav, and the association logos.
  *
+ * Layout notes, because the original's proportions are not obvious from the
+ * markup and were wrong here on the first pass:
+ *
+ *  - the outer columns (socials, memberships) are `flex-basis: 12em` above
+ *    800px, which is what keeps the legal links optically centred rather than
+ *    merely space-between
+ *  - each legal link is `min-width: 6em` and centred, so they sit on an even
+ *    rhythm regardless of word length
+ *  - the memberships column is left-aligned with a 4rem left inset on desktop,
+ *    not right-aligned
+ *
  * The old footer also carried a cookie-consent bar. It is gone: with no
  * analytics the site sets no cookies, so there is nothing to consent to.
  */
@@ -63,8 +74,8 @@ const year = new Date().getFullYear();
 
 <footer class="bg-dlabs-gray-100 flex flex-col items-center px-6 py-8">
   <div class="flex w-full max-w-[60rem] flex-col gap-12 md:gap-3">
-    <div class="flex flex-col items-center gap-8 md:flex-row md:gap-4">
-      <div class="flex flex-1 flex-row gap-3">
+    <div class="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
+      <div class="flex flex-row gap-3 md:basis-48">
         {
           socials.map((social) => (
             <a
@@ -79,8 +90,17 @@ const year = new Date().getFullYear();
         }
       </div>
 
+      {
+        /*
+        Always a row, wrapping if it must. The old markup's legal group was a
+        plain `.row` with no column variant, so it stays horizontal on mobile —
+        stacking it here was wrong. Centred on mobile because the parent column
+        centres its children; flush left on desktop, where the 12em outer
+        columns do the centring.
+      */
+      }
       <nav
-        class="flex flex-1 flex-col items-center gap-3 md:flex-row md:justify-center md:gap-12"
+        class="flex flex-1 flex-row flex-wrap items-center justify-center gap-4 md:justify-start md:gap-12"
         aria-label="Rechtliches"
       >
         {
@@ -96,7 +116,7 @@ const year = new Date().getFullYear();
         }
       </nav>
 
-      <div class="flex flex-1 flex-col gap-3 md:items-end">
+      <div class="flex flex-col gap-3 md:basis-48 md:pl-16">
         <div class="text-2xs font-bold">{labels.member_of}</div>
         {
           memberships.map((m) => (
@@ -122,11 +142,25 @@ const year = new Date().getFullYear();
 <style>
   .footer-link {
     color: var(--color-black);
+    font-weight: bold;
     text-decoration: none;
     transition-property: color;
   }
 
   .footer-link:hover {
     color: var(--color-dlabs-blue);
+  }
+
+  /*
+   * Above 800px each link gets an even footprint, as the old rule did. No
+   * padding: the original template asked for 10px in an inline style, but that
+   * attribute also contained CSS comments and the parser dropped it — live
+   * computes 0. Matching what ships, not what was intended.
+   */
+  @media (width >= 50rem) {
+    .footer-link {
+      min-width: 6em;
+      text-align: center;
+    }
   }
 </style>

@@ -64,7 +64,16 @@ const nav = NAV_ITEMS.map((ref) => ({
 
     <div class="flex-auto"></div>
 
-    <nav class="hidden flex-row items-baseline gap-16 md:flex" aria-label="Hauptnavigation">
+    {
+      /*
+      `md:mr-4` reproduces a quirk of the old layout that is nonetheless the
+      live site's geometry: the shell used a spacing helper that put a 1rem
+      right margin on every child except the last, and the last child is the
+      hidden burger button — so the desktop nav sits 1rem short of the container
+      edge while the logo is flush to it.
+    */
+    }
+    <nav class="hidden flex-row items-baseline gap-16 md:mr-4 md:flex" aria-label="Hauptnavigation">
       <div class="flex flex-row items-baseline gap-8 lg:gap-12">
         {
           nav.map((item) => (
@@ -97,7 +106,11 @@ const nav = NAV_ITEMS.map((ref) => ({
         aria-controls="mobile-nav"
         aria-expanded="false"
       >
-        <Image src={menuIcon} alt="Menü öffnen" class="w-4" />
+        {
+          /* No size class: the icons are intrinsically 24x24 and the old markup's
+            `h-2` matched no rule, so live renders them at that size. */
+        }
+        <Image src={menuIcon} alt="Menü öffnen" />
       </button>
     </div>
   </div>
@@ -107,7 +120,7 @@ const nav = NAV_ITEMS.map((ref) => ({
   <div class="relative flex h-full w-full flex-col items-center px-8 py-6">
     <div class="absolute top-6 right-6">
       <button type="button" class="cursor-pointer" data-menu-close aria-label="Menü schließen">
-        <Image src={closeIcon} alt="" class="w-3" />
+        <Image src={closeIcon} alt="" />
       </button>
     </div>
 
