@@ -50,6 +50,14 @@
  *   `non-interactive` -> `pointer-events-none`, `fill-parent` -> `flex-1`.
  */
 @theme {
+  /*
+   * Tailwind's defaults plus one extra step. The old design has a real 480px
+   * breakpoint (`q-sm`) that changes type size in three places — the services
+   * intro and the two jobs sliders — and without it those all render one step
+   * too small between 480 and 640.
+   */
+  --breakpoint-xs: 30rem;
+
   /* Reset Tailwind's default type ladder so nothing off-scale is reachable. */
   --text-*: initial;
 

@@ -10,6 +10,7 @@
  */
 import { Image } from "astro:assets";
 import Button from "@/components/Button.astro";
+import arrowUpRight from "@/assets/images/icons/icon-arrow-right-up.svg";
 import { pageUrl, type Locale } from "@/lib/i18n";
 
 export interface ContactDetails {
@@ -103,9 +104,11 @@ if (!avatar) {
         href={`${pageUrl("about", locale)}#locations`}
         class:list={["locations-link w-full max-w-[60rem]", light ? "is-light" : "is-dark"]}
       >
-        <h2 class="font-heading tracking-heading max-w-[30rem] text-xl">
-          {contact.our_locations}
-          <span aria-hidden="true">↗</span>
+        <h2 class="font-heading tracking-heading flex max-w-[30rem] items-center gap-3 text-xl">
+          <span>{contact.our_locations}</span>
+          {/* The icon, as on the current site — not a text arrow, which would
+              otherwise end up inside the heading's text. */}
+          <Image src={arrowUpRight} alt="" class="w-4 shrink-0" />
         </h2>
       </a>
     )

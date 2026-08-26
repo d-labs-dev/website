@@ -41,13 +41,17 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
  * interpolated into a class name, because Tailwind only generates classes it can
  * see as literal text.
  */
-const CIRCLE_COLOURS: Record<string, string> = {
-  blue: "bg-dlabs-blue",
-  yellow: "bg-dlabs-yellow",
-  darkBlue: "bg-dlabs-dark-blue",
-  red: "bg-dlabs-red",
-  green: "bg-dlabs-green",
-  purple: "bg-dlabs-purple",
+/**
+ * Each dot needs both a border and a matching fill: at rest it is a small solid
+ * dot, and as a ring the fill is dropped and the border shows.
+ */
+const DOT_COLOURS: Record<string, string> = {
+  blue: "border-dlabs-blue bg-dlabs-blue",
+  yellow: "border-dlabs-yellow bg-dlabs-yellow",
+  darkBlue: "border-dlabs-dark-blue bg-dlabs-dark-blue",
+  red: "border-dlabs-red bg-dlabs-red",
+  green: "border-dlabs-green bg-dlabs-green",
+  purple: "border-dlabs-purple bg-dlabs-purple",
 };
 
 const OBJECT_POSITION: Record<string, string> = {
@@ -69,7 +73,7 @@ const OBJECT_POSITION: Record<string, string> = {
         <div class="relative flex flex-col justify-center gap-2 pb-4 md:flex-row md:gap-4">
           {/* The blue dot that sits behind the row until a slide takes over. */}
           <div class="absolute inset-0 flex flex-col items-center">
-            <div class="bg-dlabs-blue h-3 w-3 rounded-full" data-scroller-home-dot></div>
+            <div class="service-dot border-dlabs-blue bg-dlabs-blue" data-scroller-home-dot></div>
           </div>
 
           {
@@ -79,12 +83,9 @@ const OBJECT_POSITION: Record<string, string> = {
                 class="pointer-events-auto flex flex-1 flex-row items-start gap-2 text-left"
                 data-scroller-indicator={i}
               >
-                <div class="w-4 shrink-0">
+                <div class="w-5 shrink-0">
                   <div
-                    class:list={[
-                      "h-3 w-3 rounded-full opacity-0",
-                      CIRCLE_COLOURS[slide.color] ?? "bg-dlabs-blue",
-                    ]}
+                    class:list={["service-dot", DOT_COLOURS[slide.color] ?? DOT_COLOURS.blue]}
                     data-scroller-dot
                   />
                 </div>
@@ -183,6 +184,34 @@ const OBJECT_POSITION: Record<string, string> = {
 </div>
 
 <style>
+  /*
+   * Two states, from the old `.service-circle`:
+   *  - at rest a small filled dot (scale 0.33, background = its border colour)
+   *  - as a ring when it is the active field, or during the entrance animation
+   * The transition durations are the original's: 0.25s colour and scale,
+   * 0.5s movement.
+   */
+  .service-dot {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border-width: 4px;
+    border-style: solid;
+    transform: scale(0.33);
+    opacity: 0;
+    transition-property: background-color, transform, translate, opacity;
+    transition-duration: 0.25s, 0.25s, 0.5s, 0.5s;
+  }
+
+  /* `!important` because the fill is a Tailwind bg-* utility on the same
+     element, and this needs to beat it without depending on source order. */
+  .service-dot[data-ring],
+  [data-active] .service-dot {
+    background-color: transparent !important;
+    transform: scale(1);
+  }
+
   .scroller-arrow {
     cursor: pointer;
     border: none;

@@ -45,11 +45,20 @@ Phase 5 of the migration plan — parity verification — is mostly outstanding:
 
 - [x] Route diff against the old build (scripted, 224/225)
 - [x] hreflang integrity (464/464 resolve)
-- [ ] Visual diff vs production at 375 / 768 / 1440 and ~1100px
-- [ ] `<head>` / SEO parity across all 240 pages
-- [ ] Link check: internal links, `mailto:`, the job posting PDF
-- [ ] Whitespace spot-check on the inline-adjacency cases (see `compressHTML` in astro.config.mjs)
-- [ ] Lighthouse + axe, one page per template type
+- [x] `<head>` / SEO parity — 0 tags present on live but absent here
+- [x] Link check — 6613 links, 0 broken anchors, 4 broken internal links that are broken on
+      production too (Contentful copy pointing at deleted methods, listed below)
+- [x] Whitespace spot-check on the inline-adjacency cases
+- [x] Heading-structure comparison — identical on services, blog and about
+- [~] Visual diff — done at 500 / 768 / 1100 / 1440 for the main pages. Chrome enforces a ~500px
+  minimum window width, so a true 375px check needs a real device or Playwright
+- [ ] Lighthouse + axe. A static a11y scan found no regressions: the pages without an `h1`
+      (approach, services, jobs, blog) have none on production either
+
+Broken links in Contentful copy — content fixes, not code, and 404 on production today:
+`/methods/qualitative_befragung.html`, `/methods/qualifying_coaches.html`,
+`/en/methods/qualitative_survey.html`, `/en/methods/qualifying_coaches.html`. They appear in the
+"Methoden im Fokus: Shadowing" post and in the approach page copy.
 
 Then Phase 6, the cutover, is the checklist at the bottom of this file.
 
