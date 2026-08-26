@@ -12,7 +12,9 @@
     "astro": "astro",
     "typecheck": "astro check",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check:links": "node scripts/check-links.mjs",
+    "verify": "astro build && node scripts/check-links.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

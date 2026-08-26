@@ -76,16 +76,28 @@ pnpm install
 pnpm dev            # localhost:4321
 ```
 
-| Command          | Does                                                                                            |
-| ---------------- | ----------------------------------------------------------------------------------------------- |
-| `pnpm dev`       | Dev server. `pnpm astro dev --background` to detach, then `astro dev stop` / `status` / `logs`. |
-| `pnpm build`     | Static build to `dist/`.                                                                        |
-| `pnpm preview`   | Serve `dist/` locally.                                                                          |
-| `pnpm typecheck` | `astro check`.                                                                                  |
-| `pnpm format`    | Prettier over the repo.                                                                         |
+| Command            | Does                                                                                                                                                            |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`         | Dev server. `pnpm astro dev --background` to detach, then `astro dev stop` / `status` / `logs`.                                                                 |
+| `pnpm build`       | Static build to `dist/`.                                                                                                                                        |
+| `pnpm preview`     | Serve `dist/` locally.                                                                                                                                          |
+| `pnpm typecheck`   | `astro check`.                                                                                                                                                  |
+| `pnpm check:links` | Crawl `dist/` and request every internal link; non-zero exit if any is not 200. Pass a URL to check a running server: `pnpm check:links http://localhost:4321`. |
+| `pnpm verify`      | `build` then `check:links`. Run this before handing anything over.                                                                                              |
+| `pnpm format`      | Prettier over the repo.                                                                                                                                         |
 
 `/styleguide` renders every primitive on one page — check design-system changes there first. It is
 `noindex` and unlinked.
+
+> **If a page 404s in `pnpm dev`, restart the dev server.** Astro 7's dev server fails to register
+> newly added route files, logging `Failed to update routes via HMR: TypeError: undefined is not a
+function` and serving 404 for pages the production build has. Changes to `astro.config.mjs` also
+> need a restart. `pnpm verify` tests the real build and is the source of truth.
+
+> **If a page 404s in `pnpm dev`, restart the dev server.** Astro 7 fails to register newly added
+> route files, logging `Failed to update routes via HMR` and serving 404 for pages the production
+> build has. Changes to `astro.config.mjs` also need a restart. `pnpm verify` tests the real build
+> and is the source of truth.
 
 Read [`docs/astro.md`](docs/astro.md) before porting a page. It carries the old-atomic-class →
 Tailwind mapping and a list of things that look wrong but aren't.
