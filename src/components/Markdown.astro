@@ -27,6 +27,14 @@ interface Props {
   inline?: boolean;
   /** Use on a dark background (the blue panels). */
   tone?: "default" | "on-dark";
+  /**
+   * The block is set in the heading face. Puts `font-heading` on the prose
+   * element itself, which both applies the face and — via
+   * `.prose:not(.font-heading)` — keeps its 1.3 line-height instead of the 1.6
+   * body measure. The original did this by having `.markdown` and
+   * `.font-heading` on the same element.
+   */
+  heading?: boolean;
   class?: string;
 }
 
@@ -35,6 +43,7 @@ const {
   size = "base",
   inline = false,
   tone = "default",
+  heading = false,
   class: className = "",
 } = Astro.props;
 
@@ -70,7 +79,9 @@ const onDark = {
  */
 const sizeClass = size === "sm" ? "text-sm" : size === "base" ? "text-base" : "[font-size:inherit]";
 
-const classes = ["prose", sizeClass, "max-w-none", className].filter(Boolean).join(" ");
+const classes = ["prose", heading ? "font-heading" : "", sizeClass, "max-w-none", className]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 {

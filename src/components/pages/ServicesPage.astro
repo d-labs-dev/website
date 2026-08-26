@@ -36,14 +36,25 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", othe
   activeRef="services"
   alternates={alternates}
 >
-  {/* Intro */}
+  {
+    /*
+    Intro. The old classes are `minheight-75vh pt-8` with `q-md-height-screen
+    q-md-pt-4` — and `q-md` is *max*-width 640, so the full-height, tight-padding
+    variant is the mobile one. They were applied at md: here, i.e. inverted.
+  */
+  }
   <div
-    class="relative flex min-h-[75vh] flex-col items-center justify-center px-6 pt-24 md:min-h-screen md:pt-12"
+    class="relative flex h-screen flex-col items-center justify-center px-6 pt-6 sm:h-auto sm:min-h-[75vh] sm:pt-24"
   >
-    <div class="flex w-full max-w-[60rem] flex-col gap-6 pb-12">
+    {
+      /* No pb here: the old services intro is `maxwidth-7 width-full col sp-4`
+        with no bottom padding, unlike the approach page's, which has pb-6. With
+        justify-center a 3rem pad lifts the block ~28px off live's position. */
+    }
+    <div class="flex w-full max-w-[60rem] flex-col gap-6">
       <LeadLine>{copy.intro_lead}</LeadLine>
       <div class="font-heading tracking-heading xs:text-xl text-lg sm:text-2xl">
-        <Markdown source={copy.intro_text} size="inherit" />
+        <Markdown source={copy.intro_text} size="inherit" heading />
       </div>
     </div>
 

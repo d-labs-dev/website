@@ -67,7 +67,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLoc
     <div
       class="font-heading tracking-heading relative z-3 w-full max-w-[60rem] text-xl sm:text-2xl md:text-3xl"
     >
-      <Markdown source={copy.title_text} size="inherit" tone="on-dark" />
+      <Markdown source={copy.title_text} size="inherit" tone="on-dark" heading />
     </div>
 
     {/* The white wedge the hero sits on, as on the current site. */}
@@ -91,7 +91,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLoc
   {/* Openings */}
   <div id="list" class="flex flex-col items-center gap-24 px-6 py-24">
     <div class="font-heading tracking-heading w-full max-w-[40rem] text-lg sm:text-xl">
-      <Markdown source={copy.intro_text} size="inherit" />
+      <Markdown source={copy.intro_text} size="inherit" heading />
     </div>
 
     <div class="flex w-full flex-col items-center gap-12">
