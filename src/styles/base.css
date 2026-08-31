@@ -75,6 +75,31 @@ svg {
 }
 
 /*
+ * One transition timing for the whole site, inherited.
+ *
+ * The current site sets `transition-duration: 0.15s` on `html` and has every
+ * element inherit it, so a component only ever declares which properties it
+ * animates. Reproducing that here matters: our components were written the same
+ * way — `transition-property: color` and nothing else — and without an inherited
+ * duration that resolves to `0s`, so every hover on the site changed instantly
+ * instead of easing. Invisible to layout measurement, obvious in use.
+ *
+ * Tailwind's own `transition-*` utilities set their own duration and override
+ * this where they are used, and the reduced-motion block below still wins.
+ */
+html {
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+*,
+*::before,
+*::after {
+  transition-duration: inherit;
+  transition-timing-function: inherit;
+}
+
+/*
  * Form controls keep the browser's `line-height: normal`.
  *
  * Tailwind's preflight gives them `font: inherit`, and the `font` shorthand

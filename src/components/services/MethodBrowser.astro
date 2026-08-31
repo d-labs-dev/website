@@ -8,11 +8,17 @@
  * built client-side.
  */
 import type { CollectionEntry } from "astro:content";
-import { Image } from "astro:assets";
 import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
-import searchIcon from "@/assets/images/icons/icon-search.svg";
-import caretDown from "@/assets/images/icons/icon-caret-down.svg";
+/*
+ * Imported as components, not through <Image>: the original inlines these marks
+ * with `fill: currentColor`, so they take the button's colour and change with it
+ * on hover. An <img> cannot inherit `color`, which is why the magnifier stayed
+ * black. Astro's SVG components need `fill-current` and explicit `inline` /
+ * `align-baseline`, because preflight makes svg a block.
+ */
+import SearchIcon from "@/assets/images/icons/icon-search.svg";
+import CaretDown from "@/assets/images/icons/icon-caret-down.svg";
 import { contentfulImage, assetAlt } from "@/lib/contentful-image";
 import { entryUrl, type Locale } from "@/lib/i18n";
 
@@ -123,7 +129,7 @@ const TILE_HEIGHT = 300;
             data-search-close
             aria-label={locale === "de" ? "Suche schließen" : "Close search"}
           >
-            <Image src={searchIcon} alt="" class="inline w-6 align-baseline" />
+            <SearchIcon class="inline h-6 w-6 fill-current align-baseline" aria-hidden="true" />
           </button>
         </div>
 
@@ -132,7 +138,7 @@ const TILE_HEIGHT = 300;
             <button type="button" class="toolbar-button flex-auto" data-filter-toggle>
               <span class="flex flex-row items-center px-3 py-2">
                 <span data-filter-label>{copy.filter_button_label}</span>
-                <Image src={caretDown} alt="" class="w-4" />
+                <CaretDown class="inline h-4 w-4 fill-current align-baseline" aria-hidden="true" />
               </span>
             </button>
           </div>
@@ -149,7 +155,7 @@ const TILE_HEIGHT = 300;
               700px, against 33 for a flex-wrapped 1rem icon.
             */
             }
-            <Image src={searchIcon} alt="" class="inline w-6 align-baseline" />
+            <SearchIcon class="inline h-6 w-6 fill-current align-baseline" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -268,10 +274,18 @@ const TILE_HEIGHT = 300;
     outline: none;
   }
 
+  /* `.button-text`: black, blue on hover and focus, like every other one. */
   .search-close {
     border: none;
     background: none;
     cursor: pointer;
+    color: var(--color-black);
+    transition-property: color;
+  }
+
+  .search-close:hover,
+  .search-close:focus {
+    color: var(--color-dlabs-blue);
   }
 
   /* `.button-ghost.is-mini`: a 2px grey outline with a slightly bottom-light pad. */
@@ -286,12 +300,18 @@ const TILE_HEIGHT = 300;
     font-weight: bold;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition-property: border-color, color;
+    color: var(--color-black);
+    transition-property: background-color, color, border-color;
   }
 
-  .toolbar-button:hover {
-    border-color: var(--color-dlabs-blue);
-    color: var(--color-dlabs-blue);
+  /*
+   * `.button-ghost:hover, :focus { background-color: $black; color: $white }` —
+   * it fills in rather than turning blue, and the grey border is left alone.
+   */
+  .toolbar-button:hover,
+  .toolbar-button:focus {
+    background-color: var(--color-black);
+    color: #fff;
   }
 
   /*
@@ -344,14 +364,10 @@ const TILE_HEIGHT = 300;
     transform: scale(1);
   }
 
+  /* `.reset-link`, which has no hover state on the current site. */
   .tile-link {
     color: inherit;
     text-decoration: none;
-    transition-property: color;
-  }
-
-  .tile-link:hover {
-    color: var(--color-dlabs-blue);
   }
 </style>
 
