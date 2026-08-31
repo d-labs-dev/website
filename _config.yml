@@ -50,6 +50,26 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  # The Astro site, which lives alongside this one until the cutover.
+  #
+  # Two reasons it has to be excluded, not just ignored. Jekyll parses the `---`
+  # fences in every `.astro` file as YAML front matter and dies on the first one,
+  # which is why the build fails; and anything it does not fail on it *copies*
+  # into _site, so a green build would publish our sources to the S3 bucket.
+  #
+  # Dotfiles (.astro/, .prettierignore) need no entry: Jekyll skips them already.
+  - AGENTS.md
+  - CLAUDE.md
+  - astro.config.mjs
+  - content
+  - dist
+  - docs
+  - package.json
+  - pnpm-lock.yaml
+  - public
+  - scripts
+  - src
+  - tsconfig.json
 
 contentful:
   spaces:
