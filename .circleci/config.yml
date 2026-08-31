@@ -59,8 +59,16 @@ jobs:
       - checkout
       - run:
           name: enable pnpm
+          # `corepack enable` writes its shims into /usr/local/bin, which the
+          # `circleci` user cannot touch — the first run died on
+          # `EACCES: unlink '/usr/local/bin/pnpm'`. cimg images give that user
+          # passwordless sudo, which is the documented way round it; the fallback
+          # installs the shims under $HOME instead, for an image that does not.
           command: |
-            corepack enable
+            sudo corepack enable || corepack enable --install-directory "$HOME/.local/bin"
+            echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$BASH_ENV"
+            source "$BASH_ENV"
+            pnpm --version
             pnpm config set store-dir ~/.pnpm-store
       - restore_cache:
           key: pnpm-v1-{{ checksum "pnpm-lock.yaml" }}-{{ arch }}
