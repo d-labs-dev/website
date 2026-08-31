@@ -14,6 +14,8 @@ export function setupClientGrid(): void {
   const rest = root.querySelector<HTMLElement>("[data-client-rest]");
   if (!toggle || !rest) return;
 
+  const label = toggle.querySelector<HTMLElement>("[data-client-label]") ?? toggle;
+  const caret = toggle.querySelector<HTMLElement>("[data-client-caret]");
   const labelMore = toggle.dataset.labelMore ?? "";
   const labelLess = toggle.dataset.labelLess ?? "";
 
@@ -21,7 +23,8 @@ export function setupClientGrid(): void {
 
   toggle.addEventListener("click", () => {
     const expanded = rest.classList.toggle("hidden") === false;
-    toggle.textContent = expanded ? labelLess : labelMore;
+    label.textContent = expanded ? labelLess : labelMore;
+    caret?.classList.toggle("rotate-180", expanded);
     toggle.setAttribute("aria-expanded", String(expanded));
   });
 }

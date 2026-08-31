@@ -55,23 +55,30 @@ const DOT_COLOURS: Record<string, string> = {
   purple: "border-dlabs-purple bg-dlabs-purple",
 };
 
+/**
+ * Only meaningful below 640px, where the slide image has a fixed 6rem height and
+ * so gets cropped; above that its height is auto and nothing is cut off. `top`
+ * is 6% down rather than flush, as in the original.
+ */
 const OBJECT_POSITION: Record<string, string> = {
   center: "object-center",
-  top: "object-top",
+  top: "object-[50%_6%]",
   bottom: "object-bottom",
 };
 ---
 
 <div class="relative" id="overview" data-services-scroller>
   {/* Leading spacer, so the first slide animates in rather than starting put. */}
-  <div class="h-1" data-keyframe-marker></div>
+  <div class="h-2" data-keyframe-marker></div>
 
   <div class="pointer-events-none absolute inset-0">
     <div class="sticky top-0 flex min-h-screen flex-col items-center">
-      <div class="flex w-full max-w-[60rem] flex-col gap-6 px-6 pt-24" id="services-top">
-        <LeadLine class="opacity-0" data-scroller-lead>{title}</LeadLine>
+      <div class="flex w-full max-w-[60rem] flex-col gap-6 px-6 pt-20 sm:pt-24" id="services-top">
+        <LeadLine class="opacity-0 transition-opacity duration-500 ease-out" data-scroller-lead>
+          {title}
+        </LeadLine>
 
-        <div class="relative flex flex-col justify-center gap-2 pb-4 md:flex-row md:gap-4">
+        <div class="relative flex flex-col justify-center gap-2 pb-4 sm:flex-row sm:gap-4">
           {/* The blue dot that sits behind the row until a slide takes over. */}
           <div class="absolute inset-0 flex flex-col items-center">
             <div class="service-dot border-dlabs-blue bg-dlabs-blue" data-scroller-home-dot></div>
@@ -81,16 +88,19 @@ const OBJECT_POSITION: Record<string, string> = {
             slides.map((slide, i) => (
               <button
                 type="button"
-                class="pointer-events-auto flex flex-1 flex-row items-start gap-2 text-left"
+                class="pointer-events-auto flex flex-auto flex-row items-start gap-2 text-left"
                 data-scroller-indicator={i}
               >
-                <div class="w-5 shrink-0">
+                <div class="w-6 shrink-0">
                   <div
                     class:list={["service-dot", DOT_COLOURS[slide.color] ?? DOT_COLOURS.blue]}
                     data-scroller-dot
                   />
                 </div>
-                <div class="text-xs opacity-0" data-scroller-label>
+                <div
+                  class="text-sm opacity-0 transition-opacity duration-500 ease-out"
+                  data-scroller-label
+                >
                   {slide.name}
                 </div>
               </button>
@@ -107,25 +117,25 @@ const OBJECT_POSITION: Record<string, string> = {
               if (!image) throw new Error(`Service slide image not found: ${slide.img}`);
               return (
                 <div class="w-full shrink-0 px-6">
-                  <div class="flex flex-col items-center gap-6 md:flex-row md:items-start">
+                  <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
                     {/*
                       Eager, not lazy: the slides sit side by side inside the track,
                       so the ones off to the right never intersect the viewport and
                       would pop in mid-animation rather than being ready. Five
                       images, and they are this section's actual content.
                     */}
-                    <div class="w-full shrink-0 md:w-1/3">
+                    <div class="w-full shrink-0 sm:w-1/3">
                       <Image
                         src={image}
                         alt=""
                         class:list={[
-                          "h-32 w-full object-cover md:h-auto",
+                          "h-24 w-full object-cover sm:h-auto",
                           OBJECT_POSITION[slide["img-position"] ?? "center"],
                         ]}
                         loading="eager"
                       />
                     </div>
-                    <div class="pointer-events-auto px-6 text-xs md:text-base">
+                    <div class="pointer-events-auto px-6 text-xs sm:text-base">
                       <Markdown source={slide.text} size="inherit" />
                     </div>
                   </div>
@@ -160,7 +170,7 @@ const OBJECT_POSITION: Record<string, string> = {
 
       <div class="flex-auto" style="flex-grow: 2"></div>
 
-      <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 md:flex">
+      <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 sm:flex">
         <div class="pointer-events-auto flex flex-col items-center gap-4">
           <Button variant="text" color="black" href="#list">{listLinkText}</Button>
           <a href="#list" aria-hidden="true" tabindex="-1">

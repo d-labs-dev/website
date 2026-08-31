@@ -31,9 +31,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "@astrojs/markdown-satteri": "^0.3.8",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
+    "satteri": "^0.10.5",
     "typescript": "^6.0.3"
   }
 }

@@ -85,7 +85,8 @@ export function setupMethodBrowser(): void {
       apply();
 
       // On mobile the panel is a disclosure; collapse it once a choice is made.
-      if (filterPanel && window.innerWidth < 768) {
+      // 800px is the `md` breakpoint, where the panel stops being collapsible.
+      if (filterPanel && window.innerWidth < 800) {
         filterPanel.classList.add("hidden");
         filterToggle?.setAttribute("aria-expanded", "false");
       }

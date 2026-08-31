@@ -50,10 +50,10 @@ const offices = officesEntry?.data.offices ?? [];
         </div>
       </div>
 
-      <div class="flex flex-1 flex-col gap-16 md:flex-row md:gap-4">
+      <div class="flex flex-auto flex-col gap-16 md:flex-row md:gap-4">
         {
           offices.map((office) => (
-            <div class="flex flex-1 flex-col gap-3 md:gap-8">
+            <div class="flex flex-auto flex-col gap-3 md:gap-8">
               <div class="flex flex-col gap-6">
                 <div>
                   {office.street}

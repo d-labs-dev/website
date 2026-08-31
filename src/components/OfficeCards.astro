@@ -53,13 +53,13 @@ const photos = import.meta.glob<{ default: ImageMetadata }>(
           </div>
         </div>
 
-        <div class="flex flex-1 flex-col gap-16 md:flex-row md:gap-4">
+        <div class="flex flex-auto flex-col gap-16 md:flex-row md:gap-4">
           {
             offices.map((office) => {
               const photo = photos[`/src/assets/images/${office.image}`]?.default;
               if (!photo) throw new Error(`Office photo not found: ${office.image}`);
               return (
-                <div class="flex flex-1 flex-col gap-3 md:gap-8">
+                <div class="flex flex-auto flex-col gap-3 md:gap-8">
                   <div class="flex flex-col items-start pb-6 md:pb-0">
                     <Image
                       src={photo}

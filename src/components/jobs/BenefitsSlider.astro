@@ -40,15 +40,21 @@ const icons = import.meta.glob<{ default: ImageMetadata }>(
         return (
           <div class="flex flex-col items-center gap-3 px-8 sm:flex-row sm:gap-8">
             <div class="shrink-0 py-4">
-              <div class="border-dlabs-gray-200 flex h-40 w-40 items-center justify-center rounded-full border">
-                <Image src={icon} alt="" class="h-20 w-20" loading="lazy" />
-              </div>
+              {/*
+                The icon art *is* the 10rem disc — `rounded-full width-10
+                height-10` on the image itself. It was in a bordered ring here at
+                half size, which is neither what the file draws nor what live shows.
+              */}
+              <Image src={icon} alt="" class="h-40 w-40 rounded-full" loading="lazy" />
             </div>
 
-            <div class="flex flex-col gap-4">
-              <div class="font-heading text-base xs:text-lg sm:text-xl">
-                <Markdown source={benefit.text} inline />
-              </div>
+            {/*
+              `pb-4` stands in for the original's trailing empty `row sp-1 text-sm`
+              div, which contributes nothing but a 1rem gap under the text — and
+              with it 20px of carousel height, since the tallest slide sets it.
+            */}
+            <div class="font-heading text-base pb-4 xs:text-lg sm:text-xl">
+              <Markdown source={benefit.text} inline />
             </div>
           </div>
         );

@@ -3,30 +3,33 @@
 #
 # `padding` replaces the per-logo {% case partner.name %} block in the old
 # template, which switched Tailwind-ish padding classes on the partner's *name*.
+# Written mobile-first: the old classes were desktop-first, because `q-lg-*` is a
+# max-width query at 800px, so the bare class is the wide value and the prefixed
+# one the narrow.
 # Keying layout off a display string breaks the moment a name is edited, so the
 # value lives with the partner instead.
 partners:
   - name: Automotive BerlinBrandenburg
     logo: partners/logo_automotive-ber.svg
     link: https://www.ac-bb.de/
-    padding: "pr-16 md:px-4"
+    padding: "px-4 md:pr-16 md:pl-0"
   - name: GERMAN UPA
     logo: partners/logo_german-upa.svg
     link: https://germanupa.de/
-    padding: "px-8 md:px-4"
+    padding: "px-4 md:px-8"
   - name: hpi
     logo: partners/logo_hpi.svg
     link: https://hpi.de/
-    padding: "pr-3 pl-16 md:pr-8 md:pl-4"
+    padding: "pr-8 pl-4 md:pr-3 md:pl-16"
   - name: hpi dschool
     logo: partners/logo_hpi_dschool.svg
     link: https://hpi.de/school-of-design-thinking.html
-    padding: "pr-16 md:px-4"
+    padding: "px-4 md:pr-16 md:pl-0"
   - name: Silicon Sanssouci
     logo: partners/logo_sisa.svg
     link: https://www.silicon-sanssouci.org/
-    padding: "px-12 md:pr-8 md:pl-3"
+    padding: "pr-8 pl-3 md:px-12"
   - name: medianet
     logo: partners/logo_medianet.svg
     link: https://www.medianet-bb.de
-    padding: "pl-16 md:px-4"
+    padding: "px-4 md:pr-0 md:pl-16"

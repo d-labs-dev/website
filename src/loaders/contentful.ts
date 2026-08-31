@@ -41,6 +41,13 @@ const PAGE_SIZE = 100;
  *
  * `include: 2` resolves linked entries and assets two levels deep, which covers
  * blogPost -> author (person) -> image and method -> domains.
+ *
+ * `order: "sys.createdAt"` is load-bearing. The CDA's default order is
+ * `-sys.updatedAt`, which reshuffles every time an editor saves an entry; the
+ * old Jekyll importer dumped entries in creation order, and the live method
+ * list still renders in that order. Verified: the first six titles under
+ * `sys.createdAt` match _data/contentful/de.yaml and d-labs.com exactly, while
+ * the default order does not.
  */
 async function fetchAll(contentType: string, locale: Locale): Promise<Record<string, any>[]> {
   const out: Record<string, any>[] = [];
@@ -53,6 +60,7 @@ async function fetchAll(contentType: string, locale: Locale): Promise<Record<str
       include: 2,
       limit: PAGE_SIZE,
       skip,
+      order: ["sys.createdAt"],
     });
 
     out.push(...(res.items as unknown as Record<string, any>[]));
@@ -121,6 +129,7 @@ export function contentfulLoader<T extends { slug?: string }>(
       for (const locale of LOCALES) {
         stats[locale] = { stored: 0, skipped: 0 };
         const entries = await fetchAll(contentType, locale);
+        let order = 0;
 
         for (const entry of entries) {
           const mapped = map(entry, locale);
@@ -149,7 +158,10 @@ export function contentfulLoader<T extends { slug?: string }>(
           }
 
           const id = `${locale}/${slug}`;
-          const data = await parseData({ id, data: { ...mapped, slug, locale } });
+          // `order` carries Contentful's creation order through to the pages.
+          // getCollection() returns entries sorted by id (i.e. alphabetically by
+          // slug), so anything that lists entries has to sort on this instead.
+          const data = await parseData({ id, data: { ...mapped, slug, locale, order: order++ } });
           store.set({ id, data, digest: generateDigest(data) });
           stats[locale].stored++;
         }

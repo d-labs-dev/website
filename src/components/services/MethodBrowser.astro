@@ -47,13 +47,17 @@ if (unmatched.length > 0 && knownDomains.size > 0) {
   );
 }
 
-const CIRCLE_COLOURS: Record<string, string> = {
-  blue: "bg-dlabs-blue",
-  yellow: "bg-dlabs-yellow",
-  darkBlue: "bg-dlabs-dark-blue",
-  red: "bg-dlabs-red",
-  green: "bg-dlabs-green",
-  purple: "bg-dlabs-purple",
+/**
+ * The filter dot takes one colour for both its border and its fill, so it is a
+ * custom property rather than a `bg-*` utility. See the `.filter-dot` rule.
+ */
+const DOT_COLOURS: Record<string, string> = {
+  blue: "var(--color-dlabs-blue)",
+  yellow: "var(--color-dlabs-yellow)",
+  darkBlue: "var(--color-dlabs-dark-blue)",
+  red: "var(--color-dlabs-red)",
+  green: "var(--color-dlabs-green)",
+  purple: "var(--color-dlabs-purple)",
 };
 
 const TILE_WIDTH = 400;
@@ -61,28 +65,54 @@ const TILE_HEIGHT = 300;
 ---
 
 <div class="flex flex-col items-center px-6 pb-16" id="list" data-method-browser>
-  <div class="flex w-full max-w-[60rem] flex-col gap-3 md:gap-12">
-    {/* Sticky toolbar */}
-    <div class="sticky top-24 z-2 flex flex-col gap-1 bg-white pt-24 pb-2 md:gap-6">
-      <div class="flex flex-col items-stretch gap-3 md:flex-row md:items-end">
+  <div class="flex w-full max-w-[60rem] flex-col gap-3 sm:gap-12">
+    {
+      /*
+      Sticky toolbar. `top-0`, not an offset below the header: the old `.sticky`
+      class bundled `top: 0`, so on the live site the toolbar pins to the very
+      top of the viewport and passes under the header.
+
+      Padding-top is 5rem below 640px and 6rem above (`pt-8 q-md-pt-7-5`).
+    */
+    }
+    <div class="sticky top-0 z-2 flex flex-col bg-white pt-20 pb-3 sm:pt-24">
+      {
+        /*
+        The gap under this row is a margin, not the parent's `gap`: below 800px the
+        filter panel is `display: none`, and a flex gap collapses around a
+        non-rendered item while the original's `col sp-4` margin-bottom does not —
+        which left the toolbar 25px short of live at those widths.
+      */
+      }
+      <div class="mb-2 flex flex-col items-stretch gap-3 sm:mb-6 sm:flex-row sm:items-end">
         <LeadLine as="h2">{copy.services_title}</LeadLine>
 
-        <div class="hidden flex-auto md:block"></div>
+        <div class="hidden flex-auto sm:block"></div>
 
         <div class="relative hidden" data-search-field style="margin-bottom: 0.3rem">
           <input
             type="search"
-            class="search-input w-full md:w-auto"
+            class="search-input w-full sm:w-auto"
             placeholder={copy.search_placeholder}
             aria-label={copy.search_placeholder ?? copy.services_title}
             data-search-input
           />
+          {
+            /*
+            Decorative, as on the live site, where the same mark sits in a
+            `type="search"` button that submits nothing — search runs on input.
+            A span rather than a button, so there is no control that does nothing.
+          */
+          }
+          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center">
+            <Image src={searchIcon} alt="" class="w-4" />
+          </span>
         </div>
 
         <div class="flex flex-row gap-3">
-          <div class="flex flex-1 flex-col md:hidden">
-            <button type="button" class="toolbar-button flex-1" data-filter-toggle>
-              <span class="flex flex-row items-center gap-2 px-3 py-1">
+          <div class="flex flex-auto flex-col md:hidden">
+            <button type="button" class="toolbar-button flex-auto" data-filter-toggle>
+              <span class="flex flex-row items-center gap-2 px-3 py-2">
                 <span data-filter-label>{copy.filter_button_label}</span>
                 <Image src={caretDown} alt="" class="w-3" />
               </span>
@@ -94,17 +124,24 @@ const TILE_HEIGHT = 300;
             data-search-toggle
             aria-label={copy.search_placeholder ?? "Search"}
           >
-            <span class="flex px-2 py-1"><Image src={searchIcon} alt="" class="w-4" /></span>
+            {
+              /*
+              No wrapper: the original inlines the SVG as the button's only child,
+              so the button's height comes from the icon's line box — 45px at
+              700px, against 33 for a flex-wrapped 1rem icon.
+            */
+            }
+            <Image src={searchIcon} alt="" class="inline-block w-6" />
           </button>
         </div>
       </div>
 
-      <div class="hidden pt-4 pb-2 md:block" data-filter-panel>
-        <div class="flex flex-col items-start justify-center gap-3 md:flex-row md:gap-4">
+      <div class="hidden pt-4 pb-3 sm:pt-0 md:block" data-filter-panel>
+        <div class="flex flex-col items-start justify-center gap-4 md:flex-row">
           <button type="button" class="filter" data-filter="" data-active>
             <span class="flex flex-row items-start gap-2">
-              <span class="w-3 shrink-0"
-                ><span class="bg-dlabs-blue block h-3 w-3 rounded-full"></span></span
+              <span class="h-4 w-4 shrink-0"
+                ><span class="filter-dot" style={`--dot: ${DOT_COLOURS.blue}`}></span></span
               >
               <span class="text-xs">{copy.services_all_button}</span>
             </span>
@@ -114,12 +151,10 @@ const TILE_HEIGHT = 300;
             domains.map((domain) => (
               <button type="button" class="filter" data-filter={domain.name}>
                 <span class="flex flex-row items-start gap-2">
-                  <span class="w-3 shrink-0">
+                  <span class="h-4 w-4 shrink-0">
                     <span
-                      class:list={[
-                        "block h-3 w-3 rounded-full",
-                        CIRCLE_COLOURS[domain.color] ?? "bg-dlabs-blue",
-                      ]}
+                      class="filter-dot"
+                      style={`--dot: ${DOT_COLOURS[domain.color] ?? DOT_COLOURS.blue}`}
                     />
                   </span>
                   <span class="text-xs">{domain.name}</span>
@@ -131,8 +166,14 @@ const TILE_HEIGHT = 300;
       </div>
     </div>
 
-    {/* Tiles */}
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-12">
+    {
+      /*
+      1-up below 480px, 2-up below 800px, 3-up above — and 3rem gutters at every
+      width. The old `q-sm-width-full` is a *max*-width query at 30em, so it maps
+      to `xs:`, and `grid sp-6` had no responsive variant (`q-lg-4` matches no rule).
+    */
+    }
+    <div class="xs:grid-cols-2 grid grid-cols-1 gap-12 md:grid-cols-3">
       {
         methods.map((method) => (
           <div
@@ -163,7 +204,7 @@ const TILE_HEIGHT = 300;
             </a>
             <div class="flex flex-col gap-4">
               <a href={entryUrl("methods", method.data.slug, locale)} class="tile-link">
-                <h3 class="text-base font-bold" data-search-text>
+                <h3 class="text-base leading-[1.3] font-bold" data-search-text>
                   {method.data.title}
                 </h3>
               </a>
@@ -185,18 +226,27 @@ const TILE_HEIGHT = 300;
 <style>
   .search-input {
     border: none;
-    border-bottom: 2px solid var(--color-dlabs-gray-200);
-    padding: 0.25rem 2rem 0.15rem 0;
+    border-bottom: 2px solid var(--color-black);
+    padding: 0.6rem 1.5rem 0.5rem 0;
     font-size: var(--text-xs);
     outline: none;
     background: none;
+  }
+
+  /* 1rem below 640px, so focusing the field does not make iOS zoom the page. */
+  @media (width < 40rem) {
+    .search-input {
+      font-size: 1rem;
+    }
   }
 
   .search-input:focus {
     border-bottom-color: var(--color-dlabs-blue);
   }
 
+  /* `.button-ghost.is-mini`: a 2px grey outline with a slightly bottom-light pad. */
   .toolbar-button {
+    padding: 0.25rem 0.25rem 0.15rem;
     border: 2px solid var(--color-dlabs-gray-200);
     background: none;
     cursor: pointer;
@@ -213,26 +263,48 @@ const TILE_HEIGHT = 300;
     color: var(--color-dlabs-blue);
   }
 
-  /* Was .service-carousel-indicator + .button-transparent. */
+  /*
+   * Was .service-carousel-indicator + .button-transparent. No opacity and no
+   * bold on the active one: the only thing that marks the choice is the dot,
+   * which grows from a small disc into a ring.
+   */
   .filter {
     border: none;
     background: none;
     padding: 0.2rem;
     margin: -0.2rem;
     cursor: pointer;
-    text-align: left;
+    text-align: inherit;
     color: var(--color-black);
-    opacity: 0.55;
-    transition-property: opacity, color;
+    transition-property: color;
   }
 
-  .filter:hover {
-    opacity: 1;
+  .filter:hover,
+  .filter:focus-visible {
+    color: var(--color-dlabs-blue);
   }
 
-  .filter[data-active] {
-    opacity: 1;
-    font-weight: bold;
+  /*
+   * Was .service-circle. A 1.25rem disc scaled to a third of its size, which
+   * grows to full size and empties out when its filter is the active one — so
+   * the inactive state is a small dot and the active state a 4px ring. The
+   * 1rem box it sits in is deliberately smaller than the circle, as on live.
+   */
+  .filter-dot {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 4px solid var(--dot);
+    background-color: var(--dot);
+    transform: scale(0.33);
+    transition-property: background-color, transform;
+    transition-duration: 0.25s;
+  }
+
+  .filter[data-active] .filter-dot {
+    background-color: transparent;
+    transform: scale(1);
   }
 
   .tile-link {

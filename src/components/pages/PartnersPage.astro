@@ -33,10 +33,15 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("partners", othe
 >
   <article class="flex flex-col items-center px-6 py-12 pt-24">
     <div class="flex w-full max-w-[40rem] flex-col gap-8 pt-12">
-      <div class="flex flex-col gap-6">
-        <h1 class="font-heading tracking-heading text-xl">{copy.title}</h1>
-        <Markdown source={copy.content} />
-      </div>
+      {
+        /*
+        Title and body are one prose block, as in the original: that is where the
+        h1 gets its 1.8rem size and 3rem bottom margin. Routing the heading
+        through the markdown pipeline rather than hand-writing it keeps those
+        metrics in one place instead of two.
+      */
+      }
+      <Markdown source={`# ${copy.title}\n\n${copy.content}`} />
 
       <div class="flex flex-row flex-wrap items-center">
         {
@@ -56,7 +61,12 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("partners", othe
                   partner.padding,
                 ]}
               >
-                <Image src={logo} alt={partner.name} class="max-h-12 w-full object-contain" />
+                {/*
+                  `w-full`, no height cap. `full-width maxheight-6` in the old
+                  markup match no rule, but these SVGs declare no width, so a
+                  bare <img> fills its box — see the note in ClientGrid.
+                */}
+                <Image src={logo} alt={partner.name} class="w-full" />
               </a>
             );
           })
@@ -65,3 +75,17 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("partners", othe
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  /*
+   * 3rem under the title, which is what live renders. The old `.markdown` sets
+   * `h1 { margin-bottom: 3rem }` but also `h1:not(:last-child) { margin-bottom:
+   * 1rem }`, and the more specific rule usually wins — except here, where the
+   * intro copy is emitted as a bare text node rather than a paragraph, so the h1
+   * *is* the last element child. The copy belongs in a <p>, so the spacing is
+   * restored explicitly rather than by dropping the markup.
+   */
+  article :global(.prose h1) {
+    margin-bottom: 3rem;
+  }
+</style>

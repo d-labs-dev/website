@@ -20,7 +20,11 @@ interface Props {
 const { locale } = Astro.props;
 const copy = await getPageCopy("services", locale);
 
-const methods = await getCollection("methods", (entry) => entry.data.locale === locale);
+// Sorted by Contentful's creation order, which is the order the live list uses.
+// getCollection() hands them back sorted by id, i.e. alphabetically by slug.
+const methods = (await getCollection("methods", (entry) => entry.data.locale === locale)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 const domains = copy.slides.map((slide: { name: string; color: string }) => ({
   name: slide.name,
@@ -38,14 +42,13 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", othe
 >
   {
     /*
-    Intro. The old classes are `minheight-75vh pt-8` with `q-md-height-screen
-    q-md-pt-4` — and `q-md` is *max*-width 640, so the full-height, tight-padding
-    variant is the mobile one. They were applied at md: here, i.e. inverted.
+    Intro. `minheight-75vh pt-8 q-md-height-screen q-md-pt-4` — and `q-md` is
+    *max*-width 640, so the full-height, tight-padding variant is the mobile one.
+    The three min-heights live in the scoped style below, because two of them are
+    viewport-aspect queries with no utility equivalent.
   */
   }
-  <div
-    class="relative flex h-screen flex-col items-center justify-center px-6 pt-6 sm:h-auto sm:min-h-[75vh] sm:pt-24"
-  >
+  <div class="services-intro relative flex flex-col items-center justify-center px-6 pt-6 sm:pt-24">
     {
       /* No pb here: the old services intro is `maxwidth-7 width-full col sp-4`
         with no bottom padding, unlike the approach page's, which has pb-6. With
@@ -58,8 +61,9 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", othe
       </div>
     </div>
 
+    {/* `show-md`: the scroll hint is the mobile affordance, hidden from 640px up. */}
     <div
-      class="absolute inset-x-0 bottom-0 z-1 hidden flex-col items-center pb-6 text-black md:flex"
+      class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black sm:hidden"
     >
       <a href="#overview" aria-label={locale === "de" ? "Weiter" : "Continue"}>
         <Image src={arrowDown} alt="" class="w-4" />
@@ -85,3 +89,33 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", othe
     }}
   />
 </BaseLayout>
+
+<style>
+  /*
+   * The old `.minheight-75vh` shrinks the hero on very wide viewports, and
+   * `.q-md-height-screen` — declared later in the original stylesheet, so it wins
+   * — gives it the full viewport height on mobile. Kept as CSS because both are
+   * viewport-aspect queries, which have no utility form.
+   */
+  .services-intro {
+    min-height: 75vh;
+  }
+
+  @media (min-width: 150vh) {
+    .services-intro {
+      min-height: 70vh;
+    }
+  }
+
+  @media (min-width: 200vh) {
+    .services-intro {
+      min-height: 67vh;
+    }
+  }
+
+  @media (width < 40rem) {
+    .services-intro {
+      min-height: -webkit-fill-available;
+    }
+  }
+</style>

@@ -46,6 +46,12 @@ const contentfulBase = {
   /** Contentful sys.id — identical across locales, so it pairs translations. */
   contentfulId: z.string(),
   slug: z.string().min(1),
+  /**
+   * Position in Contentful's creation order, set by the loader. Any page that
+   * lists entries must sort on this: getCollection() returns them ordered by id,
+   * which is alphabetical by slug and not the order the live site renders.
+   */
+  order: z.number(),
 };
 
 // ---------------------------------------------------------------------------

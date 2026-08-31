@@ -3,6 +3,8 @@ import { defineConfig, envField, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import { satteri } from "@astrojs/markdown-satteri";
+import { hardBreaks } from "./src/lib/hard-breaks.ts";
 
 const FONTS = "./src/assets/fonts";
 /** @type {[string, ...string[]]} */
@@ -102,6 +104,15 @@ export default defineConfig({
    * Letter Gothic's bold is a real 700 (usWeightClass 700), so it needs none of
    * this.
    */
+  /*
+   * Pinned: dev on Astro's default port, `preview` next door so the two can run
+   * side by side. `strictPort` lives in the Vite config below — Astro's own
+   * server options do not have it, and without it a clash silently moves to the
+   * next free port, which is how this session ended up with four orphaned dev
+   * servers on 4321-4324 and links pointing at whichever one was newest.
+   */
+  server: ({ command }) => ({ port: command === "dev" ? 4321 : 4322 }),
+
   fonts: [
     {
       provider: fontProviders.local(),
@@ -134,9 +145,19 @@ export default defineConfig({
     },
   ],
 
+  /*
+   * kramdown's `hard_wrap` in one plugin — see src/lib/hard-breaks.ts for why the
+   * legal pages need it.
+   */
+  markdown: {
+    processor: satteri({ mdastPlugins: [hardBreaks] }),
+  },
+
   integrations: [sitemap({ i18n: { defaultLocale: "de", locales: { de: "de-DE", en: "en-US" } } })],
 
   vite: {
     plugins: [tailwindcss()],
+    server: { strictPort: true },
+    preview: { strictPort: true },
   },
 });

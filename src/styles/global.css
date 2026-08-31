@@ -11,6 +11,13 @@
  */
 @import "tailwindcss" source(none);
 @source "../**/*.{astro,ts,js,md}";
+/*
+ * The content directory too, because content/partners/partners.yml carries a
+ * `padding` field of real utility classes (it replaced a per-logo Liquid
+ * `{% case %}`). Without this glob those classes are silently never generated —
+ * the partner logos rendered with their mobile padding at every width.
+ */
+@source "../../content/**/*.{yml,yaml,md}";
 
 @plugin "@tailwindcss/typography";
 
@@ -47,7 +54,7 @@
  *   maxwidth-7 -> max-w-[60rem].
  *
  *   LAYOUT — `col` -> `flex flex-col`, `row` -> `flex`, `push` -> `flex-auto`,
- *   `non-interactive` -> `pointer-events-none`, `fill-parent` -> `flex-1`.
+ *   `non-interactive` -> `pointer-events-none`, `fill-parent` -> `flex-auto`.
  */
 @theme {
   /*
@@ -169,6 +176,40 @@
  * Measured on d-labs.com: line-height 1.6, li margin 0.5rem, ul padding-left
  * 1.5em, custom SVG bullet at 0.5em x 0.5833em.
  */
+/*
+ * The D-LABS bullet mark. Shared between markdown lists and the hand-built
+ * lists on the approach page, exactly as the old stylesheet shared it between
+ * `.markdown > ul` and `.d-labs-list`. Top-level only: nested lists keep the
+ * browser default, as on the current site.
+ *
+ * It cannot live inside the `.prose` block below, because the approach page puts
+ * `.prose` on the list *items* and needs the mark on a `ul` that is not itself
+ * inside a prose element.
+ */
+.prose > ul,
+.bullet-list {
+  list-style: none;
+  padding-left: 1.5em;
+}
+
+.prose > ul > li,
+.bullet-list > li {
+  position: relative;
+}
+
+.prose > ul > li::before,
+.bullet-list > li::before {
+  content: "";
+  position: absolute;
+  top: 0.4em;
+  left: -1.5em;
+  width: 0.5em;
+  height: 0.583333em;
+  background-image: url("../assets/images/list-bullet.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .prose {
   /*
    * `:not(.font-heading)` mirrors the original rule exactly — the old
@@ -240,29 +281,6 @@
     margin-bottom: 0.5rem;
   }
 
-  /* Top-level lists use the D-LABS bullet mark. Nested lists keep the browser
-     default, as on the current site. */
-  & > ul {
-    list-style: none;
-    padding-left: 1.5em;
-
-    & > li {
-      position: relative;
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0.4em;
-        left: -1.5em;
-        width: 0.5em;
-        height: 0.583333em;
-        background-image: url("../assets/images/list-bullet.svg");
-        background-repeat: no-repeat;
-        background-size: contain;
-      }
-    }
-  }
-
   /* Plugin colour variables. */
   --tw-prose-body: var(--color-black);
   --tw-prose-headings: var(--color-black);
@@ -296,5 +314,75 @@
   & code::before,
   & code::after {
     content: none;
+  }
+
+  /*
+   * Undo the plugin declarations the block above does not already replace. The
+   * old `.markdown` set only line-height, margins, headings, lists and link
+   * colour; everything else was the browser default, so anything the plugin adds
+   * on top of that is drift. Grouped here rather than scattered above so it is
+   * obvious what is a reset and what is a real rule.
+   */
+
+  /* Long URLs in the legal pages wrap instead of overflowing their column. */
+  word-break: break-word;
+
+  /* Links keep the surrounding weight; the plugin sets 500 (Roboto Medium). */
+  & a {
+    font-weight: inherit;
+  }
+
+  /*
+   * Heading weights are the browser defaults on the current site — bold, with
+   * h3 and h5 explicitly set back to normal. The plugin instead ramps 800 / 700 /
+   * 600 / 600, so h1 renders heavier and h4 lighter than production.
+   */
+  & :is(h1, h2, h4, h6) {
+    font-weight: bold;
+  }
+
+  /* And `strong`, which the plugin sets to 600. */
+  & :is(strong, b) {
+    font-weight: bold;
+  }
+
+  /*
+   * No top margins anywhere: spacing is `margin-bottom` on all but the last
+   * child, so a leading margin adds space above the first line of every block.
+   */
+  & :is(p, ul, ol, li, blockquote, pre, figure, table, hr, img) {
+    margin-top: 0;
+  }
+
+  /* Only `:not(:last-child)` carries a bottom margin, set above. */
+  & :is(li, blockquote, figure, table, img, hr):last-child {
+    margin-bottom: 0;
+  }
+
+  & li {
+    padding-inline-start: 0;
+  }
+
+  /* Browser default: no italics, no rule, and no injected quote marks. */
+  & blockquote {
+    font-style: normal;
+    font-weight: inherit;
+    border-inline-start: none;
+    padding-inline-start: 0;
+    quotes: none;
+  }
+
+  & blockquote p:first-of-type::before,
+  & blockquote p:last-of-type::after {
+    content: none;
+  }
+
+  & :is(code, pre) {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  & :is(hr, img, figure) {
+    margin-bottom: 1.5rem;
   }
 }

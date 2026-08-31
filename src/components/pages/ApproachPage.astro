@@ -112,7 +112,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
       <div class="h-8" data-keyframe-marker></div>
       {
         screens.map((_, i) => (
-          <div class="h-[25rem] md:h-[20rem]" id={`n${i + 1}`} data-keyframe-marker />
+          <div class="h-[20rem] sm:h-[25rem]" id={`n${i + 1}`} data-keyframe-marker />
         ))
       }
 
@@ -125,12 +125,14 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
           >
             <div class="sticky top-0 flex min-h-screen flex-col items-center px-6">
               <div class="w-full max-w-[60rem]">
-                <div class="relative flex flex-col gap-6 pt-16 pb-16">
-                  <h2 class="font-heading tracking-heading pt-8 text-base md:text-xl">
+                <div class="relative flex min-h-[60vh] flex-col gap-6 pt-24 pb-16">
+                  <h2 class="font-heading tracking-heading pt-8 text-base sm:text-xl">
                     {screen.title}
                   </h2>
                   {screen.text && (
-                    <div class="max-w-[15rem] text-xs md:text-base">{screen.text}</div>
+                    <div class="max-w-[25rem] text-xs sm:max-w-[15rem] sm:text-base">
+                      {screen.text}
+                    </div>
                   )}
                 </div>
               </div>
@@ -140,7 +142,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
       }
 
       <div class="absolute inset-y-0 right-0 z-1 hidden md:block">
-        <div class="sticky flex min-h-screen flex-col justify-center gap-4 pr-3">
+        <div class="sticky top-0 flex min-h-screen flex-col justify-center gap-4 pr-4">
           {
             screens.map((_, i) => (
               <a
@@ -169,8 +171,8 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
                 <LeadLine>{project.lead}</LeadLine>
               </div>
 
-              <div class="flex h-40 flex-row gap-4 md:h-[30rem]">
-                <div class="relative w-1/3 shrink-0 md:w-[15rem]">
+              <div class="flex h-40 flex-row gap-4 sm:h-[30rem]">
+                <div class="relative w-1/3 shrink-0 sm:w-[15rem]">
                   <Image
                     src={resolve(project.img1)}
                     alt=""
@@ -178,7 +180,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
                     loading="lazy"
                   />
                 </div>
-                <div class="relative flex-1">
+                <div class="relative flex-auto">
                   <Image
                     src={resolve(project.img2)}
                     alt=""
@@ -188,8 +190,8 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
                 </div>
               </div>
 
-              <div class="relative flex flex-col items-center gap-4 md:flex-row md:items-start">
-                <div class="flex w-full shrink-0 flex-col items-center gap-8 py-3 md:sticky md:top-24 md:w-[15rem] md:pt-16 md:pb-8">
+              <div class="relative flex flex-col items-center gap-4 sm:flex-row sm:items-start">
+                <div class="relative flex w-[15rem] shrink-0 flex-col items-center gap-8 py-3 sm:sticky sm:top-0 sm:pt-16 sm:pb-8">
                   <Image src={resolve(project.circle_img)} alt="" class="w-full" loading="lazy" />
 
                   <div class="flex flex-col gap-3">
@@ -211,7 +213,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
                   </div>
                 </div>
 
-                <div class="relative flex flex-1 flex-col gap-8 pt-16 max-md:py-6">
+                <div class="relative flex flex-auto flex-col gap-8 pt-16 max-sm:py-6">
                   <h3 class="font-heading tracking-heading max-w-[30rem] text-xl">
                     {project.task}
                   </h3>
@@ -225,9 +227,9 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
                   ).map(([heading, items]) => (
                     <div class="flex flex-col gap-6">
                       <h4 class="font-heading text-xs uppercase">{heading}</h4>
-                      <ul class="prose flex flex-col gap-3">
+                      <ul class="bullet-list flex flex-col gap-3">
                         {items.map((item) => (
-                          <li>
+                          <li class="prose max-w-none">
                             <Markdown source={item} inline />
                           </li>
                         ))}
@@ -235,9 +237,12 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
                     </div>
                   ))}
 
-                  {project.image_source && (
-                    <div class="text-dlabs-gray-300 text-2xs">{project.image_source}</div>
-                  )}
+                  {/*
+                    Always rendered, empty or not: `.approach-project-image_source`
+                    is an unconditional element in the original, so it contributes
+                    a 2rem column gap on the two projects that have no credit.
+                  */}
+                  <div class="image-source">{project.image_source}</div>
                 </div>
               </div>
             </div>
@@ -251,6 +256,15 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
 </BaseLayout>
 
 <style>
+  /*
+   * `.approach-project-image_source`. The size is a fluid calc rather than a
+   * token, so it stays CSS: `text-2xs` would be 0.32px off at 1280.
+   */
+  .image-source {
+    font-size: calc(0.45em + 0.4vw);
+    color: var(--color-dlabs-gray-300);
+  }
+
   .screen-dot {
     width: 0.5rem;
     height: 0.5rem;

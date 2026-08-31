@@ -141,7 +141,15 @@ const nav = NAV_ITEMS.map((ref) => ({
       }
     </nav>
 
-    <div class="h-10"></div>
+    {
+      /*
+      A growing spacer, not a fixed gap. The old markup's `push maxheight-1`
+      resolves to just `push` (there is no `maxheight-*` family), so the overlay
+      has three equal spacers and the nav and language switcher sit at the
+      one-third marks rather than adjacent.
+    */
+    }
+    <div class="flex-auto"></div>
 
     <a
       href={switcherUrl}

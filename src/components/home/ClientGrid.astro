@@ -9,6 +9,7 @@
 import { getEntry } from "astro:content";
 import { Image } from "astro:assets";
 import Button from "@/components/Button.astro";
+import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
 
 interface Props {
   heading: string;
@@ -34,56 +35,84 @@ function resolve(path: string) {
 ---
 
 <div
-  class="relative z-2 flex flex-col items-center bg-white px-6 pt-8 pb-24 md:pt-24"
+  class="relative z-2 flex flex-col items-center bg-white px-6 pt-24 pb-24"
   id="clients"
   data-client-grid
 >
   <div class="flex w-full max-w-[60rem] flex-col gap-8">
     <h2 class="font-heading tracking-heading text-xl">{heading}</h2>
 
-    <div class="grid grid-cols-3 items-center gap-8 sm:grid-cols-4 md:grid-cols-6">
+    {
+      /*
+      2-up below 800px and 4-up above, with 1.5rem of padding on each side of a
+      cell and 1rem above and below — the original's `width-1_4 px-4 py-3
+      q-lg-width-1_2`.
+
+      `w-full` and no height cap: the old markup's `full-width maxheight-6` match
+      no rule, but these SVGs declare no width either, so a bare <img> defaults
+      to 100% of its box — which is what live renders (230x152 in a 230px cell).
+      Astro's <Image> writes intrinsic width/height attributes, so without
+      `w-full` each logo comes out a few pixels smaller than production.
+    */
+    }
+    <div class="flex flex-row flex-wrap">
       {
         first.map((client) => (
-          <Image
-            src={resolve(client.logo)}
-            alt={client.name}
-            title={client.name}
-            class="max-h-12 w-full object-contain"
-            loading="lazy"
-          />
+          <div class="flex w-1/2 items-center justify-center px-6 py-4 md:w-1/4">
+            <Image
+              src={resolve(client.logo)}
+              alt={client.name}
+              title={client.name}
+              class="w-full"
+              loading="lazy"
+            />
+          </div>
         ))
       }
     </div>
 
     <div class="hidden" data-client-rest>
-      <div class="grid grid-cols-3 items-center gap-8 sm:grid-cols-4 md:grid-cols-6">
+      <div class="flex flex-row flex-wrap">
         {
           rest.map((client) => (
-            <Image
-              src={resolve(client.logo)}
-              alt={client.name}
-              title={client.name}
-              class="max-h-12 w-full object-contain"
-              loading="lazy"
-            />
+            <div class="flex w-1/2 items-center justify-center px-6 py-4 md:w-1/4">
+              <Image
+                src={resolve(client.logo)}
+                alt={client.name}
+                title={client.name}
+                class="w-full"
+                loading="lazy"
+              />
+            </div>
           ))
         }
       </div>
     </div>
 
     {
+      /*
+      A text button with a caret, as on live — `button-text is-blue`, not a ghost
+      button with a border, which stood 36px taller. The caret flips when the rest
+      of the grid is showing, which is what the original did by swapping two
+      hidden copies of the button's contents.
+    */
+    }
+    {
       rest.length > 0 && (
-        <div class="flex flex-col items-start">
+        <div class="flex flex-col items-center">
           <Button
-            variant="ghost"
-            color="black"
+            variant="text"
+            color="blue"
             data-client-toggle
             data-label-more={showMore}
             data-label-less={showLess}
             aria-expanded="false"
             aria-controls="client-rest"
           >
-            {showMore}
+            <span class="flex flex-row items-center gap-4">
+              <Image src={arrowDown} alt="" class="w-4 transition-transform" data-client-caret />
+              <span data-client-label>{showMore}</span>
+            </span>
           </Button>
         </div>
       )

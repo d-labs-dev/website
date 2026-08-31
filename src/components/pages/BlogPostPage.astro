@@ -51,7 +51,6 @@ const alternates = counterpartSlug
                   ? Math.round((800 * post.heroImage.height) / post.heroImage.width)
                   : undefined
               }
-              class="w-full"
               loading="eager"
             />
           )
@@ -75,7 +74,7 @@ const alternates = counterpartSlug
                       alt={post.author.image.title || post.author.name}
                       width={100}
                       height={100}
-                      class="h-24 w-24 rounded-full"
+                      class="h-12 w-12 rounded-full"
                       loading="lazy"
                     />
                   )}

@@ -77,19 +77,20 @@ const year = new Date().getFullYear();
     <div class="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
       {
         /*
-        gap-4, not the 0.75rem the spacing class suggests: in the original each
-        icon sits in a `.button-text` anchor with 0.2rem padding and -0.2rem
-        margins, so the icons end up ~1rem apart rather than 0.75rem.
+        `sp-2` is 0.75rem, and each icon sits in a `.button-text` anchor whose
+        0.2rem padding and -0.2rem margins widen the gap between the marks
+        themselves — reproduced in `.icon-link` below rather than approximated
+        with a bigger gap.
       */
       }
-      <div class="flex flex-row gap-4 md:basis-48">
+      <div class="flex flex-row gap-3 md:basis-48">
         {
           socials.map((social) => (
             <a
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="transition-opacity hover:opacity-70"
+              class="icon-link transition-opacity hover:opacity-70"
             >
               <Image src={social.icon} alt={social.label} class="h-4 w-auto" loading="lazy" />
             </a>
@@ -107,7 +108,7 @@ const year = new Date().getFullYear();
       */
       }
       <nav
-        class="flex flex-1 flex-row flex-wrap items-center justify-center gap-4 md:justify-start md:gap-12"
+        class="flex flex-1 flex-row flex-wrap items-center justify-center gap-4 sm:gap-12"
         aria-label="Rechtliches"
       >
         {
@@ -131,7 +132,7 @@ const year = new Date().getFullYear();
               href={m.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="transition-opacity hover:opacity-70"
+              class="icon-link self-start transition-opacity hover:opacity-70"
             >
               <Image src={m.logo} alt={m.label} class={`${m.class} w-auto`} loading="lazy" />
             </a>
@@ -147,6 +148,21 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
+  /* `.button-text`: a small hit area that does not push its neighbours apart. */
+  .icon-link {
+    display: block;
+    padding: 0.2rem;
+    margin: -0.2rem;
+  }
+
+  /*
+   * No padding, no flex-grow. The original template asks for
+   * `flex-grow: 1; text-align: center; padding: 10px; border: 1px solid transparent`
+   * in an inline style, but it asks through the `locale_link` Liquid tag, which
+   * drops the argument — the shipped anchors carry no `style` attribute at all.
+   * Measured on d-labs.com at 700px: the four links are 484px wide and 20px tall,
+   * which is text only. Reproducing the intent instead made them wrap to two rows.
+   */
   .footer-link {
     color: var(--color-black);
     font-weight: bold;
@@ -158,12 +174,7 @@ const year = new Date().getFullYear();
     color: var(--color-dlabs-blue);
   }
 
-  /*
-   * Above 800px each link gets an even footprint, as the old rule did. No
-   * padding: the original template asked for 10px in an inline style, but that
-   * attribute also contained CSS comments and the parser dropped it — live
-   * computes 0. Matching what ships, not what was intended.
-   */
+  /* Above 800px each link gets an even footprint, as the old rule did. */
   @media (width >= 50rem) {
     .footer-link {
       min-width: 6em;
