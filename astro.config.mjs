@@ -74,8 +74,9 @@ export default defineConfig({
         access: "secret",
       }),
       // Ships in the page, so it must be HTTP-referrer restricted in the Google
-      // Cloud console. Optional: without it the map renders a disabled
-      // placeholder rather than breaking the build.
+      // Cloud console — which also means the map only renders on an allowed
+      // host, not on localhost or the S3 preview hostname. Optional so a build
+      // without it warns and leaves the map empty rather than failing.
       PUBLIC_GOOGLE_MAPS_API_KEY: envField.string({
         context: "client",
         access: "public",

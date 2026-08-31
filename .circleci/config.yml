@@ -48,16 +48,81 @@ jobs:
     steps:
       - run: aws cloudfront create-invalidation --distribution-id E9ENVGAMEA762 --paths '/*'
 
+  # The Astro site. Its own image, because dlabspotsdam/website-build is Ruby and
+  # has no Node; and its own deploy job on that Ruby image, because cimg/node has
+  # no awscli. Neither has to grow a toolchain it does not already carry.
+  build-astro:
+    working_directory: ~/d-labs-website
+    docker:
+      - image: cimg/node:24.2
+    steps:
+      - checkout
+      - run:
+          name: enable pnpm
+          command: |
+            corepack enable
+            pnpm config set store-dir ~/.pnpm-store
+      - restore_cache:
+          key: pnpm-v1-{{ checksum "pnpm-lock.yaml" }}-{{ arch }}
+      - run: pnpm install --frozen-lockfile
+      - save_cache:
+          key: pnpm-v1-{{ checksum "pnpm-lock.yaml" }}-{{ arch }}
+          paths:
+            - ~/.pnpm-store
+      # `verify` is build + the legacy redirect map + the link crawl, so a broken
+      # link fails the branch here rather than being found on the preview.
+      - run:
+          name: build and verify astro
+          command: pnpm verify
+      - persist_to_workspace:
+          root: ~/d-labs-website
+          paths:
+            - dist
+      - store_artifacts:
+          path: dist
+
+  deploy-preview:
+    working_directory: ~/d-labs-website
+    docker:
+      - image: dlabspotsdam/website-build:latest
+    steps:
+      - attach_workspace:
+          at: ~/d-labs-website
+      - run:
+          name: deploy astro to the preview bucket
+          command: aws s3 sync ./dist/ s3://preview.d-labs.com --delete
+
 workflows:
   version: 2
   release:
     jobs:
+      # Jekyll still builds and deploys production, untouched.
       - build:
           context: website
+          filters:
+            branches:
+              only: master
       - deploy:
           context: website
           requires:
             - build
+          filters:
+            branches:
+              only: master
+
+      # Every other branch previews the Astro site instead.
+      - build-astro:
+          context: website
+          filters:
+            branches:
+              ignore: master
+      - deploy-preview:
+          context: website
+          requires:
+            - build-astro
+          filters:
+            branches:
+              ignore: master
       - hold-invalidate-cache:
           type: approval
           requires:
