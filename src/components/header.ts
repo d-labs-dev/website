@@ -41,12 +41,16 @@ function setupMobileMenu(mobileNav: HTMLElement) {
   const closeButtons = mobileNav.querySelectorAll<HTMLElement>("[data-menu-close]");
 
   const setOpen = (open: boolean) => {
-    mobileNav.classList.toggle("hidden", !open);
+    mobileNav.toggleAttribute("data-open", open);
     openButtons.forEach((b) => b.setAttribute("aria-expanded", String(open)));
     // Stop the page behind the overlay from scrolling.
     document.documentElement.style.overflow = open ? "hidden" : "";
 
     if (open) {
+      // Focusable straight away. It was not while `*` had `transition-property:
+      // all` — `visibility` is inherited, so these links sat at
+      // `visibility: hidden` for the first half of a transition and a hidden
+      // element cannot take focus. Fixed in base.css, not here.
       mobileNav.querySelector<HTMLElement>("a")?.focus();
     } else {
       openButtons[0]?.focus();
@@ -58,7 +62,7 @@ function setupMobileMenu(mobileNav: HTMLElement) {
 
   // The overlay has no visible affordance for Escape otherwise.
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !mobileNav.classList.contains("hidden")) {
+    if (event.key === "Escape" && mobileNav.hasAttribute("data-open")) {
       setOpen(false);
     }
   });
@@ -68,7 +72,7 @@ function setupMobileMenu(mobileNav: HTMLElement) {
   window.addEventListener(
     "resize",
     () => {
-      if (window.innerWidth >= 768 && !mobileNav.classList.contains("hidden")) {
+      if (window.innerWidth >= 800 && mobileNav.hasAttribute("data-open")) {
         setOpen(false);
       }
     },

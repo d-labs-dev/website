@@ -122,7 +122,13 @@ const nav = NAV_ITEMS.map((ref) => ({
   </div>
 </header>
 
-<div class="fixed inset-0 z-20 hidden bg-white" id="mobile-nav" data-mobile-nav>
+{
+  /*
+  No `hidden` class: the overlay fades, and `display: none` cannot be animated.
+  `data-open` drives it instead — see `.mobile-nav` below.
+*/
+}
+<div class="mobile-nav fixed inset-0 z-20 bg-white" id="mobile-nav" data-mobile-nav>
   <div class="relative flex h-full w-full flex-col items-center px-8 py-6">
     <div class="absolute top-6 right-6">
       <button type="button" class="close-button" data-menu-close aria-label="Menü schließen">
@@ -170,6 +176,42 @@ const nav = NAV_ITEMS.map((ref) => ({
 
 <style>
   @reference "../styles/global.css";
+
+  /*
+   * The overlay fades over 250ms, as `toggleButton()` does: the burger carries no
+   * `data-toggle-style`, so it falls through to jQuery's `fadeToggle(250)`.
+   *
+   * `visibility` rather than `display`, because display cannot be animated — and
+   * unlike opacity alone it also takes the closed overlay out of the tab order
+   * and stops it swallowing clicks. It flips at the end of the fade-out and the
+   * start of the fade-in, which is what fadeToggle does with display.
+   */
+  /*
+   * `ease-in-out`, not the site's usual `ease-out`: jQuery's default easing is
+   * `swing`, a cosine curve. At 80ms of 250ms it is 0.23 — measured 0.21 on
+   * live — where ease-out is already at 0.49.
+   *
+   * Visibility is switched instantly on the way in and held to the end of the
+   * fade on the way out. Transitioning it symmetrically looks the same but
+   * leaves the overlay `visibility: hidden` for the first half of the fade-in,
+   * and a hidden element cannot take focus — so `focus()` on the first link
+   * silently did nothing and the keyboard was left on <body>.
+   */
+  .mobile-nav {
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 250ms ease-in-out,
+      visibility 0s linear 250ms;
+  }
+
+  .mobile-nav[data-open] {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 250ms ease-in-out,
+      visibility 0s;
+  }
 
   .site-header {
     border-top: 0.1rem solid var(--color-dlabs-blue);

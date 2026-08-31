@@ -13,6 +13,8 @@
  * surprising rather than helpful.
  */
 
+import { slideToggle } from "@/lib/slide";
+
 const DEBOUNCE_MS = 120;
 
 interface Tile {
@@ -100,16 +102,20 @@ export function setupMethodBrowser(): void {
       // On mobile the panel is a disclosure; collapse it once a choice is made.
       // 800px is the `md` breakpoint, where the panel stops being collapsible.
       if (filterPanel && window.innerWidth < 800) {
-        filterPanel.classList.add("hidden");
+        panelOpen = false;
+        slideToggle(filterPanel, false);
         filterToggle?.setAttribute("aria-expanded", "false");
       }
     });
   });
 
+  let panelOpen = false;
+
   filterToggle?.addEventListener("click", () => {
     if (!filterPanel) return;
-    const open = filterPanel.classList.toggle("hidden");
-    filterToggle.setAttribute("aria-expanded", String(!open));
+    panelOpen = !panelOpen;
+    slideToggle(filterPanel, panelOpen);
+    filterToggle.setAttribute("aria-expanded", String(panelOpen));
   });
 
   /**

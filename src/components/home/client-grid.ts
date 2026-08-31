@@ -6,6 +6,8 @@
  * children to change its label. Here the two labels are data attributes, so the
  * button says what it does without duplicate markup.
  */
+import { slideToggle } from "@/lib/slide";
+
 export function setupClientGrid(): void {
   const root = document.querySelector<HTMLElement>("[data-client-grid]");
   if (!root) return;
@@ -21,8 +23,11 @@ export function setupClientGrid(): void {
 
   rest.id ||= "client-rest";
 
+  let expanded = false;
+
   toggle.addEventListener("click", () => {
-    const expanded = rest.classList.toggle("hidden") === false;
+    expanded = !expanded;
+    slideToggle(rest, expanded);
     label.textContent = expanded ? labelLess : labelMore;
     caret?.classList.toggle("rotate-180", expanded);
     toggle.setAttribute("aria-expanded", String(expanded));

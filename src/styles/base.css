@@ -114,6 +114,18 @@ html {
 *::after {
   transition-duration: inherit;
   transition-timing-function: inherit;
+  /*
+   * `none`, and it is not optional — the original has it for a reason. The
+   * initial value of `transition-property` is `all`, so inheriting a duration
+   * without this makes *every* property of *every* element animate over 0.15s.
+   *
+   * That is invisible most of the time and then bites hard: `visibility` is an
+   * inherited property, so opening the mobile menu left its links stuck at
+   * `visibility: hidden` for the first half of a 0.15s transition, and a hidden
+   * element cannot take focus. Components opt in by naming the properties they
+   * animate, exactly as the original's do.
+   */
+  transition-property: none;
 }
 
 /*
