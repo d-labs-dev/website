@@ -13,7 +13,12 @@ import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
 import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
 import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
-import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
 
 export interface ServiceSlide {
   name: string;
@@ -191,14 +196,16 @@ const OBJECT_POSITION: Record<string, string> = {
             what that line box is measured from.
           */
           }
-          <a
-            href="#list"
-            class="-m-[0.2rem] inline-block p-[0.2rem] text-xs leading-none"
-            aria-hidden="true"
-            tabindex="-1"
-          >
-            <Image src={arrowDown} alt="" class="inline w-4 align-baseline" />
-          </a>
+          {
+            /*
+        A real `.button-text`, so the mark is black at rest and turns blue on hover
+        and focus like the label above it. As a bare anchor it had no colour of its
+        own and no hover state at all.
+      */
+          }
+          <Button variant="text" color="black" href="#list" aria-hidden="true" tabindex="-1">
+            <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+          </Button>
         </div>
       </div>
     </div>

@@ -10,7 +10,12 @@ import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
 import ServicesScroller from "@/components/services/ServicesScroller.astro";
 import MethodBrowser from "@/components/services/MethodBrowser.astro";
-import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
 import { getPageCopy, pageUrl, otherLocale, type Locale } from "@/lib/i18n";
 
 interface Props {
@@ -66,7 +71,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", othe
       class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black sm:hidden"
     >
       <a href="#overview" aria-label={locale === "de" ? "Weiter" : "Continue"}>
-        <Image src={arrowDown} alt="" class="w-4" />
+        <ArrowDown class="w-4 fill-current" aria-hidden="true" />
       </a>
     </div>
   </div>

@@ -9,7 +9,12 @@
 import { getEntry } from "astro:content";
 import { Image } from "astro:assets";
 import Button from "@/components/Button.astro";
-import arrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
 
 interface Props {
   heading: string;
@@ -110,7 +115,11 @@ function resolve(path: string) {
             aria-controls="client-rest"
           >
             <span class="flex flex-row items-center gap-4">
-              <Image src={arrowDown} alt="" class="w-4 transition-transform" data-client-caret />
+              <ArrowDown
+                class="w-4 fill-current transition-transform"
+                data-client-caret
+                aria-hidden="true"
+              />
               <span data-client-label>{showMore}</span>
             </span>
           </Button>

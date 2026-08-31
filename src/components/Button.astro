@@ -98,10 +98,14 @@ const ghostText: Record<Color, string> = {
   white: "text-white hover:text-dlabs-blue",
 };
 
+/*
+ * `:focus` as well as `:hover`, as `.button-transparent` and `.button-text` both
+ * do — keyboard users get the same feedback the pointer does.
+ */
 const bareText: Record<Color, string> = {
-  black: "text-black hover:text-dlabs-blue",
-  blue: "text-dlabs-blue hover:text-black",
-  white: "text-white hover:text-black",
+  black: "text-black hover:text-dlabs-blue focus-visible:text-dlabs-blue",
+  blue: "text-dlabs-blue hover:text-black focus-visible:text-black",
+  white: "text-white hover:text-black focus-visible:text-black",
 };
 
 const ghostHoverBg: Record<Color, string> = {

@@ -7,8 +7,13 @@ import Markdown from "@/components/Markdown.astro";
 import Contact from "@/components/Contact.astro";
 import { contentfulImage, assetAlt } from "@/lib/contentful-image";
 import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
-import downloadIcon from "@/assets/images/icons/icon-download.svg";
-import arrowDownIcon from "@/assets/images/icons/icon-arrow-down.svg";
+import DownloadIcon from "@/assets/images/icons/icon-download.svg";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
 import { Image } from "astro:assets";
 
 interface Props {
@@ -113,14 +118,16 @@ const jobsUrl = pageUrl("jobs", locale);
     }
     <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center gap-4 pb-8 md:flex">
       <Button variant="text" color="black" href="#next">{copy.learn_more}</Button>
-      <a
-        href="#next"
-        class="-m-[0.2rem] inline-block p-[0.2rem] text-xs leading-none"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <Image src={arrowDownIcon} alt="" class="inline w-4 align-baseline" />
-      </a>
+      {
+        /*
+        A real `.button-text`, so the mark is black at rest and turns blue on hover
+        and focus like the label above it. As a bare anchor it had no colour of its
+        own and no hover state at all.
+      */
+      }
+      <Button variant="text" color="black" href="#next" aria-hidden="true" tabindex="-1">
+        <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+      </Button>
     </div>
   </div>
 
@@ -164,7 +171,7 @@ const jobsUrl = pageUrl("jobs", locale);
         job.posting && (
           <Button variant="text" color="blue" href={job.posting.url} target="_blank" rel="noopener">
             <span class="flex items-center gap-3">
-              <Image src={downloadIcon} alt="" class="w-4" />
+              <DownloadIcon class="w-4 fill-current" aria-hidden="true" />
               <span>{copy.download_button_label}</span>
             </span>
           </Button>
