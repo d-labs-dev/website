@@ -299,10 +299,19 @@
   --tw-prose-th-borders: var(--color-dlabs-gray-200);
   --tw-prose-td-borders: var(--color-dlabs-gray-200);
 
-  /* Headings inside CMS copy use the display face, as on the current site. */
+  /*
+   * Headings inside CMS copy use the display face, as on the current site — but
+   * *not* its tracking. The old `.markdown` heading rule sets only line-height
+   * and font-family; the 0.02rem belongs to `.font-heading`, a separate class,
+   * and reaches these headings only where markdown is rendered in the heading
+   * face (`<Markdown heading />`), by inheritance, exactly as it does on live.
+   *
+   * Measured on d-labs.com: "Impressum" as an h1 is 156.56px wide, and 160.02
+   * with the tracking — 0.02rem per character across every heading in ~217 pages
+   * of CMS copy and the three legal pages.
+   */
   & :is(h1, h2, h3, h4, h5, h6) {
     font-family: var(--font-heading);
-    letter-spacing: var(--tracking-heading);
   }
 
   & a:hover {

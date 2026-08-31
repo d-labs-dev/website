@@ -75,6 +75,23 @@ svg {
 }
 
 /*
+ * `object-fit: cover` on every image, as the current site's base does.
+ *
+ * It only bites where a box ends up off-aspect, and the footer's membership
+ * logos are exactly that: from 800 to ~1024px the 12rem column shrinks below
+ * the logos' natural width, and `cover` crops them rather than scaling them
+ * down. Live shows half-cut wordmarks there; without this rule ours scaled them
+ * to fit, which reads better but is not what ships.
+ *
+ * Flagged rather than fixed: it is a real defect at those widths, and the place
+ * to fix it is the redesign, with a height cap and `object-contain` on that
+ * column.
+ */
+img {
+  object-fit: cover;
+}
+
+/*
  * One transition timing for the whole site, inherited.
  *
  * The current site sets `transition-duration: 0.15s` on `html` and has every

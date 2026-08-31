@@ -74,16 +74,27 @@ const year = new Date().getFullYear();
 
 <footer class="bg-dlabs-gray-100 flex flex-col items-center px-6 py-8">
   <div class="flex w-full max-w-[60rem] flex-col gap-12 md:gap-3">
-    <div class="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-4">
+    {
+      /*
+      From 800px up the spacing is a margin on two of the five children, not a gap
+      between all of them: `sp-3` skips `.push`, so the row carries two 1rem gaps,
+      not four. With `gap-4` the columns were squeezed 17px narrower than live's,
+      which showed as the social marks and membership logos being clipped early.
+
+      Below 800px the spacers are hidden, so `gap-8` leaves exactly the two gaps
+      the original's `sp-5` puts between the three visible children.
+    */
+    }
+    <div class="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-0">
       {
         /*
-        `sp-2` is 0.75rem, and each icon sits in a `.button-text` anchor whose
-        0.2rem padding and -0.2rem margins widen the gap between the marks
-        themselves — reproduced in `.icon-link` below rather than approximated
-        with a bigger gap.
+        0.95rem, not the 0.75rem `sp-2` names: that margin-right replaces
+        `.button-text`'s -0.2rem on one side while the next anchor keeps its own,
+        so the anchors sit 0.95rem apart. A flex `gap` adds to both negative
+        margins instead of replacing one, so it has to carry the difference.
       */
       }
-      <div class="flex flex-row gap-3 md:basis-48">
+      <div class="flex flex-row gap-[0.95rem] md:mr-4 md:basis-48">
         {
           socials.map((social) => (
             <a
@@ -100,15 +111,29 @@ const year = new Date().getFullYear();
 
       {
         /*
-        Always a row, wrapping if it must. The old markup's legal group was a
-        plain `.row` with no column variant, so it stays horizontal on mobile —
-        stacking it here was wrong. Centred on mobile because the parent column
-        centres its children; flush left on desktop, where the 12em outer
-        columns do the centring.
+        A growing spacer either side of the legal nav, as in the original, and no
+        `flex-1` on the nav itself.
+
+        This is what keeps the links on one line: the spacers take the slack, the
+        12rem outer columns give way when there is none, and the nav keeps its own
+        content width. With `flex-1` the nav got only what was left after the
+        outer columns had taken their basis, so between 800 and ~1150px it wrapped
+        onto two, three, even four lines while the columns never budged.
+
+        Hidden below 800px: there the row is a column, and unlike the original's
+        `sp-5` — which skips `.push` — a flex `gap` would put 2rem above and below
+        each spacer.
+
+        `flex-nowrap`, too: the original's legal group is a plain `.row` with no
+        `.wrappable`, so the links cannot wrap. That is not a detail — it is what
+        makes the nav hold its width and push the shrinking onto the columns
+        beside it.
       */
       }
+      <div class="hidden flex-auto md:block"></div>
+
       <nav
-        class="flex flex-1 flex-row flex-wrap items-center justify-center gap-4 sm:gap-12"
+        class="flex flex-row flex-nowrap items-center justify-center gap-4 sm:gap-12 md:mr-4"
         aria-label="Rechtliches"
       >
         {
@@ -123,6 +148,8 @@ const year = new Date().getFullYear();
           ))
         }
       </nav>
+
+      <div class="hidden flex-auto md:block"></div>
 
       <div class="flex flex-col gap-3 md:basis-48 md:pl-16">
         <div class="text-2xs font-bold">{labels.member_of}</div>
