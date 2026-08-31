@@ -171,6 +171,11 @@ const nav = NAV_ITEMS.map((ref) => ({
   }
 
   .site-logo,
+  .menu-button {
+    filter: grayscale(0) brightness(1);
+    transition-property: filter;
+  }
+
   /*
    * `.button-text`: a block button with a 0.2rem hit area that the negative
    * margin keeps out of the layout. Block matters here — a default-inline button
@@ -182,11 +187,6 @@ const nav = NAV_ITEMS.map((ref) => ({
     padding: 0.2rem;
     margin: -0.2rem;
     cursor: pointer;
-  }
-
-  .menu-button {
-    filter: grayscale(0) brightness(1);
-    transition-property: filter;
   }
 
   .nav-link {

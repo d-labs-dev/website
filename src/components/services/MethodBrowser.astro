@@ -112,9 +112,9 @@ const TILE_HEIGHT = 300;
         <div class="flex flex-row gap-3">
           <div class="flex flex-auto flex-col md:hidden">
             <button type="button" class="toolbar-button flex-auto" data-filter-toggle>
-              <span class="flex flex-row items-center gap-2 px-3 py-2">
+              <span class="flex flex-row items-center px-3 py-2">
                 <span data-filter-label>{copy.filter_button_label}</span>
-                <Image src={caretDown} alt="" class="w-3" />
+                <Image src={caretDown} alt="" class="w-4" />
               </span>
             </button>
           </div>
@@ -131,7 +131,7 @@ const TILE_HEIGHT = 300;
               700px, against 33 for a flex-wrapped 1rem icon.
             */
             }
-            <Image src={searchIcon} alt="" class="inline-block w-6" />
+            <Image src={searchIcon} alt="" class="inline w-6 align-baseline" />
           </button>
         </div>
       </div>
