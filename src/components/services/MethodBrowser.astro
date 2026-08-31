@@ -89,7 +89,20 @@ const TILE_HEIGHT = 300;
 
         <div class="hidden flex-auto sm:block"></div>
 
-        <div class="relative hidden" data-search-field style="margin-bottom: 0.3rem">
+        {
+          /*
+          `sm:mr-3` is the trailing edge live has and a flex `gap` cannot give:
+          the original spaces this row with `sp-2`, a margin-right on every child
+          but the last, and the last child is the button pair that search hides.
+          A hidden sibling still holds its slot in that scheme, so the field stops
+          0.75rem short of the container; with `gap` alone it ran flush to the edge,
+          14px further right than production.
+
+          The inline margin-bottom is the original's, and it stays inline for the
+          same reason it is there: in the stacked layout it has to beat `sp-2`.
+        */
+        }
+        <div class="relative mr-0 hidden sm:mr-3" data-search-field style="margin-bottom: 0.3rem">
           <input
             type="search"
             class="search-input w-full sm:w-auto"
@@ -99,17 +112,22 @@ const TILE_HEIGHT = 300;
           />
           {
             /*
-            Decorative, as on the live site, where the same mark sits in a
-            `type="search"` button that submits nothing — search runs on input.
-            A span rather than a button, so there is no control that does nothing.
+            Not decoration: on the live site this mark is the control that leaves
+            search again — it hides the field, brings the two toolbar buttons back
+            and clears the query.
           */
           }
-          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center p-[0.2rem]">
-            <Image src={searchIcon} alt="" class="w-6" />
-          </span>
+          <button
+            type="button"
+            class="search-close absolute inset-y-0 right-0 -m-[0.2rem] flex items-center p-[0.2rem]"
+            data-search-close
+            aria-label={locale === "de" ? "Suche schließen" : "Close search"}
+          >
+            <Image src={searchIcon} alt="" class="inline w-6 align-baseline" />
+          </button>
         </div>
 
-        <div class="flex flex-row gap-3">
+        <div class="flex flex-row gap-3" data-toolbar-buttons>
           <div class="flex flex-auto flex-col md:hidden">
             <button type="button" class="toolbar-button flex-auto" data-filter-toggle>
               <span class="flex flex-row items-center px-3 py-2">
@@ -229,7 +247,6 @@ const TILE_HEIGHT = 300;
     border-bottom: 2px solid var(--color-black);
     padding: 0.6rem 0 0.5rem;
     font-size: var(--text-xs);
-    outline: none;
     background: none;
   }
 
@@ -240,8 +257,21 @@ const TILE_HEIGHT = 300;
     }
   }
 
+  /*
+   * `.input:focus { outline: none }`, and no colour change — the underline is
+   * `$black` in every state on live, so a focused field is indistinguishable from
+   * an unfocused one. Reproduced rather than improved, because leaving the ring in
+   * drew a full rounded box around the field that the current site never shows.
+   * Worth revisiting in the redesign; it is a real gap, just not a new one.
+   */
   .search-input:focus {
-    border-bottom-color: var(--color-dlabs-blue);
+    outline: none;
+  }
+
+  .search-close {
+    border: none;
+    background: none;
+    cursor: pointer;
   }
 
   /* `.button-ghost.is-mini`: a 2px grey outline with a slightly bottom-light pad. */
@@ -303,7 +333,13 @@ const TILE_HEIGHT = 300;
     transition-duration: 0.25s;
   }
 
-  .filter[data-active] .filter-dot {
+  /*
+   * Two selectors, as in the original: the dot inside the active filter, and a
+   * dot marked active in its own right — which is the copy the mobile filter
+   * label carries once a field is chosen.
+   */
+  .filter[data-active] .filter-dot,
+  .filter-dot[data-active] {
     background-color: transparent;
     transform: scale(1);
   }

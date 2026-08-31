@@ -40,8 +40,11 @@ export function setupMethodBrowser(): void {
   const emptyState = root.querySelector<HTMLElement>("[data-empty-state]");
 
   const searchToggle = root.querySelector<HTMLElement>("[data-search-toggle]");
+  const searchClose = root.querySelector<HTMLElement>("[data-search-close]");
   const searchField = root.querySelector<HTMLElement>("[data-search-field]");
   const searchInput = root.querySelector<HTMLInputElement>("[data-search-input]");
+  /** Both toolbar buttons, which search replaces rather than sits beside. */
+  const toolbarButtons = root.querySelector<HTMLElement>("[data-toolbar-buttons]");
 
   const filterToggle = root.querySelector<HTMLElement>("[data-filter-toggle]");
   const filterPanel = root.querySelector<HTMLElement>("[data-filter-panel]");
@@ -69,8 +72,18 @@ export function setupMethodBrowser(): void {
       filter.setAttribute("aria-pressed", String(active));
     }
 
+    // The original clones the active button's contents into the label, dot and
+    // all, and marks that dot active so it shows as a ring.
     if (filterLabel) {
-      filterLabel.textContent = activeDomain === "" ? defaultFilterLabel : activeDomain;
+      const active = filters.find((f) => (f.dataset.filter ?? "") === activeDomain);
+      if (activeDomain === "" || !active) {
+        filterLabel.textContent = defaultFilterLabel;
+      } else {
+        filterLabel.replaceChildren(
+          ...Array.from(active.children, (child) => child.cloneNode(true)),
+        );
+        filterLabel.querySelector(".filter-dot")?.setAttribute("data-active", "");
+      }
     }
 
     emptyState?.classList.toggle("hidden", visible > 0);
@@ -99,17 +112,30 @@ export function setupMethodBrowser(): void {
     filterToggle.setAttribute("aria-expanded", String(!open));
   });
 
-  searchToggle?.addEventListener("click", () => {
-    if (!searchField) return;
-    searchField.classList.toggle("hidden");
-    if (!searchField.classList.contains("hidden")) {
+  /**
+   * Search is a mode, not an extra field. The original hides
+   * `[data-search-button],[data-toggle]` and shows the input in their place, so
+   * the row reads as one control at a time; leaving the buttons up beside the
+   * field is the most visible way this diverged.
+   */
+  function setSearchOpen(open: boolean) {
+    searchField?.classList.toggle("hidden", !open);
+    toolbarButtons?.classList.toggle("hidden", open);
+    searchToggle?.setAttribute("aria-expanded", String(open));
+
+    if (open) {
       searchInput?.focus();
-    } else if (searchInput) {
-      searchInput.value = "";
-      query = "";
-      apply();
+      return;
     }
-  });
+
+    if (searchInput) searchInput.value = "";
+    query = "";
+    apply();
+    searchToggle?.focus();
+  }
+
+  searchToggle?.addEventListener("click", () => setSearchOpen(true));
+  searchClose?.addEventListener("click", () => setSearchOpen(false));
 
   let debounce: number | undefined;
   searchInput?.addEventListener("input", (event) => {
@@ -121,13 +147,9 @@ export function setupMethodBrowser(): void {
     }, DEBOUNCE_MS);
   });
 
-  // Escape clears the search rather than trapping the visitor in a filtered view.
+  // Escape leaves search rather than trapping the visitor in a filtered view.
   searchInput?.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      searchInput.value = "";
-      query = "";
-      apply();
-    }
+    if (event.key === "Escape") setSearchOpen(false);
   });
 
   apply();
