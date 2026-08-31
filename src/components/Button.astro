@@ -140,8 +140,9 @@ if (variant === "circle") {
 } else {
   // Bare text: padding gives the focus ring somewhere to sit, the negative
   // margin keeps it from shifting surrounding layout. Alignment is inherited,
-  // matching the old .button-transparent.
-  groups.push("inline-block p-1 -m-1 [text-align:inherit]");
+  // matching the old .button-transparent — including its 0.2rem, which is a
+  // pixel off Tailwind's `p-1` and shows up in stacked link groups.
+  groups.push("inline-block p-[0.2rem] -m-[0.2rem] [text-align:inherit]");
 }
 
 if (isBox) {

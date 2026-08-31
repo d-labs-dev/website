@@ -109,6 +109,16 @@ const OBJECT_POSITION: Record<string, string> = {
         </div>
       </div>
 
+      {
+        /*
+        The first of the original's two `push` spacers. They are `flex: auto` with
+        grow 1 and grow 2, so the slide track sits a third of the way down the free
+        space rather than directly under the field labels — 93px of air at 1280,
+        which was missing entirely.
+      */
+      }
+      <div class="flex-auto"></div>
+
       <div class="relative flex w-full flex-col items-center overflow-hidden">
         <div class="flex w-full max-w-[60rem] flex-row" data-scroller-track>
           {
@@ -173,8 +183,21 @@ const OBJECT_POSITION: Record<string, string> = {
       <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 sm:flex">
         <div class="pointer-events-auto flex flex-col items-center gap-4">
           <Button variant="text" color="black" href="#list">{listLinkText}</Button>
-          <a href="#list" aria-hidden="true" tabindex="-1">
-            <Image src={arrowDown} alt="" class="w-4" />
+          {
+            /*
+            `inline`, not the preflight default `block`: on live the arrow is an
+            inline SVG, so its line box adds the descender space that makes the
+            anchor 30px rather than 19 — and `.button-text` sets 0.8rem, which is
+            what that line box is measured from.
+          */
+          }
+          <a
+            href="#list"
+            class="-m-[0.2rem] inline-block p-[0.2rem] text-xs leading-none"
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            <Image src={arrowDown} alt="" class="inline w-4 align-baseline" />
           </a>
         </div>
       </div>
