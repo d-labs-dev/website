@@ -58,8 +58,15 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
     <div
       class="relative z-2 flex min-h-screen flex-col items-center justify-center px-6 py-8 text-white"
     >
+      {
+        /*
+        An h1 for structure, where the original uses a plain div — but explicitly
+        `font-normal`, because that div inherits weight 400 and `.font-heading`
+        sets none. Left bold it was wider and wrapped a word early.
+      */
+      }
       <h1
-        class="hero-claim font-heading tracking-heading relative z-4 w-full max-w-[60rem] text-xl sm:text-3xl"
+        class="hero-claim font-heading tracking-heading relative z-4 w-full max-w-[60rem] text-xl font-normal sm:text-3xl"
       >
         <Markdown source={copy.hero_claim} size="inherit" tone="on-dark" heading />
       </h1>
@@ -93,7 +100,8 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
       <div
         class="sticky top-0 flex min-h-screen w-full max-w-[60rem] flex-col justify-center pt-8 max-sm:justify-start md:pt-0"
       >
-        <div class="w-full md:w-2/5">
+        {/* `.home-circle-container`: 40%, full width below 640px — not 800. */}
+        <div class="w-full sm:w-2/5">
           <HomeCircles />
         </div>
       </div>
@@ -122,8 +130,13 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
             <div class="sticky top-0 flex min-h-screen flex-col items-center justify-center px-6">
               <div class="w-full max-w-[60rem]">
                 <div class="flex min-h-screen max-w-[30rem] flex-col justify-center gap-6 py-8 max-sm:justify-end md:mr-12 md:ml-[45%] md:min-h-[60vh]">
-                  <h2 class="font-heading text-base font-bold">{screen.title}</h2>
-                  {screen.text && <div class="text-xs md:text-base">{screen.text}</div>}
+                  {/*
+                    `text-xl q-md-text-md`: 1.8rem, dropping to 1rem below 640px.
+                    It was 1rem at every width, which is what made this section
+                    read as a different design rather than a different size.
+                  */}
+                  <h2 class="font-heading text-base font-bold sm:text-xl">{screen.title}</h2>
+                  {screen.text && <div class="text-xs sm:text-base">{screen.text}</div>}
                   <div class="flex flex-col items-start">
                     <Button variant="ghost" color="black" href={screen.cta_target}>
                       {screen.cta}
@@ -257,15 +270,16 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
   }
 
   /* Was .scroll-indicator. */
+  /*
+   * `.scroll-indicator`: a 0.33rem disc that only changes colour. It was 0.5rem
+   * here, and grew on activation — the original has no transform at all.
+   */
   .screen-dot {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.33rem;
+    height: 0.33rem;
     border-radius: 50%;
-    border: none;
-    padding: 0;
     background-color: var(--color-dlabs-gray-200);
-    cursor: pointer;
-    transition-property: background-color, transform;
+    transition-property: background-color;
   }
 
   .screen-dot:hover {
@@ -274,7 +288,6 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
 
   .screen-dot[data-active] {
     background-color: var(--color-dlabs-blue);
-    transform: scale(1.4);
   }
 </style>
 

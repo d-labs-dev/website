@@ -11,8 +11,13 @@ import { Image } from "astro:assets";
 import Button from "@/components/Button.astro";
 import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
-import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
-import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
+/*
+ * Inlined at their own size: the original drops these in with no class, so they
+ * render at the file's 32px and their line box makes the button 39.7x43 — not the
+ * 38.4 square a 1.5rem block image gives.
+ */
+import ArrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
+import ArrowRight from "@/assets/images/icons/icon-swipe-right.svg";
 /*
  * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
  * original this mark takes its link's colour and follows it on hover. An <img>
@@ -168,7 +173,7 @@ const OBJECT_POSITION: Record<string, string> = {
             aria-label="Previous"
             disabled
           >
-            <Image src={arrowLeft} alt="" class="w-6" />
+            <ArrowLeft class="inline align-baseline" aria-hidden="true" />
           </button>
         </div>
         <div class="absolute inset-y-0 right-0 flex flex-row items-center pr-3">
@@ -178,7 +183,7 @@ const OBJECT_POSITION: Record<string, string> = {
             data-scroller-next
             aria-label="Next"
           >
-            <Image src={arrowRight} alt="" class="w-6" />
+            <ArrowRight class="inline align-baseline" aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -251,12 +256,23 @@ const OBJECT_POSITION: Record<string, string> = {
     transform: scale(1);
   }
 
+  /* `.button-text`: a 0.2rem hit area that the negative margin keeps out of flow. */
   .scroller-arrow {
     cursor: pointer;
     border: none;
     background: none;
-    padding: 0.25rem;
-    transition-property: opacity;
+    padding: 0.2rem;
+    margin: -0.2rem;
+    /* `%button-with-text`, which is what sizes the icon's line box. */
+    font-size: var(--text-xs);
+    line-height: 1;
+    color: var(--color-black);
+    transition-property: color, opacity;
+  }
+
+  .scroller-arrow:hover,
+  .scroller-arrow:focus {
+    color: var(--color-dlabs-blue);
   }
 
   .scroller-arrow:disabled {

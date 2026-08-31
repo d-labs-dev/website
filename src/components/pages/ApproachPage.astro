@@ -155,8 +155,13 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
       </div>
 
       <div class="pointer-events-none absolute inset-0 z-1 flex flex-col items-center">
-        <div class="sticky top-0 min-h-screen w-full max-w-[60rem] px-6 pt-24">
-          <LeadLine>{copy.slider_lead}</LeadLine>
+        {
+          /* `q-md-px-4`: the 1.5rem inset is a below-640px rule, so above that the
+            lead-line's rule starts flush with the container. Applied at every
+            width it sat 28.8px right of live's. */
+        }
+        <div class="sticky top-0 min-h-screen w-full max-w-[60rem] pt-24 max-sm:px-6">
+          <LeadLine size="xs">{copy.slider_lead}</LeadLine>
         </div>
       </div>
 
@@ -303,7 +308,14 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
     </div>
   </div>
 
-  <Contact locale={locale} contact={copy.contact} light={true} />
+  {
+    /*
+    The blue variant. `contact.html` defaults to `bg-blue text-white` and only
+    goes white when the include passes `is_white`, which the approach page does
+    not — only the individual job pages do.
+  */
+  }
+  <Contact locale={locale} contact={copy.contact} />
 </BaseLayout>
 
 <style>
@@ -336,12 +348,16 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
     color: var(--color-dlabs-gray-300);
   }
 
+  /*
+   * `.scroll-indicator`: a 0.33rem disc that only changes colour. It was 0.5rem
+   * here, and grew on activation — the original has no transform at all.
+   */
   .screen-dot {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.33rem;
+    height: 0.33rem;
     border-radius: 50%;
     background-color: var(--color-dlabs-gray-200);
-    transition-property: background-color, transform;
+    transition-property: background-color;
   }
 
   .screen-dot:hover {
@@ -350,7 +366,6 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
 
   .screen-dot[data-active] {
     background-color: var(--color-dlabs-blue);
-    transform: scale(1.4);
   }
 </style>
 

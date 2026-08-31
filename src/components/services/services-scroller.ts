@@ -133,7 +133,6 @@ export function setupServicesScroller(): void {
       indicator.toggleAttribute("data-active", active);
       indicator.setAttribute("aria-current", active ? "true" : "false");
       const label = indicator.querySelector<HTMLElement>("[data-scroller-label]");
-      if (label) label.style.fontWeight = active ? "bold" : "";
     });
 
     if (prev) prev.disabled = index <= 1;

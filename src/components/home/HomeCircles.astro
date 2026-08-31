@@ -11,10 +11,16 @@
  *
  * One fix on the way through: the coaching group's id was written `if="COACHING"`
  * in the original, so it never had an id at all.
+ *
+ * `inline` and `align-baseline`, against Tailwind's preflight, which makes svg a
+ * block aligned to the middle: sitting on the baseline as an inline replaced
+ * element leaves descender space below, which makes the container 8.8px taller.
+ * The container is vertically centred, so as a block the whole diagram sat 4.4px
+ * low against production — enough to light up every stroke in a pixel diff.
  */
 ---
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="w-full">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="inline w-full align-baseline">
   <circle
     id="_06-ellipse-engineering"
     cx="300"

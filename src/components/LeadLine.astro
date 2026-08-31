@@ -16,9 +16,11 @@ interface Props extends HTMLAttributes<"div"> {
   color?: "blue" | "white";
   /**
    * `small` is the `q-md-text-xs` variant the services page uses — one step down
-   * below 640px. Everywhere else the label is text-sm at every width.
+   * below 640px. `xs` is 0.8rem at every width, which exactly one label in the
+   * old markup asks for: the approach page's sticky slider lead. Everywhere else
+   * the label is text-sm at every width.
    */
-  size?: "default" | "small";
+  size?: "default" | "small" | "xs";
 }
 
 /**
@@ -42,7 +44,7 @@ const colorClass = color === "white" ? "text-white" : "text-dlabs-blue";
     // No tracking utility needed: `uppercase` carries the design's 0.1em, the
     // same as the old `.uppercase` class did.
     "lead-line font-heading font-bold uppercase",
-    size === "small" ? "text-xs sm:text-sm" : "text-sm",
+    size === "small" ? "text-xs sm:text-sm" : size === "xs" ? "text-xs" : "text-sm",
     colorClass,
     className,
   ]}
