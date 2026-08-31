@@ -175,10 +175,19 @@ export function svgTransform(values: TransformValues): string {
  */
 export const POINTER_EVENTS_OPACITY_THRESHOLD = 0.2;
 
-/** Set opacity, and stop a faded-out element from intercepting clicks. */
+/**
+ * Set opacity, and stop a faded-out element from intercepting clicks.
+ *
+ * `auto`, not `""`. These panels sit inside a `pointer-events-none` wrapper — the
+ * old `non-interactive` — so clearing the inline style hands control back to that
+ * class and the panel stays inert even at full opacity. The original writes
+ * `pointerEvents: "initial"` for exactly this reason, and without it nothing
+ * inside the visible screen could be clicked: the home page's "Mehr zum Projekt"
+ * buttons and the approach page's captions were all dead.
+ */
 export function applyOpacity(el: HTMLElement, opacity: number): void {
   el.style.opacity = String(opacity);
-  el.style.pointerEvents = opacity < POINTER_EVENTS_OPACITY_THRESHOLD ? "none" : "";
+  el.style.pointerEvents = opacity < POINTER_EVENTS_OPACITY_THRESHOLD ? "none" : "auto";
 }
 
 /**

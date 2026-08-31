@@ -149,6 +149,31 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
         ))
       }
 
+      {
+        /*
+        The scroll hint down to the clients grid, which was missing. It lives in
+        its own pinned layer on the original, with `interactive` re-enabling
+        pointer events inside the `non-interactive` wrapper.
+      */
+      }
+      <div class="pointer-events-none absolute inset-0 z-1">
+        <div class="sticky top-0 h-screen w-full">
+          <div
+            class="absolute inset-x-0 bottom-0 z-1 hidden flex-col items-center pb-8 text-black sm:flex"
+          >
+            <Button
+              variant="text"
+              color="black"
+              href="#clients"
+              class="pointer-events-auto"
+              aria-label={locale === "de" ? "Nach unten scrollen" : "Scroll down"}
+            >
+              <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
       {/* Screen indicator rail */}
       <div class="absolute inset-y-0 right-0 hidden md:block">
         <div class="sticky flex flex-col justify-center gap-4 pr-4" style="height: 60vh; top: 20vh">
