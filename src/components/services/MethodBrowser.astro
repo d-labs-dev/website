@@ -104,8 +104,8 @@ const TILE_HEIGHT = 300;
             A span rather than a button, so there is no control that does nothing.
           */
           }
-          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center">
-            <Image src={searchIcon} alt="" class="w-4" />
+          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center p-[0.2rem]">
+            <Image src={searchIcon} alt="" class="w-6" />
           </span>
         </div>
 
@@ -137,13 +137,13 @@ const TILE_HEIGHT = 300;
       </div>
 
       <div class="hidden pt-4 pb-3 sm:pt-0 md:block" data-filter-panel>
-        <div class="flex flex-col items-start justify-center gap-4 md:flex-row">
+        <div class="flex flex-col items-start justify-center gap-[1.2rem] md:flex-row">
           <button type="button" class="filter" data-filter="" data-active>
             <span class="flex flex-row items-start gap-2">
               <span class="h-4 w-4 shrink-0"
                 ><span class="filter-dot" style={`--dot: ${DOT_COLOURS.blue}`}></span></span
               >
-              <span class="text-xs">{copy.services_all_button}</span>
+              <span class="pt-[0.2rem] text-xs">{copy.services_all_button}</span>
             </span>
           </button>
 
@@ -157,7 +157,7 @@ const TILE_HEIGHT = 300;
                       style={`--dot: ${DOT_COLOURS[domain.color] ?? DOT_COLOURS.blue}`}
                     />
                   </span>
-                  <span class="text-xs">{domain.name}</span>
+                  <span class="pt-[0.2rem] text-xs">{domain.name}</span>
                 </span>
               </button>
             ))
@@ -227,7 +227,7 @@ const TILE_HEIGHT = 300;
   .search-input {
     border: none;
     border-bottom: 2px solid var(--color-black);
-    padding: 0.6rem 1.5rem 0.5rem 0;
+    padding: 0.6rem 0 0.5rem;
     font-size: var(--text-xs);
     outline: none;
     background: none;
@@ -247,6 +247,7 @@ const TILE_HEIGHT = 300;
   /* `.button-ghost.is-mini`: a 2px grey outline with a slightly bottom-light pad. */
   .toolbar-button {
     padding: 0.25rem 0.25rem 0.15rem;
+    line-height: 1;
     border: 2px solid var(--color-dlabs-gray-200);
     background: none;
     cursor: pointer;

@@ -74,6 +74,26 @@ svg {
   max-width: 100%;
 }
 
+/*
+ * Form controls keep the browser's `line-height: normal`.
+ *
+ * Tailwind's preflight gives them `font: inherit`, and the `font` shorthand
+ * carries line-height — so every button inherits body's 1.5. The current site
+ * only sets `font-family` and `font-size` on its buttons, so the UA's `font:
+ * -webkit-small-control` leaves line-height at `normal` (~1.15 for Roboto).
+ * Measured on d-labs.com: a services filter label is 17.66px against 23.04 here,
+ * which made each filter 2px taller and misaligned it against its dot.
+ *
+ * Components that want a specific measure set one (Button does, matching the old
+ * `%button-with-text`'s `line-height: 1`).
+ */
+button,
+input,
+select,
+textarea {
+  line-height: normal;
+}
+
 /* Phone numbers should not look like links. */
 a[href^="tel"] {
   color: inherit;

@@ -101,7 +101,7 @@ const nav = NAV_ITEMS.map((ref) => ({
     <div class="md:hidden">
       <button
         type="button"
-        class="menu-button cursor-pointer"
+        class="menu-button"
         data-menu-open
         aria-controls="mobile-nav"
         aria-expanded="false"
@@ -119,7 +119,7 @@ const nav = NAV_ITEMS.map((ref) => ({
 <div class="fixed inset-0 z-20 hidden bg-white" id="mobile-nav" data-mobile-nav>
   <div class="relative flex h-full w-full flex-col items-center px-8 py-6">
     <div class="absolute top-6 right-6">
-      <button type="button" class="cursor-pointer" data-menu-close aria-label="Menü schließen">
+      <button type="button" class="close-button" data-menu-close aria-label="Menü schließen">
         <Image src={closeIcon} alt="" />
       </button>
     </div>
@@ -171,6 +171,19 @@ const nav = NAV_ITEMS.map((ref) => ({
   }
 
   .site-logo,
+  /*
+   * `.button-text`: a block button with a 0.2rem hit area that the negative
+   * margin keeps out of the layout. Block matters here — a default-inline button
+   * sits in a line box, which made the header 81px tall against live's 73.
+   */
+  .menu-button,
+  .close-button {
+    display: block;
+    padding: 0.2rem;
+    margin: -0.2rem;
+    cursor: pointer;
+  }
+
   .menu-button {
     filter: grayscale(0) brightness(1);
     transition-property: filter;
