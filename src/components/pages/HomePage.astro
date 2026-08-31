@@ -300,6 +300,8 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
    * here, and grew on activation — the original has no transform at all.
    */
   .screen-dot {
+    /* `%raw-button` sets this; live's indicators are anchors and get it anyway. */
+    cursor: pointer;
     width: 0.33rem;
     height: 0.33rem;
     border-radius: 50%;
