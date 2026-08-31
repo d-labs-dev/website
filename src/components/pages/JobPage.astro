@@ -4,6 +4,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Button from "@/components/Button.astro";
 import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
+import Contact from "@/components/Contact.astro";
 import { contentfulImage, assetAlt } from "@/lib/contentful-image";
 import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
 import downloadIcon from "@/assets/images/icons/icon-download.svg";
@@ -35,7 +36,14 @@ const jobsUrl = pageUrl("jobs", locale);
   alternates={alternates}
 >
   {/* Hero: image on the left, intro and apply circle on the right. */}
-  <div class="relative flex flex-col pt-16 md:min-h-screen md:justify-center md:pt-0">
+  {
+    /*
+    `height-screen` is unconditional on the old hero, and `justify-center`
+    only takes over from `q-lg-justify-stretch` above 800px. Applied at `md:`
+    the hero was 147px short of the viewport below 800.
+  */
+  }
+  <div class="relative flex min-h-screen flex-col justify-stretch pt-16 md:justify-center md:pt-0">
     <div class="flex flex-auto flex-col gap-6 md:flex-initial md:flex-row md:gap-0">
       <div class="relative aspect-video md:aspect-auto md:min-h-[25rem] md:w-[calc(50%-6rem)]">
         {
@@ -51,16 +59,23 @@ const jobsUrl = pageUrl("jobs", locale);
       </div>
 
       <div class="flex w-full flex-auto flex-col md:w-auto">
+        {
+          /*
+          `sp-4` is a margin-bottom on every child but the last *and* the `.push`,
+          so this column carries two 1.5rem gaps, not the three a flex `gap` puts
+          between four children — 25px of extra height across the hero column.
+        */
+        }
         <div
-          class="flex w-full max-w-[50rem] flex-auto flex-col gap-6 px-6 md:max-w-[30rem] md:px-0 md:pl-12"
+          class="flex w-full max-w-[50rem] flex-auto flex-col px-6 md:max-w-[30rem] md:px-0 md:pl-12"
         >
-          <Button variant="text" color="black" href={`${jobsUrl}#list`}>
+          <Button variant="text" color="black" href={`${jobsUrl}#list`} class="mb-6">
             ←&nbsp;&nbsp;{copy.back_button_label}
           </Button>
 
           <div class="flex-auto"></div>
 
-          <div class="flex flex-col gap-4">
+          <div class="mb-6 flex flex-col gap-4">
             <h1 class="font-heading tracking-heading text-xl sm:text-2xl">
               {job.title}<a
                 href={`${jobsUrl}#inclusivity`}
@@ -88,10 +103,23 @@ const jobsUrl = pageUrl("jobs", locale);
       </div>
     </div>
 
+    {
+      /*
+      The label is a plain `.button-text` — black, not blue. The original wraps
+      this pair in an unclosed `<a class="button-text is-blue">`, which the parser
+      turns into two empty anchors that pick up nothing; the visible link inside
+      has no `is-blue`.
+    */
+    }
     <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center gap-4 pb-8 md:flex">
-      <Button variant="text" color="blue" href="#next">{copy.learn_more}</Button>
-      <a href="#next" aria-hidden="true" tabindex="-1">
-        <Image src={arrowDownIcon} alt="" class="w-4" />
+      <Button variant="text" color="black" href="#next">{copy.learn_more}</Button>
+      <a
+        href="#next"
+        class="-m-[0.2rem] inline-block p-[0.2rem] text-xs leading-none"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <Image src={arrowDownIcon} alt="" class="inline w-4 align-baseline" />
       </a>
     </div>
   </div>
@@ -144,4 +172,14 @@ const jobsUrl = pageUrl("jobs", locale);
       }
     </div>
   </div>
+
+  {
+    /*
+    The contact block, which was missing from this page entirely — the old layout
+    ends with `include contact.html contact=_.contact is_white=true
+    no_button=true`: the light variant, and the details without the mail button
+    because the apply call to action above already covers it.
+  */
+  }
+  <Contact locale={locale} contact={copy.contact} light={true} withButton={false} />
 </BaseLayout>

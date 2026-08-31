@@ -176,40 +176,6 @@
  * Measured on d-labs.com: line-height 1.6, li margin 0.5rem, ul padding-left
  * 1.5em, custom SVG bullet at 0.5em x 0.5833em.
  */
-/*
- * The D-LABS bullet mark. Shared between markdown lists and the hand-built
- * lists on the approach page, exactly as the old stylesheet shared it between
- * `.markdown > ul` and `.d-labs-list`. Top-level only: nested lists keep the
- * browser default, as on the current site.
- *
- * It cannot live inside the `.prose` block below, because the approach page puts
- * `.prose` on the list *items* and needs the mark on a `ul` that is not itself
- * inside a prose element.
- */
-.prose > ul,
-.bullet-list {
-  list-style: none;
-  padding-left: 1.5em;
-}
-
-.prose > ul > li,
-.bullet-list > li {
-  position: relative;
-}
-
-.prose > ul > li::before,
-.bullet-list > li::before {
-  content: "";
-  position: absolute;
-  top: 0.4em;
-  left: -1.5em;
-  width: 0.5em;
-  height: 0.583333em;
-  background-image: url("../assets/images/list-bullet.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
 .prose {
   /*
    * `:not(.font-heading)` mirrors the original rule exactly — the old
@@ -394,4 +360,46 @@
   & :is(hr, img, figure) {
     margin-bottom: 1.5rem;
   }
+}
+
+/*
+ * Source order matters here, which is why this sits *after* the block above and
+ * not before it: `.prose > ul` and `.prose :is(ul, ol)` have equal specificity,
+ * so whichever comes last wins. The old stylesheet declares the 2rem indent
+ * first and this 1.5em one second; with the order reversed every markdown list
+ * was indented 2rem instead of 1.5em, which is 12.5px narrower content and cost
+ * the job pages an extra wrapped line per list.
+ */
+/*
+ * The D-LABS bullet mark. Shared between markdown lists and the hand-built
+ * lists on the approach page, exactly as the old stylesheet shared it between
+ * `.markdown > ul` and `.d-labs-list`. Top-level only: nested lists keep the
+ * browser default, as on the current site.
+ *
+ * It cannot live inside the `.prose` block below, because the approach page puts
+ * `.prose` on the list *items* and needs the mark on a `ul` that is not itself
+ * inside a prose element.
+ */
+.prose > ul,
+.bullet-list {
+  list-style: none;
+  padding-left: 1.5em;
+}
+
+.prose > ul > li,
+.bullet-list > li {
+  position: relative;
+}
+
+.prose > ul > li::before,
+.bullet-list > li::before {
+  content: "";
+  position: absolute;
+  top: 0.4em;
+  left: -1.5em;
+  width: 0.5em;
+  height: 0.583333em;
+  background-image: url("../assets/images/list-bullet.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
 }

@@ -84,7 +84,13 @@ const nav = NAV_ITEMS.map((ref) => ({
               data-active={item.isActive ? "" : undefined}
               aria-current={item.isActive ? "page" : undefined}
             >
-              {item.label}
+              {/*
+                The label is wrapped so the badge can carry its own underline.
+                The anchor's blue rule would be invisible on the blue disc, so on
+                the jobs page the original marks the *label* instead, in white —
+                `is-active-badge-text` in locale_link_tag.rb.
+              */}
+              <div class="nav-label">{item.label}</div>
             </a>
           ))
         }
@@ -236,6 +242,13 @@ const nav = NAV_ITEMS.map((ref) => ({
     font-weight: normal;
     text-transform: uppercase;
     border-bottom-color: transparent;
+  }
+
+  /* The active jobs badge underlines its label in white. */
+  /* A block element, as the original's is: an inline span's rule would not add
+     its 2px to the anchor's height, and the badge would sit 2px short. */
+  .nav-link[data-badge][data-active] .nav-label {
+    border-bottom: 2px solid #fff;
   }
 
   .site-header:not([data-blue-top]) .nav-link[data-badge]::before,

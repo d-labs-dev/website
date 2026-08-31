@@ -42,3 +42,33 @@ export function setupApproach(): void {
   const tracker = trackScroll({ root, onChange: (index) => render(index) });
   render(tracker.index, true);
 }
+
+/**
+ * The intro circle: it expands once, 1.5 seconds after load or as soon as the
+ * visitor moves the pointer or scrolls — whichever comes first. Port of
+ * `approachAnimation()`, which used the same three triggers.
+ *
+ * Under reduced motion it starts grown, so the page does not open with a
+ * transform animation nobody asked for.
+ */
+export function setupApproachCircle(): void {
+  const circle = document.querySelector<HTMLElement>("[data-approach-circle]");
+  if (!circle) return;
+
+  const grow = () => {
+    window.clearTimeout(timer);
+    document.removeEventListener("mousemove", grow);
+    window.removeEventListener("scroll", grow);
+    circle.setAttribute("data-grown", "");
+  };
+
+  if (prefersReducedMotion()) {
+    circle.style.transition = "none";
+    grow();
+    return;
+  }
+
+  const timer = window.setTimeout(grow, 1500);
+  document.addEventListener("mousemove", grow, { once: true, passive: true });
+  window.addEventListener("scroll", grow, { once: true, passive: true });
+}

@@ -78,9 +78,20 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
     >
       <div class="relative z-1 flex w-full max-w-[60rem] flex-col gap-6 pb-12">
         <LeadLine>{copy.intro_lead}</LeadLine>
-        <div class="font-heading tracking-heading xs:text-xl text-lg sm:text-2xl">
+        {/* `text-xxl q-md-text-xl`: one step at 640px, unlike the services intro. */}
+        <div class="font-heading tracking-heading text-xl sm:text-2xl">
           <Markdown source={copy.intro_text} size="inherit" heading />
         </div>
+      </div>
+
+      {
+        /*
+        The circle that opens the page: a small blue ring behind the copy that
+        expands past the viewport shortly after load. It was missing entirely.
+      */
+      }
+      <div class="pointer-events-none absolute inset-0 flex flex-col">
+        <div class="approach-circle" data-approach-circle></div>
       </div>
 
       <div class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black">
@@ -257,6 +268,26 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
 
 <style>
   /*
+   * The intro circle. Values are the original's: a 20vmax ring that starts at a
+   * tenth of its size with a thick border and grows to ten times with a thin one,
+   * over 0.75s. `margin: auto` centres it in the absolutely-positioned wrapper.
+   */
+  .approach-circle {
+    margin: auto;
+    width: 20vmax;
+    height: 20vmax;
+    border-radius: 50%;
+    border: 15px solid var(--color-dlabs-blue);
+    transform: translate3d(0, 33%, 0) scale(0.1);
+    transition: transform 0.75s ease-out;
+  }
+
+  .approach-circle[data-grown] {
+    border-width: 2px;
+    transform: translate3d(0, 33%, 0) scale(10);
+  }
+
+  /*
    * `.approach-project-image_source`. The size is a fluid calc rather than a
    * token, so it stays CSS: `text-2xs` would be 0.32px off at 1280.
    */
@@ -284,6 +315,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
 </style>
 
 <script>
-  import { setupApproach } from "@/components/approach/approach";
+  import { setupApproach, setupApproachCircle } from "@/components/approach/approach";
   setupApproach();
+  setupApproachCircle();
 </script>

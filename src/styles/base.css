@@ -117,23 +117,27 @@ html {
 }
 
 /*
- * Form controls keep the browser's `line-height: normal`.
+ * Form controls get `line-height: 1.15`, from normalize.css v8 — which the
+ * current site loads and Tailwind's preflight does not carry over.
  *
- * Tailwind's preflight gives them `font: inherit`, and the `font` shorthand
- * carries line-height — so every button inherits body's 1.5. The current site
- * only sets `font-family` and `font-size` on its buttons, so the UA's `font:
- * -webkit-small-control` leaves line-height at `normal` (~1.15 for Roboto).
- * Measured on d-labs.com: a services filter label is 17.66px against 23.04 here,
- * which made each filter 2px taller and misaligned it against its dot.
+ * Preflight instead gives controls `font: inherit`, and the `font` shorthand
+ * carries line-height, so every button here inherited body's 1.5: a services
+ * filter label was 23.04px against live's 17.66, making each filter 2px taller.
  *
- * Components that want a specific measure set one (Button does, matching the old
- * `%button-with-text`'s `line-height: 1`).
+ * The value has to be the number, not `normal`. A number inherits as a factor,
+ * so a 0.8rem label inside a 1rem button gets 1.15 x 0.8rem; `normal` does not
+ * inherit, so the label resolves its own — ~1.172 for Roboto, which left the
+ * label a pixel below its dot instead of level with it.
+ *
+ * Components that want a specific measure still set one: Button uses 1, matching
+ * the old `%button-with-text`.
  */
 button,
 input,
+optgroup,
 select,
 textarea {
-  line-height: normal;
+  line-height: 1.15;
 }
 
 /* Phone numbers should not look like links. */
