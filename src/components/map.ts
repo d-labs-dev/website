@@ -1,9 +1,13 @@
 /**
- * Google Maps, loaded on demand.
+ * Google Maps.
  *
- * Port of `initMap()` from the old scripts.js, with two differences: the script
- * is fetched when the visitor asks for it rather than on page load, and the API
- * key comes from a public env var instead of being hardcoded in the template.
+ * Port of `initMap()` from the old scripts.js. The options are the original's
+ * verbatim — zoom 6, the same computed centre, the same greyscale style with
+ * D-LABS blue water, and the same 25x25 marker at the same three coordinates.
+ *
+ * Two differences remain: the API key comes from a public env var rather than
+ * being hardcoded in the template, and the script is appended by this module
+ * instead of sitting inline in the markup. Both are invisible to the visitor.
  */
 
 const OFFICES = [
@@ -101,25 +105,19 @@ function render(container: HTMLElement) {
 
 export function setupMap(): void {
   const container = document.querySelector<HTMLElement>("[data-map]");
-  const trigger = container?.querySelector<HTMLButtonElement>("[data-map-load]");
-  if (!container || !trigger) return;
+  if (!container) return;
 
   const apiKey = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
-    // Better an honest note than a placeholder that does nothing when clicked.
-    trigger.disabled = true;
-    trigger.title = "PUBLIC_GOOGLE_MAPS_API_KEY is not set";
+    // No key, no map — and no half-rendered grey box either. The container keeps
+    // its height so the page does not reflow.
+    console.warn("PUBLIC_GOOGLE_MAPS_API_KEY is not set; the map will not render.");
     return;
   }
 
-  trigger.addEventListener("click", async () => {
-    trigger.disabled = true;
-    try {
-      await loadMapsScript(apiKey);
-      container.replaceChildren();
-      render(container);
-    } catch {
-      trigger.disabled = false;
-    }
-  });
+  void loadMapsScript(apiKey)
+    .then(() => render(container))
+    .catch(() => {
+      /* Google unreachable: leave the empty container rather than an error box. */
+    });
 }
