@@ -89,9 +89,14 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLoc
     </svg>
 
     <div class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-8 text-black">
-      <a href="#list" aria-label={locale === "de" ? "Zur Liste scrollen" : "Scroll to the list"}>
-        <ArrowDown class="w-4 fill-current" aria-hidden="true" />
-      </a>
+      <Button
+        variant="text"
+        color="black"
+        href="#list"
+        aria-label={locale === "de" ? "Zur Liste scrollen" : "Scroll to the list"}
+      >
+        <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+      </Button>
     </div>
   </div>
 
@@ -129,7 +134,13 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLoc
           <div id="inclusivity" class="scroll-mt-32">
             <span class="text-dlabs-blue">*</span>{copy.inclusivity_text}
           </div>
-          <Markdown source={copy.initiative_text} />
+          {
+            /*
+            A plain `<div>` on live, not a `.markdown` one, so it keeps body's 1.5
+            line-height rather than the 1.6 markdown measure.
+          */
+          }
+          <Markdown source={copy.initiative_text} plain />
         </div>
 
         <div class="flex flex-col items-center">

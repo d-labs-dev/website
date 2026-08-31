@@ -25,6 +25,15 @@ interface Props {
   size?: "sm" | "base" | "inherit";
   /** Render without a wrapping block element, for short single-line fields. */
   inline?: boolean;
+  /**
+   * Emit the block HTML with no `prose` class at all.
+   *
+   * A handful of fields are markdownified into a plain `<div>` on the current
+   * site rather than a `.markdown` one, so they keep body's 1.5 line-height
+   * instead of the 1.6 markdown measure — the jobs page's `initiative_text` is
+   * one, and the 0.1 was two pixels a line.
+   */
+  plain?: boolean;
   /** Use on a dark background (the blue panels). */
   tone?: "default" | "on-dark";
   /**
@@ -42,6 +51,7 @@ const {
   source,
   size = "base",
   inline = false,
+  plain = false,
   tone = "default",
   heading = false,
   class: className = "",
@@ -87,6 +97,8 @@ const classes = ["prose", heading ? "font-heading" : "", sizeClass, "max-w-none"
 {
   inline ? (
     <Fragment set:html={html} />
+  ) : plain ? (
+    html && <div class={className || undefined} set:html={html} />
   ) : (
     html && <div class={classes} style={tone === "on-dark" ? onDark : undefined} set:html={html} />
   )

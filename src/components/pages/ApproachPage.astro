@@ -100,11 +100,19 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
       </div>
 
       <div class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black">
-        <div class="flex flex-col items-center gap-4">
+        {
+          /*
+          `sp-3` is a margin-bottom of 1rem that replaces `.button-text`'s -0.2rem
+          on that side, while the mark below keeps its own — so the two sit 0.8rem
+          apart. A flex `gap` adds to both negative margins instead of replacing
+          one, so it needs 1.2rem to leave the same 0.8rem.
+        */
+        }
+        <div class="flex flex-col items-center gap-[1.2rem]">
           <Button variant="text" color="black" href="#n1">{copy.intro_cta_text}</Button>
-          <a href="#n1" aria-hidden="true" tabindex="-1">
-            <ArrowDown class="w-4 fill-current" aria-hidden="true" />
-          </a>
+          <Button variant="text" color="black" href="#n1" aria-hidden="true" tabindex="-1">
+            <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+          </Button>
         </div>
       </div>
     </div>
@@ -116,6 +124,33 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
           class="sticky top-0 flex min-h-screen w-full max-w-[80rem] flex-row items-end overflow-hidden pb-16 md:items-center md:pb-0"
         >
           <ApproachDiagram />
+
+          {
+            /*
+            The link down to the project examples, which was missing — the old
+            markup hangs it off the bottom of the diagram's sticky wrapper. Its
+            copy is `projects_link_text`, which was in the content all along with
+            nothing rendering it.
+          */
+          }
+          <div
+            class="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center pb-3 sm:pb-6"
+          >
+            <div class="pointer-events-auto flex flex-col items-center gap-[1.2rem]">
+              <Button variant="text" color="black" href="#projects">
+                {copy.projects_link_text}
+              </Button>
+              <Button
+                variant="text"
+                color="black"
+                href="#projects"
+                aria-hidden="true"
+                tabindex="-1"
+              >
+                <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 

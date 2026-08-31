@@ -10,6 +10,7 @@
  */
 import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
 import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
 import OfficeCards from "@/components/OfficeCards.astro";
@@ -76,9 +77,14 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("about", otherLo
       <div
         class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-12 text-black md:flex"
       >
-        <a href="#next" aria-label={locale === "de" ? "Weiter" : "Continue"}>
-          <ArrowDown class="w-4 fill-current" aria-hidden="true" />
-        </a>
+        <Button
+          variant="text"
+          color="black"
+          href="#next"
+          aria-label={locale === "de" ? "Weiter" : "Continue"}
+        >
+          <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+        </Button>
       </div>
     </div>
 

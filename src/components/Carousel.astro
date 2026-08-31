@@ -30,7 +30,7 @@ const { label, loop = false, class: className = "" } = Astro.props;
   aria-label={label}
 >
   <div class="carousel-viewport overflow-hidden" data-carousel-viewport>
-    <div class="carousel-track flex" data-carousel-track>
+    <div class="carousel-track flex items-start" data-carousel-track>
       <slot />
     </div>
   </div>
@@ -39,7 +39,7 @@ const { label, loop = false, class: className = "" } = Astro.props;
     class="pointer-events-none absolute inset-y-0 right-full hidden flex-col justify-center md:flex"
   >
     <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous">
-      <Image src={arrowLeft} alt="" class="h-8 max-w-none" />
+      <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" />
     </button>
   </div>
 
@@ -47,7 +47,7 @@ const { label, loop = false, class: className = "" } = Astro.props;
     class="pointer-events-none absolute inset-y-0 left-full hidden flex-col justify-center md:flex"
   >
     <button type="button" class="carousel-arrow" data-carousel-next aria-label="Next">
-      <Image src={arrowRight} alt="" class="h-8 max-w-none" />
+      <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" />
     </button>
   </div>
 
@@ -61,12 +61,13 @@ const { label, loop = false, class: className = "" } = Astro.props;
     min-width: 0;
   }
 
+  /* `.button-text`: a 0.2rem hit area, not Tailwind's 0.25rem. */
   .carousel-arrow {
     pointer-events: auto;
     cursor: pointer;
     border: none;
     background: none;
-    padding: 0.25rem;
+    padding: 0.2rem;
     transition-property: opacity;
   }
 

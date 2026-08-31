@@ -101,7 +101,14 @@ const jobsUrl = pageUrl("jobs", locale);
               href={copy.apply_now_target}
               aria-label={copy.apply_now_aria_label}
             >
-              {copy.circle_apply_now_button_label}
+              {
+                /*
+                `pb-t1` on the original: 0.25rem under the label, which lifts it
+                2px above the circle's centre. Without it the two lines sit dead
+                centre and read as slightly low against live.
+              */
+              }
+              <span class="block pb-1">{copy.circle_apply_now_button_label}</span>
             </Button>
           </div>
         </div>
@@ -116,7 +123,7 @@ const jobsUrl = pageUrl("jobs", locale);
       has no `is-blue`.
     */
     }
-    <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center gap-4 pb-8 md:flex">
+    <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center gap-[1.2rem] pb-8 md:flex">
       <Button variant="text" color="black" href="#next">{copy.learn_more}</Button>
       {
         /*

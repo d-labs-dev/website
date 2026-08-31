@@ -93,15 +93,21 @@ if (!avatar) {
 
         {
           withButton && contact.cta_text && (
-            <div class="flex flex-col items-start">
-              <Button
-                variant="solid"
-                color={light ? "blue" : "white"}
-                href={`mailto:${contact.email}`}
-              >
-                {contact.cta_text}
-              </Button>
-            </div>
+            <Button
+              variant="solid"
+              color={light ? "blue" : "white"}
+              href={`mailto:${contact.email}`}
+              class="block w-full text-center"
+            >
+              {/*
+                Full width, not content width. The original's `.button` is
+                `display: block` and sits directly in a `col` with the default
+                `align-items: stretch`, so it spans the details column — 214px
+                against the 121px an inline-block gives. The `items-start` wrapper
+                that used to be here was mine, and wrong.
+              */}
+              {contact.cta_text}
+            </Button>
           )
         }
       </div>
