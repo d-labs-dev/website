@@ -1,0 +1,230 @@
+---
+/**
+ * Client logos as a self-advancing carousel, replacing the 12-up grid with a
+ * "show more" toggle.
+ *
+ * Every logo is a slide and the track loops, so the section is one row tall at
+ * any width instead of growing to nine. All 36 are in the HTML — Embla moves
+ * the track, it does not fetch — so the names stay indexable, as they were
+ * when the hidden rest of the grid shipped in the markup.
+ *
+ * Autoplay means WCAG 2.2.2 applies: moving content that starts on its own
+ * needs a way to stop it. That is the pause button, which is why it sits in the
+ * heading row rather than being an optional flourish. It ships `hidden` and JS
+ * reveals it: with no JS nothing moves, and a pause button for a static row of
+ * logos would be a lie.
+ */
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
+import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
+
+interface Props {
+  heading: string;
+  /** Accessible name of the toggle while the carousel is moving. */
+  pauseLabel: string;
+  /** …and while it is stopped. */
+  playLabel: string;
+  prevLabel: string;
+  nextLabel: string;
+}
+
+const { heading, pauseLabel, playLabel, prevLabel, nextLabel } = Astro.props;
+
+const entry = await getEntry("clients", "clients");
+const clients = entry?.data.logos ?? [];
+
+const logos = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/clients/*.svg", {
+  eager: true,
+});
+
+function resolve(path: string) {
+  const logo = logos[`/src/assets/images/${path}`]?.default;
+  if (!logo) throw new Error(`Client logo not found: src/assets/images/${path}`);
+  return logo;
+}
+---
+
+<div class="relative z-2 flex flex-col items-center bg-white px-6 pt-24 pb-24" id="clients">
+  <div class="flex w-full max-w-[60rem] flex-col gap-8" data-client-carousel>
+    <div class="flex items-center justify-between gap-4">
+      <h2 class="font-heading tracking-heading text-xl">{heading}</h2>
+
+      {/* Not <Button>: none of its variants is a bordered square icon box. */}
+      <button
+        type="button"
+        class="client-toggle"
+        data-client-toggle
+        data-label-pause={pauseLabel}
+        data-label-play={playLabel}
+        aria-label={playLabel}
+        aria-controls="client-carousel-viewport"
+        hidden
+      >
+        <svg viewBox="0 0 12 14" class="h-3.5 w-3" aria-hidden="true" data-icon="pause">
+          <rect x="0" y="0" width="4" height="14" fill="currentColor"></rect>
+          <rect x="8" y="0" width="4" height="14" fill="currentColor"></rect>
+        </svg>
+        <svg viewBox="0 0 12 14" class="h-3.5 w-3" aria-hidden="true" data-icon="play">
+          <path d="M0 0 L12 7 L0 14 Z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+
+    {
+      /*
+      Arrows are flex siblings of the viewport rather than absolutely positioned
+      outside it, as on the quote slider. This section is already the full
+      60rem content column, so there is no room beside it to hang them in — and
+      the reference design puts them inside the frame either way.
+    */
+    }
+    <div class="flex items-center gap-1 sm:gap-3">
+      <button type="button" class="client-arrow" data-carousel-prev aria-label={prevLabel}>
+        <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" />
+      </button>
+
+      <div class="client-viewport" id="client-carousel-viewport" data-carousel-viewport>
+        <div class="client-track">
+          {
+            clients.map((client) => (
+              <div class="client-slide">
+                {/*
+                  Bare `w-full`, as the grid had it, and deliberately no height
+                  cap. Every one of these files is drawn on the same 225x148
+                  artboard (one is 240.91x148), so they already share an aspect
+                  ratio and scale together — the size differences you see are
+                  whitespace inside the artwork, which no CSS here can reclaim.
+                  A `max-h` on top of that binds before the width does and just
+                  renders every logo smaller than its slide allows.
+                */}
+                <Image
+                  src={resolve(client.logo)}
+                  alt={client.name}
+                  title={client.name}
+                  class="w-full"
+                  loading="lazy"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <button type="button" class="client-arrow" data-carousel-next aria-label={nextLabel}>
+        <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" />
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .client-viewport {
+    overflow: hidden;
+    flex: 1 1 auto;
+    /* Without this the track's content floors the flex item and the row
+       overflows the page instead of clipping. */
+    min-width: 0;
+  }
+
+  .client-track {
+    display: flex;
+    align-items: center;
+    /* Vertical scrolling still belongs to the page while dragging sideways. */
+    touch-action: pan-y pinch-zoom;
+  }
+
+  /*
+   * Slides per view: 2 → 3 → 4 → 6, ending on the six of the reference design.
+   * The steps are the design's own breakpoints (see the @theme block), and the
+   * 2-up base matches what the grid did below 800px.
+   */
+  .client-slide {
+    flex: 0 0 50%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*
+     * Narrower than the grid's px-6. That 1.5rem was gutter for a 4-up cell
+     * roughly 297px wide; six across the same column gives a slide of ~193px,
+     * where the same padding would be a third of it and shrink every logo to
+     * match. 0.5rem keeps the gutter at about the proportion the grid had.
+     */
+    padding: 1rem 0.5rem;
+  }
+
+  @media (width >= 30rem) {
+    .client-slide {
+      flex-basis: 33.333%;
+    }
+  }
+
+  @media (width >= 40rem) {
+    .client-slide {
+      flex-basis: 25%;
+    }
+  }
+
+  @media (width >= 70rem) {
+    .client-slide {
+      flex-basis: 16.666%;
+    }
+  }
+
+  /* `.button-text`: a 0.2rem hit area, not Tailwind's 0.25rem — as on the
+     quote slider's arrows, which these are the same artwork as. */
+  .client-arrow {
+    flex: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    transition-property: opacity;
+  }
+
+  .client-arrow:hover {
+    opacity: 0.7;
+  }
+
+  .client-toggle {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid var(--color-black);
+    background: none;
+    color: var(--color-black);
+    transition-property: color, background-color, border-color;
+  }
+
+  .client-toggle:hover {
+    background-color: var(--color-black);
+    color: #fff;
+  }
+
+  /* The two glyphs are both in the markup and JS picks one, so the button never
+     has to rebuild its contents — and it reads correctly the moment the class
+     lands, with no frame of the wrong icon. Stopped is the pre-JS state. */
+  .client-toggle [data-icon="pause"] {
+    display: none;
+  }
+
+  .client-toggle.is-playing [data-icon="pause"] {
+    display: block;
+  }
+
+  .client-toggle.is-playing [data-icon="play"] {
+    display: none;
+  }
+</style>
+
+<script>
+  import { setupClientCarousel } from "./client-carousel";
+  setupClientCarousel();
+</script>

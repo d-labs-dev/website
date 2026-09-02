@@ -24,8 +24,10 @@ screens:
   cta: MORE ABOUT THE PROJECT
   cta_target: /en/approach/#project3
 clients_heading: Our Customers
-clients_show_more: See more
-clients_show_less: Show less
+clients_pause: Pause logo carousel
+clients_play: Play logo carousel
+clients_prev: Previous client logos
+clients_next: Next client logos
 blog_cta_text: Find out more
 jobs_image: dlabs_main-01-jobteaser.jpg
 jobs_lead: Jobs

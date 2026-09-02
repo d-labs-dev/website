@@ -28,8 +28,10 @@ screens:
     cta: Mehr zum Projekt
     cta_target: /approach/#project3
 clients_heading: Unsere Kunden
-clients_show_more: Mehr Anzeigen
-clients_show_less: Weniger Anzeigen
+clients_pause: Logo-Karussell pausieren
+clients_play: Logo-Karussell abspielen
+clients_prev: Vorherige Kundenlogos
+clients_next: Nächste Kundenlogos
 blog_cta_text: Erfahren Sie Mehr
 jobs_image: dlabs_main-01-jobteaser.jpg
 jobs_lead: Jobs

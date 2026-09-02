@@ -25,6 +25,7 @@
     "astro": "^7.2.4",
     "contentful": "^11.12.9",
     "embla-carousel": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
     "marked": "^18.0.10",
     "sharp": "^0.35.3",
     "tailwindcss": "^4.3.3",

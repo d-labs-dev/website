@@ -254,8 +254,12 @@ const offices = defineCollection({
 const clients = defineCollection({
   loader: glob({ pattern: "clients.yml", base: "./content/clients" }),
   schema: z.object({
-    first: z.array(z.object({ name: z.string(), logo: z.string() })),
-    rest: z.array(z.object({ name: z.string(), logo: z.string() })),
+    /**
+     * One ordered list, not a shown/hidden split: the homepage carousel cycles
+     * through all of them, so the order is the editorial decision and there is
+     * nothing left to hide behind a "show more".
+     */
+    logos: z.array(z.object({ name: z.string(), logo: z.string() })),
   }),
 });
 
