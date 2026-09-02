@@ -13,6 +13,8 @@ import Markdown from "@/components/Markdown.astro";
 import Locations from "@/components/Locations.astro";
 import HomeCircles from "@/components/home/HomeCircles.astro";
 import ClientCarousel from "@/components/home/ClientCarousel.astro";
+import Spotlight from "@/components/Spotlight.astro";
+import Teaser from "@/components/Teaser.astro";
 /*
  * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
  * original this mark takes its link's colour and follows it on hover. An <img>
@@ -192,6 +194,9 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
     </div>
   </div>
 
+  {/* Spotlight sits between the screens and the clients, as on the design board. */}
+  <Spotlight locale={locale} variant="short" ctaHref={`${pageUrl("services", locale)}#spotlight`} />
+
   <ClientCarousel
     heading={copy.clients_heading}
     pauseLabel={copy.clients_pause}
@@ -202,85 +207,78 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
 
   {
     /*
-    Blog teaser. The image is a 15rem flex item beside the text, not an absolute
-    overlay: `width-11 relative no-shrink minheight-10 q-md-width-full
-    q-md-is-first` — full width and first in order below 640px. The eyebrow sits
-    *beside* the text column above 1120px (`row sp-6 align-start q-xl-col`), which
-    is why the block is 484px tall on live rather than 552.
+    Blog teaser. Full-bleed: the blue runs the width of the page and a square
+    image is anchored over its right edge, as tall as the band — see Teaser's
+    `square` format. The copy inside still lines up with the 60rem column.
   */
   }
   {
     latest && (
-      <div class="bg-dlabs-blue relative z-2 flex flex-col items-center pl-6 text-white max-sm:pl-0">
-        <div class="flex w-full max-w-[60rem] flex-col gap-8">
-          <div class="flex flex-col sm:flex-row sm:gap-24">
-            <div class="flex flex-col items-start pt-12 pb-16 max-sm:px-6 lg:flex-row lg:gap-12">
-              <LeadLine color="white">Blog</LeadLine>
+      <Teaser side="right" format="square" tone="dark">
+        {latest.data.heroImage && (
+          <img
+            slot="media"
+            src={contentfulImage(latest.data.heroImage, {
+              width: 900,
+              height: 900,
+              fit: "fill",
+              focus: "faces",
+            })}
+            alt={assetAlt(latest.data.heroImage)}
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        )}
 
-              <div class="flex flex-col gap-8 pt-8">
-                <div class="flex flex-col gap-4">
-                  <a href={entryUrl("blog", latest.data.slug, locale)} class="teaser-link">
-                    <h2 class="font-heading tracking-heading text-xl">{latest.data.title}</h2>
-                  </a>
-                  <Markdown source={latest.data.description} tone="on-dark" />
-                </div>
+        {/*
+          Eyebrow on its own line with the copy stacked underneath and stepped in
+          past it, so the rule hangs furthest left, then the label, then the
+          heading, body and button on one shared edge. The indent is only from
+          `md` up — on a narrow screen the copy uses the full width.
+        */}
+        <div class="flex flex-col items-start gap-4">
+          <LeadLine color="white" indent="narrow">
+            Blog
+          </LeadLine>
 
-                <div class="flex flex-col items-start">
-                  <Button
-                    variant="ghost"
-                    color="white"
-                    href={entryUrl("blog", latest.data.slug, locale)}
-                  >
-                    {copy.blog_cta_text}
-                  </Button>
-                </div>
-              </div>
+          <div class="flex max-w-[34rem] flex-col items-start gap-8 md:pl-28">
+            <div class="flex flex-col gap-4">
+              <a href={entryUrl("blog", latest.data.slug, locale)} class="teaser-link">
+                <h2 class="font-heading tracking-heading text-xl">{latest.data.title}</h2>
+              </a>
+              <Markdown source={latest.data.description} tone="on-dark" />
             </div>
 
-            {latest.data.heroImage && (
-              <div class="relative min-h-40 w-full shrink-0 max-sm:order-first sm:w-[15rem]">
-                <img
-                  src={contentfulImage(latest.data.heroImage, {
-                    width: 300,
-                    height: 400,
-                    fit: "fill",
-                    focus: "faces",
-                  })}
-                  alt={assetAlt(latest.data.heroImage)}
-                  class="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            )}
+            <Button variant="ghost" color="white" href={entryUrl("blog", latest.data.slug, locale)}>
+              {copy.blog_cta_text}
+            </Button>
           </div>
         </div>
-      </div>
+      </Teaser>
     )
   }
 
-  {/* Jobs teaser */}
-  <div class="relative z-2 flex flex-col bg-white sm:flex-row">
-    <div class="relative min-h-32 w-full sm:w-1/2">
-      <Image
-        src={jobsImage}
-        alt=""
-        class="jobs-image absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-      />
-    </div>
-    <div class="w-full sm:w-1/2">
-      <div class="flex flex-col gap-4 px-6 py-24 sm:pl-12">
-        <LeadLine>{copy.jobs_lead}</LeadLine>
-        <h2 class="font-heading tracking-heading text-xl">{copy.jobs_title}</h2>
-        <div class="flex flex-col items-start gap-8">
-          <div>{copy.jobs_desc}</div>
-          <Button variant="ghost" color="blue" href={copy.jobs_cta_url ?? pageUrl("jobs", locale)}>
-            {copy.jobs_cta_text}
-          </Button>
-        </div>
+  {/* Jobs teaser — the board's "Format 1: halbe Seite", image left. */}
+  <Teaser side="left" format="half">
+    <Image
+      slot="media"
+      src={jobsImage}
+      alt=""
+      class="jobs-image absolute inset-0 h-full w-full object-cover"
+      loading="lazy"
+    />
+
+    <div class="flex flex-col gap-4 px-6 py-24 sm:pl-12">
+      <LeadLine>{copy.jobs_lead}</LeadLine>
+      <h2 class="font-heading tracking-heading text-xl">{copy.jobs_title}</h2>
+      <div class="flex flex-col items-start gap-8">
+        <div>{copy.jobs_desc}</div>
+        <Button variant="ghost" color="blue" href={copy.jobs_cta_url ?? pageUrl("jobs", locale)}>
+          {copy.jobs_cta_text}
+        </Button>
       </div>
     </div>
-  </div>
+  </Teaser>
 
   <Locations locale={locale} light={true} withMap={true} />
 </BaseLayout>

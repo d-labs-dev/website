@@ -7,6 +7,12 @@
  * Progressive enhancement: with no JS the first slide is visible and the rest
  * follow in the flow, which is more useful than an empty box.
  */
+/*
+ * The arrow glyphs load eagerly. Astro's <Image> defaults to `loading="lazy"`,
+ * which is right for content but wrong for a control: the button's own disc
+ * paints immediately, so a deferred glyph shows as an empty circle until it
+ * arrives. They are a few hundred bytes each.
+ */
 import { Image } from "astro:assets";
 import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
 import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
@@ -15,20 +21,64 @@ interface Props {
   /** Announced to screen readers, since a carousel is otherwise anonymous. */
   label: string;
   loop?: boolean;
+  /**
+   * Dots are the quote slider's affordance and their position is tuned for its
+   * portrait indent, so a carousel that is not that shape turns them off.
+   */
+  dots?: boolean;
+  /**
+   * `outside` hangs the arrows in the margin beside the carousel, which needs
+   * the caller to have room there. `overlay` lays them over the slide's own left
+   * and right edges, for a full-bleed band with no margin to hang them in — they
+   * float above the content rather than reserving a column and pushing it in.
+   */
+  arrows?: "outside" | "overlay";
+  /**
+   * Which overlaid arrow sits on top of imagery and so needs an opaque disc
+   * behind it. The other one is left as a bare chevron — a plate over plain
+   * background is visual noise, and the design only draws one.
+   */
+  arrowPlate?: "none" | "prev" | "next";
+  prevLabel?: string;
+  nextLabel?: string;
   class?: string;
 }
 
-const { label, loop = false, class: className = "" } = Astro.props;
+const {
+  label,
+  loop = false,
+  dots = true,
+  arrows = "outside",
+  arrowPlate = "none",
+  prevLabel = "Previous",
+  nextLabel = "Next",
+  class: className = "",
+} = Astro.props;
+
+const overlay = arrows === "overlay";
 ---
 
 <div
   class:list={["carousel relative", className]}
   data-carousel
   data-loop={loop ? "" : undefined}
+  data-arrows={arrows}
+  data-arrow-plate={arrowPlate}
   role="group"
   aria-roledescription="carousel"
   aria-label={label}
 >
+  <div
+    class:list={[
+      "pointer-events-none absolute inset-y-0 z-10 flex-col justify-center",
+      overlay ? "left-3 flex sm:left-6" : "right-full hidden md:flex",
+    ]}
+  >
+    <button type="button" class="carousel-arrow" data-carousel-prev aria-label={prevLabel}>
+      <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" loading="eager" />
+    </button>
+  </div>
+
   <div class="carousel-viewport overflow-hidden" data-carousel-viewport>
     <div class="carousel-track flex items-start" data-carousel-track>
       <slot />
@@ -36,22 +86,17 @@ const { label, loop = false, class: className = "" } = Astro.props;
   </div>
 
   <div
-    class="pointer-events-none absolute inset-y-0 right-full hidden flex-col justify-center md:flex"
+    class:list={[
+      "pointer-events-none absolute inset-y-0 z-10 flex-col justify-center",
+      overlay ? "right-3 flex sm:right-6" : "left-full hidden md:flex",
+    ]}
   >
-    <button type="button" class="carousel-arrow" data-carousel-prev aria-label="Previous">
-      <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" />
+    <button type="button" class="carousel-arrow" data-carousel-next aria-label={nextLabel}>
+      <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" loading="eager" />
     </button>
   </div>
 
-  <div
-    class="pointer-events-none absolute inset-y-0 left-full hidden flex-col justify-center md:flex"
-  >
-    <button type="button" class="carousel-arrow" data-carousel-next aria-label="Next">
-      <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" />
-    </button>
-  </div>
-
-  <div class="carousel-dots" data-carousel-dots role="tablist" aria-label={label}></div>
+  {dots && <div class="carousel-dots" data-carousel-dots role="tablist" aria-label={label} />}
 </div>
 
 <style>
@@ -71,9 +116,25 @@ const { label, loop = false, class: className = "" } = Astro.props;
     transition-property: opacity;
   }
 
-  .carousel-arrow:disabled {
-    opacity: 0.35;
-    cursor: default;
+  /*
+   * An arrow laid over imagery needs a surface of its own: a mid-blue chevron on
+   * a mid-tone photograph is invisible however it is shadowed. Over plain
+   * background it needs nothing, and a disc there would only add noise — so the
+   * plate is opt-in per arrow rather than a property of overlay mode.
+   */
+  .carousel[data-arrow-plate="prev"] [data-carousel-prev],
+  .carousel[data-arrow-plate="next"] [data-carousel-next] {
+    padding: 0.7rem;
+    border-radius: 9999px;
+    background-color: rgb(255 255 255 / 0.92);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.28);
+    transition-property: background-color, box-shadow;
+  }
+
+  .carousel[data-arrow-plate="prev"] [data-carousel-prev]:hover,
+  .carousel[data-arrow-plate="next"] [data-carousel-next]:hover {
+    background-color: #fff;
+    box-shadow: 0 3px 14px rgb(0 0 0 / 0.38);
   }
 
   /* Dots sit under the text column, indented past the portrait. */

@@ -1,0 +1,62 @@
+# Spotlight topics — the editorial slider on the home and services pages.
+#
+# Localized, one file per locale, so the two files must stay in step: the
+# carousel is index-based and a topic missing from one language would silently
+# shift the other's order.
+#
+# Each topic carries two intros: the boards give the two pages different copy.
+# `text_short` is the home page teaser, `text_full` the fuller block on Leistungen
+# that also lists `services`. Transcribed from the design boards, which supersede
+# the earlier Astro prototype
+# (dlabs-website-astro/content/components/spotlight.yml): that file's KI intro is
+# an older draft, and its Barrierefreiheit one is missing a clause.
+#
+# `text` and `services` are separate fields because the short variant on the home
+# page shows the intro *without* the bullet list, which the prototype's single
+# markdown blob could not express.
+lead: Spotlight
+services_heading: "Unsere Leistungen:"
+interested_text: Interesse geweckt? Hier gibt es alle Details.
+download_pdf_text: PDF Herunterladen
+cta_text: Erfahre Mehr
+prev_label: Vorheriges Thema
+next_label: Nächstes Thema
+pause_label: Themenwechsel pausieren
+play_label: Themenwechsel abspielen
+
+spotlights:
+  - title: KI menschzentriert einsetzen
+    # Home (short) — from the "Startseite Vorschlag 1.0" board
+    text_short:
+      Künstliche Intelligenz (KI) hält noch ungeahnte Potenziale bereit – doch nur, wenn sie
+      sinnvoll in Produkte und Prozesse eingebunden wird. Ein menschzentrierter Ansatz lohnt sich
+      vom Umgang mit KI bis hin zur Einführung von KI-Produktlandschaften.
+    # Leistungen (full) — from the services board
+    text_full:
+      Ein menschzentrierter Ansatz lohnt sich von der KI-Strategie bis zur Gestaltung ganzer
+      KI-Produktlandschaften. Unsere Experten setzen den richtigen Fokus und helfen, das volle
+      Potenzial von KI-getriebenen Prozessen zu entfalten.
+    image: spotlight/1.jpg
+    services:
+      - "**Grundlagen** für KI schaffen"
+      - "**Exploration** von KI-Potenzialen"
+      - "**Realisierung** der KI-Lösungen"
+      - "**Transformationsbegleitung**"
+    pdf: /downloads/d-labs-ki-leistungspakete.pdf
+
+  - title: Barrierefrei von Anfang an
+    text_short: "Digitale Barrierefreiheit gehört bei uns einfach dazu. Ob bei der Optimierung oder
+      Neugestaltung digitaler Produkte und Services: Wir bauen ein tiefes Verständnis für die
+      Lebensrealitäten der User auf und bauen Barrieren ab."
+    # The full one keeps the closing sentence the home teaser drops.
+    text_full: "Digitale Barrierefreiheit gehört bei uns einfach dazu. Ob bei der Optimierung oder
+      Neugestaltung digitaler Produkte und Services: Wir bauen ein tiefes Verständnis für die
+      Lebensrealitäten der User auf und bauen Barrieren ab. So sorgen wir dafür, dass digitale
+      Lösungen von möglichst vielen Menschen gut genutzt werden können."
+    image: spotlight/2.jpg
+    services:
+      - "**Schulungen** zu digitaler Barrierefreiheit"
+      - "**Expert Reviews** für Barrierefreiheit und Usability"
+      - "**Inklusives Design** digitaler Lösungen"
+      - "**Beratung** zu Themen der digitalen Barrierefreiheit"
+    pdf: /downloads/d-labs-leistungspakete-barrierefreiheit.pdf

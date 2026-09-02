@@ -1,0 +1,56 @@
+# Spotlight topics, English. See the notes in de.yml — the two files are
+# index-matched and must carry the same topics in the same order.
+#
+# The `text_full` values match the German `text_full` exactly — the prototype's
+# English was always the long form. The `text_short` values follow the German
+# short forms: the KI one translates the board's rewritten teaser, reusing the
+# vocabulary the long form already established ("pays off", "AI product
+# landscapes"); the accessibility one is the long form minus its closing
+# sentence, exactly as the German pair differ.
+lead: Spotlight
+services_heading: "Our services:"
+interested_text: Interested? Here are all the details.
+download_pdf_text: Download PDF
+cta_text: Find out more
+prev_label: Previous topic
+next_label: Next topic
+pause_label: Pause topic rotation
+play_label: Play topic rotation
+
+spotlights:
+  - title: Using AI with a Human-Centered Approach
+    text_short:
+      Artificial intelligence (AI) still holds untapped potential — but only when it is embedded
+      meaningfully into products and processes. A human-centered approach pays off, from working
+      with AI through to introducing entire AI product landscapes.
+    text_full:
+      A human-centered approach pays off from AI strategy to the design of entire AI product
+      landscapes. Our experts set the right focus and help to unleash the full potential of
+      AI-driven processes.
+    image: spotlight/1.jpg
+    services:
+      - "Creating **foundations** for AI"
+      - "**Exploring** AI potentials"
+      - "**Realizing** AI solutions"
+      - "**Transformation support**"
+    pdf: /downloads/d-labs-ki-leistungspakete.pdf
+
+  - title: Accessible from the Start
+    # The short one is the full text without its closing sentence, matching how
+    # the German pair differ. No new copy invented.
+    text_short:
+      "Digital accessibility is simply part of our work. Whether optimizing or redesigning digital
+      products and services: We build a deep understanding of the users' realities of life and
+      eliminate barriers."
+    text_full:
+      "Digital accessibility is simply part of our work. Whether optimizing or redesigning digital
+      products and services: We build a deep understanding of the users' realities of life and
+      eliminate barriers. This ensures that digital solutions can be used well by as many people as
+      possible."
+    image: spotlight/2.jpg
+    services:
+      - "**Training** on digital accessibility"
+      - "**Expert reviews** for accessibility and usability"
+      - "**Inclusive design** of digital solutions"
+      - "**Consulting** on digital accessibility issues"
+    pdf: /downloads/d-labs-leistungspakete-barrierefreiheit.pdf

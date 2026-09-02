@@ -249,7 +249,43 @@ const offices = defineCollection({
 });
 
 /**
- * Client logos. Not localized. `first` shows by default, `rest` when expanded.
+ * Spotlight topics — the editorial slider on the home and services pages.
+ * Localized, one entry per locale, so `getEntry("spotlight", locale)`.
+ */
+const spotlight = defineCollection({
+  loader: glob({ pattern: "*.yml", base: "./content/spotlight" }),
+  schema: z.object({
+    lead: z.string(),
+    services_heading: z.string(),
+    interested_text: z.string(),
+    download_pdf_text: z.string(),
+    cta_text: z.string(),
+    prev_label: z.string(),
+    next_label: z.string(),
+    pause_label: z.string(),
+    play_label: z.string(),
+    spotlights: z.array(
+      z.object({
+        title: z.string(),
+        /**
+         * The two pages carry different intros in the design, so each topic has
+         * both. Intro paragraph only — the bullets are `services`.
+         */
+        text_short: z.string(),
+        text_full: z.string(),
+        /** Path under src/assets/images/. */
+        image: z.string(),
+        /** Markdown per line: the source copy bolds each item's lead-in. */
+        services: z.array(z.string()),
+        /** Path under public/. Optional: the download button is omitted without one. */
+        pdf: z.string().optional(),
+      }),
+    ),
+  }),
+});
+
+/**
+ * Client logos. Not localized. One ordered list, cycled by the homepage carousel.
  */
 const clients = defineCollection({
   loader: glob({ pattern: "clients.yml", base: "./content/clients" }),
@@ -320,4 +356,5 @@ export const collections = {
   offices,
   partners,
   clients,
+  spotlight,
 };

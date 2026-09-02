@@ -10,6 +10,7 @@ import LeadLine from "@/components/LeadLine.astro";
 import Markdown from "@/components/Markdown.astro";
 import ServicesScroller from "@/components/services/ServicesScroller.astro";
 import MethodBrowser from "@/components/services/MethodBrowser.astro";
+import Spotlight from "@/components/Spotlight.astro";
 /*
  * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
  * original this mark takes its link's colour and follows it on hover. An <img>
@@ -86,6 +87,14 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", othe
     slides={copy.slides}
     listLinkText={copy.list_link_text}
   />
+
+  {
+    /* Full variant: the bullet list and the PDF, per the design board. The id is
+      what the home page's spotlight button links to. */
+  }
+  <div id="spotlight">
+    <Spotlight locale={locale} variant="full" />
+  </div>
 
   <MethodBrowser
     locale={locale}

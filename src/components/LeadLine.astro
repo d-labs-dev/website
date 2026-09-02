@@ -21,6 +21,14 @@ interface Props extends HTMLAttributes<"div"> {
    * the label is text-sm at every width.
    */
   size?: "default" | "small" | "xs";
+  /**
+   * How far the label is pushed right of the rule. `default` widens from 3em to
+   * 6em at 50rem, as the ported CSS does. `narrow` holds 3em at every width, for
+   * a band where the copy is stepped in underneath the eyebrow rather than
+   * sitting beside it — there the wider step leaves the label almost touching
+   * the heading's left edge.
+   */
+  indent?: "default" | "narrow";
 }
 
 /**
@@ -32,6 +40,7 @@ const {
   as: Tag = "div",
   color = "blue",
   size = "default",
+  indent = "default",
   class: className = "",
   ...rest
 } = Astro.props;
@@ -48,6 +57,7 @@ const colorClass = color === "white" ? "text-white" : "text-dlabs-blue";
     colorClass,
     className,
   ]}
+  data-indent={indent}
   {...rest}
 >
   <slot />
@@ -72,11 +82,11 @@ const colorClass = color === "white" ? "text-white" : "text-dlabs-blue";
   }
 
   @media (width >= 50rem) {
-    .lead-line {
+    .lead-line[data-indent="default"] {
       margin-left: 6em;
     }
 
-    .lead-line::before {
+    .lead-line[data-indent="default"]::before {
       left: -6em;
     }
   }

@@ -58,10 +58,14 @@ function setupOne(root: HTMLElement) {
 
   const update = () => {
     updateDots();
-    // Without loop, the ends are dead — say so rather than leaving a button
-    // that silently does nothing.
-    if (prev) prev.disabled = !embla.canScrollPrev();
-    if (next) next.disabled = !embla.canScrollNext();
+    /*
+     * An arrow that leads nowhere is removed, not dimmed. On a looping carousel
+     * both directions always scroll, so this only ever fires at the ends of a
+     * non-looping one — where a greyed-out button still invites a click and
+     * still occupies the slide it sits over.
+     */
+    if (prev) prev.hidden = !embla.canScrollPrev();
+    if (next) next.hidden = !embla.canScrollNext();
   };
 
   embla.on("select", update);

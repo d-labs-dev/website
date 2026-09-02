@@ -1,0 +1,170 @@
+---
+/**
+ * Spotlight — the editorial topic slider from the design board.
+ *
+ * Two presentations of the same content:
+ *   `short` (home)      intro paragraph and one button through to the details.
+ *   `full`  (services)  plus the "Unsere Leistungen:" list, the closing line and
+ *                       the PDF download.
+ *
+ * One component rather than two because the content, the slider and the layout
+ * are identical — only the tail of the text column differs.
+ *
+ * It always opens on the first topic. The order in content/spotlight/<locale>.yml
+ * is therefore the editorial decision, as it is for the client logos.
+ */
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Carousel from "@/components/Carousel.astro";
+import Teaser from "@/components/Teaser.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import Button from "@/components/Button.astro";
+import type { Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  variant?: "short" | "full";
+  /** Where the `short` variant's button goes — usually the services page. */
+  ctaHref?: string;
+  class?: string;
+}
+
+const {
+  locale,
+  variant = "short",
+  ctaHref = "/services/#spotlight",
+  class: className = "",
+} = Astro.props;
+
+/*
+ * The home variant's left arrow lands on a half-width photo and needs a disc
+ * behind it. On services the image is small and inset, so both arrows sit on
+ * plain background and a plate there would only be noise.
+ */
+const arrowPlate = variant === "short" ? "prev" : "none";
+
+/*
+ * Services layout notes, since they cannot live inside the ternary below:
+ *
+ * - The lead line sits above the whole block, a small square image beside the
+ *   copy, and the "Interesse geweckt?" line plus the PDF button form a sub-CTA
+ *   row *below* the pair rather than trailing the text column.
+ * - Two nested divs, not one: the outer is the carousel's flex item and has to
+ *   stay 100% wide, or the slides are narrower than the viewport and the next
+ *   one peeks in beside the current. The 60rem cap goes on the inner wrapper,
+ *   which leaves the arrows outside it over the page margin, as designed.
+ * - `sm:self-start` on the image: a flex row stretches its items to the row
+ *   height, and a stretched height beats `aspect-ratio` — without it that box
+ *   comes out 296x412 rather than square.
+ */
+
+const entry = await getEntry("spotlight", locale);
+if (!entry) throw new Error(`Missing spotlight copy: content/spotlight/${locale}.yml`);
+const copy = entry.data;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/spotlight/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+
+function resolve(path: string) {
+  const image = images[`/src/assets/images/${path}`]?.default;
+  if (!image) throw new Error(`Spotlight image not found: src/assets/images/${path}`);
+  return image;
+}
+---
+
+<Carousel
+  label={copy.lead}
+  loop={false}
+  dots={false}
+  arrows="overlay"
+  arrowPlate={arrowPlate}
+  prevLabel={copy.prev_label}
+  nextLabel={copy.next_label}
+  class={className}
+>
+  {
+    copy.spotlights.map((item) =>
+      variant === "full" ? (
+        <div class="w-full">
+          <div class="mx-auto flex w-full max-w-[60rem] flex-col gap-8 px-6 py-16">
+            <LeadLine>{copy.lead}</LeadLine>
+
+            <div class="flex flex-col gap-8 sm:flex-row sm:gap-12">
+              <div class="relative aspect-square w-full shrink-0 sm:w-[20rem] sm:self-start">
+                <Image
+                  src={resolve(item.image)}
+                  alt=""
+                  class="absolute inset-0 h-full w-full object-cover"
+                  loading="eager"
+                />
+              </div>
+
+              <div class="flex flex-col gap-4">
+                <h2 class="font-heading tracking-heading text-xl">{item.title}</h2>
+                <Markdown source={item.text_full} />
+
+                <div class="flex flex-col gap-2">
+                  <p class="font-bold">{copy.services_heading}</p>
+                  <ul class="flex list-disc flex-col gap-1 pl-5">
+                    {item.services.map((service) => (
+                      <li>
+                        <Markdown source={service} inline />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-8">
+              <p>{copy.interested_text}</p>
+              {item.pdf && (
+                <Button
+                  variant="ghost"
+                  color="black"
+                  href={item.pdf}
+                  target="_blank"
+                  rel="noopener"
+                  class="shrink-0"
+                >
+                  {copy.download_pdf_text}
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Teaser side="left" format="half">
+          {/*
+            Eager, not lazy: this is the first band below the fold and there are
+            only two images, ~200 kB each. A deferred one shows as an empty half.
+          */}
+          <Image
+            slot="media"
+            src={resolve(item.image)}
+            alt=""
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+          />
+
+          {/* `pr-16`: the right arrow is overlaid here, so the copy stops short
+              of it rather than running underneath. */}
+          <div class="flex flex-col gap-4 py-16 pr-16 pl-6 sm:pr-20 sm:pl-12">
+            <LeadLine>{copy.lead}</LeadLine>
+            <h2 class="font-heading tracking-heading text-xl">{item.title}</h2>
+            <Markdown source={item.text_short} />
+
+            <div class="flex flex-col items-start pt-4">
+              <Button variant="ghost" color="black" href={ctaHref}>
+                {copy.cta_text}
+              </Button>
+            </div>
+          </div>
+        </Teaser>
+      ),
+    )
+  }
+</Carousel>

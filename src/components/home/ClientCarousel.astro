@@ -81,7 +81,7 @@ function resolve(path: string) {
     }
     <div class="flex items-center gap-1 sm:gap-3">
       <button type="button" class="client-arrow" data-carousel-prev aria-label={prevLabel}>
-        <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" />
+        <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" loading="eager" />
       </button>
 
       <div class="client-viewport" id="client-carousel-viewport" data-carousel-viewport>
@@ -112,7 +112,7 @@ function resolve(path: string) {
       </div>
 
       <button type="button" class="client-arrow" data-carousel-next aria-label={nextLabel}>
-        <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" />
+        <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" loading="eager" />
       </button>
     </div>
   </div>

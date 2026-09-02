@@ -1,0 +1,90 @@
+---
+/**
+ * The image-beside-text band used by the spotlight, jobs and blog sections.
+ *
+ * Two formats, from the design board:
+ *
+ *   half    "Format 1: halbe Seite" — image and text share the row, 50/50.
+ *   square  "Format 2: quadratisch" — the band's colour runs the full width of
+ *           the page and a square image is anchored over one edge of the
+ *           viewport, as tall as the band. It deliberately ignores the 60rem
+ *           content column, while the copy inside stays aligned to it.
+ *
+ * Why `square` takes the image out of flow: a square whose height should match
+ * the band cannot be done with the image in flow. Flex and grid both size the
+ * main axis from content before any cross-axis stretch, so `aspect-ratio` never
+ * gets a definite height and the box collapses to zero width. Absolute
+ * positioning gives it a definite height (`inset-y-0 h-full`) and the ratio
+ * derives the width from that. It also leaves the copy as the only thing
+ * deciding the band's height, instead of the two fighting over it.
+ *
+ * The media arrives through a slot, not a prop: the callers have nothing in
+ * common at the image level — a Contentful URL, an `astro:assets` ImageMetadata,
+ * a glob-resolved one — and a slot keeps that union out of here. Slotted media
+ * should fill its box with `absolute inset-0 h-full w-full object-cover`; the
+ * box is positioned in both formats.
+ *
+ * Classes are assembled here rather than written as one long conditional string
+ * in the markup, the same way Button.astro does it: two independent axes
+ * (format and side) over three elements is not readable inline.
+ */
+interface Props {
+  /** Which edge the image sits on from the breakpoint up. Below it, both stack. */
+  side?: "left" | "right";
+  format?: "half" | "square";
+  /** `dark` is the blue band the blog teaser sits in. */
+  tone?: "light" | "dark";
+  class?: string;
+}
+
+const { side = "left", format = "half", tone = "light", class: className = "" } = Astro.props;
+
+const isSquare = format === "square";
+const onRight = side === "right";
+
+/** `z-2`: above the pinned circle diagram, as every band on this page is. */
+const root = [
+  "relative z-2",
+  tone === "dark" ? "bg-dlabs-blue text-white" : "bg-white",
+  !isSquare && ["flex flex-col sm:flex-row", onRight && "sm:flex-row-reverse"],
+  className,
+];
+
+const media = [
+  "relative w-full",
+  isSquare
+    ? // Stacked below `lg`: a full-width square above the copy.
+      [
+        "aspect-square lg:absolute lg:inset-y-0 lg:h-full lg:w-auto",
+        onRight ? "lg:right-0" : "lg:left-0",
+      ]
+    : "min-h-32 sm:w-1/2 sm:flex-none",
+];
+
+/*
+ * `ps-[…]` lines the copy up with the site's 60rem content column, so a
+ * full-bleed band still reads as part of the page. `100%` rather than `100vw` —
+ * vw counts the scrollbar and would shift it by ~8px.
+ *
+ * The 42% inset only keeps the copy clear of the image. The band's colour runs
+ * underneath it either way, so there is never a seam between the two, whatever
+ * width the square works out to.
+ */
+const content = isSquare
+  ? ["py-16 ps-[max(1.5rem,calc((100%-60rem)/2))] pe-6", onRight ? "lg:pe-[42%]" : "lg:ps-[42%]"]
+  : "flex min-w-0 flex-auto flex-col justify-center";
+---
+
+{
+  /* Media first in the DOM so the stacked order is image-then-text at every
+    width, whichever edge the image takes on a wide screen. */
+}
+<div class:list={root} data-teaser={format}>
+  <div class:list={media}>
+    <slot name="media" />
+  </div>
+
+  <div class:list={content}>
+    <slot />
+  </div>
+</div>
