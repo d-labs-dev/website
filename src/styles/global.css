@@ -394,7 +394,12 @@
    * off the end of a two-line caption.
    */
   & figure > figcaption {
-    margin-top: 0.5rem;
+    /*
+     * Tight to the picture on purpose. The figure's own 1.5rem bottom margin is
+     * five times this, so the caption sits with the image it belongs to rather
+     * than floating between it and the next paragraph.
+     */
+    margin-top: 0.3rem;
     /*
      * The smallest step on the type ramp — ~14px against the body's ~20px, in
      * the region news sites use (Reuters sets 12). A token rather than a fixed
