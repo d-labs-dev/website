@@ -65,26 +65,45 @@ function setupOne(root: HTMLElement) {
   const prev = root.querySelector<HTMLButtonElement>("[data-carousel-prev]");
   const next = root.querySelector<HTMLButtonElement>("[data-carousel-next]");
   const dotsContainer = root.querySelector<HTMLElement>("[data-carousel-dots]");
+  const keepDisabledArrows = root.hasAttribute("data-keep-disabled-arrows");
+  const autoHeight = root.hasAttribute("data-auto-height");
 
   prev?.addEventListener("click", () => embla.scrollPrev());
   next?.addEventListener("click", () => embla.scrollNext());
 
   const updateDots = dotsContainer ? buildDots(embla, dotsContainer) : () => {};
 
+  const updateHeight = () => {
+    if (!autoHeight) return;
+    const selected = slides[embla.selectedScrollSnap()];
+    if (selected) viewport.style.height = `${selected.offsetHeight}px`;
+  };
+
   const update = () => {
     updateDots();
-    /*
-     * An arrow that leads nowhere is removed, not dimmed. On a looping carousel
-     * both directions always scroll, so this only ever fires at the ends of a
-     * non-looping one — where a greyed-out button still invites a click and
-     * still occupies the slide it sits over.
-     */
-    if (prev) prev.hidden = !embla.canScrollPrev();
-    if (next) next.hidden = !embla.canScrollNext();
+    /* Most carousels remove an unavailable end control. Media-strip carousels
+     * retain it as disabled so the two controls keep stable positions over the
+     * image and remain recognizable as a pair. */
+    if (prev) {
+      prev.hidden = !keepDisabledArrows && !embla.canScrollPrev();
+      prev.disabled = keepDisabledArrows && !embla.canScrollPrev();
+    }
+    if (next) {
+      next.hidden = !keepDisabledArrows && !embla.canScrollNext();
+      next.disabled = keepDisabledArrows && !embla.canScrollNext();
+    }
+    updateHeight();
   };
 
   embla.on("select", update);
   embla.on("reInit", update);
+
+  if (autoHeight && "ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(updateHeight);
+    slides.forEach((slide) => resizeObserver.observe(slide));
+    embla.on("destroy", () => resizeObserver.disconnect());
+  }
+
   update();
 }
 

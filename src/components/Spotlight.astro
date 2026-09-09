@@ -91,8 +91,10 @@ function resolve(path: string) {
   label={copy.lead}
   loop={false}
   dots={false}
-  arrows="overlay"
+  arrows="media"
   arrowPlate={arrowPlate}
+  keepDisabledArrows={true}
+  autoHeight={true}
   prevLabel={copy.prev_label}
   nextLabel={copy.next_label}
   class={className}
@@ -101,20 +103,21 @@ function resolve(path: string) {
     copy.spotlights.map((item) =>
       variant === "full" ? (
         <div class="w-full" data-carousel-hash={`spotlight-${item.slug}`}>
-          <div class="mx-auto flex w-full max-w-[60rem] flex-col gap-8 px-6 py-16">
-            <LeadLine>{copy.lead}</LeadLine>
+          <div class="mx-auto flex w-full max-w-[60rem] flex-col gap-0 sm:gap-8 sm:px-6 sm:py-16">
+            <LeadLine class="hidden sm:block">{copy.lead}</LeadLine>
 
             <div class="flex flex-col gap-8 sm:flex-row sm:gap-12">
-              <div class="relative aspect-square w-full shrink-0 sm:w-[20rem] sm:self-start">
+              <div class="relative h-32 w-full shrink-0 sm:aspect-square sm:h-auto sm:w-[20rem] sm:self-start">
                 <Image
                   src={resolve(item.image)}
                   alt=""
-                  class="absolute inset-0 h-full w-full object-cover"
+                  class="spotlight-photo absolute inset-0 h-full w-full object-cover"
                   loading="eager"
                 />
               </div>
 
-              <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-4 px-6 pt-12 pb-16 sm:px-0 sm:py-0">
+                <LeadLine class="sm:hidden">{copy.lead}</LeadLine>
                 <h2 class="font-heading tracking-heading text-xl">{item.title}</h2>
                 <Markdown source={item.text_full} />
 
@@ -128,10 +131,25 @@ function resolve(path: string) {
                     ))}
                   </ul>
                 </div>
+
+                <div class="flex flex-col items-start gap-4 pt-4 sm:hidden">
+                  <p>{copy.interested_text}</p>
+                  {item.pdf && (
+                    <Button
+                      variant="ghost"
+                      color="black"
+                      href={item.pdf}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      {copy.download_pdf_text}
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
 
-            <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-8">
+            <div class="hidden flex-col items-start gap-4 sm:flex sm:flex-row sm:items-center sm:gap-8">
               <p>{copy.interested_text}</p>
               {item.pdf && (
                 <Button
@@ -149,12 +167,7 @@ function resolve(path: string) {
           </div>
         </div>
       ) : (
-        <Teaser
-          side="left"
-          format="half"
-          mediaClass="max-sm:aspect-[4/3] max-sm:min-h-0"
-          data-carousel-hash={`spotlight-${item.slug}`}
-        >
+        <Teaser side="left" format="half" data-carousel-hash={`spotlight-${item.slug}`}>
           {/*
             Eager, not lazy: this is the first band below the fold and there are
             only two images, ~200 kB each. A deferred one shows as an empty half.
@@ -167,9 +180,9 @@ function resolve(path: string) {
             loading="eager"
           />
 
-          {/* `pr-16`: the right arrow is overlaid here, so the copy stops short
-              of it rather than running underneath. */}
-          <div class="flex flex-col gap-4 py-16 pr-16 pl-6 sm:pr-20 sm:pl-12">
+          {/* Above `sm` the right arrow is overlaid on the copy, so that column
+              stops short of it. On mobile both controls live on the image strip. */}
+          <div class="flex flex-col gap-4 px-6 pt-12 pb-16 sm:py-16 sm:pr-20 sm:pl-12">
             <LeadLine>{copy.lead}</LeadLine>
             <h2 class="font-heading tracking-heading text-xl">{item.title}</h2>
             <Markdown source={item.text_short} />

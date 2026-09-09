@@ -32,7 +32,13 @@ interface Props {
    * and right edges, for a full-bleed band with no margin to hang them in — they
    * float above the content rather than reserving a column and pushing it in.
    */
-  arrows?: "outside" | "overlay";
+  /**
+   * `media` behaves like `overlay` on larger screens, but on mobile pins both
+   * controls to the first 8rem of the slide. It is for the site's stacked
+   * image-strip teasers, where centring controls over all the copy makes them
+   * drift into the article body.
+   */
+  arrows?: "outside" | "overlay" | "media";
   /**
    * Which overlaid arrow sits on top of imagery and so needs an opaque disc
    * behind it. The other one is left as a bare chevron — a plate over plain
@@ -41,6 +47,10 @@ interface Props {
   arrowPlate?: "none" | "prev" | "next";
   prevLabel?: string;
   nextLabel?: string;
+  /** Keep end controls in place as disabled buttons instead of removing them. */
+  keepDisabledArrows?: boolean;
+  /** Size the viewport to the selected slide rather than the tallest slide. */
+  autoHeight?: boolean;
   class?: string;
 }
 
@@ -52,10 +62,12 @@ const {
   arrowPlate = "none",
   prevLabel = "Previous",
   nextLabel = "Next",
+  keepDisabledArrows = false,
+  autoHeight = false,
   class: className = "",
 } = Astro.props;
 
-const overlay = arrows === "overlay";
+const overlay = arrows === "overlay" || arrows === "media";
 ---
 
 <div
@@ -64,11 +76,14 @@ const overlay = arrows === "overlay";
   data-loop={loop ? "" : undefined}
   data-arrows={arrows}
   data-arrow-plate={arrowPlate}
+  data-keep-disabled-arrows={keepDisabledArrows ? "" : undefined}
+  data-auto-height={autoHeight ? "" : undefined}
   role="group"
   aria-roledescription="carousel"
   aria-label={label}
 >
   <div
+    data-carousel-arrow-shell
     class:list={[
       "pointer-events-none absolute inset-y-0 z-10 flex-col justify-center",
       overlay ? "left-3 flex sm:left-6" : "right-full hidden md:flex",
@@ -86,6 +101,7 @@ const overlay = arrows === "overlay";
   </div>
 
   <div
+    data-carousel-arrow-shell
     class:list={[
       "pointer-events-none absolute inset-y-0 z-10 flex-col justify-center",
       overlay ? "right-3 flex sm:right-6" : "left-full hidden md:flex",
@@ -116,6 +132,11 @@ const overlay = arrows === "overlay";
     transition-property: opacity;
   }
 
+  .carousel-arrow:disabled {
+    cursor: default;
+    opacity: 0.35;
+  }
+
   /*
    * An arrow laid over imagery needs a surface of its own: a mid-blue chevron on
    * a mid-tone photograph is invisible however it is shadowed. Over plain
@@ -135,6 +156,23 @@ const overlay = arrows === "overlay";
   .carousel[data-arrow-plate="next"] [data-carousel-next]:hover {
     background-color: #fff;
     box-shadow: 0 3px 14px rgb(0 0 0 / 0.38);
+  }
+
+  /* On mobile the image strip owns the Spotlight navigation. */
+  @media (width < 40rem) {
+    .carousel[data-arrows="media"] [data-carousel-arrow-shell] {
+      inset-block: 0 auto;
+      height: 8rem;
+    }
+
+    .carousel[data-arrows="media"] [data-carousel-prev],
+    .carousel[data-arrows="media"] [data-carousel-next] {
+      padding: 0.7rem;
+      border-radius: 9999px;
+      background-color: rgb(255 255 255 / 0.92);
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.28);
+      transition-property: background-color, box-shadow, opacity;
+    }
   }
 
   /* Dots sit under the text column, indented past the portrait. */
