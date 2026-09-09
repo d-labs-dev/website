@@ -109,6 +109,25 @@
   --color-dlabs-gray-100: #fafafa;
   --color-dlabs-gray-200: #dee3e6;
   --color-dlabs-gray-300: #bac0c4;
+  /*
+   * NOT A BRAND COLOUR — invented here, and it should be signed off before it is
+   * treated as one. Grau 3's own hue and saturation (204deg, 8%) taken down to
+   * 40% lightness, measuring 5.70:1 on white: quiet enough to read as secondary
+   * beside the 14.99:1 ink, with headroom over AA's 4.5.
+   *
+   * It exists because the palette has no colour for secondary text. Both halves
+   * of this repo define exactly three greys (see `$gray100..300` in
+   * assets/css/_tokens.scss), all light tints — Grau 3, the darkest, is 1.84:1.
+   * And on live those greys are only ever `background-color` (4 uses) or
+   * `border-color` (1); not one `color:` among them. They are fill colours, and
+   * a caption was the first thing to point one at text.
+   *
+   * So the real question is a brand one: what colour is secondary text? Until
+   * that is answered this is the stand-in. The alternative needing no invention
+   * is --color-dlabs-dark-blue (9.27:1), which is what captions used before it
+   * was swapped for Grau 3.
+   */
+  --color-dlabs-gray-400: #5e686e;
   --color-dlabs-yellow: #fcbd29;
   --color-dlabs-green: #87c745;
   --color-dlabs-red: #e72d5f;
@@ -258,7 +277,7 @@
   --tw-prose-hr: var(--color-dlabs-gray-200);
   --tw-prose-quotes: var(--color-black);
   --tw-prose-quote-borders: var(--color-dlabs-blue);
-  --tw-prose-captions: var(--color-dlabs-gray-300);
+  --tw-prose-captions: var(--color-dlabs-gray-400);
   --tw-prose-code: var(--color-black);
   --tw-prose-pre-bg: var(--color-dlabs-gray-100);
   --tw-prose-pre-code: var(--color-black);
@@ -385,16 +404,23 @@
     font-size: var(--text-2xs);
     line-height: 1.4;
     /*
-     * Grau 3, as specified by the brand palette.
-     *
-     * Worth knowing: this is 1.84:1 against white, where WCAG AA asks 4.5:1 for
-     * text at this size — the palette's greys are all light tints, so none of
-     * them clears the bar as body-sized text on white. The previous value, the
-     * brand's dark blue, was 9.27:1. Raise this before the accessibility audit
-     * if it has not been signed off deliberately.
+     * Grau 4, not the palette's Grau 3. Grau 3 measured 1.84:1 against white and
+     * a caption is small text, so it needed 4.5:1 — the site publishes a BITV 2.0
+     * accessibility statement, and contrast is not among the barriers that
+     * statement discloses. See the token's note for how the colour was derived.
      */
-    color: var(--color-dlabs-gray-300);
+    color: var(--color-dlabs-gray-400);
     text-wrap: pretty;
+  }
+
+  /*
+   * Captions are ordinary markdown, so an editor writing **a name** in one gets
+   * the plugin's `--tw-prose-bold`, which is the full body ink — the bold words
+   * came out darker than the caption around them rather than emphasised within
+   * it. Bold in a caption stays the caption's colour and does its work by weight.
+   */
+  & figure > figcaption :is(strong, b) {
+    color: inherit;
   }
 
   & figure > img {

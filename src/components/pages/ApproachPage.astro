@@ -345,7 +345,9 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("approach", othe
    */
   .image-source {
     font-size: calc(0.45em + 0.4vw);
-    color: var(--color-dlabs-gray-300);
+    /* Grau 4: this is the smallest text on the page, so Grau 3's 1.84:1 was the
+       same contrast failure as the blog captions. */
+    color: var(--color-dlabs-gray-400);
   }
 
   /*
