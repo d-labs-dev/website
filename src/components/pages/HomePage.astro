@@ -166,7 +166,7 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
             <Button
               variant="text"
               color="black"
-              href="#clients"
+              href="#spotlight"
               class="pointer-events-auto"
               aria-label={locale === "de" ? "Nach unten scrollen" : "Scroll down"}
             >
@@ -194,8 +194,15 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLoc
     </div>
   </div>
 
-  {/* Spotlight sits between the screens and the clients, as on the design board. */}
-  <Spotlight locale={locale} variant="short" ctaHref={`${pageUrl("services", locale)}#spotlight`} />
+  {
+    /*
+    Spotlight sits between the screens and the clients, as on the design board —
+    so it, not the client carousel, is what the scroll hint above leads to.
+  */
+  }
+  <div id="spotlight" class="-scroll-mt-6">
+    <Spotlight locale={locale} variant="short" ctaHref={pageUrl("services", locale)} />
+  </div>
 
   <ClientCarousel
     heading={copy.clients_heading}

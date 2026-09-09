@@ -28,16 +28,31 @@
  * in the markup, the same way Button.astro does it: two independent axes
  * (format and side) over three elements is not readable inline.
  */
-interface Props {
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
   /** Which edge the image sits on from the breakpoint up. Below it, both stack. */
   side?: "left" | "right";
   format?: "half" | "square";
   /** `dark` is the blue band the blog teaser sits in. */
   tone?: "light" | "dark";
+  /** Extra classes for the media box, for callers whose photo needs a shape. */
+  mediaClass?: string;
   class?: string;
 }
 
-const { side = "left", format = "half", tone = "light", class: className = "" } = Astro.props;
+/*
+ * `...rest` is load-bearing: without it a data attribute passed in is silently
+ * dropped, which is how the carousel's deep-link hash would go missing.
+ */
+const {
+  side = "left",
+  format = "half",
+  tone = "light",
+  class: className = "",
+  mediaClass = "",
+  ...rest
+} = Astro.props;
 
 const isSquare = format === "square";
 const onRight = side === "right";
@@ -59,6 +74,7 @@ const media = [
         onRight ? "lg:right-0" : "lg:left-0",
       ]
     : "min-h-32 sm:w-1/2 sm:flex-none",
+  mediaClass,
 ];
 
 /*
@@ -79,7 +95,7 @@ const content = isSquare
   /* Media first in the DOM so the stacked order is image-then-text at every
     width, whichever edge the image takes on a wide screen. */
 }
-<div class:list={root} data-teaser={format}>
+<div class:list={root} data-teaser={format} {...rest}>
   <div class:list={media}>
     <slot name="media" />
   </div>

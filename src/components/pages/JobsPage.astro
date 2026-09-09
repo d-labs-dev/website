@@ -100,7 +100,17 @@ const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLoc
   </div>
 
   {/* Openings */}
-  <div id="list" class="flex flex-col items-center gap-24 px-6 py-24">
+  {
+    /*
+    `-scroll-mt-6` cancels most of the global `scroll-padding-top: 6rem`, landing
+    this section flush with the header's bottom edge (6rem - 1.5rem = 4.5rem, the
+    header's height). The global value is right for text anchors, which want
+    breathing room, but on a full-bleed band it stops 1.5rem short and leaves a
+    strip of the hero photo showing above — production tucks the list under the
+    header instead. The section's own py-24 supplies the clearance.
+  */
+  }
+  <div id="list" class="flex -scroll-mt-6 flex-col items-center gap-24 px-6 py-24">
     <div class="font-heading tracking-heading w-full max-w-[40rem] text-lg sm:text-xl">
       <Markdown source={copy.intro_text} size="inherit" heading />
     </div>

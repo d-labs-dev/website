@@ -25,17 +25,16 @@ import type { Locale } from "@/lib/i18n";
 interface Props {
   locale: Locale;
   variant?: "short" | "full";
-  /** Where the `short` variant's button goes — usually the services page. */
+  /**
+   * Page the `short` variant's button leads to. The topic's own fragment is
+   * appended per slide, so each teaser links through to *its* spotlight rather
+   * than dropping every visitor on the first one.
+   */
   ctaHref?: string;
   class?: string;
 }
 
-const {
-  locale,
-  variant = "short",
-  ctaHref = "/services/#spotlight",
-  class: className = "",
-} = Astro.props;
+const { locale, variant = "short", ctaHref = "/services/", class: className = "" } = Astro.props;
 
 /*
  * The home variant's left arrow lands on a half-width photo and needs a disc
@@ -75,6 +74,19 @@ function resolve(path: string) {
 }
 ---
 
+{
+  /*
+  One zero-height anchor per topic, so `#spotlight-<slug>` resolves to a real
+  element and the *browser* does the scrolling. Without these the fragment
+  matches nothing, the browser stays at the top of the document, and any
+  scrolling JS does is racing its fragment handling — which it loses on a real
+  navigation. The carousel script still reads the same fragment to choose which
+  slide to open on; that part cannot be expressed as an anchor, because all the
+  slides live at the same place in the layout.
+*/
+}
+{copy.spotlights.map((item) => <div id={`spotlight-${item.slug}`} class="-scroll-mt-6" />)}
+
 <Carousel
   label={copy.lead}
   loop={false}
@@ -88,7 +100,7 @@ function resolve(path: string) {
   {
     copy.spotlights.map((item) =>
       variant === "full" ? (
-        <div class="w-full">
+        <div class="w-full" data-carousel-hash={`spotlight-${item.slug}`}>
           <div class="mx-auto flex w-full max-w-[60rem] flex-col gap-8 px-6 py-16">
             <LeadLine>{copy.lead}</LeadLine>
 
@@ -108,7 +120,7 @@ function resolve(path: string) {
 
                 <div class="flex flex-col gap-2">
                   <p class="font-bold">{copy.services_heading}</p>
-                  <ul class="flex list-disc flex-col gap-1 pl-5">
+                  <ul class="bullet-list flex flex-col gap-2">
                     {item.services.map((service) => (
                       <li>
                         <Markdown source={service} inline />
@@ -137,7 +149,12 @@ function resolve(path: string) {
           </div>
         </div>
       ) : (
-        <Teaser side="left" format="half">
+        <Teaser
+          side="left"
+          format="half"
+          mediaClass="max-sm:aspect-[4/3] max-sm:min-h-0"
+          data-carousel-hash={`spotlight-${item.slug}`}
+        >
           {/*
             Eager, not lazy: this is the first band below the fold and there are
             only two images, ~200 kB each. A deferred one shows as an empty half.
@@ -146,7 +163,7 @@ function resolve(path: string) {
             slot="media"
             src={resolve(item.image)}
             alt=""
-            class="absolute inset-0 h-full w-full object-cover"
+            class="spotlight-photo absolute inset-0 h-full w-full object-cover"
             loading="eager"
           />
 
@@ -158,7 +175,7 @@ function resolve(path: string) {
             <Markdown source={item.text_short} />
 
             <div class="flex flex-col items-start pt-4">
-              <Button variant="ghost" color="black" href={ctaHref}>
+              <Button variant="ghost" color="black" href={`${ctaHref}#spotlight-${item.slug}`}>
                 {copy.cta_text}
               </Button>
             </div>
@@ -168,3 +185,18 @@ function resolve(path: string) {
     )
   }
 </Carousel>
+
+<style>
+  /*
+   * Below `sm` the media box is a short, wide strip (`min-h-32`), so a centred
+   * `object-cover` crop keeps the middle band of a portrait photo — which is
+   * chest height, cutting the subject's head off. Biasing the crop upward keeps
+   * faces in frame. Above `sm` the box is half the band and tall enough that the
+   * default centre is right.
+   */
+  @media (width < 40rem) {
+    .spotlight-photo {
+      object-position: 50% 15%;
+    }
+  }
+</style>

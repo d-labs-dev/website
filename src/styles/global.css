@@ -357,7 +357,14 @@
     font-weight: inherit;
   }
 
-  & :is(hr, img, figure) {
+  /*
+   * No `img` here, deliberately. Markdown wraps a lone image in a paragraph, so
+   * an image picked up this margin *and* its wrapping `p`'s — 3rem where the old
+   * `.markdown` gave 1.5rem, which is the doubled gap under body images in the
+   * blog. The old stylesheet set no image margin at all and let the paragraph
+   * carry the spacing; `figure` keeps one because it is a block in its own right.
+   */
+  & :is(hr, figure) {
     margin-bottom: 1.5rem;
   }
 }

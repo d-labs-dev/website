@@ -18,7 +18,8 @@ pause_label: Pause topic rotation
 play_label: Play topic rotation
 
 spotlights:
-  - title: Using AI with a Human-Centered Approach
+  - slug: ki
+    title: Using AI with a Human-Centered Approach
     text_short:
       Artificial intelligence (AI) still holds untapped potential — but only when it is embedded
       meaningfully into products and processes. A human-centered approach pays off, from working
@@ -35,7 +36,8 @@ spotlights:
       - "**Transformation support**"
     pdf: /downloads/d-labs-ki-leistungspakete.pdf
 
-  - title: Accessible from the Start
+  - slug: barrierefreiheit
+    title: Accessible from the Start
     # The short one is the full text without its closing sentence, matching how
     # the German pair differ. No new copy invented.
     text_short:
@@ -47,7 +49,7 @@ spotlights:
       products and services: We build a deep understanding of the users' realities of life and
       eliminate barriers. This ensures that digital solutions can be used well by as many people as
       possible."
-    image: spotlight/2.jpg
+    image: spotlight/barrierefreiheit.jpg
     services:
       - "**Training** on digital accessibility"
       - "**Expert reviews** for accessibility and usability"

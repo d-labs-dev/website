@@ -266,6 +266,11 @@ const spotlight = defineCollection({
     play_label: z.string(),
     spotlights: z.array(
       z.object({
+        /**
+         * Stable id for deep links, shared across locales so /spotlight-ki
+         * resolves on both. Not shown anywhere.
+         */
+        slug: z.string(),
         title: z.string(),
         /**
          * The two pages carry different intros in the design, so each topic has

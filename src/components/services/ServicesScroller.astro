@@ -192,7 +192,7 @@ const OBJECT_POSITION: Record<string, string> = {
 
       <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 sm:flex">
         <div class="pointer-events-auto flex flex-col items-center gap-[1.2rem]">
-          <Button variant="text" color="black" href="#list">{listLinkText}</Button>
+          <Button variant="text" color="black" href="#spotlight">{listLinkText}</Button>
           {
             /*
             `inline`, not the preflight default `block`: on live the arrow is an
@@ -208,7 +208,7 @@ const OBJECT_POSITION: Record<string, string> = {
         own and no hover state at all.
       */
           }
-          <Button variant="text" color="black" href="#list" aria-hidden="true" tabindex="-1">
+          <Button variant="text" color="black" href="#spotlight" aria-hidden="true" tabindex="-1">
             <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
           </Button>
         </div>

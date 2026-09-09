@@ -41,10 +41,25 @@ function setupOne(root: HTMLElement) {
   const viewport = root.querySelector<HTMLElement>("[data-carousel-viewport]");
   if (!viewport) return;
 
+  /*
+   * Deep link: a slide may name a URL fragment, so /services/#spotlight-ki opens
+   * the carousel on that topic instead of always on the first. Resolved before
+   * construction and handed to Embla as `startIndex`, which positions the track
+   * with no animation — the slide is simply where the carousel starts.
+   *
+   * Scrolling is not done here: the caller renders a real anchor element for
+   * each fragment, so the browser lands on the section by itself. This only
+   * chooses which slide is showing when it gets there.
+   */
+  const slides = Array.from(root.querySelectorAll<HTMLElement>("[data-carousel-track] > *"));
+  const hash = decodeURIComponent(window.location.hash.slice(1));
+  const deepLinked = hash ? slides.findIndex((s) => s.dataset.carouselHash === hash) : -1;
+
   const embla = EmblaCarousel(viewport, {
     loop: root.hasAttribute("data-loop"),
     align: "start",
     slidesToScroll: 1,
+    startIndex: deepLinked > 0 ? deepLinked : 0,
   });
 
   const prev = root.querySelector<HTMLButtonElement>("[data-carousel-prev]");

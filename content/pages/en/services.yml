@@ -5,8 +5,10 @@ seo_title: Services
 seo_description: D-LABS offers ✓ User Research ✓ Digital Experience Design ✓ Software Engineering ✓ Enabling
   & Coaching
 intro_lead: What We Do
-intro_text: We identify the needs of our customers, design relevant processes, conceive and optimize digital
-  products and services, implement software and sustainably enable our customers in these activities.
+# Matches the shortened German above.
+intro_text:
+  We find out what people really need. We design and optimise **digital products and
+  services**. Simple. Sustainable. Accessible.
 intro_services_title: Our Fields of Expertise
 slides:
 - name: User Research

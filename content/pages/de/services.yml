@@ -6,10 +6,11 @@ seo_description:
   D-LABS bietet ✓ User Research ✓ Digital Experience Design ✓ Software Engineering ✓ Enabling
   & Coaching
 intro_lead: Was wir machen
+# Shortened per the design board — the old three-line version was flagged as too
+# long an entry point. **bold** is rendered as markdown by the intro component.
 intro_text:
-  Wir identifizieren die Bedürfnisse unserer Kunden, gestalten relevante Prozesse, konzipieren
-  und optimieren digitale Produkte und Services, implementieren Software und befähigen unsere Kunden nachhaltig
-  in diesen Aktivitäten.
+  Wir finden heraus, was Menschen wirklich brauchen. Wir gestalten und optimieren **digitale
+  Produkte und Services**. Einfach. Nachhaltig. Barrierefrei.
 intro_services_title: Unsere Kompetenzfelder
 slides:
   - name: User Research

@@ -41,9 +41,19 @@ const alternates = counterpartSlug
         <h1 class="font-heading tracking-heading text-xl">{post.title}</h1>
 
         {
+          /*
+          `w-full` on the image, as production's `full-width` does and as
+          MethodPage already did — this page was the odd one out. Without it the
+          image stops at its 800px intrinsic width and sits left in a wider
+          column, which above ~1600px leaves it visibly smaller than the copy it
+          heads. The width/height attributes stay for the aspect ratio;
+          Tailwind's preflight supplies `height: auto`.
+        */
+        }
+        {
           post.heroImage && (
             <img
-              src={contentfulImage(post.heroImage, { width: 800 })}
+              src={contentfulImage(post.heroImage, { width: 1600 })}
               alt={assetAlt(post.heroImage)}
               width={800}
               height={
@@ -51,6 +61,7 @@ const alternates = counterpartSlug
                   ? Math.round((800 * post.heroImage.height) / post.heroImage.width)
                   : undefined
               }
+              class="w-full"
               loading="eager"
             />
           )
