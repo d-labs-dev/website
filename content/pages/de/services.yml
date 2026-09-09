@@ -15,7 +15,7 @@ intro_services_title: Unsere Kompetenzfelder
 slides:
   - name: User Research
     img: approach/dlabs_approach-research.jpg
-    img-position: center
+    img-position: "30%"
     text:
       Wir erfassen die Bedürfnisse und Anforderungen, wir testen die Usability und User Experience.
       Wir sind der erfahrene Partner für unsere Kunden und begleiten die Konzeption und Entwicklung. Im
@@ -32,14 +32,14 @@ slides:
     color: darkBlue
   - name: Software Engineering
     img: approach/dlabs_approach-engineering.jpg
-    img-position: center
+    img-position: "15%"
     text:
       Wir sind Experten auf den Gebieten der Planung, Analyse, Konzeption und Implementierung von Anwendungssoftware
       und Webapplikationen für Desktop und Mobile.
     color: red
   - name: Enabling & Coaching
     img: approach/dlabs_approach-coaching.jpg
-    img-position: top
+    img-position: center
     text:
       Wir befähigen unsere Kunden darin agil und nutzerzentriert zu arbeiten – nachhaltig und auf die
       jeweiligen individuellen Kundenbedürfnisse zugeschnitten. Dabei schöpfen unsere Coaches aus unseren
@@ -47,7 +47,7 @@ slides:
     color: green
   - name: Business & Innovation
     img: approach/dlabs_approach-business.jpg
-    img-position: center
+    img-position: "30%"
     text:
       Als Spezialisten entwickeln wir gemeinsam mit unseren Kunden digitale Lösungen. Unsere langjährige
       Erfahrung und unsere persönliche Leidenschaft sind der perfekte Mix, gemeinsam die besten digitalen

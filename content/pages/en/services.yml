@@ -13,7 +13,7 @@ intro_services_title: Our Fields of Expertise
 slides:
 - name: User Research
   img: approach/dlabs_approach-research.jpg
-  img-position: center
+  img-position: "30%"
   text: We learn the needs and requirements; we test the usability and user experience. We are the experienced
     partner for our customers and accompany the conception and development. We then validate the prototypes
     and products.
@@ -28,20 +28,20 @@ slides:
   color: darkBlue
 - name: Software Engineering
   img: approach/dlabs_approach-engineering.jpg
-  img-position: center
+  img-position: "15%"
   text: We are experts in the planning, analysis, conception and implementation of application software
     and web applications for desktop and mobile devices.
   color: red
 - name: Enabling & Coaching
   img: approach/dlabs_approach-coaching.jpg
-  img-position: top
+  img-position: center
   text: We enable our customers to work in an agile and user-centered way - sustainable and tailored to
     the individual needs of each customer. Our coaches draw on our many years of project experience and
     the various expertise of an interdisciplinary team.
   color: green
 - name: Business & Innovation
   img: approach/dlabs_approach-business.jpg
-  img-position: center
+  img-position: "30%"
   text: As specialists, we develop digital solutions together with our customers. We develop strategies
     and support our customers in their strategic realignment. We act as a competent companion in innovation
     and change processes and help with product and service optimization.

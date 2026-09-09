@@ -74,6 +74,16 @@ const OBJECT_POSITION: Record<string, string> = {
   center: "object-center",
   top: "object-[50%_6%]",
   bottom: "object-bottom",
+  /*
+   * Two stops between `top` and `center`, named by their offset because that is
+   * all they are — there is no keyword for "just above the middle". The band is
+   * thin and its height moves with the viewport (16% of the image at 614px wide,
+   * 23% at 390), so `center` lands on a subject's chest and `top` above their
+   * head whenever the face sits high in the frame. These were picked per photo by
+   * rendering the band at both ends of that range.
+   */
+  "15%": "object-[50%_15%]",
+  "30%": "object-[50%_30%]",
 };
 ---
 
