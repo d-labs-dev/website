@@ -84,7 +84,8 @@ const canonical = new URL(path.endsWith("/") ? path : `${path}/`, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    {/* No `sizes`: this ico carries 16 through 256, not the template's lone 32. */}
+    <link rel="icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     {/* Astro emits the @font-face rules, fallback metrics and preload hints. */}
