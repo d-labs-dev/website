@@ -281,7 +281,7 @@
   }
 
   & a:hover {
-    color: var(--color-dlabs-dark-blue);
+    color: var(--color-dlabs-gray-300);
   }
 
   /* The plugin decorates inline <code> with literal backticks via ::before /
@@ -366,6 +366,31 @@
    */
   & :is(hr, figure) {
     margin-bottom: 1.5rem;
+  }
+
+  /*
+   * Image captions. Smaller and quieter than the body copy so the caption reads
+   * as belonging to the picture rather than continuing the article, with just
+   * enough space to sit under it. `text-wrap: pretty` keeps a one-word last line
+   * off the end of a two-line caption.
+   */
+  & figure > figcaption {
+    margin-top: 0.5rem;
+    /*
+     * The smallest step on the type ramp — ~14px against the body's ~20px, in
+     * the region news sites use (Reuters sets 12). A token rather than a fixed
+     * px value so it keeps scaling with the fluid root the rest of the site
+     * uses; `0.9rem` here rendered at 18px, barely distinguishable from body.
+     */
+    font-size: var(--text-2xs);
+    line-height: 1.4;
+    color: var(--color-dlabs-gray-300);
+    text-wrap: pretty;
+  }
+
+  & figure > img {
+    display: block;
+    width: 100%;
   }
 }
 

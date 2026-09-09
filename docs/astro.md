@@ -105,6 +105,42 @@ values. The main content column is `maxwidth-7` → `max-w-[60rem]`.
 **Type.** `xxs → text-2xs`, `xs → text-xs`, `sm → text-sm`, `md → text-base`, `lg → text-lg`,
 `xl → text-xl`, `xxl → text-2xl`, `xxxl → text-3xl`.
 
+## Image captions in Contentful copy
+
+Contentful has no caption field, and its markdown fields carry only the image
+URL, so a caption is simply the line **directly after** an image — no blank line,
+no special syntax:
+
+```markdown
+![Kurzer Bildtext für Screenreader](https://images.ctfassets.net/…/bild.jpg)
+Die sichtbare Bildunterschrift
+```
+
+A blank line is the boundary. Leave one and the text is an ordinary paragraph
+again:
+
+```markdown
+![Kurzer Bildtext](…/bild.jpg)
+
+Das ist wieder normaler Fließtext.
+```
+
+This is not a convention we invented — it is the one already in the copy. All 22
+images in the blog that have text on the following line are captions, and the
+renderer now presents them as such: 22 `<figure>` elements with a `<figcaption>`,
+no content edits needed. The other 74 images stand alone and are unchanged.
+
+The CommonMark title slot works too — `![Alt](url "Die Bildunterschrift")` — for
+anyone who reaches for the standard idiom. It is _not_ the form to teach: smart
+quotes (a Mac default, or a paste from Word) break it outright and the image then
+renders as raw markdown text. Where a title is used it is moved into the caption
+rather than copied, so it does not also appear as a hover tooltip.
+
+The alt text and the caption are deliberately separate: the alt describes the
+image for someone who cannot see it, the caption is read by everyone. Do not
+repeat one as the other — a screen reader would announce it twice. See
+`src/lib/markdown.ts`.
+
 ## Things that look wrong but aren't
 
 - **The root font-size is fluid.** `base.css` sets `font-size: calc(0.88em + 0.4vw)` above 30em,

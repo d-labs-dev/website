@@ -1,4 +1,4 @@
-import { Marked } from "marked";
+import { Marked, type Token, type Tokens } from "marked";
 import { normalizeInternalLinks } from "./internal-links";
 
 /**
@@ -14,6 +14,67 @@ import { normalizeInternalLinks } from "./internal-links";
 const marked = new Marked({
   gfm: true,
   breaks: true,
+});
+
+/**
+ * Image captions.
+ *
+ * Contentful has no caption field and its markdown fields carry only the image
+ * URL, so a caption is whatever the editor writes on the line *directly* after
+ * an image — no blank line, no special syntax:
+ *
+ *   ![Kurzer Bildtext](url)
+ *   Die sichtbare Bildunterschrift
+ *
+ * This is not a convention we invented; it is the one already in the copy. Every
+ * one of the 22 images in the blog that has text on the following line is a
+ * caption, and none is body prose. A blank line is the boundary: leave one and
+ * the text is an ordinary paragraph again.
+ *
+ * The CommonMark title slot — `![Alt](url "Bildunterschrift")` — works too, for
+ * anyone reaching for the standard idiom. It is not the form to teach, because
+ * smart quotes break it outright and the image then renders as raw text.
+ *
+ * Either way the caption becomes a `<figcaption>` and the alt text is left
+ * alone, so the two say different things: one describes the image for a screen
+ * reader, the other is read by everyone. An image on its own renders exactly as
+ * before.
+ */
+
+marked.use({
+  renderer: {
+    paragraph(this: { parser: { parseInline: (t: Token[]) => string } }, token: Tokens.Paragraph) {
+      const inner = (token.tokens ?? []).filter((t) => t.type !== "space");
+      const image = inner[0]?.type === "image" ? (inner[0] as Tokens.Image) : null;
+
+      if (image) {
+        // Leading <br>s are the newline the editor typed; the caption is
+        // whatever follows them.
+        let rest = inner.slice(1);
+        while (rest[0]?.type === "br") rest = rest.slice(1);
+
+        // The title is moved, not copied: left on the <img> it would also show
+        // as a hover tooltip, saying the same thing twice to a mouse and nothing
+        // at all to a finger.
+        const title = image.title;
+        image.title = null;
+
+        if (rest.length > 0) {
+          const body = this.parser.parseInline(rest);
+          return `<figure>${this.parser.parseInline([image])}<figcaption>${body}</figcaption></figure>\n`;
+        }
+        if (title) {
+          const body = this.parser.parseInline([
+            { type: "text", raw: title, text: title } as Token,
+          ]);
+          return `<figure>${this.parser.parseInline([image])}<figcaption>${body}</figcaption></figure>\n`;
+        }
+        image.title = title;
+      }
+
+      return `<p>${this.parser.parseInline(token.tokens ?? [])}</p>\n`;
+    },
+  },
 });
 
 /**
