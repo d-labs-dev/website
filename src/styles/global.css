@@ -281,16 +281,7 @@
   }
 
   & a:hover {
-    /*
-     * Grau 3, as specified by the brand palette.
-     *
-     * Worth knowing: this is 1.84:1 against white, where WCAG AA asks 4.5:1 for
-     * text at this size — the palette's greys are all light tints, so none of
-     * them clears the bar as body-sized text on white. The previous value, the
-     * brand's dark blue, was 9.27:1. Raise this before the accessibility audit
-     * if it has not been signed off deliberately.
-     */
-    color: var(--color-dlabs-gray-300);
+    color: var(--color-dlabs-dark-blue);
   }
 
   /* The plugin decorates inline <code> with literal backticks via ::before /
