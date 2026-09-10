@@ -1,0 +1,225 @@
+---
+/**
+ * Single-slide carousel with dots and side arrows. Replaces slick (and with it
+ * jQuery); the mechanics are Embla, the appearance is the old `.carousel`.
+ *
+ * Slides are whatever is passed in — each direct child of the slot becomes one.
+ * Progressive enhancement: with no JS the first slide is visible and the rest
+ * follow in the flow, which is more useful than an empty box.
+ */
+/*
+ * The arrow glyphs load eagerly. Astro's <Image> defaults to `loading="lazy"`,
+ * which is right for content but wrong for a control: the button's own disc
+ * paints immediately, so a deferred glyph shows as an empty circle until it
+ * arrives. They are a few hundred bytes each.
+ */
+import { Image } from "astro:assets";
+import arrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
+import arrowRight from "@/assets/images/icons/icon-swipe-right.svg";
+
+interface Props {
+  /** Announced to screen readers, since a carousel is otherwise anonymous. */
+  label: string;
+  loop?: boolean;
+  /**
+   * Dots are the quote slider's affordance and their position is tuned for its
+   * portrait indent, so a carousel that is not that shape turns them off.
+   */
+  dots?: boolean;
+  /**
+   * `outside` hangs the arrows in the margin beside the carousel, which needs
+   * the caller to have room there. `overlay` lays them over the slide's own left
+   * and right edges, for a full-bleed band with no margin to hang them in — they
+   * float above the content rather than reserving a column and pushing it in.
+   */
+  /**
+   * `media` behaves like `overlay` on larger screens, but on mobile pins both
+   * controls to the first 8rem of the slide. It is for the site's stacked
+   * image-strip teasers, where centring controls over all the copy makes them
+   * drift into the article body.
+   */
+  arrows?: "outside" | "overlay" | "media";
+  /**
+   * Which overlaid arrow sits on top of imagery and so needs an opaque disc
+   * behind it. The other one is left as a bare chevron — a plate over plain
+   * background is visual noise, and the design only draws one.
+   */
+  arrowPlate?: "none" | "prev" | "next";
+  prevLabel?: string;
+  nextLabel?: string;
+  /** Keep end controls in place as disabled buttons instead of removing them. */
+  keepDisabledArrows?: boolean;
+  /** Size the viewport to the selected slide rather than the tallest slide. */
+  autoHeight?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  loop = false,
+  dots = true,
+  arrows = "outside",
+  arrowPlate = "none",
+  prevLabel = "Previous",
+  nextLabel = "Next",
+  keepDisabledArrows = false,
+  autoHeight = false,
+  class: className = "",
+} = Astro.props;
+
+const overlay = arrows === "overlay" || arrows === "media";
+---
+
+<div
+  class:list={["carousel relative", className]}
+  data-carousel
+  data-loop={loop ? "" : undefined}
+  data-arrows={arrows}
+  data-arrow-plate={arrowPlate}
+  data-keep-disabled-arrows={keepDisabledArrows ? "" : undefined}
+  data-auto-height={autoHeight ? "" : undefined}
+  role="group"
+  aria-roledescription="carousel"
+  aria-label={label}
+>
+  <div
+    data-carousel-arrow-shell
+    class:list={[
+      "pointer-events-none absolute inset-y-0 z-10 flex-col justify-center",
+      overlay ? "left-3 flex sm:left-6" : "right-full hidden md:flex",
+    ]}
+  >
+    <button type="button" class="carousel-arrow" data-carousel-prev aria-label={prevLabel}>
+      <Image src={arrowLeft} alt="" class="h-6 w-auto max-w-none" loading="eager" />
+    </button>
+  </div>
+
+  <div class="carousel-viewport overflow-hidden" data-carousel-viewport>
+    <div class="carousel-track flex items-start" data-carousel-track>
+      <slot />
+    </div>
+  </div>
+
+  <div
+    data-carousel-arrow-shell
+    class:list={[
+      "pointer-events-none absolute inset-y-0 z-10 flex-col justify-center",
+      overlay ? "right-3 flex sm:right-6" : "left-full hidden md:flex",
+    ]}
+  >
+    <button type="button" class="carousel-arrow" data-carousel-next aria-label={nextLabel}>
+      <Image src={arrowRight} alt="" class="h-6 w-auto max-w-none" loading="eager" />
+    </button>
+  </div>
+
+  {dots && <div class="carousel-dots" data-carousel-dots role="tablist" aria-label={label} />}
+</div>
+
+<style>
+  /* Each direct child of the track is one slide, full width and not shrinking. */
+  .carousel-track > :global(*) {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  /* `.button-text`: a 0.2rem hit area, not Tailwind's 0.25rem. */
+  .carousel-arrow {
+    pointer-events: auto;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    transition-property: opacity;
+  }
+
+  .carousel-arrow:disabled {
+    cursor: default;
+    opacity: 0.35;
+  }
+
+  /*
+   * An arrow laid over imagery needs a surface of its own: a mid-blue chevron on
+   * a mid-tone photograph is invisible however it is shadowed. Over plain
+   * background it needs nothing, and a disc there would only add noise — so the
+   * plate is opt-in per arrow rather than a property of overlay mode.
+   */
+  .carousel[data-arrow-plate="prev"] [data-carousel-prev],
+  .carousel[data-arrow-plate="next"] [data-carousel-next] {
+    padding: 0.7rem;
+    border-radius: 9999px;
+    background-color: rgb(255 255 255 / 0.92);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.28);
+    transition-property: background-color, box-shadow;
+  }
+
+  .carousel[data-arrow-plate="prev"] [data-carousel-prev]:hover,
+  .carousel[data-arrow-plate="next"] [data-carousel-next]:hover {
+    background-color: #fff;
+    box-shadow: 0 3px 14px rgb(0 0 0 / 0.38);
+  }
+
+  /* On mobile the image strip owns the Spotlight navigation. */
+  @media (width < 40rem) {
+    .carousel[data-arrows="media"] [data-carousel-arrow-shell] {
+      inset-block: 0 auto;
+      height: 8rem;
+    }
+
+    .carousel[data-arrows="media"] [data-carousel-prev],
+    .carousel[data-arrows="media"] [data-carousel-next] {
+      padding: 0.7rem;
+      border-radius: 9999px;
+      background-color: rgb(255 255 255 / 0.92);
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.28);
+      transition-property: background-color, box-shadow, opacity;
+    }
+  }
+
+  /* Dots sit under the text column, indented past the portrait. */
+  .carousel-dots {
+    position: absolute;
+    bottom: -2rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: start;
+    list-style: none;
+  }
+
+  @media (width >= 40rem) {
+    .carousel-dots {
+      left: 14rem;
+    }
+  }
+
+  .carousel-dots :global(button) {
+    width: 0.5rem;
+    height: 0.5rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-dlabs-gray-200);
+    cursor: pointer;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    transition-property: background-color;
+  }
+
+  .carousel-dots :global(button:not(:last-child)) {
+    margin-right: 18px;
+  }
+
+  .carousel-dots :global(button:hover) {
+    background-color: var(--color-dlabs-gray-300);
+  }
+
+  .carousel-dots :global(button[aria-selected="true"]) {
+    background-color: var(--color-dlabs-blue);
+  }
+</style>
+
+<script>
+  import { setupCarousels } from "./carousel";
+  setupCarousels();
+</script>

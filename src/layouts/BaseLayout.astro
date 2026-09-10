@@ -1,0 +1,132 @@
+---
+import "../styles/global.css";
+import { Font } from "astro:assets";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { resolveLocale, otherLocale, pageUrl } from "@/lib/i18n";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Absolute or site-relative URL of the social preview image. */
+  image?: string;
+  /** Set on pages that should not be indexed (e.g. the styleguide). */
+  noindex?: boolean;
+  /**
+   * Translations of this page, for hreflang. Omit an entry when no translation
+   * exists — 5 blog posts have no English version, and pointing hreflang at a
+   * page that was never built is worse than omitting it.
+   */
+  alternates?: { locale: string; url: string }[];
+  /** Ref of this page, so the header/footer can mark the matching link active. */
+  activeRef?: string;
+  /** Home page only: the header starts over the blue hero. */
+  blueHeader?: boolean;
+  /** Omit the header and footer (the styleguide). */
+  bare?: boolean;
+  /** og:type. "article" for blog posts, as on the current site. */
+  ogType?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  image,
+  noindex = false,
+  alternates = [],
+  activeRef,
+  blueHeader = false,
+  bare = false,
+  ogType = "website",
+} = Astro.props;
+
+const locale = resolveLocale(Astro.currentLocale);
+
+/**
+ * The `lang` attribute uses the region-qualified tag the current site declares
+ * in its front matter — `de` and `en-US`. (Production also gets this wrong on
+ * most pages: the layout reads `page.lang`, but the pages set `locale`, so every
+ * German method, blog and job page claims `lang="en"`.)
+ */
+const HTML_LANG: Record<typeof locale, string> = { de: "de", en: "en-US" };
+const lang = HTML_LANG[locale];
+
+/**
+ * The switcher points at this page's translation when one exists, and otherwise
+ * at the other locale's home page — the same fallback the old
+ * language_switcher_tag.rb used. `alternates` already encodes that: a page
+ * without a translation passes an empty array.
+ */
+const switcherUrl =
+  alternates.find((alt) => alt.locale === otherLocale(locale))?.url ??
+  pageUrl("index", otherLocale(locale));
+
+const SITE_NAME = "D‑LABS GmbH";
+/** Contentful and YAML copy carries stray whitespace; meta tags should not. */
+const trimmed = (value?: string) => value?.replace(/\s+/g, " ").trim() || undefined;
+const metaTitle = trimmed(title);
+const metaDescription = trimmed(description);
+
+const pageTitle = metaTitle ? `${metaTitle} | ${SITE_NAME}` : SITE_NAME;
+/**
+ * Every URL ends in a slash (`trailingSlash: "always"`). Astro reports the
+ * pathname without one for some routes, so normalise before building the
+ * canonical.
+ */
+const path = Astro.url.pathname;
+const canonical = new URL(path.endsWith("/") ? path : `${path}/`, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    {/* No `sizes`: this ico carries 16 through 256, not the template's lone 32. */}
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    {/* Astro emits the @font-face rules, fallback metrics and preload hints. */}
+    <Font cssVariable="--font-letter-gothic" preload />
+    <Font cssVariable="--font-roboto" preload />
+
+    <title>{pageTitle}</title>
+    {metaDescription && <meta name="description" content={metaDescription} />}
+    <link rel="canonical" href={canonical.href} />
+    {
+      alternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.locale} href={new URL(alt.url, Astro.site).href} />
+      ))
+    }
+    {alternates.length > 0 && <link rel="alternate" hreflang={locale} href={canonical.href} />}
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content={locale === "de" ? "de_DE" : "en_US"} />
+    <meta property="og:title" content={metaTitle ?? SITE_NAME} />
+    {metaDescription && <meta property="og:description" content={metaDescription} />}
+    <meta property="og:url" content={canonical.href} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+  </head>
+
+  <body class="flex min-h-screen flex-col">
+    {
+      !bare && (
+        <Header
+          locale={locale}
+          activeRef={activeRef}
+          switcherUrl={switcherUrl}
+          blueOnTop={blueHeader}
+        />
+      )
+    }
+    <main class="flex-auto" aria-label="Content">
+      <slot />
+    </main>
+    {!bare && <Footer locale={locale} activeRef={activeRef} />}
+  </body>
+</html>

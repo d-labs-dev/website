@@ -1,0 +1,117 @@
+---
+/**
+ * The office address block, appearing at the foot of several pages. Optionally
+ * followed by the map.
+ */
+import { getEntry } from "astro:content";
+import Map from "@/components/Map.astro";
+import { getSharedCopy, pageUrl, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  /** Light variant, on a grey ground rather than blue. */
+  light?: boolean;
+  withMap?: boolean;
+}
+
+const { locale, light = false, withMap = false } = Astro.props;
+
+const copy = await getSharedCopy("locations", locale);
+const officesEntry = await getEntry("offices", "offices");
+const offices = officesEntry?.data.offices ?? [];
+---
+
+<div
+  id="locations"
+  class:list={[
+    "relative z-1 flex flex-col items-center gap-6 px-6 pt-16 pb-24",
+    light ? "bg-dlabs-gray-100 text-black" : "bg-dlabs-blue text-white",
+  ]}
+>
+  <div class="flex w-full max-w-[60rem] flex-col gap-12 lg:gap-24">
+    <h2 class="font-heading tracking-heading max-w-[40rem] text-xl">{copy.title}</h2>
+
+    {
+      /*
+        6rem in both states. The original is `row sp-8 q-xl-col`, and
+        `.q-xl-col.sp-8` only flips the axis — margin-right 0, margin-bottom
+        6rem — so the gap does not shrink when it stacks. (The responsive step
+        is on the wrapper above, which is `sp-8 q-xl-sp-6`.)
+      */
+    }
+    <div class="flex flex-col gap-24 lg:flex-row">
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col">
+          <div>D‑LABS GmbH</div>
+          <a
+            class:list={["office-link", light ? "is-light" : "is-dark"]}
+            href={`mailto:${copy.company_email}`}>{copy.company_email}</a
+          >
+        </div>
+      </div>
+
+      <div class="flex flex-auto flex-col gap-16 md:flex-row md:gap-4">
+        {
+          offices.map((office) => (
+            <div class="flex flex-auto flex-col gap-3 md:gap-8">
+              <div class="flex flex-col gap-6">
+                <div>
+                  {office.street}
+                  <br />
+                  {/* One space, not `{" "}` plus a source newline — with
+                      compressHTML: true both survive and you get two. */}
+                  {`${office.zip} `}
+                  <b class:list={[light ? "text-dlabs-blue" : "text-white"]}>{office.city}</b>
+                </div>
+                <div>
+                  {office.tel}
+                  <br />
+                  <a
+                    class:list={["office-link", light ? "is-light" : "is-dark"]}
+                    href={`mailto:${office.email}`}
+                  >
+                    {office.email}
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+{withMap && <Map locale={locale} />}
+
+<style>
+  /*
+   * Was `.link-blue` (light ground) and `.link-light` (blue ground). Only
+   * `.link-blue` sets `text-decoration: none` — `.link-light` does not, so on the
+   * blue block these links keep the browser's underline. That difference is
+   * deliberate in the original and was flattened here.
+   */
+  .office-link {
+    transition-property: color;
+  }
+
+  .office-link.is-light {
+    color: var(--color-dlabs-blue);
+    text-decoration: none;
+  }
+
+  .office-link.is-light:hover {
+    color: var(--color-dlabs-dark-blue);
+  }
+
+  /* `.link-light`: colour only, so the underline stays. Explicit because
+     Tailwind's preflight has anchors inherit text-decoration. */
+  .office-link.is-dark {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .office-link.is-dark:hover {
+    color: var(--color-white-a90);
+  }
+</style>

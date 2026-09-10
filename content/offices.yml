@@ -1,0 +1,27 @@
+# D-LABS office locations. Not localized — addresses, phone numbers and email
+# are the same in both languages, so this is one file rather than a copy per
+# locale. The two labels that *are* translated live in
+# content/shared/<locale>/locations.yml.
+offices:
+  - name: Potsdam
+    is_main: true
+    image: about-us/dlabs_about-us-potsdam.jpg
+    street: Marlene-Dietrich-Allee 15
+    zip: "14482"
+    city: Potsdam
+    tel: +49 331 97 992 300
+    email: potsdam@d-labs.com
+  - name: Berlin
+    image: about-us/dlabs_about-us-berlin.jpg
+    street: Matkowskystraße 2
+    zip: "10245"
+    city: Berlin
+    tel: +49 30 29 387 978
+    email: berlin@d-labs.com
+  - name: Stuttgart
+    image: about-us/dlabs_about-us-stuttgart.jpg
+    street: Königstraße 21
+    zip: "70173"
+    city: Stuttgart
+    tel: +49 711 99 796 266
+    email: stuttgart@d-labs.com

@@ -1,0 +1,35 @@
+# Build output and dependencies
+dist/
+.astro/
+node_modules/
+_site/
+.jekyll-cache/
+pnpm-lock.yaml
+
+# ── The Jekyll site ──────────────────────────────────────────────────────────
+# Prettier must not touch the live site. Left alone it reformats Liquid
+# templates and, with prettier-plugin-tailwindcss loaded, reorders their class
+# attributes — churn in files this rewrite is replacing rather than editing. It
+# also reflowed the minified vendor JS.
+_data/
+_includes/
+_layouts/
+_plugins/
+assets/
+en/
+jobs/
+vendor/
+
+# Jekyll pages at the repo root
+404.md
+about.html
+accessibility.md
+approach.html
+blog.html
+imprint.md
+index.html
+jobs.html
+partners.html
+privacy-policy.md
+services.html
+prettier.config.js

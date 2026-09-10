@@ -1,0 +1,8 @@
+# Order lives in src/lib/i18n.ts (FOOTER_ITEMS).
+# The cookie-consent copy from the old footer.yml is deliberately not carried
+# over: the site sets no cookies, so there is no banner.
+privacy: Datenschutz
+imprint: Impressum
+accessibility: Barrierefreiheit
+partners: Partnerschaften
+member_of: Mitglied im

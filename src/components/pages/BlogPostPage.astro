@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+import { formatPostDate, isoDate } from "@/lib/dates";
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+  counterpartSlug: string | null;
+}
+
+const { entry, counterpartSlug } = Astro.props;
+const post = entry.data;
+const locale = post.locale as Locale;
+
+const copy = await getPageCopy("blog", locale);
+
+const alternates = counterpartSlug
+  ? [{ locale: otherLocale(locale), url: entryUrl("blog", counterpartSlug, otherLocale(locale)) }]
+  : [];
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  image={post.heroImage ? contentfulImage(post.heroImage, { width: 1200 }) : undefined}
+  alternates={alternates}
+  ogType="article"
+>
+  <article class="flex flex-col items-center px-6 py-16 pt-24">
+    <div class="flex w-full max-w-[40rem] flex-col gap-12">
+      <div class="flex flex-col gap-6">
+        <LeadLine>
+          <time datetime={isoDate(post.date)}>{formatPostDate(post.date)}</time>
+        </LeadLine>
+
+        <h1 class="font-heading tracking-heading text-xl">{post.title}</h1>
+
+        {
+          /*
+          `w-full` on the image, as production's `full-width` does and as
+          MethodPage already did — this page was the odd one out. Without it the
+          image stops at its 800px intrinsic width and sits left in a wider
+          column, which above ~1600px leaves it visibly smaller than the copy it
+          heads. The width/height attributes stay for the aspect ratio;
+          Tailwind's preflight supplies `height: auto`.
+        */
+        }
+        {
+          post.heroImage && (
+            <img
+              src={contentfulImage(post.heroImage, { width: 1600 })}
+              alt={assetAlt(post.heroImage)}
+              width={800}
+              height={
+                post.heroImage.width && post.heroImage.height
+                  ? Math.round((800 * post.heroImage.height) / post.heroImage.width)
+                  : undefined
+              }
+              class="w-full"
+              loading="eager"
+            />
+          )
+        }
+
+        <div class="flex flex-col items-center">
+          <div class="flex w-full max-w-[30rem] flex-col gap-12">
+            <Markdown source={post.body} />
+
+            {
+              post.author && (
+                <div class="flex flex-col items-start gap-3">
+                  {post.author.image && (
+                    <img
+                      src={contentfulImage(post.author.image, {
+                        width: 100,
+                        height: 100,
+                        fit: "fill",
+                        focus: "faces",
+                      })}
+                      alt={post.author.image.title || post.author.name}
+                      width={100}
+                      height={100}
+                      class="h-12 w-12 rounded-full"
+                      loading="lazy"
+                    />
+                  )}
+                  <div class="flex flex-col">
+                    <div class="text-sm">
+                      {copy.by_author} {post.author.name}
+                    </div>
+                    <div class="text-sm font-bold">{post.author.title}</div>
+                  </div>
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col items-start pt-12">
+          <Button variant="text" color="black" href={pageUrl("blog", locale)}>
+            ←&nbsp;&nbsp;{copy.back_button_text}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

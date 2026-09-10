@@ -1,0 +1,37 @@
+# seo_title / seo_description are the curated values from the Jekyll page's front
+# matter, which jekyll-seo-tag used for <title>, meta description and og tags.
+# They are deliberately not the same as the on-page copy.
+seo_description: We are a consulting and design company that designs, optimizes and implements user-centric
+  digital products and services.
+hero_claim: Understand needs. Identify potentials. Set the right focus.<br/><b>magnifying potentials</b>
+screens:
+- title: We provide companies security to use the potential of digitalization for themselves quickly,
+    purposefully and sustainably.
+  cta: Who We Are
+  cta_target: /en/about/
+- title: How can the customer interface of a distribution system operator be designed in a uniform way?
+  text: Forward-looking service concept for the realization of a uniform customer interface.
+  cta: MORE ABOUT THE PROJECT
+  cta_target: /en/approach/#project1
+- title: How do you train the employees of a DAX Group to be fit for agile working in interdisciplinary
+    teams?
+  text: Building knowledge on agile work in the company and application in internal projects.
+  cta: MORE ABOUT THE PROJECT
+  cta_target: /en/approach/#project2
+- title: How can visitors to an exhibition be digitally supported?
+  text: Intuitively usable app for iOS and Android for visitor multimedia accompaniment and support during
+    and after the exhibition visit.
+  cta: MORE ABOUT THE PROJECT
+  cta_target: /en/approach/#project3
+clients_heading: Our Customers
+clients_pause: Pause logo carousel
+clients_play: Play logo carousel
+clients_prev: Previous client logos
+clients_next: Next client logos
+blog_cta_text: Find out more
+jobs_image: dlabs_main-01-jobteaser.jpg
+jobs_lead: Jobs
+jobs_title: Your chance! Your new job!
+jobs_desc: Become part of the D-LABS team. Here with us, innovative projects and varied tasks are waiting
+  for you. Inform yourself about our job offers and send us your contact details today.
+jobs_cta_text: Find out more

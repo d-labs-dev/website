@@ -1,0 +1,10 @@
+---
+import { entryPaths } from "@/lib/entry-routes";
+import MethodPage from "@/components/pages/MethodPage.astro";
+
+export const getStaticPaths = () => entryPaths("methods", "de");
+
+const { entry, counterpartSlug } = Astro.props;
+---
+
+<MethodPage entry={entry} counterpartSlug={counterpartSlug} />

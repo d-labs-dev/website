@@ -1,0 +1,140 @@
+---
+/**
+ * Services: an intro, the scroll-driven competence-field scroller, and the
+ * method browser.
+ */
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import ServicesScroller from "@/components/services/ServicesScroller.astro";
+import MethodBrowser from "@/components/services/MethodBrowser.astro";
+import Spotlight from "@/components/Spotlight.astro";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+import { getPageCopy, pageUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("services", locale);
+
+// Sorted by Contentful's creation order, which is the order the live list uses.
+// getCollection() hands them back sorted by id, i.e. alphabetically by slug.
+const methods = (await getCollection("methods", (entry) => entry.data.locale === locale)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const domains = copy.slides.map((slide: { name: string; color: string }) => ({
+  name: slide.name,
+  color: slide.color,
+}));
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("services", otherLocale(locale)) }];
+---
+
+<BaseLayout
+  title={copy.seo_title ?? copy.intro_lead}
+  description={copy.seo_description ?? copy.intro_text}
+  activeRef="services"
+  alternates={alternates}
+>
+  {
+    /*
+    Intro. `minheight-75vh pt-8 q-md-height-screen q-md-pt-4` — and `q-md` is
+    *max*-width 640, so the full-height, tight-padding variant is the mobile one.
+    The three min-heights live in the scoped style below, because two of them are
+    viewport-aspect queries with no utility equivalent.
+  */
+  }
+  <div class="services-intro relative flex flex-col items-center justify-center px-6 pt-6 sm:pt-24">
+    {
+      /* No pb here: the old services intro is `maxwidth-7 width-full col sp-4`
+        with no bottom padding, unlike the approach page's, which has pb-6. With
+        justify-center a 3rem pad lifts the block ~28px off live's position. */
+    }
+    <div class="flex w-full max-w-[60rem] flex-col gap-6">
+      <LeadLine>{copy.intro_lead}</LeadLine>
+      <div class="font-heading tracking-heading xs:text-xl text-lg sm:text-2xl">
+        <Markdown source={copy.intro_text} size="inherit" heading />
+      </div>
+    </div>
+
+    {/* `show-md`: the scroll hint is the mobile affordance, hidden from 640px up. */}
+    <div
+      class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-6 text-black sm:hidden"
+    >
+      <Button
+        variant="text"
+        color="black"
+        href="#overview"
+        aria-label={locale === "de" ? "Weiter" : "Continue"}
+      >
+        <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+      </Button>
+    </div>
+  </div>
+
+  <ServicesScroller
+    title={copy.intro_services_title}
+    slides={copy.slides}
+    listLinkText={copy.list_link_text}
+  />
+
+  {
+    /* Full variant: the bullet list and the PDF, per the design board. The id is
+      what the home page's spotlight button links to. */
+  }
+  <div id="spotlight" class="-scroll-mt-6">
+    <Spotlight locale={locale} variant="full" />
+  </div>
+
+  <MethodBrowser
+    locale={locale}
+    methods={methods}
+    domains={domains}
+    copy={{
+      services_title: copy.services_title,
+      services_all_button: copy.services_all_button,
+      filter_button_label: copy.filter_button_label,
+      search_placeholder: copy.search_placeholder,
+    }}
+  />
+</BaseLayout>
+
+<style>
+  /*
+   * The old `.minheight-75vh` shrinks the hero on very wide viewports, and
+   * `.q-md-height-screen` — declared later in the original stylesheet, so it wins
+   * — gives it the full viewport height on mobile. Kept as CSS because both are
+   * viewport-aspect queries, which have no utility form.
+   */
+  .services-intro {
+    min-height: 75vh;
+  }
+
+  @media (min-width: 150vh) {
+    .services-intro {
+      min-height: 70vh;
+    }
+  }
+
+  @media (min-width: 200vh) {
+    .services-intro {
+      min-height: 67vh;
+    }
+  }
+
+  @media (width < 40rem) {
+    .services-intro {
+      min-height: -webkit-fill-available;
+    }
+  }
+</style>

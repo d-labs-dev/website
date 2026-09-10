@@ -1,0 +1,7 @@
+# Nav labels. The order of the items lives in src/lib/i18n.ts (NAV_ITEMS) —
+# it is structure, not copy, so it is not duplicated per locale.
+about: Über uns
+approach: Arbeitsweise
+services: Leistungen
+blog: Blog
+jobs: Jobs

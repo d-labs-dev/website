@@ -1,0 +1,40 @@
+---
+/**
+ * Google Map showing the three offices.
+ *
+ * Loaded on page view, as the current site does — the script tag is injected as
+ * soon as the module runs rather than waiting for a click.
+ *
+ * Worth being explicit about the consequence, because it is the one thing this
+ * component changes about the site's privacy posture: the visitor's IP reaches
+ * Google on every page that renders the map, before they have asked for
+ * anything. That is also true of production today, so this is parity, not a
+ * regression — but it is the reason the old site carries a cookie banner, and
+ * ours does not. The click-to-load version is a small revert away
+ * (`data-map-load` in git history) if that gets revisited.
+ *
+ * The API key is public by necessity (it ships in the page), so it must be
+ * HTTP-referrer restricted in the Google Cloud console.
+ */
+import { getSharedCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getSharedCopy("locations", locale);
+---
+
+<div
+  id="map"
+  class="bg-dlabs-gray-100 relative z-1 h-[25rem] sm:h-[30rem]"
+  data-map
+  aria-label={copy.title}
+>
+</div>
+
+<script>
+  import { setupMap } from "./map";
+  setupMap();
+</script>

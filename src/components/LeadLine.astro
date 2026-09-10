@@ -1,0 +1,93 @@
+---
+/**
+ * The small uppercase blue label with a rule running out to its left, used as a
+ * section eyebrow throughout the site (was `.lead-line` plus the
+ * `uppercase font-heading font-bold text-blue text-sm` cluster).
+ *
+ * The rule is a pseudo-element, so this is one of the few components that needs
+ * a scoped <style> rather than utilities alone.
+ */
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  /** Renders as a heading when the label is the section's actual title. */
+  as?: "div" | "h2" | "h3" | "h4";
+  /** White on dark backgrounds. */
+  color?: "blue" | "white";
+  /**
+   * `small` is the `q-md-text-xs` variant the services page uses — one step down
+   * below 640px. `xs` is 0.8rem at every width, which exactly one label in the
+   * old markup asks for: the approach page's sticky slider lead. Everywhere else
+   * the label is text-sm at every width.
+   */
+  size?: "default" | "small" | "xs";
+  /**
+   * How far the label is pushed right of the rule. `default` widens from 3em to
+   * 6em at 50rem, as the ported CSS does. `narrow` holds 3em at every width, for
+   * a band where the copy is stepped in underneath the eyebrow rather than
+   * sitting beside it — there the wider step leaves the label almost touching
+   * the heading's left edge.
+   */
+  indent?: "default" | "narrow";
+}
+
+/**
+ * `...rest` is load-bearing: without it any data attribute passed in is silently
+ * dropped, which is how the services scroller's `data-scroller-lead` went
+ * missing and left its eyebrow stuck at opacity 0.
+ */
+const {
+  as: Tag = "div",
+  color = "blue",
+  size = "default",
+  indent = "default",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const colorClass = color === "white" ? "text-white" : "text-dlabs-blue";
+---
+
+<Tag
+  class:list={[
+    // No tracking utility needed: `uppercase` carries the design's 0.1em, the
+    // same as the old `.uppercase` class did.
+    "lead-line font-heading font-bold uppercase",
+    size === "small" ? "text-xs sm:text-sm" : size === "xs" ? "text-xs" : "text-sm",
+    colorClass,
+    className,
+  ]}
+  data-indent={indent}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  /* The rule sits to the left of the label, outside its box. `margin-left`
+     reserves the space it occupies so it doesn't overhang the container. */
+  .lead-line {
+    position: relative;
+    margin-left: 3em;
+  }
+
+  .lead-line::before {
+    content: "";
+    position: absolute;
+    top: 40%;
+    right: 100%;
+    left: -3em;
+    margin-right: 1em;
+    border-bottom: 1px solid;
+  }
+
+  @media (width >= 50rem) {
+    .lead-line[data-indent="default"] {
+      margin-left: 6em;
+    }
+
+    .lead-line[data-indent="default"]::before {
+      left: -6em;
+    }
+  }
+</style>

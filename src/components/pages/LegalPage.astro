@@ -1,0 +1,39 @@
+---
+/**
+ * Imprint, privacy policy and accessibility statement.
+ *
+ * The markdown here goes through Astro's own pipeline (a content collection),
+ * not `marked` — that is only for strings arriving from Contentful. So it is
+ * rendered via `render()` and its H1 comes from the body rather than being
+ * emitted separately, as on the current site.
+ */
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { otherLocale, pageUrl, type Locale } from "@/lib/i18n";
+
+interface Props {
+  entry: CollectionEntry<"legal">;
+  locale: Locale;
+  /** Page ref, for the active nav state and the language switcher. */
+  ref: string;
+}
+
+const { entry, locale, ref } = Astro.props;
+const { Content } = await render(entry);
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl(ref, otherLocale(locale)) }];
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  activeRef={ref}
+  alternates={alternates}
+>
+  <article class="flex flex-col items-center px-6 py-12 pt-24">
+    <div class="prose w-full max-w-[40rem] pt-12">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

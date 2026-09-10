@@ -1,0 +1,167 @@
+# The Astro rewrite
+
+Conventions and gotchas for the Astro site that lives at the root of this repo. See the root
+`README.md` for how to run either site.
+
+Astro, static output, content from Contentful, deployed to S3 behind CloudFront. Replaces the
+Jekyll 3.9 / Ruby 2.7 site that currently still occupies this repo alongside it.
+
+The goal of the initial build is **design parity** with the old site — same 225 routes, same URLs,
+same DE/EN split — on a stack that can actually be worked on. The cosmetic redesign lands after
+parity, as a components-and-CSS change.
+
+## Commands
+
+| Command          | Does                                                                                                     |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| `pnpm dev`       | Dev server on :4321. `pnpm astro dev --background` to detach, then `astro dev stop` / `status` / `logs`. |
+| `pnpm build`     | Static build to `dist/`.                                                                                 |
+| `pnpm preview`   | Serve `dist/` locally.                                                                                   |
+| `pnpm typecheck` | `astro check`.                                                                                           |
+| `pnpm format`    | Prettier over the repo.                                                                                  |
+
+`/styleguide` renders every primitive on one page. It's `noindex` and unlinked. Check changes to the
+design system there first.
+
+## Environment
+
+`.env` (gitignored), same variable names as the old repo so the CircleCI context carries over:
+
+```
+CONTENTFUL_SPACE_ID=…
+CONTENTFUL_ACCESS_TOKEN=…
+```
+
+## Conventions
+
+**No custom CSS classes.** Styling is Tailwind utilities in markup; anything reusable becomes an
+Astro component. The two exceptions are element defaults in `src/styles/base.css` and the
+`.prose` configuration in `global.css` — the latter styles HTML generated from Contentful markdown,
+which can't carry classes.
+
+**One utility per property.** Tailwind resolves competing utilities by their position in the
+generated stylesheet, not by order in the `class` attribute. So `w-auto` in a shared string silently
+beats `w-[5.5rem]` in a variant string, with no warning and no local override. When composing
+classes in component frontmatter, make each group contribute at most one utility per CSS property.
+`src/components/Button.astro` is the reference for this.
+
+**Scroll-driven sections** use `src/lib/scroll-progress.ts` (which marker is active) and
+`src/lib/spring.ts` (wobble springs, transform formatters). Each animated section gets its own
+module that reads the active index and says what should happen — there is no shared interpreter and
+no `data-keyframes` attribute language any more. `src/components/dev/scroll-lab.ts` plus
+`/styleguide/scroll` is the working reference; read it before writing a new section.
+
+Two things that are easy to get wrong there: apply the _initial_ state with `set()` rather than
+`to()`, because a spring whose target already equals its current value never emits an update and the
+attribute stays unset; and give a tracked section more than one viewport of content after its last
+marker, or the "past the section" index is unreachable and the last screen can never animate out.
+
+**Behaviour lives next to its markup.** `Foo.astro` imports `foo.ts` from a scoped `<script>`. No
+global behaviour file, no framework, nothing hydrates.
+
+One exception: everything under `src/pages/` is a route, so a `.ts` file there is served as a broken
+endpoint. Page-level behaviour modules go in `src/components/` and are imported by path.
+
+### Porting reference: old atomic classes → Tailwind
+
+The old site used a bespoke atomic system. When porting a template:
+
+**Breakpoints.** The old system was desktop-first `max-width`; Tailwind is mobile-first `min-width`,
+so conditions **invert** — the old `q-*` value becomes the base style and the old base becomes the
+`sm:`/`md:`/`lg:` variant.
+
+| Old          | Actual px | Tailwind                 |
+| ------------ | --------- | ------------------------ |
+| `q-sm` ≤30em | 480       | base (no default at 480) |
+| `q-md` ≤40em | 640       | `sm:` — exact match      |
+| `q-lg` ≤50em | 800       | `md:` (768)              |
+| `q-xl` ≤70em | 1120      | `lg:` (1024)             |
+
+e.g. `row q-md-col` → `flex flex-col sm:flex-row`.
+
+Old media queries used `em`, which in a media query resolves against the browser's initial 16px —
+_not_ the fluid root below — so those px values are exact.
+
+**Spacing.** The old `sp-*` gap scale lands exactly on Tailwind's default spacing scale, so there are
+no custom spacing tokens. Only the numbers differ:
+
+| Old    | rem  | Tailwind |
+| ------ | ---- | -------- |
+| `sp-1` | 0.5  | `2`      |
+| `sp-2` | 0.75 | `3`      |
+| `sp-3` | 1    | `4`      |
+| `sp-4` | 1.5  | `6`      |
+| `sp-5` | 2    | `8`      |
+| `sp-6` | 3    | `12`     |
+| `sp-7` | 4    | `16`     |
+| `sp-8` | 6    | `24`     |
+
+**Layout.** `col` → `flex flex-col` · `row` → `flex` · `push` → `flex-auto` ·
+`fill-parent` → `flex-1` · `non-interactive` → `pointer-events-none` · `no-shrink` → `shrink-0`.
+
+**Containers.** `maxwidth-N` was a 5/10/15/20/30/40/50/60/80rem ladder, written here as arbitrary
+values. The main content column is `maxwidth-7` → `max-w-[60rem]`.
+
+**Type.** `xxs → text-2xs`, `xs → text-xs`, `sm → text-sm`, `md → text-base`, `lg → text-lg`,
+`xl → text-xl`, `xxl → text-2xl`, `xxxl → text-3xl`.
+
+## Image captions in Contentful copy
+
+Contentful has no caption field, and its markdown fields carry only the image
+URL, so a caption is simply the line **directly after** an image — no blank line,
+no special syntax:
+
+```markdown
+![Kurzer Bildtext für Screenreader](https://images.ctfassets.net/…/bild.jpg)
+Die sichtbare Bildunterschrift
+```
+
+A blank line is the boundary. Leave one and the text is an ordinary paragraph
+again:
+
+```markdown
+![Kurzer Bildtext](…/bild.jpg)
+
+Das ist wieder normaler Fließtext.
+```
+
+This is not a convention we invented — it is the one already in the copy. All 22
+images in the blog that have text on the following line are captions, and the
+renderer now presents them as such: 22 `<figure>` elements with a `<figcaption>`,
+no content edits needed. The other 74 images stand alone and are unchanged.
+
+The CommonMark title slot works too — `![Alt](url "Die Bildunterschrift")` — for
+anyone who reaches for the standard idiom. It is _not_ the form to teach: smart
+quotes (a Mac default, or a paste from Word) break it outright and the image then
+renders as raw markdown text. Where a title is used it is moved into the caption
+rather than copied, so it does not also appear as a hover tooltip.
+
+The alt text and the caption are deliberately separate: the alt describes the
+image for someone who cannot see it, the caption is read by everyone. Do not
+repeat one as the other — a screen reader would announce it twice. See
+`src/lib/markdown.ts`.
+
+## Things that look wrong but aren't
+
+- **The root font-size is fluid.** `base.css` sets `font-size: calc(0.88em + 0.4vw)` above 30em,
+  carried over from the old site, so every rem-based utility scales with the viewport. Breakpoints
+  are unaffected. Deliberate for now; revisit with the redesign.
+- **`text-black` is not `#000`.** `--color-black` is overridden to `#152935`; the design has no true
+  black.
+- **This design has no Roboto Bold — its bold is the Roboto Medium cut.** `roboto-latin-500.woff2`
+  is internally "Roboto Medium", `usWeightClass: 500`, and there is no 700 file anywhere in the
+  design. Fonts are declared through Astro's font API in `astro.config.mjs`, where that Medium file
+  is registered at **both 500 and 700**. So `font-medium` and `font-bold` each hit a real declared
+  face — no synthetic bolding, and both render Medium letterforms. To introduce a true bold later,
+  drop in a `roboto-latin-700` and change only the 700 entry. Letter Gothic's bold is a genuine 700
+  and needs none of this.
+  <br>The old site declared the Medium file at `bold` only, with nothing at 500, so its
+  `font-medium` silently fell back to Regular. We render Medium there instead — the weight the old
+  CSS was asking for.
+- **Markdown is rendered with `breaks: true`.** The old site ran kramdown with `hard_wrap: true`, so
+  a single newline in a Contentful field is a `<br>`. Editors have written against that for years.
+  See `src/lib/markdown.ts`.
+- **TypeScript is pinned to 6.x.** TypeScript 7 is the native compiler and does not yet expose the
+  programmatic API `astro check` needs, so 7.x silently disables type checking. Nothing else needs
+  it — the build never type-checks. Unpin once
+  [withastro/roadmap#1321](https://github.com/withastro/roadmap/discussions/1321) lands.

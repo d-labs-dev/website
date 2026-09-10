@@ -1,0 +1,138 @@
+---
+/**
+ * Scroll-engine lab.
+ *
+ * The pages that use the scroll engine (home, services, approach) don't exist
+ * yet, so this exercises it in isolation: stacked cross-fading panels keyed to
+ * markers, a scroll indicator, a spring-driven SVG group, and a live readout of
+ * the active index.
+ *
+ * It is also the reference for the pattern each animated section should follow —
+ * see `src/components/dev/scroll-lab.ts`. That module cannot live beside this
+ * file: everything under src/pages/ is a route, so a .ts there is served as a
+ * broken endpoint. Page-level behaviour modules go in src/components/.
+ *
+ * Unlinked and noindex.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const panels = [
+  { title: "Nutzerforschung", text: "Wir verstehen, was Menschen wirklich brauchen." },
+  { title: "Konzeption", text: "Aus Erkenntnissen werden tragfähige Ideen." },
+  { title: "Gestaltung", text: "Ideen bekommen eine Form, die sich benutzen lässt." },
+  { title: "Umsetzung", text: "Und dann bauen wir es wirklich." },
+];
+---
+
+<BaseLayout title="Scroll lab" noindex={true} bare={true}>
+  <div class="text-2xs fixed top-4 left-4 z-50 font-mono">
+    <div class="border-dlabs-gray-200 flex flex-col gap-1 border bg-white/90 px-3 py-2">
+      <div>
+        index <span class="text-dlabs-blue font-bold" data-readout-index>—</span> / count <span
+          data-readout-count>—</span
+        >
+      </div>
+      <div class="text-dlabs-gray-300" data-readout-note></div>
+    </div>
+  </div>
+
+  <div class="flex min-h-screen flex-col items-center justify-center px-6">
+    <p class="max-w-[30rem] text-center text-lg">
+      Scroll down. Nothing below is a real page — it exercises
+      <code>lib/scroll-progress.ts</code> and <code>lib/spring.ts</code>.
+    </p>
+  </div>
+
+  {/* One tracked section. Markers set the scroll rhythm; panels are pinned. */}
+  <div class="relative" data-scroll-lab>
+    {/* Leading spacer marker, so the first panel can fade *in* rather than start visible. */}
+    <div class="h-8" data-keyframe-marker></div>
+
+    {
+      panels.map((_, i) => (
+        <div class={i === panels.length - 1 ? "min-h-screen" : "h-[40rem]"} data-keyframe-marker />
+      ))
+    }
+
+    {/* Pinned, stacked panels — only one is opaque at a time. */}
+    {
+      panels.map((panel, i) => (
+        <div class="pointer-events-none absolute inset-0" style="opacity: 0" data-panel={i}>
+          <div class="sticky top-0 flex min-h-screen flex-col items-center justify-center px-6">
+            <div class="flex w-full max-w-[60rem] flex-col gap-6">
+              <div class="font-heading text-2xl font-bold">{panel.title}</div>
+              <div class="max-w-[30rem]">{panel.text}</div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+
+    {/* Indicator rail, the services/home pattern. */}
+    <div class="absolute inset-y-0 right-0 hidden md:block">
+      <div class="sticky flex flex-col justify-center gap-4 pr-6" style="height: 60vh; top: 20vh">
+        {
+          panels.map((_, i) => (
+            <button
+              type="button"
+              class="indicator"
+              data-indicator={i}
+              aria-label={`Screen ${i + 1}`}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Spring group + SVG attribute transform — the approach-diagram path. */}
+    <div class="pointer-events-none absolute inset-0">
+      <div class="sticky top-0 flex min-h-screen items-end justify-start p-12">
+        <svg viewBox="0 0 400 200" class="w-[18rem]" aria-hidden="true">
+          <g data-svg-group>
+            <circle cx="40" cy="160" r="18" fill="var(--color-dlabs-blue)"></circle>
+            <circle cx="90" cy="160" r="18" fill="var(--color-dlabs-yellow)"></circle>
+            <circle cx="140" cy="160" r="18" fill="var(--color-dlabs-green)"></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  {
+    /*
+    Deliberately taller than one viewport. The last marker is min-h-screen, so
+    with only a single screen after it its bottom edge lands exactly at maximum
+    scroll and the index can never pass it — the "past the section" state would
+    be unreachable, and that state is what lets a real page animate its last
+    screen out.
+  */
+  }
+  <div class="flex min-h-[180vh] flex-col items-center justify-start pt-32">
+    <p class="text-dlabs-gray-300 text-center">
+      Past the tracked section — the index should now read {panels.length + 1}, and every panel
+      should be faded out.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .indicator {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-dlabs-blue);
+    background-color: transparent;
+    cursor: pointer;
+    transition-property: background-color, transform;
+  }
+
+  .indicator[data-active] {
+    background-color: var(--color-dlabs-blue);
+    transform: scale(1.4);
+  }
+</style>
+
+<script>
+  import { setupScrollLab } from "@/components/dev/scroll-lab";
+  setupScrollLab();
+</script>

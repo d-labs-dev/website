@@ -1,0 +1,211 @@
+---
+/**
+ * Site footer: social links, legal/partner nav, and the association logos.
+ *
+ * Layout notes, because the original's proportions are not obvious from the
+ * markup and were wrong here on the first pass:
+ *
+ *  - the outer columns (socials, memberships) are `flex-basis: 12em` above
+ *    800px, which is what keeps the legal links optically centred rather than
+ *    merely space-between
+ *  - each legal link is `min-width: 6em` and centred, so they sit on an even
+ *    rhythm regardless of word length
+ *  - the memberships column is left-aligned with a 4rem left inset on desktop,
+ *    not right-aligned
+ *
+ * The old footer also carried a cookie-consent bar. It is gone: with no
+ * analytics the site sets no cookies, so there is nothing to consent to.
+ */
+import { Image } from "astro:assets";
+import instagramIcon from "@/assets/images/icons/icon-instagram.svg";
+import xIcon from "@/assets/images/icons/icon-x.svg";
+import linkedinIcon from "@/assets/images/icons/icon-linkedin.svg";
+import sisaLogo from "@/assets/images/logo_sisa.svg";
+import medianetLogo from "@/assets/images/partners/logo_medianet.svg";
+import automotiveLogo from "@/assets/images/partners/logo_automotive-ber.svg";
+import { FOOTER_ITEMS, pageUrl, getSharedCopy, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  activeRef?: string;
+}
+
+const { locale, activeRef } = Astro.props;
+
+const labels = await getSharedCopy("footer", locale);
+
+const socials = [
+  { href: "https://www.instagram.com/dlabs_potsdam/", icon: instagramIcon, label: "Instagram" },
+  { href: "https://x.com/d_labs", icon: xIcon, label: "X" },
+  { href: "https://de.linkedin.com/company/d-labs", icon: linkedinIcon, label: "LinkedIn" },
+];
+
+/** Associations D-LABS is a member of. Heights differ per logo, as on the current site. */
+const memberships = [
+  {
+    href: "https://www.silicon-sanssouci.org/",
+    logo: sisaLogo,
+    label: "Silicon Sanssouci",
+    class: "h-8",
+  },
+  {
+    href: "https://www.medianet-bb.de",
+    logo: medianetLogo,
+    label: "media:net berlinbrandenburg",
+    class: "h-6",
+  },
+  {
+    href: "https://www.ac-bb.de/",
+    logo: automotiveLogo,
+    label: "Automotive Berlin Brandenburg",
+    class: "h-6",
+  },
+];
+
+const links = FOOTER_ITEMS.map((ref) => ({
+  ref,
+  label: labels[ref] ?? ref,
+  href: pageUrl(ref, locale),
+  isActive: ref === activeRef,
+}));
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-dlabs-gray-100 flex flex-col items-center px-6 py-8">
+  <div class="flex w-full max-w-[60rem] flex-col gap-12 md:gap-3">
+    {
+      /*
+      From 800px up the spacing is a margin on two of the five children, not a gap
+      between all of them: `sp-3` skips `.push`, so the row carries two 1rem gaps,
+      not four. With `gap-4` the columns were squeezed 17px narrower than live's,
+      which showed as the social marks and membership logos being clipped early.
+
+      Below 800px the spacers are hidden, so `gap-8` leaves exactly the two gaps
+      the original's `sp-5` puts between the three visible children.
+    */
+    }
+    <div class="flex flex-col items-center gap-8 md:flex-row md:items-center md:gap-0">
+      {
+        /*
+        0.95rem, not the 0.75rem `sp-2` names: that margin-right replaces
+        `.button-text`'s -0.2rem on one side while the next anchor keeps its own,
+        so the anchors sit 0.95rem apart. A flex `gap` adds to both negative
+        margins instead of replacing one, so it has to carry the difference.
+      */
+      }
+      <div class="flex flex-row gap-[0.95rem] md:mr-4 md:basis-48">
+        {
+          socials.map((social) => (
+            <a
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-link transition-opacity hover:opacity-70"
+            >
+              <Image src={social.icon} alt={social.label} class="h-4 w-auto" loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
+
+      {
+        /*
+        A growing spacer either side of the legal nav, as in the original, and no
+        `flex-1` on the nav itself.
+
+        This is what keeps the links on one line: the spacers take the slack, the
+        12rem outer columns give way when there is none, and the nav keeps its own
+        content width. With `flex-1` the nav got only what was left after the
+        outer columns had taken their basis, so between 800 and ~1150px it wrapped
+        onto two, three, even four lines while the columns never budged.
+
+        Hidden below 800px: there the row is a column, and unlike the original's
+        `sp-5` — which skips `.push` — a flex `gap` would put 2rem above and below
+        each spacer.
+
+        `flex-nowrap`, too: the original's legal group is a plain `.row` with no
+        `.wrappable`, so the links cannot wrap. That is not a detail — it is what
+        makes the nav hold its width and push the shrinking onto the columns
+        beside it.
+      */
+      }
+      <div class="hidden flex-auto md:block"></div>
+
+      <nav
+        class="flex flex-row flex-nowrap items-center justify-center gap-4 sm:gap-12 md:mr-4"
+        aria-label="Rechtliches"
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              class="footer-link text-xs"
+              aria-current={link.isActive ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="hidden flex-auto md:block"></div>
+
+      <div class="flex flex-col gap-3 md:basis-48 md:pl-16">
+        <div class="text-2xs font-bold">{labels.member_of}</div>
+        {
+          memberships.map((m) => (
+            <a
+              href={m.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-link self-start transition-opacity hover:opacity-70"
+            >
+              <Image src={m.logo} alt={m.label} class={`${m.class} w-auto`} loading="lazy" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center">
+      <div class="text-2xs">© D‑LABS GmbH {year}</div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* `.button-text`: a small hit area that does not push its neighbours apart. */
+  .icon-link {
+    display: block;
+    padding: 0.2rem;
+    margin: -0.2rem;
+  }
+
+  /*
+   * No padding, no flex-grow. The original template asks for
+   * `flex-grow: 1; text-align: center; padding: 10px; border: 1px solid transparent`
+   * in an inline style, but it asks through the `locale_link` Liquid tag, which
+   * drops the argument — the shipped anchors carry no `style` attribute at all.
+   * Measured on d-labs.com at 700px: the four links are 484px wide and 20px tall,
+   * which is text only. Reproducing the intent instead made them wrap to two rows.
+   */
+  .footer-link {
+    color: var(--color-black);
+    font-weight: bold;
+    text-decoration: none;
+    transition-property: color;
+  }
+
+  .footer-link:hover {
+    color: var(--color-dlabs-blue);
+  }
+
+  /* Above 800px each link gets an even footprint, as the old rule did. */
+  @media (width >= 50rem) {
+    .footer-link {
+      min-width: 6em;
+      text-align: center;
+    }
+  }
+</style>

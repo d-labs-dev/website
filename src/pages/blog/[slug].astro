@@ -1,0 +1,10 @@
+---
+import { entryPaths } from "@/lib/entry-routes";
+import BlogPostPage from "@/components/pages/BlogPostPage.astro";
+
+export const getStaticPaths = () => entryPaths("blog", "de");
+
+const { entry, counterpartSlug } = Astro.props;
+---
+
+<BlogPostPage entry={entry} counterpartSlug={counterpartSlug} />

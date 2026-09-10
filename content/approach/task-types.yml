@@ -1,0 +1,8 @@
+# Task type -> brand colour, for the project effort breakdown.
+# Not localized; the labels themselves live in the per-locale approach.yml.
+types:
+  user_research: yellow
+  design: darkBlue
+  engineering: red
+  training: green
+  consulting: purple

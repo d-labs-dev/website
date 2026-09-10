@@ -1,0 +1,377 @@
+---
+/**
+ * Browse the method library: filter by competence field, or search free-text.
+ *
+ * Every tile is rendered server-side and filtering only toggles visibility. That
+ * is deliberate — these are 56 real content pages and their titles and
+ * descriptions need to be in the HTML for search engines, so the list cannot be
+ * built client-side.
+ */
+import type { CollectionEntry } from "astro:content";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+/*
+ * Imported as components, not through <Image>: the original inlines these marks
+ * with `fill: currentColor`, so they take the button's colour and change with it
+ * on hover. An <img> cannot inherit `color`, which is why the magnifier stayed
+ * black. Astro's SVG components need `fill-current` and explicit `inline` /
+ * `align-baseline`, because preflight makes svg a block.
+ */
+import SearchIcon from "@/assets/images/icons/icon-search.svg";
+import CaretDown from "@/assets/images/icons/icon-caret-down.svg";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { entryUrl, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  methods: CollectionEntry<"methods">[];
+  /** Competence fields, in the services page's order. Must match Contentful domain titles. */
+  domains: { name: string; color: string }[];
+  copy: {
+    services_title: string;
+    services_all_button: string;
+    filter_button_label: string;
+    search_placeholder?: string;
+  };
+}
+
+const { locale, methods, domains, copy } = Astro.props;
+
+/**
+ * The filter matches a method's `domains` — which are Contentful domain titles —
+ * against these names. If someone renames a domain in Contentful without
+ * updating the services YAML, filtering silently matches nothing, so fail the
+ * build instead.
+ */
+const knownDomains = new Set(methods.flatMap((m) => m.data.domains));
+const unmatched = domains.map((d) => d.name).filter((name) => !knownDomains.has(name));
+if (unmatched.length > 0 && knownDomains.size > 0) {
+  throw new Error(
+    `Services page filter names do not match any Contentful domain title: ${unmatched.join(", ")}. ` +
+      `Known domains: ${[...knownDomains].sort().join(", ")}. ` +
+      `Fix slides[].name in content/pages/${locale}/services.yml or the domain title in Contentful.`,
+  );
+}
+
+/**
+ * The filter dot takes one colour for both its border and its fill, so it is a
+ * custom property rather than a `bg-*` utility. See the `.filter-dot` rule.
+ */
+const DOT_COLOURS: Record<string, string> = {
+  blue: "var(--color-dlabs-blue)",
+  yellow: "var(--color-dlabs-yellow)",
+  darkBlue: "var(--color-dlabs-dark-blue)",
+  red: "var(--color-dlabs-red)",
+  green: "var(--color-dlabs-green)",
+  purple: "var(--color-dlabs-purple)",
+};
+
+const TILE_WIDTH = 400;
+const TILE_HEIGHT = 300;
+---
+
+<div class="flex flex-col items-center px-6 pb-16" id="list" data-method-browser>
+  <div class="flex w-full max-w-[60rem] flex-col gap-3 sm:gap-12">
+    {
+      /*
+      Sticky toolbar. `top-0`, not an offset below the header: the old `.sticky`
+      class bundled `top: 0`, so on the live site the toolbar pins to the very
+      top of the viewport and passes under the header.
+
+      Padding-top is 5rem below 640px and 6rem above (`pt-8 q-md-pt-7-5`).
+    */
+    }
+    <div class="sticky top-0 z-2 flex flex-col bg-white pt-20 pb-3 sm:pt-24">
+      {
+        /*
+        The gap under this row is a margin, not the parent's `gap`: below 800px the
+        filter panel is `display: none`, and a flex gap collapses around a
+        non-rendered item while the original's `col sp-4` margin-bottom does not —
+        which left the toolbar 25px short of live at those widths.
+      */
+      }
+      <div class="mb-2 flex flex-col items-stretch gap-3 sm:mb-6 sm:flex-row sm:items-end">
+        <LeadLine as="h2">{copy.services_title}</LeadLine>
+
+        <div class="hidden flex-auto sm:block"></div>
+
+        {
+          /*
+          `sm:mr-3` is the trailing edge live has and a flex `gap` cannot give:
+          the original spaces this row with `sp-2`, a margin-right on every child
+          but the last, and the last child is the button pair that search hides.
+          A hidden sibling still holds its slot in that scheme, so the field stops
+          0.75rem short of the container; with `gap` alone it ran flush to the edge,
+          14px further right than production.
+
+          The inline margin-bottom is the original's, and it stays inline for the
+          same reason it is there: in the stacked layout it has to beat `sp-2`.
+        */
+        }
+        <div class="relative mr-0 hidden sm:mr-3" data-search-field style="margin-bottom: 0.3rem">
+          <input
+            type="search"
+            class="search-input w-full sm:w-auto"
+            placeholder={copy.search_placeholder}
+            aria-label={copy.search_placeholder ?? copy.services_title}
+            data-search-input
+          />
+          {
+            /*
+            Not decoration: on the live site this mark is the control that leaves
+            search again — it hides the field, brings the two toolbar buttons back
+            and clears the query.
+          */
+          }
+          <button
+            type="button"
+            class="search-close absolute inset-y-0 right-0 -m-[0.2rem] flex items-center p-[0.2rem]"
+            data-search-close
+            aria-label={locale === "de" ? "Suche schließen" : "Close search"}
+          >
+            <SearchIcon class="inline h-6 w-6 fill-current align-baseline" aria-hidden="true" />
+          </button>
+        </div>
+
+        <div class="flex flex-row gap-3" data-toolbar-buttons>
+          <div class="flex flex-auto flex-col md:hidden">
+            <button type="button" class="toolbar-button flex-auto" data-filter-toggle>
+              <span class="flex flex-row items-center px-3 py-2">
+                <span data-filter-label>{copy.filter_button_label}</span>
+                <CaretDown class="inline h-4 w-4 fill-current align-baseline" aria-hidden="true" />
+              </span>
+            </button>
+          </div>
+          <button
+            type="button"
+            class="toolbar-button"
+            data-search-toggle
+            aria-label={copy.search_placeholder ?? "Search"}
+          >
+            {
+              /*
+              No wrapper: the original inlines the SVG as the button's only child,
+              so the button's height comes from the icon's line box — 45px at
+              700px, against 33 for a flex-wrapped 1rem icon.
+            */
+            }
+            <SearchIcon class="inline h-6 w-6 fill-current align-baseline" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+
+      <div class="hidden pt-4 pb-3 sm:pt-0 md:block" data-filter-panel>
+        <div class="flex flex-col items-start justify-center gap-[1.2rem] md:flex-row">
+          <button type="button" class="filter" data-filter="" data-active>
+            <span class="flex flex-row items-start gap-2">
+              <span class="h-4 w-4 shrink-0"
+                ><span class="filter-dot" style={`--dot: ${DOT_COLOURS.blue}`}></span></span
+              >
+              <span class="pt-[0.2rem] text-xs">{copy.services_all_button}</span>
+            </span>
+          </button>
+
+          {
+            domains.map((domain) => (
+              <button type="button" class="filter" data-filter={domain.name}>
+                <span class="flex flex-row items-start gap-2">
+                  <span class="h-4 w-4 shrink-0">
+                    <span
+                      class="filter-dot"
+                      style={`--dot: ${DOT_COLOURS[domain.color] ?? DOT_COLOURS.blue}`}
+                    />
+                  </span>
+                  <span class="pt-[0.2rem] text-xs">{domain.name}</span>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    {
+      /*
+      1-up below 480px, 2-up below 800px, 3-up above — and 3rem gutters at every
+      width. The old `q-sm-width-full` is a *max*-width query at 30em, so it maps
+      to `xs:`, and `grid sp-6` had no responsive variant (`q-lg-4` matches no rule).
+    */
+    }
+    <div class="xs:grid-cols-2 grid grid-cols-1 gap-12 md:grid-cols-3">
+      {
+        methods.map((method) => (
+          <div
+            class="flex flex-col gap-6"
+            data-method-tile
+            data-domains={method.data.domains.join("|")}
+          >
+            <a
+              href={entryUrl("methods", method.data.slug, locale)}
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              {method.data.heroImage && (
+                <img
+                  src={contentfulImage(method.data.heroImage, {
+                    width: TILE_WIDTH,
+                    height: TILE_HEIGHT,
+                    fit: "fill",
+                    focus: "faces",
+                  })}
+                  alt={assetAlt(method.data.heroImage)}
+                  width={TILE_WIDTH}
+                  height={TILE_HEIGHT}
+                  class="w-full"
+                  loading="lazy"
+                />
+              )}
+            </a>
+            <div class="flex flex-col gap-4">
+              <a href={entryUrl("methods", method.data.slug, locale)} class="tile-link">
+                <h3 class="text-base leading-[1.3] font-bold" data-search-text>
+                  {method.data.title}
+                </h3>
+              </a>
+              <div data-search-text>
+                <Markdown source={method.data.description} size="sm" />
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="text-dlabs-gray-400 hidden py-12 text-center text-sm" data-empty-state>
+      {locale === "de" ? "Keine Treffer." : "No matches."}
+    </p>
+  </div>
+</div>
+
+<style>
+  .search-input {
+    border: none;
+    border-bottom: 2px solid var(--color-black);
+    padding: 0.6rem 0 0.5rem;
+    font-size: var(--text-xs);
+    background: none;
+  }
+
+  /* 1rem below 640px, so focusing the field does not make iOS zoom the page. */
+  @media (width < 40rem) {
+    .search-input {
+      font-size: 1rem;
+    }
+  }
+
+  /*
+   * `.input:focus { outline: none }`, and no colour change — the underline is
+   * `$black` in every state on live, so a focused field is indistinguishable from
+   * an unfocused one. Reproduced rather than improved, because leaving the ring in
+   * drew a full rounded box around the field that the current site never shows.
+   * Worth revisiting in the redesign; it is a real gap, just not a new one.
+   */
+  .search-input:focus {
+    outline: none;
+  }
+
+  /* `.button-text`: black, blue on hover and focus, like every other one. */
+  .search-close {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--color-black);
+    transition-property: color;
+  }
+
+  .search-close:hover,
+  .search-close:focus {
+    color: var(--color-dlabs-blue);
+  }
+
+  /* `.button-ghost.is-mini`: a 2px grey outline with a slightly bottom-light pad. */
+  .toolbar-button {
+    padding: 0.25rem 0.25rem 0.15rem;
+    line-height: 1;
+    border: 2px solid var(--color-dlabs-gray-200);
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: var(--text-xs);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    transition-property: background-color, color, border-color;
+  }
+
+  /*
+   * `.button-ghost:hover, :focus { background-color: $black; color: $white }` —
+   * it fills in rather than turning blue, and the grey border is left alone.
+   */
+  .toolbar-button:hover,
+  .toolbar-button:focus {
+    background-color: var(--color-black);
+    color: #fff;
+  }
+
+  /*
+   * Was .service-carousel-indicator + .button-transparent. No opacity and no
+   * bold on the active one: the only thing that marks the choice is the dot,
+   * which grows from a small disc into a ring.
+   */
+  .filter {
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    margin: -0.2rem;
+    cursor: pointer;
+    text-align: inherit;
+    color: var(--color-black);
+    transition-property: color;
+  }
+
+  .filter:hover,
+  .filter:focus-visible {
+    color: var(--color-dlabs-blue);
+  }
+
+  /*
+   * Was .service-circle. A 1.25rem disc scaled to a third of its size, which
+   * grows to full size and empties out when its filter is the active one — so
+   * the inactive state is a small dot and the active state a 4px ring. The
+   * 1rem box it sits in is deliberately smaller than the circle, as on live.
+   */
+  .filter-dot {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 4px solid var(--dot);
+    background-color: var(--dot);
+    transform: scale(0.33);
+    transition-property: background-color, transform;
+    transition-duration: 0.25s;
+  }
+
+  /*
+   * Two selectors, as in the original: the dot inside the active filter, and a
+   * dot marked active in its own right — which is the copy the mobile filter
+   * label carries once a field is chosen.
+   */
+  .filter[data-active] .filter-dot,
+  .filter-dot[data-active] {
+    background-color: transparent;
+    transform: scale(1);
+  }
+
+  /* `.reset-link`, which has no hover state on the current site. */
+  .tile-link {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
+
+<script>
+  import { setupMethodBrowser } from "./method-browser";
+  setupMethodBrowser();
+</script>

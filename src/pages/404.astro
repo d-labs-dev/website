@@ -1,0 +1,24 @@
+---
+/**
+ * The current site has a single, German-only 404 (there is no en/404.md), so
+ * this stays German-only too. CloudFront serves one error document for the whole
+ * distribution regardless of path, so a per-locale version would need an edge
+ * rule to be reachable anyway.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import { pageUrl } from "@/lib/i18n";
+---
+
+<BaseLayout title="Seite nicht gefunden" noindex={true}>
+  <article class="flex flex-col items-center px-6 py-12 pt-24">
+    <div class="flex w-full max-w-[40rem] flex-col items-start gap-8 pt-12">
+      <h1 class="font-heading tracking-heading text-xl">
+        Na so was,<br />die Seite wurde nicht gefunden.
+      </h1>
+      <Button variant="solid" color="blue" href={pageUrl("home", "de")}>
+        Zurück zur Homepage
+      </Button>
+    </div>
+  </article>
+</BaseLayout>

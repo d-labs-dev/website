@@ -1,0 +1,47 @@
+---
+/**
+ * The jobs hero: a stack of photos cross-fading behind the headline.
+ *
+ * All images are in the markup, stacked; only one is visible at a time. The old
+ * template hand-wrote the stack with the *last* image left un-hidden because it
+ * was the one shown first — a comment explained the trick. Here the first image
+ * is simply the first one shown.
+ */
+import { Image } from "astro:assets";
+
+interface Props {
+  images: ImageMetadata[];
+  /** One alt for the set: these are decorative team photos of the same subject. */
+  alt: string;
+  /**
+   * Sizing and positioning are the caller's. This component deliberately sets
+   * no `position`: it used to also apply `relative`, which collided with the
+   * `absolute inset-0` passed in here — Tailwind resolves that by stylesheet
+   * order, `relative` won, and the whole stack collapsed to zero height because
+   * its only children are absolutely positioned.
+   */
+  class?: string;
+}
+
+const { images, alt, class: className = "" } = Astro.props;
+---
+
+<div class:list={["bg-dlabs-blue overflow-hidden", className]} data-image-fader>
+  {
+    images.map((image, i) => (
+      <Image
+        src={image}
+        alt={i === 0 ? alt : ""}
+        class="absolute inset-0 h-full w-full object-cover"
+        style={`opacity: ${i === 0 ? 1 : 0}`}
+        loading={i === 0 ? "eager" : "lazy"}
+        data-fader-slide
+      />
+    ))
+  }
+</div>
+
+<script>
+  import { setupImageFaders } from "./image-fader";
+  setupImageFaders();
+</script>

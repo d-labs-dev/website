@@ -1,0 +1,64 @@
+---
+/**
+ * "Our benefits" — one benefit per slide: round icon, then the description.
+ *
+ * Same shape as the quote slider but without the attribution, matching the two
+ * near-identical includes on the current site.
+ */
+import { Image } from "astro:assets";
+import Carousel from "@/components/Carousel.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+
+export interface Benefit {
+  label: string;
+  img: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  benefits: Benefit[];
+}
+
+const { title, benefits } = Astro.props;
+
+const icons = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/job-benefits/*.svg",
+  { eager: true },
+);
+---
+
+<div class="flex w-full max-w-[60rem] flex-col gap-6 pb-16">
+  <LeadLine>{title}</LeadLine>
+
+  <Carousel label={title} loop={true}>
+    {
+      benefits.map((benefit) => {
+        const icon = icons[`/src/assets/images/${benefit.img}`]?.default;
+        if (!icon) throw new Error(`Benefit icon not found: ${benefit.img}`);
+        return (
+          <div class="flex flex-col items-center gap-3 px-8 sm:flex-row sm:gap-8">
+            <div class="shrink-0 py-4">
+              {/*
+                The icon art *is* the 10rem disc — `rounded-full width-10
+                height-10` on the image itself. It was in a bordered ring here at
+                half size, which is neither what the file draws nor what live shows.
+              */}
+              <Image src={icon} alt="" class="h-40 w-40 rounded-full" loading="lazy" />
+            </div>
+
+            {/*
+              `pb-4` stands in for the original's trailing empty `row sp-1 text-sm`
+              div, which contributes nothing but a 1rem gap under the text — and
+              with it 20px of carousel height, since the tallest slide sets it.
+            */}
+            <div class="font-heading text-base pb-4 xs:text-lg sm:text-xl">
+              <Markdown source={benefit.text} inline />
+            </div>
+          </div>
+        );
+      })
+    }
+  </Carousel>
+</div>

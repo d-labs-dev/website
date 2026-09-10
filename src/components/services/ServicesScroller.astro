@@ -1,0 +1,297 @@
+---
+/**
+ * The five competence fields, as a horizontal track that advances while the page
+ * scrolls. The pinned area holds the indicator row and the track; markers below
+ * it set the scroll distance each slide gets.
+ *
+ * Uses lib/scroll-progress.ts via ./services-scroller.ts. There is a leading
+ * spacer marker, so slide `i` is active at index `i + 1`.
+ */
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+/*
+ * Inlined at their own size: the original drops these in with no class, so they
+ * render at the file's 32px and their line box makes the button 39.7x43 — not the
+ * 38.4 square a 1.5rem block image gives.
+ */
+import ArrowLeft from "@/assets/images/icons/icon-swipe-left.svg";
+import ArrowRight from "@/assets/images/icons/icon-swipe-right.svg";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+
+export interface ServiceSlide {
+  name: string;
+  img: string;
+  "img-position"?: string;
+  text: string;
+  color: string;
+}
+
+interface Props {
+  title: string;
+  slides: ServiceSlide[];
+  /** Link text for the jump down to the methods list. */
+  listLinkText: string;
+}
+
+const { title, slides, listLinkText } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/approach/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+
+/**
+ * The YAML names a brand colour per slide. Mapped explicitly rather than
+ * interpolated into a class name, because Tailwind only generates classes it can
+ * see as literal text.
+ */
+/**
+ * Each dot needs both a border and a matching fill: at rest it is a small solid
+ * dot, and as a ring the fill is dropped and the border shows.
+ */
+const DOT_COLOURS: Record<string, string> = {
+  blue: "border-dlabs-blue bg-dlabs-blue",
+  yellow: "border-dlabs-yellow bg-dlabs-yellow",
+  darkBlue: "border-dlabs-dark-blue bg-dlabs-dark-blue",
+  red: "border-dlabs-red bg-dlabs-red",
+  green: "border-dlabs-green bg-dlabs-green",
+  purple: "border-dlabs-purple bg-dlabs-purple",
+};
+
+/**
+ * Only meaningful below 640px, where the slide image has a fixed 6rem height and
+ * so gets cropped; above that its height is auto and nothing is cut off. `top`
+ * is 6% down rather than flush, as in the original.
+ */
+const OBJECT_POSITION: Record<string, string> = {
+  center: "object-center",
+  top: "object-[50%_6%]",
+  bottom: "object-bottom",
+  /*
+   * Two stops between `top` and `center`, named by their offset because that is
+   * all they are — there is no keyword for "just above the middle". The band is
+   * thin and its height moves with the viewport (16% of the image at 614px wide,
+   * 23% at 390), so `center` lands on a subject's chest and `top` above their
+   * head whenever the face sits high in the frame. These were picked per photo by
+   * rendering the band at both ends of that range.
+   */
+  "15%": "object-[50%_15%]",
+  "30%": "object-[50%_30%]",
+};
+---
+
+<div class="relative" id="overview" data-services-scroller>
+  {/* Leading spacer, so the first slide animates in rather than starting put. */}
+  <div class="h-2" data-keyframe-marker></div>
+
+  <div class="pointer-events-none absolute inset-0">
+    <div class="sticky top-0 flex min-h-screen flex-col items-center">
+      <div class="flex w-full max-w-[60rem] flex-col gap-6 px-6 pt-20 sm:pt-24" id="services-top">
+        <LeadLine class="opacity-0 transition-opacity duration-500 ease-out" data-scroller-lead>
+          {title}
+        </LeadLine>
+
+        <div class="relative flex flex-col justify-center gap-2 pb-4 sm:flex-row sm:gap-4">
+          {/* The blue dot that sits behind the row until a slide takes over. */}
+          <div class="absolute inset-0 flex flex-col items-center">
+            <div class="service-dot border-dlabs-blue bg-dlabs-blue" data-scroller-home-dot></div>
+          </div>
+
+          {
+            slides.map((slide, i) => (
+              <button
+                type="button"
+                class="pointer-events-auto flex flex-auto flex-row items-start gap-2 text-left"
+                data-scroller-indicator={i}
+              >
+                <div class="w-6 shrink-0">
+                  <div
+                    class:list={["service-dot", DOT_COLOURS[slide.color] ?? DOT_COLOURS.blue]}
+                    data-scroller-dot
+                  />
+                </div>
+                <div
+                  class="text-sm opacity-0 transition-opacity duration-500 ease-out"
+                  data-scroller-label
+                >
+                  {slide.name}
+                </div>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        /*
+        The first of the original's two `push` spacers. They are `flex: auto` with
+        grow 1 and grow 2, so the slide track sits a third of the way down the free
+        space rather than directly under the field labels — 93px of air at 1280,
+        which was missing entirely.
+      */
+      }
+      <div class="flex-auto"></div>
+
+      <div class="relative flex w-full flex-col items-center overflow-hidden">
+        <div class="flex w-full max-w-[60rem] flex-row" data-scroller-track>
+          {
+            slides.map((slide) => {
+              const image = images[`/src/assets/images/${slide.img}`]?.default;
+              if (!image) throw new Error(`Service slide image not found: ${slide.img}`);
+              return (
+                <div class="w-full shrink-0 px-6">
+                  <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+                    {/*
+                      Eager, not lazy: the slides sit side by side inside the track,
+                      so the ones off to the right never intersect the viewport and
+                      would pop in mid-animation rather than being ready. Five
+                      images, and they are this section's actual content.
+                    */}
+                    <div class="w-full shrink-0 sm:w-1/3">
+                      <Image
+                        src={image}
+                        alt=""
+                        class:list={[
+                          "h-24 w-full object-cover sm:h-auto",
+                          OBJECT_POSITION[slide["img-position"] ?? "center"],
+                        ]}
+                        loading="eager"
+                      />
+                    </div>
+                    <div class="pointer-events-auto px-6 text-xs sm:text-base">
+                      <Markdown source={slide.text} size="inherit" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+
+        <div class="absolute inset-y-0 left-0 flex flex-row items-center pl-3">
+          <button
+            type="button"
+            class="scroller-arrow pointer-events-auto"
+            data-scroller-prev
+            aria-label="Previous"
+            disabled
+          >
+            <ArrowLeft class="inline align-baseline" aria-hidden="true" />
+          </button>
+        </div>
+        <div class="absolute inset-y-0 right-0 flex flex-row items-center pr-3">
+          <button
+            type="button"
+            class="scroller-arrow pointer-events-auto"
+            data-scroller-next
+            aria-label="Next"
+          >
+            <ArrowRight class="inline align-baseline" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-auto" style="flex-grow: 2"></div>
+
+      <div class="absolute inset-x-0 bottom-0 hidden flex-col items-center pb-8 sm:flex">
+        <div class="pointer-events-auto flex flex-col items-center gap-[1.2rem]">
+          <Button variant="text" color="black" href="#spotlight">{listLinkText}</Button>
+          {
+            /*
+            `inline`, not the preflight default `block`: on live the arrow is an
+            inline SVG, so its line box adds the descender space that makes the
+            anchor 30px rather than 19 — and `.button-text` sets 0.8rem, which is
+            what that line box is measured from.
+          */
+          }
+          {
+            /*
+        A real `.button-text`, so the mark is black at rest and turns blue on hover
+        and focus like the label above it. As a bare anchor it had no colour of its
+        own and no hover state at all.
+      */
+          }
+          <Button variant="text" color="black" href="#spotlight" aria-hidden="true" tabindex="-1">
+            <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {
+    slides.map((_, i) => (
+      <div
+        class={i === slides.length - 1 ? "min-h-screen" : "h-[40rem]"}
+        id={`n${i + 1}`}
+        data-keyframe-marker
+      />
+    ))
+  }
+</div>
+
+<style>
+  /*
+   * Two states, from the old `.service-circle`:
+   *  - at rest a small filled dot (scale 0.33, background = its border colour)
+   *  - as a ring when it is the active field, or during the entrance animation
+   * The transition durations are the original's: 0.25s colour and scale,
+   * 0.5s movement.
+   */
+  .service-dot {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border-width: 4px;
+    border-style: solid;
+    transform: scale(0.33);
+    opacity: 0;
+    transition-property: background-color, transform, translate, opacity;
+    transition-duration: 0.25s, 0.25s, 0.5s, 0.5s;
+  }
+
+  /* `!important` because the fill is a Tailwind bg-* utility on the same
+     element, and this needs to beat it without depending on source order. */
+  .service-dot[data-ring],
+  [data-active] .service-dot {
+    background-color: transparent !important;
+    transform: scale(1);
+  }
+
+  /* `.button-text`: a 0.2rem hit area that the negative margin keeps out of flow. */
+  .scroller-arrow {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0.2rem;
+    margin: -0.2rem;
+    /* `%button-with-text`, which is what sizes the icon's line box. */
+    font-size: var(--text-xs);
+    line-height: 1;
+    color: var(--color-black);
+    transition-property: color, opacity;
+  }
+
+  .scroller-arrow:hover,
+  .scroller-arrow:focus {
+    color: var(--color-dlabs-blue);
+  }
+
+  .scroller-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+</style>
+
+<script>
+  import { setupServicesScroller } from "./services-scroller";
+  setupServicesScroller();
+</script>

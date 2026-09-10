@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="24" height="24" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="icon_menu" data-name="icon/menu" clip-path="url(#clip-path)">
+    <rect id="Rechteck_1224" data-name="Rechteck 1224" width="24" height="24" fill="rgba(255,255,255,0)"/>
+    <path id="Pfad_23747" data-name="Pfad 23747" d="M0,0H2V24H0Z" transform="translate(24 5) rotate(90)" fill="#152935"/>
+    <path id="Pfad_23748" data-name="Pfad 23748" d="M0,0H2V24H0Z" transform="translate(24 11) rotate(90)" fill="#152935"/>
+    <path id="Pfad_23749" data-name="Pfad 23749" d="M0,0H2V24H0Z" transform="translate(24 17) rotate(90)" fill="#152935"/>
+  </g>
+</svg>

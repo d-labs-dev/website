@@ -1,0 +1,173 @@
+/*
+ * Element-level defaults only. Anything that would be a reusable "look" belongs
+ * in a component, not here.
+ */
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: 1em;
+
+  /*
+   * This rule determines what '1rem' refers to. Below 30em it is always
+   * 1em = 16px (browser default). Above that:
+   *
+   *   0.88em = 14.08px
+   *   0.4vw  = 0.4 * window.width / 100
+   *
+   * At exactly 30em (480px): 14.08 + 1.92 = 16px, so it joins up seamlessly.
+   * Beyond that, 1rem grows with the viewport — which is how the whole design
+   * scales up on large screens.
+   *
+   * Consequence worth knowing: every rem-based Tailwind utility (p-4, gap-6,
+   * text-xl) is therefore viewport-dependent. Breakpoints are NOT affected —
+   * media query units resolve against the browser's initial 16px, not this.
+   *
+   * Kept deliberately, to be revisited once the redesign lands.
+   */
+  @media screen and (min-width: 30em) {
+    font-size: calc(0.88em + 0.4vw);
+  }
+
+  /* Replaces the old smoothAnchorScroll() jQuery handler. scroll-padding-top
+     clears the fixed header, which that handler did with a -50px fudge. */
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background-color: #fff;
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  color: var(--color-black);
+}
+
+/*
+ * Headings are bold, as they are on the live site.
+ *
+ * Tailwind's preflight sets `font-weight: inherit` on h1-h6 so that headings
+ * carry no opinion; the old stylesheet never reset them, so they kept the
+ * browser default. Without this every heading on the site rendered regular
+ * where live is bold. Where a heading should be light — the about page's h1 —
+ * the markup says so with `font-normal`, exactly as the old markup did.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+ * `object-fit: cover` on every image, as the current site's base does.
+ *
+ * It only bites where a box ends up off-aspect, and the footer's membership
+ * logos are exactly that: from 800 to ~1024px the 12rem column shrinks below
+ * the logos' natural width, and `cover` crops them rather than scaling them
+ * down. Live shows half-cut wordmarks there; without this rule ours scaled them
+ * to fit, which reads better but is not what ships.
+ *
+ * Flagged rather than fixed: it is a real defect at those widths, and the place
+ * to fix it is the redesign, with a height cap and `object-contain` on that
+ * column.
+ */
+img {
+  object-fit: cover;
+}
+
+/*
+ * One transition timing for the whole site, inherited.
+ *
+ * The current site sets `transition-duration: 0.15s` on `html` and has every
+ * element inherit it, so a component only ever declares which properties it
+ * animates. Reproducing that here matters: our components were written the same
+ * way — `transition-property: color` and nothing else — and without an inherited
+ * duration that resolves to `0s`, so every hover on the site changed instantly
+ * instead of easing. Invisible to layout measurement, obvious in use.
+ *
+ * Tailwind's own `transition-*` utilities set their own duration and override
+ * this where they are used, and the reduced-motion block below still wins.
+ */
+html {
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+*,
+*::before,
+*::after {
+  transition-duration: inherit;
+  transition-timing-function: inherit;
+  /*
+   * `none`, and it is not optional — the original has it for a reason. The
+   * initial value of `transition-property` is `all`, so inheriting a duration
+   * without this makes *every* property of *every* element animate over 0.15s.
+   *
+   * That is invisible most of the time and then bites hard: `visibility` is an
+   * inherited property, so opening the mobile menu left its links stuck at
+   * `visibility: hidden` for the first half of a 0.15s transition, and a hidden
+   * element cannot take focus. Components opt in by naming the properties they
+   * animate, exactly as the original's do.
+   */
+  transition-property: none;
+}
+
+/*
+ * Form controls get `line-height: 1.15`, from normalize.css v8 — which the
+ * current site loads and Tailwind's preflight does not carry over.
+ *
+ * Preflight instead gives controls `font: inherit`, and the `font` shorthand
+ * carries line-height, so every button here inherited body's 1.5: a services
+ * filter label was 23.04px against live's 17.66, making each filter 2px taller.
+ *
+ * The value has to be the number, not `normal`. A number inherits as a factor,
+ * so a 0.8rem label inside a 1rem button gets 1.15 x 0.8rem; `normal` does not
+ * inherit, so the label resolves its own — ~1.172 for Roboto, which left the
+ * label a pixel below its dot instead of level with it.
+ *
+ * Components that want a specific measure still set one: Button uses 1, matching
+ * the old `%button-with-text`.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  line-height: 1.15;
+}
+
+/* Phone numbers should not look like links. */
+a[href^="tel"] {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

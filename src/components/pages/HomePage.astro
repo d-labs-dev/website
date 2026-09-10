@@ -1,0 +1,359 @@
+---
+/**
+ * Home: the angled blue hero, then a pinned section where the circle diagram
+ * rearranges behind four cross-fading screens, then clients, a blog teaser, a
+ * jobs teaser and the office addresses.
+ */
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import Locations from "@/components/Locations.astro";
+import HomeCircles from "@/components/home/HomeCircles.astro";
+import ClientCarousel from "@/components/home/ClientCarousel.astro";
+import Spotlight from "@/components/Spotlight.astro";
+import Teaser from "@/components/Teaser.astro";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+import { contentfulImage, assetAlt } from "@/lib/contentful-image";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("home", locale);
+
+const jobsImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+const jobsImage = jobsImages[`/src/assets/images/${copy.jobs_image}`]?.default;
+if (!jobsImage) throw new Error(`home jobs_image not found: ${copy.jobs_image}`);
+
+/** Newest post, for the blog teaser. */
+const posts = (await getCollection("blog", (entry) => entry.data.locale === locale)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const latest = posts[0];
+
+const screens = copy.screens as { title: string; text?: string; cta: string; cta_target: string }[];
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("home", otherLocale(locale)) }];
+---
+
+<BaseLayout
+  title={copy.seo_title}
+  description={copy.seo_description ?? copy.hero_claim}
+  blueHeader={true}
+  alternates={alternates}
+>
+  <div class="relative" data-home-scroll>
+    {/* Hero: claim over the angled blue field */}
+    <div
+      class="relative z-2 flex min-h-screen flex-col items-center justify-center px-6 py-8 text-white"
+    >
+      {
+        /*
+        An h1 for structure, where the original uses a plain div — but explicitly
+        `font-normal`, because that div inherits weight 400 and `.font-heading`
+        sets none. Left bold it was wider and wrapped a word early.
+      */
+      }
+      <h1
+        class="hero-claim font-heading tracking-heading relative z-4 w-full max-w-[60rem] text-xl font-normal sm:text-3xl"
+      >
+        <Markdown source={copy.hero_claim} size="inherit" tone="on-dark" heading />
+      </h1>
+
+      <svg
+        viewBox="0 0 100 100"
+        class="text-dlabs-blue pointer-events-none absolute top-0 right-0 h-full w-full fill-current"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <polygon points="0 0,100 0,100 70,0 100" class="hidden md:block"></polygon>
+        <polygon points="0 0,100 0,100 80,0 100" class="md:hidden"></polygon>
+      </svg>
+
+      <div class="absolute inset-x-0 bottom-0 flex flex-col items-center pb-8 text-black">
+        <Button
+          variant="text"
+          color="black"
+          href="#n1"
+          aria-label={locale === "de" ? "Nach unten scrollen" : "Scroll down"}
+        >
+          <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+        </Button>
+      </div>
+    </div>
+
+    {/* The circle diagram, pinned behind the screens */}
+    <div
+      class="pointer-events-none absolute top-0 right-0 flex h-full w-full flex-col items-center py-16 md:py-0"
+    >
+      <div
+        class="sticky top-0 flex min-h-screen w-full max-w-[60rem] flex-col justify-center pt-8 max-sm:justify-start md:pt-0"
+      >
+        {/* `.home-circle-container`: 40%, full width below 640px — not 800. */}
+        <div class="w-full sm:w-2/5">
+          <HomeCircles />
+        </div>
+      </div>
+    </div>
+
+    {/* Screens */}
+    <div class="relative pt-16">
+      <div class="h-8" data-keyframe-marker></div>
+      {
+        screens.map((_, i) => (
+          <div
+            class={i === screens.length - 1 ? "min-h-screen" : "h-[40rem]"}
+            id={`n${i + 1}`}
+            data-keyframe-marker
+          />
+        ))
+      }
+
+      {
+        screens.map((screen, i) => (
+          <div
+            class="pointer-events-none absolute top-0 right-0 h-full w-full"
+            style="opacity: 0"
+            data-home-screen={i}
+          >
+            <div class="sticky top-0 flex min-h-screen flex-col items-center justify-center px-6">
+              <div class="w-full max-w-[60rem]">
+                <div class="flex min-h-screen max-w-[30rem] flex-col justify-center gap-6 py-8 max-sm:justify-end md:mr-12 md:ml-[45%] md:min-h-[60vh]">
+                  {/*
+                    `text-xl q-md-text-md`: 1.8rem, dropping to 1rem below 640px.
+                    It was 1rem at every width, which is what made this section
+                    read as a different design rather than a different size.
+                  */}
+                  <h2 class="font-heading text-base font-bold sm:text-xl">{screen.title}</h2>
+                  {screen.text && <div class="text-xs sm:text-base">{screen.text}</div>}
+                  <div class="flex flex-col items-start">
+                    <Button variant="ghost" color="black" href={screen.cta_target}>
+                      {screen.cta}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+
+      {
+        /*
+        The scroll hint down to the clients grid, which was missing. It lives in
+        its own pinned layer on the original, with `interactive` re-enabling
+        pointer events inside the `non-interactive` wrapper.
+      */
+      }
+      <div class="pointer-events-none absolute inset-0 z-1">
+        <div class="sticky top-0 h-screen w-full">
+          <div
+            class="absolute inset-x-0 bottom-0 z-1 hidden flex-col items-center pb-8 text-black sm:flex"
+          >
+            <Button
+              variant="text"
+              color="black"
+              href="#spotlight"
+              class="pointer-events-auto"
+              aria-label={locale === "de" ? "Nach unten scrollen" : "Scroll down"}
+            >
+              <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Screen indicator rail */}
+      <div class="absolute inset-y-0 right-0 hidden md:block">
+        <div class="sticky flex flex-col justify-center gap-4 pr-4" style="height: 60vh; top: 20vh">
+          {
+            screens.map((_, i) => (
+              <button
+                type="button"
+                class="screen-dot"
+                data-home-indicator={i}
+                aria-label={`${locale === "de" ? "Seite" : "Screen"} ${i + 1}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {
+    /*
+    Spotlight sits between the screens and the clients, as on the design board —
+    so it, not the client carousel, is what the scroll hint above leads to.
+  */
+  }
+  <div id="spotlight" class="-scroll-mt-6">
+    <Spotlight locale={locale} variant="short" ctaHref={pageUrl("services", locale)} />
+  </div>
+
+  <ClientCarousel
+    heading={copy.clients_heading}
+    pauseLabel={copy.clients_pause}
+    playLabel={copy.clients_play}
+    prevLabel={copy.clients_prev}
+    nextLabel={copy.clients_next}
+  />
+
+  {
+    /*
+    Blog teaser. Full-bleed: the blue runs the width of the page and a square
+    image is anchored over its right edge, as tall as the band — see Teaser's
+    `square` format. The copy inside still lines up with the 60rem column.
+  */
+  }
+  {
+    latest && (
+      <Teaser side="right" format="square" tone="dark">
+        {latest.data.heroImage && (
+          <img
+            slot="media"
+            src={contentfulImage(latest.data.heroImage, {
+              width: 900,
+              height: 900,
+              fit: "fill",
+              focus: "faces",
+            })}
+            alt={assetAlt(latest.data.heroImage)}
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        )}
+
+        {/*
+          Eyebrow on its own line with the copy stacked underneath and stepped in
+          past it, so the rule hangs furthest left, then the label, then the
+          heading, body and button on one shared edge. The indent is only from
+          `md` up — on a narrow screen the copy uses the full width.
+        */}
+        <div class="flex flex-col items-start gap-4">
+          <LeadLine color="white" indent="narrow">
+            Blog
+          </LeadLine>
+
+          <div class="flex max-w-[34rem] flex-col items-start gap-8 md:pl-28">
+            <div class="flex flex-col gap-4">
+              <a href={entryUrl("blog", latest.data.slug, locale)} class="teaser-link">
+                <h2 class="font-heading tracking-heading text-xl">{latest.data.title}</h2>
+              </a>
+              <Markdown source={latest.data.description} tone="on-dark" />
+            </div>
+
+            <Button variant="ghost" color="white" href={entryUrl("blog", latest.data.slug, locale)}>
+              {copy.blog_cta_text}
+            </Button>
+          </div>
+        </div>
+      </Teaser>
+    )
+  }
+
+  {/* Jobs teaser — the board's "Format 1: halbe Seite", image left. */}
+  <Teaser side="left" format="half">
+    <Image
+      slot="media"
+      src={jobsImage}
+      alt=""
+      class="jobs-image absolute inset-0 h-full w-full object-cover"
+      loading="lazy"
+    />
+
+    <div class="flex flex-col gap-4 px-6 py-24 sm:pl-12">
+      <LeadLine>{copy.jobs_lead}</LeadLine>
+      <h2 class="font-heading tracking-heading text-xl">{copy.jobs_title}</h2>
+      <div class="flex flex-col items-start gap-8">
+        <div>{copy.jobs_desc}</div>
+        <Button variant="ghost" color="blue" href={copy.jobs_cta_url ?? pageUrl("jobs", locale)}>
+          {copy.jobs_cta_text}
+        </Button>
+      </div>
+    </div>
+  </Teaser>
+
+  <Locations locale={locale} light={true} withMap={true} />
+</BaseLayout>
+
+<style>
+  .teaser-link {
+    color: inherit;
+    text-decoration: none;
+    transition-property: opacity;
+  }
+
+  .teaser-link:hover {
+    opacity: 0.85;
+  }
+
+  /* Was .scroll-indicator. */
+  /*
+   * `.scroll-indicator`: a 0.33rem disc that only changes colour. It was 0.5rem
+   * here, and grew on activation — the original has no transform at all.
+   */
+  .screen-dot {
+    /* `%raw-button` sets this; live's indicators are anchors and get it anyway. */
+    cursor: pointer;
+    width: 0.33rem;
+    height: 0.33rem;
+    border-radius: 50%;
+    background-color: var(--color-dlabs-gray-200);
+    transition-property: background-color;
+  }
+
+  .screen-dot:hover {
+    background-color: var(--color-dlabs-gray-300);
+  }
+
+  .screen-dot[data-active] {
+    background-color: var(--color-dlabs-blue);
+  }
+</style>
+
+<style>
+  /*
+   * The claim fades in on load. On the old site this was `.opacity-0` plus a
+   * `data-init-fade` hook and a line of jQuery that set opacity to 1 once the
+   * page was ready; a CSS animation does the same thing with no script, and the
+   * reduced-motion rule in base.css collapses it to an instant appearance.
+   */
+  .hero-claim {
+    animation: hero-claim-in 0.5s ease-out both;
+  }
+
+  @keyframes hero-claim-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* `.home-jobs-img`: crop from 15% down, but only where the box crops at all. */
+  @media (width < 40rem) {
+    .jobs-image {
+      object-position: 50% 15%;
+    }
+  }
+</style>
+
+<script>
+  import { setupHome } from "@/components/home/home";
+  setupHome();
+</script>

@@ -1,0 +1,215 @@
+---
+/**
+ * Spotlight — the editorial topic slider from the design board.
+ *
+ * Two presentations of the same content:
+ *   `short` (home)      intro paragraph and one button through to the details.
+ *   `full`  (services)  plus the "Unsere Leistungen:" list, the closing line and
+ *                       the PDF download.
+ *
+ * One component rather than two because the content, the slider and the layout
+ * are identical — only the tail of the text column differs.
+ *
+ * It always opens on the first topic. The order in content/spotlight/<locale>.yml
+ * is therefore the editorial decision, as it is for the client logos.
+ */
+import { getEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Carousel from "@/components/Carousel.astro";
+import Teaser from "@/components/Teaser.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import Button from "@/components/Button.astro";
+import type { Locale } from "@/lib/i18n";
+
+interface Props {
+  locale: Locale;
+  variant?: "short" | "full";
+  /**
+   * Page the `short` variant's button leads to. The topic's own fragment is
+   * appended per slide, so each teaser links through to *its* spotlight rather
+   * than dropping every visitor on the first one.
+   */
+  ctaHref?: string;
+  class?: string;
+}
+
+const { locale, variant = "short", ctaHref = "/services/", class: className = "" } = Astro.props;
+
+/*
+ * The home variant's left arrow lands on a half-width photo and needs a disc
+ * behind it. On services the image is small and inset, so both arrows sit on
+ * plain background and a plate there would only be noise.
+ */
+const arrowPlate = variant === "short" ? "prev" : "none";
+
+/*
+ * Services layout notes, since they cannot live inside the ternary below:
+ *
+ * - The lead line sits above the whole block, a small square image beside the
+ *   copy, and the "Interesse geweckt?" line plus the PDF button form a sub-CTA
+ *   row *below* the pair rather than trailing the text column.
+ * - Two nested divs, not one: the outer is the carousel's flex item and has to
+ *   stay 100% wide, or the slides are narrower than the viewport and the next
+ *   one peeks in beside the current. The 60rem cap goes on the inner wrapper,
+ *   which leaves the arrows outside it over the page margin, as designed.
+ * - `sm:self-start` on the image: a flex row stretches its items to the row
+ *   height, and a stretched height beats `aspect-ratio` — without it that box
+ *   comes out 296x412 rather than square.
+ */
+
+const entry = await getEntry("spotlight", locale);
+if (!entry) throw new Error(`Missing spotlight copy: content/spotlight/${locale}.yml`);
+const copy = entry.data;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/spotlight/*.{jpg,jpeg,png,webp}",
+  { eager: true },
+);
+
+function resolve(path: string) {
+  const image = images[`/src/assets/images/${path}`]?.default;
+  if (!image) throw new Error(`Spotlight image not found: src/assets/images/${path}`);
+  return image;
+}
+---
+
+{
+  /*
+  One zero-height anchor per topic, so `#spotlight-<slug>` resolves to a real
+  element and the *browser* does the scrolling. Without these the fragment
+  matches nothing, the browser stays at the top of the document, and any
+  scrolling JS does is racing its fragment handling — which it loses on a real
+  navigation. The carousel script still reads the same fragment to choose which
+  slide to open on; that part cannot be expressed as an anchor, because all the
+  slides live at the same place in the layout.
+*/
+}
+{copy.spotlights.map((item) => <div id={`spotlight-${item.slug}`} class="-scroll-mt-6" />)}
+
+<Carousel
+  label={copy.lead}
+  loop={false}
+  dots={false}
+  arrows="media"
+  arrowPlate={arrowPlate}
+  keepDisabledArrows={true}
+  autoHeight={true}
+  prevLabel={copy.prev_label}
+  nextLabel={copy.next_label}
+  class={className}
+>
+  {
+    copy.spotlights.map((item) =>
+      variant === "full" ? (
+        <div class="w-full" data-carousel-hash={`spotlight-${item.slug}`}>
+          <div class="mx-auto flex w-full max-w-[60rem] flex-col gap-0 sm:gap-8 sm:px-6 sm:py-16">
+            <LeadLine class="hidden sm:block">{copy.lead}</LeadLine>
+
+            <div class="flex flex-col gap-8 sm:flex-row sm:gap-12">
+              <div class="relative h-32 w-full shrink-0 sm:aspect-square sm:h-auto sm:w-[20rem] sm:self-start">
+                <Image
+                  src={resolve(item.image)}
+                  alt=""
+                  class="spotlight-photo absolute inset-0 h-full w-full object-cover"
+                  loading="eager"
+                />
+              </div>
+
+              <div class="flex flex-col gap-4 px-6 pt-12 pb-16 sm:px-0 sm:py-0">
+                <LeadLine class="sm:hidden">{copy.lead}</LeadLine>
+                <h2 class="font-heading tracking-heading text-xl">{item.title}</h2>
+                <Markdown source={item.text_full} />
+
+                <div class="flex flex-col gap-2">
+                  <p class="font-bold">{copy.services_heading}</p>
+                  <ul class="bullet-list flex flex-col gap-2">
+                    {item.services.map((service) => (
+                      <li>
+                        <Markdown source={service} inline />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="flex flex-col items-start gap-4 pt-4 sm:hidden">
+                  <p>{copy.interested_text}</p>
+                  {item.pdf && (
+                    <Button
+                      variant="ghost"
+                      color="black"
+                      href={item.pdf}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      {copy.download_pdf_text}
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden flex-col items-start gap-4 sm:flex sm:flex-row sm:items-center sm:gap-8">
+              <p>{copy.interested_text}</p>
+              {item.pdf && (
+                <Button
+                  variant="ghost"
+                  color="black"
+                  href={item.pdf}
+                  target="_blank"
+                  rel="noopener"
+                  class="shrink-0"
+                >
+                  {copy.download_pdf_text}
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Teaser side="left" format="half" data-carousel-hash={`spotlight-${item.slug}`}>
+          {/*
+            Eager, not lazy: this is the first band below the fold and there are
+            only two images, ~200 kB each. A deferred one shows as an empty half.
+          */}
+          <Image
+            slot="media"
+            src={resolve(item.image)}
+            alt=""
+            class="spotlight-photo absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+          />
+
+          {/* Above `sm` the right arrow is overlaid on the copy, so that column
+              stops short of it. On mobile both controls live on the image strip. */}
+          <div class="flex flex-col gap-4 px-6 pt-12 pb-16 sm:py-16 sm:pr-20 sm:pl-12">
+            <LeadLine>{copy.lead}</LeadLine>
+            <h2 class="font-heading tracking-heading text-xl">{item.title}</h2>
+            <Markdown source={item.text_short} />
+
+            <div class="flex flex-col items-start pt-4">
+              <Button variant="ghost" color="black" href={`${ctaHref}#spotlight-${item.slug}`}>
+                {copy.cta_text}
+              </Button>
+            </div>
+          </div>
+        </Teaser>
+      ),
+    )
+  }
+</Carousel>
+
+<style>
+  /*
+   * Below `sm` the media box is a short, wide strip (`min-h-32`), so a centred
+   * `object-cover` crop keeps the middle band of a portrait photo — which is
+   * chest height, cutting the subject's head off. Biasing the crop upward keeps
+   * faces in frame. Above `sm` the box is half the band and tall enough that the
+   * default centre is right.
+   */
+  @media (width < 40rem) {
+    .spotlight-photo {
+      object-position: 50% 15%;
+    }
+  }
+</style>

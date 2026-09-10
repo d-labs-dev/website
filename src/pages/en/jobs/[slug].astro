@@ -1,0 +1,10 @@
+---
+import { entryPaths } from "@/lib/entry-routes";
+import JobPage from "@/components/pages/JobPage.astro";
+
+export const getStaticPaths = () => entryPaths("jobs", "en");
+
+const { entry, counterpartSlug } = Astro.props;
+---
+
+<JobPage entry={entry} counterpartSlug={counterpartSlug} />

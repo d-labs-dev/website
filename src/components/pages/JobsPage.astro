@@ -1,0 +1,188 @@
+---
+/**
+ * Jobs index: photo hero, the list of open positions, an inclusivity note, the
+ * quote and benefits sliders, and the contact block.
+ */
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
+import LeadLine from "@/components/LeadLine.astro";
+import Markdown from "@/components/Markdown.astro";
+import Contact from "@/components/Contact.astro";
+import ImageFader from "@/components/jobs/ImageFader.astro";
+import QuoteSlider from "@/components/jobs/QuoteSlider.astro";
+import BenefitsSlider from "@/components/jobs/BenefitsSlider.astro";
+import ArrowRight from "@/assets/images/icons/icon-arrow-right.svg";
+/*
+ * Inlined, not an <Image>: the file carries `fill: currentColor`, so on the
+ * original this mark takes its link's colour and follows it on hover. An <img>
+ * cannot inherit `color`, which left every one of these stuck at its rest shade.
+ */
+import ArrowDown from "@/assets/images/icons/icon-arrow-down.svg";
+import { getPageCopy, pageUrl, entryUrl, otherLocale, type Locale } from "@/lib/i18n";
+
+import slide1 from "@/assets/images/jobs-slider/jobs-slider-1.jpg";
+import slide2 from "@/assets/images/jobs-slider/jobs-slider-2.jpg";
+import slide3 from "@/assets/images/jobs-slider/jobs-slider-3.jpg";
+import slide4 from "@/assets/images/jobs-slider/jobs-slider-4.jpg";
+import slide5 from "@/assets/images/jobs-slider/jobs-slider-5.jpg";
+import slide6 from "@/assets/images/jobs-slider/jobs-slider-6.jpg";
+import slide7 from "@/assets/images/jobs-slider/jobs-slider-7.jpg";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = await getPageCopy("jobs", locale);
+
+const openings = (await getCollection("jobs", (entry) => entry.data.locale === locale)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const heroImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide7];
+const heroAlt =
+  locale === "de"
+    ? "Mitarbeitende von D-LABS bei der Arbeit vor Laptops, in Workshops, bei Events und im Austausch"
+    : "D-LABS staff at work at laptops, in workshops, at events and in conversation";
+
+const alternates = [{ locale: otherLocale(locale), url: pageUrl("jobs", otherLocale(locale)) }];
+---
+
+<BaseLayout
+  title={copy.seo_title ?? copy.list_title}
+  description={copy.seo_description ?? copy.intro_text}
+  activeRef="jobs"
+  alternates={alternates}
+>
+  {/* Hero */}
+  <div class="relative flex min-h-screen flex-col items-center justify-center px-6 py-8 text-white">
+    {
+      /*
+      Inset below the header, not full-bleed. The original used `.inset-header`
+      — `top: 4.5rem; height: calc(100% - 4.5rem)` — so the photo starts under
+      the fixed bar instead of running behind it.
+    */
+    }
+    <ImageFader
+      images={heroImages}
+      alt={heroAlt}
+      class="absolute inset-x-0 top-[4.5rem] h-[calc(100%-4.5rem)]"
+    />
+
+    <div
+      class="font-heading tracking-heading relative z-3 w-full max-w-[60rem] text-xl sm:text-2xl md:text-3xl"
+    >
+      <Markdown source={copy.title_text} size="inherit" tone="on-dark" heading />
+    </div>
+
+    {/* The white wedge the hero sits on, as on the current site. */}
+    <svg
+      viewBox="0 0 100 100"
+      class="pointer-events-none absolute bottom-0 z-1 w-full"
+      preserveAspectRatio="none"
+      style="height: 20vh; bottom: -1px"
+      aria-hidden="true"
+    >
+      <polygon points="0 100, 100 100, 100 0" fill="white"></polygon>
+    </svg>
+
+    <div class="absolute inset-x-0 bottom-0 z-1 flex flex-col items-center pb-8 text-black">
+      <Button
+        variant="text"
+        color="black"
+        href="#list"
+        aria-label={locale === "de" ? "Zur Liste scrollen" : "Scroll to the list"}
+      >
+        <ArrowDown class="inline w-4 fill-current align-baseline" aria-hidden="true" />
+      </Button>
+    </div>
+  </div>
+
+  {/* Openings */}
+  {
+    /*
+    `-scroll-mt-6` cancels most of the global `scroll-padding-top: 6rem`, landing
+    this section flush with the header's bottom edge (6rem - 1.5rem = 4.5rem, the
+    header's height). The global value is right for text anchors, which want
+    breathing room, but on a full-bleed band it stops 1.5rem short and leaves a
+    strip of the hero photo showing above — production tucks the list under the
+    header instead. The section's own py-24 supplies the clearance.
+  */
+  }
+  <div id="list" class="flex -scroll-mt-6 flex-col items-center gap-24 px-6 py-24">
+    <div class="font-heading tracking-heading w-full max-w-[40rem] text-lg sm:text-xl">
+      <Markdown source={copy.intro_text} size="inherit" heading />
+    </div>
+
+    <div class="flex w-full flex-col items-center gap-12">
+      <div class="w-full max-w-[60rem]">
+        <LeadLine>{copy.list_title}*</LeadLine>
+      </div>
+
+      <div class="flex w-full max-w-[40rem] flex-col gap-3">
+        {
+          openings.map((job) => (
+            <a
+              href={entryUrl("jobs", job.data.slug, locale)}
+              class="opening flex flex-row items-baseline gap-4 pb-3"
+            >
+              <div>{job.data.title}</div>
+              <div class="flex-auto" />
+              <div class="font-heading text-xs uppercase">{job.data.location}</div>
+              <div class="text-dlabs-blue relative" style="top: 0.15rem">
+                <ArrowRight class="w-4 fill-current" aria-hidden="true" />
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="flex w-full max-w-[40rem] flex-col gap-12">
+        <div class="flex flex-col gap-6">
+          <div id="inclusivity" class="scroll-mt-32">
+            <span class="text-dlabs-blue">*</span>{copy.inclusivity_text}
+          </div>
+          {
+            /*
+            A plain `<div>` on live, not a `.markdown` one, so it keeps body's 1.5
+            line-height rather than the 1.6 markdown measure.
+          */
+          }
+          <Markdown source={copy.initiative_text} plain />
+        </div>
+
+        <div class="flex flex-col items-center">
+          <Button
+            variant="solid"
+            color="black"
+            href={copy.apply_now_target}
+            aria-label={copy.apply_now_aria_label}
+          >
+            {copy.initiative_button_label}
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <QuoteSlider title={copy.slider_title} slides={copy.slides} />
+    <BenefitsSlider title={copy.benefits_title} benefits={copy.benefits} />
+  </div>
+
+  <Contact locale={locale} contact={copy.contact} />
+</BaseLayout>
+
+<style>
+  /* Was .list-entry: a hairline rule that turns blue on hover. */
+  .opening {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-dlabs-blue);
+    transition-property: color, border-color;
+  }
+
+  .opening:hover {
+    color: var(--color-dlabs-blue);
+    border-bottom-color: var(--color-dlabs-blue);
+  }
+</style>

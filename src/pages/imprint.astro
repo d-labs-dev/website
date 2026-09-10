@@ -1,0 +1,9 @@
+---
+import { getEntry } from "astro:content";
+import LegalPage from "@/components/pages/LegalPage.astro";
+
+const entry = await getEntry("legal", "de/imprint");
+if (!entry) throw new Error("Missing content/legal/de/imprint.md");
+---
+
+<LegalPage entry={entry} locale="de" ref="imprint" />
